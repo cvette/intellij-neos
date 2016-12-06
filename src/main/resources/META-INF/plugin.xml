@@ -1,0 +1,54 @@
+<idea-plugin version="2">
+  <id>vette.neos</id>
+  <name>Neos Support</name>
+  <version>0.1</version>
+
+  <description><![CDATA[
+    <p>Support for Neos.</p>
+    <br/>
+    <p>
+      <b>Features</b>
+      <ul>
+        <li>Fusion/TypoScript2 language support
+          <ul>
+            <li>Syntax Highlighting</li>
+            <li>Formatting</li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+    ]]></description>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="141.0"/>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <lang.parserDefinition language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
+    <lang.syntaxHighlighterFactory key="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
+    <lang.braceMatcher language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionBraceMatcher"/>
+    <lang.formatter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.formatter.FusionFormattingModelBuilder"/>
+    <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
+    <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
+    <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
+    <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
+    <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
+
+    <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
+  </extensions>
+
+  <project-components>
+    <component>
+      <implementation-class>de.vette.idea.neos.NeosProjectComponent</implementation-class>
+    </component>
+  </project-components>
+
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+  <depends>org.jetbrains.plugins.yaml</depends>
+  <depends>com.intellij.modules.platform</depends>
+</idea-plugin>
