@@ -21,11 +21,15 @@ package de.vette.idea.neos;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.psi.PsiElement;
+import de.vette.idea.neos.util.IdeHelper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class NeosProjectComponent implements ProjectComponent {
-    final private static Logger LOG = Logger.getInstance("Neos-Plugin");
 
+    final private static Logger LOG = Logger.getInstance("Neos-Plugin");
     private Project project;
 
     public NeosProjectComponent(Project project) {
@@ -36,9 +40,29 @@ public class NeosProjectComponent implements ProjectComponent {
         return LOG;
     }
 
+    public boolean isEnabled() {
+        return Settings.getInstance(project).pluginEnabled;
+    }
+
+    /**
+     * If plugin is not enabled on first project start/indexing we will never get a filled
+     * index until a forced cache rebuild, we check also for vendor path
+     */
+    public static boolean isEnabledForIndex(Project project) {
+        return (NeosProjectComponent.isEnabled(project) || NeosProjectComponent.isNeosProject(project));
+    }
+
+    public static boolean isEnabled(@Nullable Project project) {
+        return project != null && Settings.getInstance(project).pluginEnabled;
+    }
+
     @Override
     public void projectOpened() {
-
+        if (!this.isEnabled() && !Settings.getInstance(project).dismissEnableNotification) {
+            if (NeosProjectComponent.isNeosProject(this.project)) {
+                IdeHelper.notifyEnableMessage(project);
+            }
+        }
     }
 
     @Override
@@ -60,5 +84,11 @@ public class NeosProjectComponent implements ProjectComponent {
     @Override
     public String getComponentName() {
         return "NeosProjectComponent";
+    }
+
+    public static boolean isNeosProject(Project project) {
+        return (VfsUtil.findRelativeFile(project.getBaseDir(), "Packages") != null
+                && VfsUtil.findRelativeFile(project.getBaseDir(), "Configuration") != null
+                && VfsUtil.findRelativeFile(project.getBaseDir(), "Packages", "Application", "TYPO3.Neos") != null);
     }
 }
