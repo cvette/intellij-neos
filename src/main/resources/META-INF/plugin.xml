@@ -1,6 +1,7 @@
 <idea-plugin version="2">
   <id>vette.neos</id>
   <name>Neos Support</name>
+  <vendor email="neos@christianvette.de" url="https://github.com/cvette/intellij-neos">Christian Vette</vendor>
   <version>0.1</version>
 
   <description><![CDATA[
