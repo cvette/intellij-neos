@@ -1,5 +1,7 @@
 IntelliJ IDEA / PhpStorm Neos Plugin
 ====================================
+[![Build Status](https://travis-ci.org/cvette/intellij-neos.svg?branch=master)](https://travis-ci.org/cvette/intellij-neos)
+
 Work in progress.
 
 License
