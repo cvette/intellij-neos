@@ -58,6 +58,9 @@ idea {
 lexerTask(project, 'FusionLexer', 'de/vette/idea/neos/lang/fusion/lexer')
 parserTask(project, 'FusionParser', 'de/vette/idea/neos/lang/fusion/psi')
 
+compileJava.dependsOn(generateFusionLexer)
+compileJava.dependsOn(generateFusionParser)
+
 def lexerTask(project, lexerName, pkg) {
     tasks.create("generate${lexerName}", JavaExec) {
         def src = "$project.projectDir/src/main/grammars/${lexerName}.flex"
