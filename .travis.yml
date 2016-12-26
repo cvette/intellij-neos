@@ -5,9 +5,15 @@ jdk: oraclejdk8
 env:
   global: ORG_GRADLE_PROJECT_downloadIdeaSources=false
   matrix:
-        - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
-        - ORG_GRADLE_PROJECT_ideaVersion=2016.1
-        - ORG_GRADLE_PROJECT_ideaVersion=15.0.4
+    - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
+    - ORG_GRADLE_PROJECT_ideaVersion=2016.3.1
+    - ORG_GRADLE_PROJECT_ideaVersion=2016.3
+    - ORG_GRADLE_PROJECT_ideaVersion=2016.2.5
+    - ORG_GRADLE_PROJECT_ideaVersion=2016.1.4
+  allowFailures:
+    - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
+  fast_finish: true
+
 
 # https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
