@@ -58,7 +58,7 @@ public class SettingsForm implements Configurable {
 
     @Override
     public boolean isModified() {
-        return false;
+        return !pluginEnabled.isSelected() == getSettings().pluginEnabled;
     }
 
     @Override
