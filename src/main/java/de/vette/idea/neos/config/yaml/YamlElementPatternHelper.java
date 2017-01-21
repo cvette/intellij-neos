@@ -21,7 +21,6 @@ package de.vette.idea.neos.config.yaml;
 import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import de.vette.idea.neos.util.psi.ParentPathPatternCondition;
 import org.jetbrains.yaml.YAMLLanguage;
 import org.jetbrains.yaml.YAMLTokenTypes;
@@ -29,12 +28,9 @@ import org.jetbrains.yaml.psi.*;
 
 public class YamlElementPatternHelper {
 
-    public static ElementPattern<? extends PsiFile> getNodeTypeFilePattern() {
-        return PlatformPatterns.psiFile().withName(PlatformPatterns.string().startsWith("NodeTypes."));
-    }
-
     public static ElementPattern<PsiElement> getWithFirstRootKey() {
-        return PlatformPatterns.or(
+
+        return PlatformPatterns.and(PlatformPatterns.or(
                 // foo:
                 //   <caret>
                 PlatformPatterns
@@ -62,6 +58,6 @@ public class YamlElementPatternHelper {
                         YAMLKeyValue.class, YAMLMapping.class,
                         YAMLDocument.class)
                 )
-        );
+        ));
     }
 }

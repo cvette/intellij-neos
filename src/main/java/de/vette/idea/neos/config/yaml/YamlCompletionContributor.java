@@ -20,7 +20,11 @@ package de.vette.idea.neos.config.yaml;
 
 import com.intellij.codeInsight.completion.*;
 import com.intellij.patterns.PlatformPatterns;
+import com.intellij.patterns.PsiElementPattern;
+import com.intellij.psi.PsiElement;
+import de.vette.idea.neos.util.psi.FilenamePrefixPatternCondition;
 import de.vette.idea.neos.util.psi.ParentKeysPatternCondition;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.YAMLLanguage;
 
 import java.util.Collections;
@@ -119,51 +123,97 @@ public class YamlCompletionContributor extends CompletionContributor {
     }});
 
     public YamlCompletionContributor() {
-        extend(CompletionType.BASIC, YamlElementPatternHelper.getWithFirstRootKey(), new YamlCompletionProvider(ROOT_KEYS));
+        extend(CompletionType.BASIC,
+                PlatformPatterns.and(
+                        YamlElementPatternHelper.getWithFirstRootKey(),
+                        PlatformPatterns.psiElement().with(new FilenamePrefixPatternCondition("NodeTypes."))
+                ),
+                new YamlCompletionProvider(ROOT_KEYS)
+        );
 
+        // ui
+        PsiElementPattern.Capture<PsiElement> uiElementPattern =
+                getNodeTypeElementMatcher("ui");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("ui")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_KEYS)
-        );
+                uiElementPattern,
+                new YamlCompletionProvider(UI_KEYS));
+
+        // ui.help
+        PsiElementPattern.Capture<PsiElement> uiHelpElementPattern =
+                getNodeTypeElementMatcher("help", "ui");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("help", "ui")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_HELP_KEYS)
-        );
+                uiHelpElementPattern,
+                new YamlCompletionProvider(UI_HELP_KEYS));
+
+        // ui.help
+        PsiElementPattern.Capture<PsiElement> uiInspectorElementPattern =
+                getNodeTypeElementMatcher("inspector", "ui");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("inspector", "ui")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_INSPECTOR_KEYS)
-        );
+                uiInspectorElementPattern,
+                new YamlCompletionProvider(UI_INSPECTOR_KEYS));
+
+        // ui.inspector.tabs
+        PsiElementPattern.Capture<PsiElement> uiInspectorTabsElementPattern =
+                getNodeTypeElementMatcher("tabs", "inspector", "ui");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("*", "groups", "inspector", "ui")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_INSPECTOR_GROUPS_KEYS)
-        );
+                uiInspectorTabsElementPattern,
+                new YamlCompletionProvider(UI_INSPECTOR_TABS_KEYS));
+
+        // ui.inspector.groups
+        PsiElementPattern.Capture<PsiElement> uiInspectorGroupsElementPattern =
+                getNodeTypeElementMatcher("*", "groups", "inspector", "ui");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("tabs", "inspector", "ui")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_INSPECTOR_TABS_KEYS)
-        );
+                uiInspectorGroupsElementPattern,
+                new YamlCompletionProvider(UI_INSPECTOR_GROUPS_KEYS));
+
+        // *.properties
+        PsiElementPattern.Capture<PsiElement> uiPropertiesElementPattern =
+                getNodeTypeElementMatcher("*", "properties");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("*", "properties")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_PROPERTIES_KEYS)
-        );
+                uiPropertiesElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_KEYS));
+
+        // properties.*.ui
+        PsiElementPattern.Capture<PsiElement> uiPropertiesUiElementPattern =
+                getNodeTypeElementMatcher("ui", "*", "properties");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("ui", "*", "properties")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_PROPERTIES_UI_KEYS)
-        );
+                uiPropertiesUiElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_UI_KEYS));
+
+        // properties.*.ui.inspector
+        PsiElementPattern.Capture<PsiElement> uiPropertiesInspectorElementPattern =
+                getNodeTypeElementMatcher("inspector", "ui", "*", "properties");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("inspector", "ui", "*", "properties")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(UI_PROPERTIES_UI_INSPECTOR_KEYS)
-        );
+                uiPropertiesInspectorElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_UI_INSPECTOR_KEYS));
+
+        // label
+        PsiElementPattern.Capture<PsiElement> labelElementPattern =
+                getNodeTypeElementMatcher("label");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("label")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(LABEL_KEYS)
-        );
+                labelElementPattern,
+                new YamlCompletionProvider(LABEL_KEYS));
+
+        // childNodes.*
+        PsiElementPattern.Capture<PsiElement> childNodesElementPattern =
+                getNodeTypeElementMatcher("*", "childNodes");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("*", "childNodes")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(CHILDNODES_KEYS)
-        );
+                childNodesElementPattern,
+                new YamlCompletionProvider(CHILDNODES_KEYS));
+
+        // childNodes.*.constraints
+        PsiElementPattern.Capture<PsiElement> childNodesConstraintsElementPattern =
+                getNodeTypeElementMatcher("constraints", "*", "childNodes");
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().with(new ParentKeysPatternCondition("constraints", "*", "childNodes")).withLanguage(YAMLLanguage.INSTANCE),
-                new YamlCompletionProvider(CHILDNODES_CONSTRAINTS_KEYS)
-        );
+                childNodesConstraintsElementPattern,
+                new YamlCompletionProvider(CHILDNODES_CONSTRAINTS_KEYS));
+    }
+
+    protected PsiElementPattern.Capture<PsiElement> getNodeTypeElementMatcher(@NotNull String... keys) {
+        return PlatformPatterns
+                .psiElement()
+                .with(new ParentKeysPatternCondition(keys))
+                .with(new FilenamePrefixPatternCondition("NodeTypes."))
+                .withLanguage(YAMLLanguage.INSTANCE);
     }
 }
