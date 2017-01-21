@@ -56,6 +56,10 @@ public class NeosProjectComponent implements ProjectComponent {
         return project != null && Settings.getInstance(project).pluginEnabled;
     }
 
+    public static boolean isEnabled(@Nullable PsiElement element) {
+        return isEnabled(element.getProject());
+    }
+
     @Override
     public void projectOpened() {
         if (!this.isEnabled() && !Settings.getInstance(project).dismissEnableNotification) {
