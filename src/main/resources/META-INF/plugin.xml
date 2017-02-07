@@ -13,7 +13,8 @@
         <li>Fusion/TypoScript2 language support
           <ul>
             <li>Syntax Highlighting</li>
-            <li>Formatting</li>
+            <li>Basic Formatting</li>
+            <li>Brace Matching</li>
           </ul>
         </li>
         <li>Completion for node type definition</li>
@@ -25,6 +26,8 @@
   <idea-version since-build="141.0"/>
 
   <depends>com.intellij.modules.platform</depends>
+  <depends>com.jetbrains.php</depends>
+  <depends>org.jetbrains.plugins.yaml</depends>
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="de.vette.idea.neos.Settings"/>
@@ -44,8 +47,9 @@
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
-
+    <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
+    <psi.referenceContributor implementation="de.vette.idea.neos.lang.fusion.references.DefaultContextReferenceContributor"/>
   </extensions>
 
   <project-components>
@@ -53,12 +57,4 @@
       <implementation-class>de.vette.idea.neos.NeosProjectComponent</implementation-class>
     </component>
   </project-components>
-
-
-  <actions>
-    <!-- Add your actions here -->
-  </actions>
-
-  <depends>org.jetbrains.plugins.yaml</depends>
-  <depends>com.intellij.modules.platform</depends>
 </idea-plugin>
