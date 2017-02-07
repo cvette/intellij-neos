@@ -49,6 +49,7 @@
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
+    <psi.referenceContributor implementation="de.vette.idea.neos.lang.fusion.references.DefaultContextReferenceContributor"/>
   </extensions>
 
   <project-components>

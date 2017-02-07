@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class NeosProjectComponent implements ProjectComponent {
 
-    final private static Logger LOG = Logger.getInstance("Neos-Plugin");
+    final private static Logger LOG = Logger.getInstance("Neos");
     private Project project;
 
     public NeosProjectComponent(Project project) {
