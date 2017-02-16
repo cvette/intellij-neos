@@ -43,6 +43,7 @@
     <lang.braceMatcher language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionBraceMatcher"/>
     <lang.formatter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.formatter.FusionFormattingModelBuilder"/>
     <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
+    <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
     <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
@@ -50,7 +51,7 @@
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.fusion.references.DefaultContextReferenceContributor"/>
-    <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
+    <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
   </extensions>
 
   <project-components>
