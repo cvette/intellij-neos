@@ -27,5 +27,6 @@ public class FusionFileTypeFactory extends FileTypeFactory {
     @Override
     public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
         fileTypeConsumer.consume(FusionFileType.INSTANCE, FusionFileType.DEFAULT_EXTENSION);
+        fileTypeConsumer.consume(FusionFileType.INSTANCE, FusionFileType.LEGACY_EXTENSION);
     }
 }

@@ -30,7 +30,8 @@ import javax.swing.*;
  */
 public class FusionFileType extends LanguageFileType {
     public static final LanguageFileType INSTANCE = new FusionFileType();
-    public static final String DEFAULT_EXTENSION = "ts2";
+    public static final String DEFAULT_EXTENSION = "fusion";
+    public static final String LEGACY_EXTENSION = "ts2";
 
     private FusionFileType() {
         super(FusionLanguage.INSTANCE);
