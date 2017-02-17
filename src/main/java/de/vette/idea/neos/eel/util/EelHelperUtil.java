@@ -32,7 +32,11 @@ import java.util.HashMap;
 public class EelHelperUtil {
 
     public static HashMap<String, String> getHelpersInFile(@NotNull PsiFile psiFile) {
-        YAMLKeyValue defaultContext = YAMLUtil.getQualifiedKeyInFile((YAMLFile) psiFile, "TYPO3", "TypoScript", "defaultContext");
+        YAMLKeyValue defaultContext = YAMLUtil.getQualifiedKeyInFile((YAMLFile) psiFile, "Neos", "Fusion", "defaultContext");
+
+        if (defaultContext == null) {
+            defaultContext = YAMLUtil.getQualifiedKeyInFile((YAMLFile) psiFile, "TYPO3", "TypoScript", "defaultContext");
+        }
 
         HashMap<String, String> result = new HashMap<String, String>();
         if (defaultContext != null) {
@@ -42,7 +46,7 @@ public class EelHelperUtil {
                     if (mappingElement instanceof YAMLKeyValue) {
                         YAMLKeyValue keyValue = (YAMLKeyValue) mappingElement;
                         result.put(keyValue.getKeyText(), keyValue.getValueText());
-                        NeosProjectComponent.getLogger().info(keyValue.getKeyText() + ": " + keyValue.getValueText());
+                        NeosProjectComponent.getLogger().debug(keyValue.getKeyText() + ": " + keyValue.getValueText());
                     }
                 }
             }

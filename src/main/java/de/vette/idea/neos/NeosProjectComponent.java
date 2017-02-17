@@ -93,6 +93,7 @@ public class NeosProjectComponent implements ProjectComponent {
     public static boolean isNeosProject(Project project) {
         return (VfsUtil.findRelativeFile(project.getBaseDir(), "Packages") != null
                 && VfsUtil.findRelativeFile(project.getBaseDir(), "Configuration") != null
-                && VfsUtil.findRelativeFile(project.getBaseDir(), "Packages", "Application", "TYPO3.Neos") != null);
+                && (VfsUtil.findRelativeFile(project.getBaseDir(), "Packages", "Application", "TYPO3.Neos") != null
+                || VfsUtil.findRelativeFile(project.getBaseDir(), "Packages", "Application", "Neos.Neos") != null));
     }
 }
