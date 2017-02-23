@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 16 16"
+   version="1.1"
+   sodipodi:docname="fusion.svg"
+   inkscape:version="0.92.0 r15299">
+  <metadata
+     id="metadata29">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>facesConfig</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs27" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview25"
+     showgrid="false"
+     inkscape:zoom="41.7193"
+     inkscape:cx="3.4910913"
+     inkscape:cy="6.3332172"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10" />
+  <title
+     id="title2">facesConfig</title>
+  <g
+     id="g22">
+    <g
+       id="g10">
+      <polygon
+         points="6 0 2 4 6 4 6 0"
+         fill="#9aa7b0"
+         opacity="0.7"
+         style="isolation: isolate"
+         id="polygon4" />
+      <rect
+         x="1"
+         y="9"
+         width="15"
+         height="7"
+         fill="#62b543"
+         opacity="0.6"
+         id="rect6"
+         style="fill:#00adee;fill-opacity:1" />
+      <polygon
+         points="7 0 7 4 7 5 6 5 2 5 2 8 13 8 13 0 7 0"
+         fill="#9aa7b0"
+         opacity="0.7"
+         style="isolation: isolate"
+         id="polygon8" />
+    </g>
+    <g
+       id="g16"
+       transform="translate(-8)"
+       style="opacity:0.6">
+      <path
+         d="m 11,10 h 3.30575 v 0.80028 h -2.427 v 1.36385 h 2.10533 v 0.80028 H 11.87879 V 15 H 11 Z"
+         id="path14"
+         inkscape:connector-curvature="0"
+         style="fill:#231f20" />
+    </g>
+  </g>
+</svg>
