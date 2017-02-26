@@ -23,7 +23,6 @@ import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
-import de.vette.idea.neos.NeosProjectComponent;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.FusionBlock;
@@ -48,15 +47,19 @@ public class FusionBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider {
         if (e instanceof FusionBlock) {
             PsiElement currentElement = e;
             do {
-                currentElement = currentElement.getPrevSibling();
+                if (currentElement.getPrevSibling() == null) {
+                    currentElement = currentElement.getParent();
+                } else {
+                    currentElement = currentElement.getPrevSibling();
+                }
             } while (currentElement != null && !(currentElement instanceof FusionPath));
 
             if (currentElement != null) {
                 PsiElement firstChild = currentElement.getFirstChild();
                 if (firstChild != null && firstChild instanceof FusionPrototypeSignature) {
-                    for (ASTNode child : firstChild.getNode().getChildren(TokenSet.create(FusionTypes.PROTOTYPE_NAME))) {
-                        elementInfo = child.getText();
-                        break;
+                    ASTNode[] children = firstChild.getNode().getChildren(TokenSet.create(FusionTypes.PROTOTYPE_NAME));
+                    if (children.length > 0) {
+                        elementInfo = children[0].getText();
                     }
                 } else {
                     elementInfo = currentElement.getText();

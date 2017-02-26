@@ -44,6 +44,7 @@
     <lang.formatter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.formatter.FusionFormattingModelBuilder"/>
     <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
+    <lang.psiStructureViewFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.structure.FusionStructureViewBuilderFactory"/>
     <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
