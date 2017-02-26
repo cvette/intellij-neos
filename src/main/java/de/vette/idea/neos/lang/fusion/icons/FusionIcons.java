@@ -23,5 +23,9 @@ import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 public class FusionIcons {
-    public static final Icon FILE = IconLoader.getIcon("/de/vette/idea/neos/lang/fusion/icons/fusion.png");
+    public static final Icon FILE = IconLoader.getIcon("/de/vette/idea/neos/lang/fusion/icons/fileTypes/fusion.png");
+    public static final Icon PROTOTYPE = IconLoader.getIcon("/de/vette/idea/neos/lang/fusion/icons/nodes/prototype.png");
+    public static final Icon PATH = IconLoader.getIcon("/de/vette/idea/neos/lang/fusion/icons/nodes/path.png");
+    public static final Icon META = IconLoader.getIcon("/de/vette/idea/neos/lang/fusion/icons/nodes/meta.png");
+    public static final Icon UNSET = IconLoader.getIcon("/de/vette/idea/neos/lang/fusion/icons/nodes/unset.png");
 }
