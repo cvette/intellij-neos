@@ -39,7 +39,7 @@ property_assignment ::= path ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE
 prototype_inheritance ::= path PROTOTYPE_COPY_OPERATOR prototype_signature [block]
 
 private object_type ::= (simple_type|namespaced_type) [block]
-simple_type ::= UNQUALIFIED_TYPE [block]
+simple_type ::= UNQUALIFIED_TYPE
 namespaced_type ::= OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR UNQUALIFIED_TYPE {pin=1}
 
 path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))* {
