@@ -29,20 +29,30 @@ include_declaration ::= INCLUDE_KEYWORD INCLUDE_SEPARATOR (resource|INCLUDE_PATH
 resource ::= RESOURCE_KEYWORD RESOURCE_PATH {pin=1}
 
 private property ::= (property_block|property_deletion|property_copy|property_assignment|prototype_inheritance)
-private property_block ::= path block {pin=2}
-private property_deletion ::= path UNSET_OPERATOR {pin=2}
-private property_copy ::= path COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|object_type) {pin=2}
-private property_assignment ::= path ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|expression|object_type) {pin=2}
+property_block ::= path block {pin=2}
+property_deletion ::= path UNSET_OPERATOR {pin=2}
+property_copy ::= path COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|object_type) {pin=2}
+property_assignment ::= path ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|expression|object_type) {
+    pin=2
+}
 
 prototype_inheritance ::= path PROTOTYPE_COPY_OPERATOR prototype_signature [block]
 
-private object_type ::= (UNQUALIFIED_TYPE|namespaced_type) [block]
-private namespaced_type ::= OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR UNQUALIFIED_TYPE {pin=1}
+private object_type ::= (simple_type|namespaced_type) [block]
+simple_type ::= UNQUALIFIED_TYPE [block]
+namespaced_type ::= OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR UNQUALIFIED_TYPE {pin=1}
 
-path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))*
+path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))* {
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement" ]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.mixin.FusionPathImplMixin"
+}
 
 meta_property ::= META_PROPERTY_KEYWORD META_PROPERTY_NAME {pin=1}
-prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN PROTOTYPE_NAME RIGHT_PAREN {pin=1}
+prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN PROTOTYPE_NAME RIGHT_PAREN {
+    pin=1
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement" ]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.mixin.FusionPrototypeSignatureImplMixin"
+}
 
 value_string_line ::= VALUE_STRING_QUOTE (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}
 value_string_single_line ::= VALUE_STRING_QUOTE (VALUE_STRING | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}

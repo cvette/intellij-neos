@@ -15,12 +15,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.psi.impl.mixin;
 
-package de.vette.idea.neos.lang.fusion.psi;
+import com.intellij.lang.ASTNode;
+import de.vette.idea.neos.lang.fusion.psi.FusionPath;
+import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
+import org.jetbrains.annotations.NotNull;
 
-import com.intellij.navigation.NavigationItem;
-import com.intellij.psi.PsiNamedElement;
+public abstract class FusionPathImplMixin extends FusionNamedElementImpl implements FusionPath {
+    public FusionPathImplMixin(@NotNull ASTNode astNode) {
+        super(astNode);
+    }
 
-public interface FusionNamedElement extends FusionCompositeElement, PsiNamedElement, NavigationItem {
+    @Override
+    public String getName() {
+        if (getFirstChild() instanceof FusionPrototypeSignature) {
+            return ((FusionPrototypeSignature) getFirstChild()).getName();
+        }
 
+        return this.getText();
+    }
 }

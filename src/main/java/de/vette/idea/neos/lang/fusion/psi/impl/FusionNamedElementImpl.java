@@ -18,14 +18,71 @@
 
 package de.vette.idea.neos.lang.fusion.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.util.IncorrectOperationException;
 import de.vette.idea.neos.lang.fusion.psi.FusionNamedElement;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class FusionNamedElementImpl extends ASTWrapperPsiElement implements FusionNamedElement {
+import javax.swing.*;
+
+public abstract class FusionNamedElementImpl extends FusionCompositeElementImpl implements FusionNamedElement, PsiNameIdentifierOwner {
 
     public FusionNamedElementImpl(@NotNull ASTNode astNode) {
         super(astNode);
+    }
+
+    @Nullable
+    @Override
+    public PsiElement getNameIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public PsiElement getNavigationElement() {
+        return super.getNavigationElement();
+    }
+
+    @Override
+    public int getTextOffset() {
+        return super.getTextOffset();
+    }
+
+    @Override
+    public ItemPresentation getPresentation() {
+        return new ItemPresentation() {
+            @Nullable
+            @Override
+            public String getPresentableText() {
+                return "";
+            }
+
+            @Nullable
+            @Override
+            public String getLocationString() {
+                return "";
+            }
+
+            @Nullable
+            @Override
+            public Icon getIcon(boolean unused) {
+                return null;
+            }
+        };
     }
 }
