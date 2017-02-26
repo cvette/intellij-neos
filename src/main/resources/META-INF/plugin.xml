@@ -5,25 +5,29 @@
   <version>0.1</version>
 
   <description><![CDATA[
-    <p>Support for Neos.</p>
+    <p>Support for the Neos CMS.</p>
     <br/>
     <p>
       <b>Features</b>
       <ul>
-        <li>Fusion/TypoScript2 language support
+        <li>Fusion / TypoScript2 language support
           <ul>
-            <li>Syntax Highlighting</li>
-            <li>Basic Formatting</li>
-            <li>Brace Matching</li>
+            <li>Configurable syntax highlighting</li>
+            <li>Basic formatting</li>
+            <li>Brace matching</li>
+            <li>Breadcrumb navigation</li>
+            <li>Code folding</li>
+            <li>Structure view</li>
+            <li>EEL helper references (Ctrl+Click navigation to class/method)</li>
           </ul>
         </li>
-        <li>Completion for node type definition</li>
+        <li>Completion for node type definitions</li>
       </ul>
     </p>
     ]]></description>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="141.0"/>
+  <idea-version since-build="162.0"/>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.jetbrains.php</depends>
@@ -37,7 +41,6 @@
                          parentId="reference.webide.settings.project.settings.php"
                          nonDefaultProject="true"
     />
-
     <lang.parserDefinition language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
     <lang.syntaxHighlighterFactory key="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
     <lang.braceMatcher language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionBraceMatcher"/>
