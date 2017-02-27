@@ -6,7 +6,24 @@ IntelliJ IDEA / PhpStorm Neos Plugin
 [![Downloads last month](https://christianvette.de/badge/9362/last-month)](https://plugins.jetbrains.com/plugin/9362)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/intellij-neos/Lobby)
 
-Work in progress.
+This is a **work in progress**. There may be performance and stability problems.
+
+Features
+--------
+
+* Fusion / TypoScript2 language support
+ * Configurable syntax highlighting
+ * Basic formatting
+ * Brace matching
+ * Breadcrumb navigation
+ * Code folding
+ * Structure view
+ * EEL helper references (Ctrl+Click navigation to class/method)
+* Completion for node type definitions
+
+Usage
+-----
+You can install the plugin by going to `Settings > Plugins > Browse repositories` and searching for "Neos".
 
 License
 -------
