@@ -21,6 +21,7 @@ package de.vette.idea.neos.lang.fusion.structure;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
+import com.intellij.ide.util.treeView.smartTree.Sorter;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
 import de.vette.idea.neos.lang.fusion.psi.FusionFile;
@@ -28,10 +29,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class FusionStructureViewModel extends TextEditorBasedStructureViewModel implements StructureViewModel.ElementInfoProvider {
     private FusionFile fusionFile;
+    private Sorter[] mySorters;
 
     public FusionStructureViewModel(Editor editor, PsiFile file) {
         super(editor, file);
-        fusionFile = (FusionFile) file;
+        this.fusionFile = (FusionFile) file;
+        this.mySorters = new Sorter[]{Sorter.ALPHA_SORTER};
     }
 
     @NotNull
@@ -48,5 +51,11 @@ public class FusionStructureViewModel extends TextEditorBasedStructureViewModel 
     @Override
     public boolean isAlwaysLeaf(StructureViewTreeElement element) {
         return false;
+    }
+
+    @NotNull
+    @Override
+    public Sorter[] getSorters() {
+        return this.mySorters;
     }
 }
