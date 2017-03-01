@@ -25,6 +25,9 @@ import de.vette.idea.neos.lang.fusion.psi.FusionIdentifier;
 import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Entry point for "go to definition" feature for Eel helper -- ("cmd+click" on Eel helper)
+ */
 public class DefaultContextReferenceContributor extends PsiReferenceContributor {
 
     @Override

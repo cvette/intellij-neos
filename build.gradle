@@ -18,17 +18,15 @@
 
 buildscript {
     repositories {
-        mavenCentral()
         maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
     }
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.1.10"
+    id "org.jetbrains.intellij" version "0.2.5"
 }
 
 apply plugin: 'idea'
-apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
 version "$version-$buildNumber"
@@ -40,13 +38,43 @@ sourceSets {
     main.java.srcDirs += 'src/gen'
 }
 
+// See http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
+// and https://plugins.jetbrains.com/plugin/6610-php
+def pluginsForIdeaVersion = [
+    'LATEST-EAP-SNAPSHOT': [
+        // Branch Number: 171
+        'com.jetbrains.php:171.3691.14',
+        'yaml'
+    ],
+    '2016.3.1': [
+        // Branch Number: 163
+        'com.jetbrains.php:163.10504.2',
+        'yaml'
+    ],
+    '2016.3': [
+        // Branch Number: 163
+        'com.jetbrains.php:163.7743.54',
+        'yaml'
+    ],
+    '2016.2.5': [
+        // Branch Number: 162
+        'com.jetbrains.php:162.1121.34',
+        'yaml'
+    ],
+    '2016.1.4': [
+        // Branch Number: 145
+        'com.jetbrains.php:145.9070.40',
+        'yaml'
+    ]
+]
+
 intellij {
     version ideaVersion
     pluginName 'neos-intellij-plugin'
     updateSinceUntilBuild false
     downloadSources Boolean.valueOf(downloadIdeaSources)
     type = 'IU'
-    plugins = ['yaml']
+    plugins = pluginsForIdeaVersion[ideaVersion]
 }
 
 idea {

@@ -25,6 +25,19 @@ Usage
 -----
 You can install the plugin by going to `Settings > Plugins > Browse repositories` and searching for "Neos".
 
+Developing
+----------
+
+- clone the repository
+- run `./gradlew runIde` - for the first time, this will take quite a while, as it downloads IntelliJ
+- to open the project in IntelliJ, Use "File -> Open" in IntelliJ and select the "build.gradle" in here.
+- have fun developing :)
+
+Development Tips and Tricks
+---------------------------
+
+- install GrammarKit if you want to work on the parser
+
 License
 -------
 Copyright (C) 2016  Christian Vette
