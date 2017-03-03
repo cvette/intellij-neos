@@ -48,7 +48,7 @@ def pluginsForIdeaVersion = [
     ],
     '2016.3.1': [
         // Branch Number: 163
-        'com.jetbrains.php:163.10504.2',
+        'com.jetbrains.php:163.9166.11',
         'yaml'
     ],
     '2016.3': [
@@ -63,7 +63,7 @@ def pluginsForIdeaVersion = [
     ],
     '2016.1.4': [
         // Branch Number: 145
-        'com.jetbrains.php:145.9070.40',
+        'com.jetbrains.php:145.970.40',
         'yaml'
     ]
 ]
