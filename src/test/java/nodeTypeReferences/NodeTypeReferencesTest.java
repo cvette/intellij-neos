@@ -69,7 +69,8 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
         doRunTestWithCustomAssertions(
                 "NodeTypes.allDefinitionsAreFound.yaml",
                 resolveResult -> {
-                    assertEquals("Length does not match", 3, resolveResult.length);
+                    // one element shall be skipped; which is the element where we are currently
+                    assertEquals("Length does not match", 2, resolveResult.length);
                 }
         );
     }

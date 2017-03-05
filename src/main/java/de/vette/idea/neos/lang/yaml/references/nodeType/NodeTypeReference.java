@@ -53,6 +53,8 @@ public class NodeTypeReference extends PsiPolyVariantReferenceBase<YAMLKeyValue>
                 .flatMap(yamlFile -> YAMLUtil.getTopLevelKeys(yamlFile).stream())
                 // get the correct YAML key
                 .filter(yamlKeyValue -> yamlKeyValue.getKeyText().equals(nodeTypeNameToFindReferenceFor))
+                // remove "current" element if it exists
+                .filter(yamlKeyValue -> yamlElement != yamlKeyValue)
                 // build up the result object
                 .map(yamlKeyValue -> new PsiElementResolveResult(yamlKeyValue, true))
                 .toArray(PsiElementResolveResult[]::new);
