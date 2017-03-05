@@ -10,6 +10,7 @@ import de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReference;
 
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import helpers.NeosProjectDescriptor;
@@ -65,12 +66,11 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
     }
 
     public void testAllDefinitionsAreFound() {
-        doRunTest(
+        doRunTestWithCustomAssertions(
                 "NodeTypes.allDefinitionsAreFound.yaml",
-                3,
-                "Neos.NodeTypes:Text",
-                "NodeTypes.Basic.yaml",
-                offset -> true
+                resolveResult -> {
+                    assertEquals("Length does not match", 3, resolveResult.length);
+                }
         );
     }
 
@@ -78,6 +78,18 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
      * Helper actually running the testcase
      */
     private void doRunTest(String fileNameToInclude, int expectedNumberOfSuggestions, String targetPsiElementKeyText, String targetFile, Function<Integer, Boolean> offsetChecker) {
+        doRunTestWithCustomAssertions(fileNameToInclude, resolveResult -> {
+            assertEquals("Length does not match", expectedNumberOfSuggestions, resolveResult.length);
+
+            YAMLKeyValue yamlKeyValue = assertInstanceOf(resolveResult[0].getElement(), YAMLKeyValue.class);
+
+            assertEquals("keyText does not match", targetPsiElementKeyText, yamlKeyValue.getKeyText());
+            assertEquals("wrong file name", targetFile, yamlKeyValue.getContainingFile().getName());
+            assertTrue("Text offset fits", offsetChecker.apply(yamlKeyValue.getTextOffset()));
+        });
+    }
+
+    private void doRunTestWithCustomAssertions(String fileNameToInclude, Consumer<ResolveResult[]> assertResults) {
         myFixture.configureByFiles(fileNameToInclude, "NodeTypes.Basic.yaml");
 
         // actually trigger indexing
@@ -86,12 +98,6 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
         PsiElement element = myFixture.getFile().findElementAt(myFixture.getCaretOffset()).getParent();
 
         ResolveResult[] resolveResult = ((NodeTypeReference) element.getReferences()[0]).multiResolve(false);
-        assertEquals("Length does not match", expectedNumberOfSuggestions, resolveResult.length);
-
-        YAMLKeyValue yamlKeyValue = assertInstanceOf(resolveResult[0].getElement(), YAMLKeyValue.class);
-
-        assertEquals("keyText does not match", targetPsiElementKeyText, yamlKeyValue.getKeyText());
-        assertEquals("wrong file name", targetFile, yamlKeyValue.getContainingFile().getName());
-        assertTrue("Text offset fits", offsetChecker.apply(yamlKeyValue.getTextOffset()));
+        assertResults.accept(resolveResult);
     }
 }

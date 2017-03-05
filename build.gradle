@@ -112,6 +112,14 @@ idea {
     }
 }
 
+test {
+    testLogging {
+        events "failed"
+        exceptionFormat "short"
+        showStackTraces true
+    }
+}
+
 lexerTask(project, 'FusionLexer', 'de/vette/idea/neos/lang/fusion/lexer')
 parserTask(project, 'FusionParser', 'de/vette/idea/neos/lang/fusion/psi')
 
