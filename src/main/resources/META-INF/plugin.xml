@@ -22,6 +22,7 @@
           </ul>
         </li>
         <li>Completion for node type definitions</li>
+        <li>"Go to definition" for node types / supertypes / constraints in NodeTypes.yaml</li>
       </ul>
     </p>
     ]]></description>

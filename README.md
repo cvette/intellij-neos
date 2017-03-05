@@ -20,6 +20,7 @@ Features
  * Structure view
  * EEL helper references (Ctrl+Click navigation to class/method)
 * Completion for node type definitions
+* "Go to definition" for node types / supertypes / constraints in NodeTypes.yaml
 
 Usage
 -----
