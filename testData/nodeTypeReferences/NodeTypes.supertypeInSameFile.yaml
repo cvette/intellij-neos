@@ -1,0 +1,11 @@
+'Neos.NodeTypes:Page':
+  constraints:
+    nodeTypes:
+      '*': FALSE
+      'Neos.NodeTypes:Headline': TRUE
+      'Neos.NodeTypes:Text': TRUE
+      'Neos.NodeTypes:Image': TRUE
+
+'Neos.Demo:Homepage':
+  superTypes:
+    'Neos.NodeTypes:Page<caret>': TRUE

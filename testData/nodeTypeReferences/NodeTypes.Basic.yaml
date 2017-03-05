@@ -1,0 +1,6 @@
+'Neos.NodeTypes:Headline':
+  abstract: true
+'Neos.NodeTypes:Text':
+  abstract: true
+'Neos.NodeTypes:Image':
+  abstract: true
