@@ -109,7 +109,7 @@ public class NodeTypesYamlFileIndex extends ScalarIndexExtension<String> {
                 return false;
             }
 
-            return psiFile.getName().startsWith("NodeTypes.") && psiFile.getName().endsWith(".yaml");
+            return psiFile.getName().startsWith("NodeTypes.");
         }
     }
 }

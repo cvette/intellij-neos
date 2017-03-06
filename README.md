@@ -47,8 +47,9 @@ Development Tips and Tricks
 ---------------------------
 
 - install GrammarKit if you want to work on the parser
-- to log, use `com.intellij.openapi.diagnostic.Logger.getInstance("!!! CUSTOM").warn("FOO");`
+- to log, use `NeosProjectComponent.getLogger().warn("Foo")`
   and run `tail -f build/idea-sandbox/system/log/idea.log`.
+- If you use debug level, you have to add the "Neos" debug category via Help > Debug Log Settings.
 
 License
 -------

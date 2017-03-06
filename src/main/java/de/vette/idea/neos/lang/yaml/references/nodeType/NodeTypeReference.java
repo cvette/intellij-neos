@@ -30,7 +30,6 @@ public class NodeTypeReference extends PsiPolyVariantReferenceBase<YAMLKeyValue>
     @NotNull
     @Override
     public Object[] getVariants() {
-        // TODO: fill for autocompletion!
         return new Object[0];
     }
 
