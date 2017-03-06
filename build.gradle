@@ -44,27 +44,56 @@ def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
         // Branch Number: 171
         'com.jetbrains.php:171.3691.14',
-        'yaml'
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
     ],
     '2016.3.1': [
         // Branch Number: 163
         'com.jetbrains.php:163.9166.11',
-        'yaml'
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
     ],
     '2016.3': [
         // Branch Number: 163
         'com.jetbrains.php:163.7743.54',
-        'yaml'
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties',
+
+        // DEV dependencies: UNCOMMENT the following lines during development
+        // to install additional plugins for development
+        // 'PsiViewer:3.28.93'
     ],
     '2016.2.5': [
         // Branch Number: 162
         'com.jetbrains.php:162.1121.34',
-        'yaml'
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
     ],
     '2016.1.4': [
         // Branch Number: 145
         'com.jetbrains.php:145.970.40',
-        'yaml'
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
     ]
 ]
 
@@ -80,6 +109,14 @@ intellij {
 idea {
     module {
         generatedSourceDirs += file('src/gen')
+    }
+}
+
+test {
+    testLogging {
+        events "failed"
+        exceptionFormat "short"
+        showStackTraces true
     }
 }
 

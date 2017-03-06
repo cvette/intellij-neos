@@ -1,0 +1,3 @@
+'Neos.Demo:Homepage':
+  superTypes:
+    'Neos.NodeTypes:<caret>Image': TRUE

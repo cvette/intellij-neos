@@ -1,0 +1,5 @@
+'Neos.NodeTypes:T<caret>ext':
+  foo: bar
+
+'Neos.NodeTypes:Text':
+  foo: baz

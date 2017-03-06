@@ -1,0 +1,4 @@
+'Neos.Demo:Homepage':
+  constraints:
+    nodeTypes:
+      'Neos.<caret>NodeTypes:Image': TRUE
