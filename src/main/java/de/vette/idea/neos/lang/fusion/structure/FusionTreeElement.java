@@ -147,8 +147,6 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
         return FusionIcons.PATH;
     }
 
-
-
     @Override
     public boolean canNavigate() {
         return true;

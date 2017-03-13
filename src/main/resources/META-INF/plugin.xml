@@ -19,6 +19,7 @@
             <li>Code folding</li>
             <li>Structure view</li>
             <li>EEL helper references (Ctrl+Click navigation to class/method)</li>
+            <li>Prototype references (Ctrl+Click navigation to prototype definition)</li>
           </ul>
         </li>
         <li>Completion for node type definitions</li>
@@ -59,6 +60,10 @@
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.fusion.references.DefaultContextReferenceContributor"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
+
+    <!-- Indices -->
+    <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
+    <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex"/>
   </extensions>
 
   <project-components>

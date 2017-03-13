@@ -15,25 +15,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.vette.idea.neos.lang.fusion.psi.impl.mixin;
+package de.vette.idea.neos.lang.fusion.stubs;
 
-import com.intellij.lang.ASTNode;
-import de.vette.idea.neos.lang.fusion.psi.FusionPath;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
+import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionPathImplMixin extends FusionNamedElementImpl implements FusionPath {
-    public FusionPathImplMixin(@NotNull ASTNode astNode) {
-        super(astNode);
-    }
+public class StubElementTypeFactory {
 
-    @Override
-    public String getName() {
-        if (getFirstChild() instanceof FusionPrototypeSignature) {
-            return ((FusionPrototypeSignature) getFirstChild()).getName();
+    @NotNull
+    public static IElementType factory(@NotNull  String name) {
+        if (name.equals("PROTOTYPE_SIGNATURE")) {
+            return FusionPrototypeSignatureStub.TYPE;
+        } else if (name.equals("NAMESPACE_DECLARATION")){
+            return FusionNamespaceDeclarationStub.TYPE;
         }
 
-        return this.getText();
+        throw new RuntimeException("Unknown element type: " + name);
     }
 }

@@ -58,7 +58,6 @@ RIGHT_BRACE = "}"
 LEFT_BRACKET = "["
 RIGHT_BRACKET = "]"
 PROTOTYPE_KEYWORD = "prototype"
-PROTOTYPE_NAME = [a-zA-Z0-9.:]+
 LEFT_PAREN = "("
 RIGHT_PAREN = ")"
 META_PROPERTY_KEYWORD = "@"
@@ -98,7 +97,7 @@ IF_SEPARATOR = {COLON}
 // Path states
 %state META_PROPERTY_FOUND
 %state PATH_PART, PATH_FOUND
-%state PROTOTYPE_FOUND, PROTOTYPE_IN_PATH_FOUND, PROTOTYPE_EXPECTED, PROTOTYPE_IN_PATH_NEXT
+%state PROTOTYPE_FOUND, PROTOTYPE_IN_PATH_FOUND, PROTOTYPE_EXPECTED, PROTOTYPE_IN_PATH_NEXT, OBJECT_TYPE_IN_PROTOTYPE_FOUND, OBJECT_TYPE_IN_PROTOTYPE_IN_PATH_FOUND
 %state OPERATOR_OR_LEFT_BRACE_EXPECTED
 
 // Value states
@@ -180,8 +179,16 @@ IF_SEPARATOR = {COLON}
 }
 
 <PROTOTYPE_IN_PATH_FOUND> {
-    {PROTOTYPE_NAME}                        { return FusionTypes.PROTOTYPE_NAME; }
+    {OBJECT_TYPE_PART}                      { return FusionTypes.UNQUALIFIED_TYPE; }
+    {OBJECT_TYPE_PART}/{COLON}              { yybegin(OBJECT_TYPE_IN_PROTOTYPE_IN_PATH_FOUND); return FusionTypes.OBJECT_TYPE_NAMESPACE; }
+    {COLON}                                 { return FusionTypes.OBJECT_TYPE_SEPARATOR; }
     {LEFT_PAREN}                            { return FusionTypes.LEFT_PAREN; }
+    {RIGHT_PAREN}                           { yybegin(PROTOTYPE_IN_PATH_NEXT); return FusionTypes.RIGHT_PAREN; }
+}
+
+<OBJECT_TYPE_IN_PROTOTYPE_IN_PATH_FOUND> {
+    {COLON}                                 { return FusionTypes.OBJECT_TYPE_SEPARATOR; }
+    {OBJECT_TYPE_PART}                      { return FusionTypes.UNQUALIFIED_TYPE; }
     {RIGHT_PAREN}                           { yybegin(PROTOTYPE_IN_PATH_NEXT); return FusionTypes.RIGHT_PAREN; }
 }
 
@@ -193,8 +200,16 @@ IF_SEPARATOR = {COLON}
 }
 
 <PROTOTYPE_FOUND> {
-    {PROTOTYPE_NAME}                        { return FusionTypes.PROTOTYPE_NAME; }
+    {OBJECT_TYPE_PART}                      { return FusionTypes.UNQUALIFIED_TYPE; }
+    {OBJECT_TYPE_PART}/{COLON}              { yybegin(OBJECT_TYPE_IN_PROTOTYPE_FOUND); return FusionTypes.OBJECT_TYPE_NAMESPACE; }
+    {COLON}                                 { return FusionTypes.OBJECT_TYPE_SEPARATOR; }
     {LEFT_PAREN}                            { return FusionTypes.LEFT_PAREN; }
+    {RIGHT_PAREN}                           { yybegin(CRLF_OR_LEFT_BRACE_EXPECTED); return FusionTypes.RIGHT_PAREN; }
+}
+
+<OBJECT_TYPE_IN_PROTOTYPE_FOUND> {
+    {COLON}                                 { return FusionTypes.OBJECT_TYPE_SEPARATOR; }
+    {OBJECT_TYPE_PART}                      { return FusionTypes.UNQUALIFIED_TYPE; }
     {RIGHT_PAREN}                           { yybegin(CRLF_OR_LEFT_BRACE_EXPECTED); return FusionTypes.RIGHT_PAREN; }
 }
 

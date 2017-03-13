@@ -19,7 +19,6 @@
 package de.vette.idea.neos.lang.fusion;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
@@ -33,14 +32,12 @@ import com.intellij.psi.tree.TokenSet;
 import de.vette.idea.neos.lang.fusion.parser.FusionParser;
 import de.vette.idea.neos.lang.fusion.psi.FusionFile;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import de.vette.idea.neos.lang.fusion.stubs.FusionFileStub;
 import org.jetbrains.annotations.NotNull;
 
 public class FusionParserDefinition implements ParserDefinition {
 
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, FusionTypes.CRLF);
-
-    public static final IFileElementType FILE =
-            new IFileElementType(Language.findInstance(FusionLanguage.class));
 
     @NotNull
     @Override
@@ -55,7 +52,7 @@ public class FusionParserDefinition implements ParserDefinition {
 
     @Override
     public IFileElementType getFileNodeType() {
-        return FILE;
+        return FusionFileStub.TYPE;
     }
 
     @NotNull

@@ -57,10 +57,7 @@ public class FusionBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider {
             if (currentElement != null) {
                 PsiElement firstChild = currentElement.getFirstChild();
                 if (firstChild != null && firstChild instanceof FusionPrototypeSignature) {
-                    ASTNode[] children = firstChild.getNode().getChildren(TokenSet.create(FusionTypes.PROTOTYPE_NAME));
-                    if (children.length > 0) {
-                        elementInfo = children[0].getText();
-                    }
+
                 } else {
                     elementInfo = currentElement.getText();
                 }

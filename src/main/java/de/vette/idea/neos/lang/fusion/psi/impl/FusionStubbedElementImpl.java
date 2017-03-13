@@ -18,34 +18,20 @@
 
 package de.vette.idea.neos.lang.fusion.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
 import org.jetbrains.annotations.NotNull;
 
-abstract class FusionCompositeElementImpl extends ASTWrapperPsiElement implements FusionCompositeElement {
+public abstract class FusionStubbedElementImpl<StubT extends StubElement> extends StubBasedPsiElementBase<StubT> implements FusionCompositeElement {
 
-    public FusionCompositeElementImpl(@NotNull ASTNode astNode) {
-        super(astNode);
+    public FusionStubbedElementImpl(@NotNull StubT stub, @NotNull IStubElementType nodeType) {
+        super(stub, nodeType);
     }
 
-    @Override
-    @NotNull
-    public PsiReference[] getReferences() {
-        if (this.getOriginalElement() instanceof FusionCompositeIdentifier
-                || this.getOriginalElement() instanceof FusionMethodName) {
-            return ReferenceProvidersRegistry.getReferencesFromProviders(this);
-        }
-
-        return super.getReferences();
-    }
-
-    @Override
-    public String toString() {
-        return getNode().getElementType().toString();
+    public FusionStubbedElementImpl(@NotNull ASTNode node) {
+        super(node);
     }
 }

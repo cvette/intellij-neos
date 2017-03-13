@@ -15,12 +15,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.stubs;
 
-package de.vette.idea.neos.lang.fusion.psi;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
+import com.intellij.psi.stubs.StubElement;
 
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiNamedElement;
+public abstract class FusionNamedStub<T extends PsiElement> extends StubBase<T> {
 
-public interface FusionNamedElement extends FusionCompositeElement, PsiNamedElement, NavigatablePsiElement {
+    protected String name;
 
+    public FusionNamedStub(StubElement parent, IStubElementType elementType, String name) {
+        super(parent, elementType);
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }
