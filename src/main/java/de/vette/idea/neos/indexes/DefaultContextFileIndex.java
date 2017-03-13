@@ -18,7 +18,6 @@
 
 package de.vette.idea.neos.indexes;
 
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.indexing.*;
 import com.intellij.util.io.DataExternalizer;
@@ -42,12 +41,7 @@ public class DefaultContextFileIndex extends FileBasedIndexExtension<String, Str
     @NotNull
     @Override
     public FileBasedIndex.InputFilter getInputFilter() {
-        return  new FileBasedIndex.InputFilter() {
-            @Override
-            public boolean acceptInput(@NotNull VirtualFile virtualFile) {
-                return virtualFile.getFileType() == YAMLFileType.YML;
-            }
-        };
+        return virtualFile -> virtualFile.getFileType() == YAMLFileType.YML;
     }
 
     @Override
@@ -64,19 +58,15 @@ public class DefaultContextFileIndex extends FileBasedIndexExtension<String, Str
     @NotNull
     @Override
     public DataIndexer<String, String, FileContent> getIndexer() {
-        return new DataIndexer<String, String, FileContent>() {
-            @NotNull
-            @Override
-            public Map<String, String> map(@NotNull FileContent fileContent) {
-                Map<String, String> map = new THashMap<String, String>();
-                PsiFile psiFile = fileContent.getPsiFile();
-                if(!NeosProjectComponent.isEnabledForIndex(psiFile.getProject())
-                        || !isValidForIndex(fileContent, psiFile)) {
-                    return map;
-                }
-
-                return EelHelperUtil.getHelpersInFile(psiFile);
+        return fileContent -> {
+            Map<String, String> map = new THashMap<>();
+            PsiFile psiFile = fileContent.getPsiFile();
+            if(!NeosProjectComponent.isEnabledForIndex(psiFile.getProject())
+                    || !isValidForIndex(fileContent, psiFile)) {
+                return map;
             }
+
+            return EelHelperUtil.getHelpersInFile(psiFile);
         };
     }
 
