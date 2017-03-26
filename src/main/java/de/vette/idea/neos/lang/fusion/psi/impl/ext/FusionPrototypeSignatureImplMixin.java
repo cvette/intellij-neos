@@ -16,30 +16,27 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.psi.impl.mixin;
+package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.IncorrectOperationException;
 import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedNamedElementImpl;
+import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class FusionPrototypeSignatureImplMixin extends FusionNamedElementImpl implements FusionPrototypeSignature {
-
-    protected ASTNode astNode;
+public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedElementImpl<FusionPrototypeSignatureStub> implements FusionPrototypeSignature {
 
     public FusionPrototypeSignatureImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
-        this.astNode = astNode;
     }
 
-    @Override
-    public String getName() {
-        for (ASTNode node : getNode().getChildren(TokenSet.create(FusionTypes.PROTOTYPE_NAME))) {
-            return node.getText();
-        }
-
-        return this.getText();
+    public FusionPrototypeSignatureImplMixin(@NotNull FusionPrototypeSignatureStub stub, @NotNull IStubElementType nodeType) {
+        super(stub, nodeType);
     }
 }

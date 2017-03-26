@@ -1,7 +1,7 @@
 {
     classHeader='copyrightHeader.java'
 
-    generate=[tokenAccessors="no"]
+    generateTokenAccessors=true
     parserClass="de.vette.idea.neos.lang.fusion.parser.FusionParser"
     parserUtilClass="de.vette.idea.neos.lang.fusion.parser.FusionParserUtil"
 
@@ -23,7 +23,17 @@ private item_ ::= namespace_declaration | include_declaration | property | SINGL
 
 inner block ::= LEFT_BRACE [item_ *] RIGHT_BRACE {pin=1}
 
-namespace_declaration ::= NAMESPACE_KEYWORD NAMESPACE_SEPARATOR NAMESPACE_ALIAS NAMESPACE_ALIAS_SEPARATOR PACKAGE_KEY {pin=1}
+namespace_declaration ::= NAMESPACE_KEYWORD NAMESPACE_SEPARATOR alias NAMESPACE_ALIAS_SEPARATOR namespace {
+    pin=1
+    implements = "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement"
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionNamespaceDeclarationImplMixin"
+    stubClass = "de.vette.idea.neos.lang.fusion.stubs.FusionNamespaceDeclarationStub"
+    elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
+}
+
+alias ::= NAMESPACE_ALIAS
+namespace ::= PACKAGE_KEY
+
 include_declaration ::= INCLUDE_KEYWORD INCLUDE_SEPARATOR (resource|INCLUDE_PATH) {pin=1}
 
 resource ::= RESOURCE_KEYWORD RESOURCE_PATH {pin=1}
@@ -31,27 +41,30 @@ resource ::= RESOURCE_KEYWORD RESOURCE_PATH {pin=1}
 private property ::= (property_block|property_deletion|property_copy|property_assignment|prototype_inheritance)
 property_block ::= path block {pin=2}
 property_deletion ::= path UNSET_OPERATOR {pin=2}
-property_copy ::= path COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|object_type) {pin=2}
-property_assignment ::= path ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|expression|object_type) {
-    pin=2
+property_copy ::= path COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance) {pin=2}
+property_assignment ::= path ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|expression|prototype_instance) {pin=2}
+
+prototype_inheritance ::= prototype_signature PROTOTYPE_COPY_OPERATOR prototype_signature [block] {pin=2}
+
+type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {pin=1}
+prototype_instance ::= type [block] {
+    pin=1
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeInstanceImplMixin"
 }
 
-prototype_inheritance ::= path PROTOTYPE_COPY_OPERATOR prototype_signature [block]
-
-private object_type ::= (simple_type|namespaced_type) [block]
-simple_type ::= UNQUALIFIED_TYPE
-namespaced_type ::= OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR UNQUALIFIED_TYPE {pin=1}
-
 path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))* {
+    pin=2
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement" ]
-    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.mixin.FusionPathImplMixin"
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPathImplMixin"
 }
 
 meta_property ::= META_PROPERTY_KEYWORD META_PROPERTY_NAME {pin=1}
-prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN PROTOTYPE_NAME RIGHT_PAREN {
+prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
     pin=1
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement" ]
-    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.mixin.FusionPrototypeSignatureImplMixin"
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeSignatureImplMixin"
+    stubClass = "de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub"
+    elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
 }
 
 value_string_line ::= VALUE_STRING_QUOTE (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}

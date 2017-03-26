@@ -15,12 +15,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.resolve.ref;
 
-package de.vette.idea.neos.lang.fusion.psi;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.ResolveResult;
+import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiNamedElement;
+import java.util.List;
 
-public interface FusionNamedElement extends FusionCompositeElement, PsiNamedElement, NavigatablePsiElement {
+public interface FusionReference extends PsiPolyVariantReference {
 
+    @Override
+    FusionCompositeElement getElement();
+
+    @Nullable
+    @Override
+    FusionCompositeElement resolve();
 }

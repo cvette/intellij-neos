@@ -15,12 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.vette.idea.neos.lang.fusion.psi;
 
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiNamedElement;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 
-public interface FusionNamedElement extends FusionCompositeElement, PsiNamedElement, NavigatablePsiElement {
+public interface FusionReferenceElement extends FusionCompositeElement {
 
+    @Override
+    FusionReference getReference();
 }

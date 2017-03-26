@@ -15,12 +15,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.stubs.index;
 
-package de.vette.idea.neos.lang.fusion.psi;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
+import org.jetbrains.annotations.NotNull;
 
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiNamedElement;
+public class FusionPrototypeDeclarationIndex extends StringStubIndexExtension<FusionPrototypeSignature> {
 
-public interface FusionNamedElement extends FusionCompositeElement, PsiNamedElement, NavigatablePsiElement {
+    public static StubIndexKey<String, FusionPrototypeSignature> KEY = StubIndexKey.createIndexKey("de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex");
 
+    @NotNull
+    @Override
+    public StubIndexKey<String, FusionPrototypeSignature> getKey() {
+        return KEY;
+    }
 }
