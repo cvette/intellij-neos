@@ -52,17 +52,20 @@ public class FusionBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider {
                 } else {
                     currentElement = currentElement.getPrevSibling();
                 }
-            } while (currentElement != null && !(currentElement instanceof FusionPath));
+            } while (currentElement != null && !(currentElement instanceof FusionPath) && !(currentElement instanceof FusionPrototypeInheritance));
 
             if (currentElement != null) {
-                PsiElement firstChild = currentElement.getFirstChild();
-                if (firstChild != null && firstChild instanceof FusionPrototypeSignature) {
-
-                } else {
+                if (currentElement instanceof FusionPath) {
                     elementInfo = currentElement.getText();
+                } else if (currentElement.getFirstChild() instanceof FusionPrototypeSignature) {
+                    FusionType type = ((FusionPrototypeSignature) currentElement.getFirstChild()).getType();
+                    if (type != null) {
+                        elementInfo = type.getText();
+                    }
                 }
             }
         }
+
         if (elementInfo.length() > 30) {
             elementInfo = "..." + elementInfo.substring(elementInfo.length() - 27, elementInfo.length());
         }
