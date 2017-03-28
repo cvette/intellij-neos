@@ -54,7 +54,7 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
     @NotNull
     @Override
     public Collection<StructureViewTreeElement> getChildrenBase() {
-        Collection<StructureViewTreeElement> result = new ArrayList<StructureViewTreeElement>();
+        Collection<StructureViewTreeElement> result = new ArrayList<>();
 
         if (getElement() == null) {
             return Collections.emptyList();
@@ -69,11 +69,12 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
             if (element instanceof FusionPropertyAssignment
                     || element instanceof FusionPropertyBlock
                     || element instanceof FusionPropertyCopy
-                    || element instanceof FusionPropertyDeletion
-                    || element instanceof FusionPrototypeInheritance) {
+                    || element instanceof FusionPropertyDeletion) {
                 if (element.getFirstChild() instanceof FusionPath) {
                     result.add(new FusionTreeElement(element.getFirstChild()));
                 }
+            } else if (element instanceof FusionPrototypeInheritance) {
+                result.add(new FusionTreeElement(element));
             }
         }
 
@@ -85,10 +86,15 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
         PsiElement blockElement = null;
         if (getElement() instanceof FusionFile) {
             return getElement();
+        } else if (getElement() instanceof FusionPrototypeInheritance) {
+            return ((FusionPrototypeInheritance) getElement()).getBlock();
         } else if (getElement() instanceof FusionPath) {
             PsiElement currentSibling = getElement();
             do {
                 currentSibling = currentSibling.getNextSibling();
+                if (currentSibling instanceof FusionPrototypeInstance) {
+                    currentSibling = currentSibling.getFirstChild();
+                }
             } while (currentSibling != null && !(currentSibling instanceof FusionBlock));
 
             blockElement = currentSibling;
@@ -108,6 +114,17 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
             return ((FusionFile) getElement()).getName();
         }
 
+        if (getElement() instanceof FusionPrototypeInheritance
+                && getElement().getFirstChild() instanceof FusionPrototypeSignature) {
+
+            FusionType type = ((FusionPrototypeSignature) getElement().getFirstChild()).getType();
+            if (type != null) {
+                return type.getText();
+            }
+
+            return "Prototype";
+        }
+
         if (getElement().getFirstChild() != null
                 && getElement().getFirstChild() instanceof FusionPrototypeSignature) {
             return ((FusionNamedElement)getElement()).getName();
@@ -124,6 +141,10 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
 
         if (getElement() instanceof FusionFile) {
             return FusionIcons.FILE;
+        }
+
+        if (getElement() instanceof FusionPrototypeInheritance) {
+            return FusionIcons.PROTOTYPE;
         }
 
         if (getElement() instanceof FusionPath) {
