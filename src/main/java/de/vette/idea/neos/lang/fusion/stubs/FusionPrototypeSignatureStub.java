@@ -19,10 +19,7 @@
 package de.vette.idea.neos.lang.fusion.stubs;
 
 import com.intellij.psi.stubs.*;
-import de.vette.idea.neos.lang.fusion.psi.FusionPath;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeInheritance;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
-import de.vette.idea.neos.lang.fusion.psi.FusionType;
+import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionPrototypeSignatureImpl;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;
 import org.jetbrains.annotations.NotNull;
@@ -34,13 +31,15 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
     protected String namespace;
     protected String name;
     protected Boolean isDefinition;
+    protected Boolean isInheritance;
 
-    public FusionPrototypeSignatureStub(StubElement parent, IStubElementType elementType, String namespace, String name, Boolean isDefinition) {
+    public FusionPrototypeSignatureStub(StubElement parent, IStubElementType elementType, String namespace, String name, Boolean isDefinition, Boolean isInheritance) {
         super(parent, elementType);
 
         this.namespace = namespace;
         this.name = name;
         this.isDefinition = isDefinition;
+        this.isInheritance = isInheritance;
     }
 
     public static FusionStubElementType TYPE = new FusionStubElementType<FusionPrototypeSignatureStub , FusionPrototypeSignature>("FUSION_PROTOTYPE_SIGNATURE") {
@@ -55,10 +54,19 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
             String name = "";
             String namespace = "";
             Boolean isDefinition = false;
+            Boolean isInheritance = false;
 
-            if (psi.getPrevSibling() == null
-                    && (psi.getParent() instanceof FusionPrototypeInheritance
-                    || psi.getParent() instanceof FusionPath)) {
+            if (psi.getParent() instanceof FusionPrototypeInheritance
+                    && psi.getParent().getParent() instanceof FusionFile && psi.getPrevSibling() == null) {
+                isDefinition = true;
+                isInheritance = true;
+            }
+
+            if ((psi.getParent().getParent() instanceof FusionPropertyAssignment
+                    || psi.getParent().getParent() instanceof FusionPropertyBlock)
+                    && psi.getParent().getParent().getParent() instanceof FusionFile
+                    && psi.getParent() instanceof FusionPath
+                    && psi.getPrevSibling() == null) {
                 isDefinition = true;
             }
 
@@ -71,11 +79,9 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
                 if (type.getUnqualifiedType() != null) {
                     name = type.getUnqualifiedType().getText();
                 }
-
-                return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), namespace, name, isDefinition);
+                return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), namespace, name, isDefinition, isInheritance);
             }
-
-            return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), null, name, isDefinition);
+            return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), null, name, isDefinition, isInheritance);
         }
 
         @Override
@@ -83,12 +89,13 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
             dataStream.writeName(stub.namespace);
             dataStream.writeName(stub.name);
             dataStream.writeBoolean(stub.isDefinition);
+            dataStream.writeBoolean(stub.isInheritance);
         }
 
         @NotNull
         @Override
         public FusionPrototypeSignatureStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-            return new FusionPrototypeSignatureStub(parentStub, this, getNameAsString(dataStream.readName()), getNameAsString(dataStream.readName()), dataStream.readBoolean());
+            return new FusionPrototypeSignatureStub(parentStub, this, getNameAsString(dataStream.readName()), getNameAsString(dataStream.readName()), dataStream.readBoolean(), dataStream.readBoolean());
         }
 
         @Override

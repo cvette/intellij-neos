@@ -17,7 +17,6 @@
  */
 package de.vette.idea.neos.lang.fusion.resolve.ref;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiPolyVariantReferenceBase;
 import com.intellij.psi.ResolveResult;

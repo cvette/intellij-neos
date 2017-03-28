@@ -18,12 +18,8 @@
 package de.vette.idea.neos.lang.fusion.resolve.ref;
 
 import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.ResolveResult;
 import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public interface FusionReference extends PsiPolyVariantReference {
 
