@@ -19,16 +19,15 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.util.IncorrectOperationException;
+import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeInheritance;
 import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedNamedElementImpl;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionPrototypeInheritanceReference;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedElementImpl<FusionPrototypeSignatureStub> implements FusionPrototypeSignature {
 
@@ -38,5 +37,22 @@ public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedEle
 
     public FusionPrototypeSignatureImplMixin(@NotNull FusionPrototypeSignatureStub stub, @NotNull IStubElementType nodeType) {
         super(stub, nodeType);
+    }
+
+    @Override
+    public FusionReference getReference() {
+        if (this.getParent() == null
+                || !(this.getParent() instanceof FusionPrototypeInheritance)
+                || this.getPrevSibling() == null) {
+            return null;
+        }
+
+        return new FusionPrototypeInheritanceReference(this);
+    }
+
+    @NotNull
+    @Override
+    public PsiReference[] getReferences() {
+        return super.getReferences();
     }
 }

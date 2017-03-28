@@ -62,6 +62,7 @@ path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_str
 meta_property ::= META_PROPERTY_KEYWORD META_PROPERTY_NAME {pin=1}
 prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
     pin=1
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeSignatureImplMixin"
     stubClass = "de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub"
     elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
