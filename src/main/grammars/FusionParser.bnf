@@ -68,7 +68,13 @@ prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
     elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
 }
 
-value_string_line ::= VALUE_STRING_QUOTE (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}
+value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_QUOTE {
+    pin=1
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionValueStringLineImplMixin"
+}
+value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)*
+
 value_string_single_line ::= VALUE_STRING_QUOTE (VALUE_STRING | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}
 expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE conditional_expression EEL_RIGHT_BRACE {pin=1}
 

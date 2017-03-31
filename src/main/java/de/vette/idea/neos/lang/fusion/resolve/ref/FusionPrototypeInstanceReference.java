@@ -18,6 +18,7 @@
 package de.vette.idea.neos.lang.fusion.resolve.ref;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 
@@ -30,7 +31,7 @@ public class FusionPrototypeInstanceReference extends FusionReferenceBase<Fusion
     }
 
     @Override
-    List<FusionCompositeElement> resolveInner() {
+    List<PsiElement> resolveInner() {
         return ResolveEngine.getPrototypeDefinitions(getElement().getProject(), getElement().getType());
     }
 

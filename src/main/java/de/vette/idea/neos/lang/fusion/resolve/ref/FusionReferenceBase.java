@@ -17,11 +17,8 @@
  */
 package de.vette.idea.neos.lang.fusion.resolve.ref;
 
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiPolyVariantReferenceBase;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,17 +32,17 @@ public abstract class FusionReferenceBase<T extends FusionReferenceElement> exte
         super(psiElement);
     }
 
-    abstract List<FusionCompositeElement> resolveInner();
+    abstract List<PsiElement> resolveInner();
 
     @NotNull
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         return ResolveCache.getInstance(myElement.getProject())
                 .resolveWithCaching(this, (r, incomplete) -> {
-                    List<FusionCompositeElement> elements = r.resolveInner();
+                    List<PsiElement> elements = r.resolveInner();
                     List<ResolveResult> resolveResults = new ArrayList<>();
                     ResolveResult[] result = new ResolveResult[elements.size()];
-                    for (FusionCompositeElement e : elements) {
+                    for (PsiElement e: elements) {
                         resolveResults.add(new PsiElementResolveResult(e));
                     }
 
@@ -55,8 +52,8 @@ public abstract class FusionReferenceBase<T extends FusionReferenceElement> exte
 
     @Nullable
     @Override
-    public FusionCompositeElement resolve() {
-        return (FusionCompositeElement) super.resolve();
+    public PsiElement resolve() {
+        return super.resolve();
     }
 
     @NotNull

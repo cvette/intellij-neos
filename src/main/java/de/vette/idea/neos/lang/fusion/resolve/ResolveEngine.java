@@ -15,10 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package de.vette.idea.neos.lang.fusion.resolve;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import de.vette.idea.neos.lang.fusion.psi.*;
@@ -30,11 +33,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ResolveEngine {
+    protected final static Pattern RESOURCE_PATTERN =
+            Pattern.compile("^resource://([^/]+)/(.*)");
+
 
     @NotNull
-    public static List<FusionCompositeElement> getPrototypeDefinitions(Project project, FusionType type) {
+    public static List<PsiElement> getPrototypeDefinitions(Project project, FusionType type) {
         if (type.getUnqualifiedType() == null) return new ArrayList<>();
 
         String instanceNs = null;
@@ -46,7 +54,7 @@ public class ResolveEngine {
         }
 
         // find all prototypes that have the name of this instance
-        List<FusionCompositeElement> result = new ArrayList<>();
+        List<PsiElement> result = new ArrayList<>();
         Collection<FusionPrototypeSignature> possiblePrototypes = StubIndex.getElements(
                 FusionPrototypeDeclarationIndex.KEY,
                 instanceName,
@@ -88,7 +96,7 @@ public class ResolveEngine {
         }
 
         // If one of the results is a prototype inheritance, return it as the only result
-        for (FusionCompositeElement resultPrototype : result) {
+        for (PsiElement resultPrototype : result) {
             if (resultPrototype.getParent() != null && resultPrototype.getParent() instanceof FusionPrototypeInheritance) {
                 result.clear();
                 result.add(resultPrototype);
@@ -112,6 +120,26 @@ public class ResolveEngine {
             FusionNamespace namespace = namespaces.iterator().next().getNamespace();
             if (namespace != null) {
                 return namespace.getText();
+            }
+        }
+
+        return null;
+    }
+
+    public static VirtualFile findResource(Project project, String resourcePath) {
+        Matcher m = RESOURCE_PATTERN.matcher(resourcePath);
+        if (m.matches()) {
+            Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, m.group(1), GlobalSearchScope.projectScope(project));
+            VirtualFile baseDir = project.getBaseDir().findChild("Packages");
+            if (baseDir == null) {
+                return null;
+            }
+
+            resourcePath = "Resources/" + m.group(2);
+            for (VirtualFile file : files) {
+                if (file.getPath().startsWith(baseDir.getPath())) {
+                    return file.findFileByRelativePath(resourcePath);
+                }
             }
         }
 
