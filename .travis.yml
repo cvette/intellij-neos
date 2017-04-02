@@ -6,8 +6,8 @@ env:
   global: ORG_GRADLE_PROJECT_downloadIdeaSources=false
   matrix:
     - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
-    - ORG_GRADLE_PROJECT_ideaVersion=2016.3.1
-    - ORG_GRADLE_PROJECT_ideaVersion=2016.3
+    - ORG_GRADLE_PROJECT_ideaVersion=2017.1
+    - ORG_GRADLE_PROJECT_ideaVersion=2016.3.6
     - ORG_GRADLE_PROJECT_ideaVersion=2016.2.5
     - ORG_GRADLE_PROJECT_ideaVersion=2016.1.4
 

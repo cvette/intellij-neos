@@ -43,7 +43,7 @@ sourceSets {
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
         // Branch Number: 171
-        'com.jetbrains.php:171.3691.14',
+        'com.jetbrains.php:171.3780.104',
         'yaml',
 
         // test dependencies
@@ -51,7 +51,20 @@ def pluginsForIdeaVersion = [
         'java-i18n',
         'properties'
     ],
-    '2016.3.1': [
+    '2017.1': [
+        // Branch Number: 171
+        'com.jetbrains.php:171.3780.104',
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties',
+        // DEV dependencies: UNCOMMENT the following lines during development
+        // to install additional plugins for development
+        // 'PsiViewer:3.28.93'
+    ],
+    '2016.3.6': [
         // Branch Number: 163
         'com.jetbrains.php:163.9166.11',
         'yaml',
@@ -60,20 +73,6 @@ def pluginsForIdeaVersion = [
         'CSS',
         'java-i18n',
         'properties'
-    ],
-    '2016.3': [
-        // Branch Number: 163
-        'com.jetbrains.php:163.7743.54',
-        'yaml',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties',
-
-        // DEV dependencies: UNCOMMENT the following lines during development
-        // to install additional plugins for development
-        // 'PsiViewer:3.28.93'
     ],
     '2016.2.5': [
         // Branch Number: 162
