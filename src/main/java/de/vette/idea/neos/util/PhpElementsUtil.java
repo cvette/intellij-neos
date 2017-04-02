@@ -17,6 +17,7 @@ package de.vette.idea.neos.util;/*
  */
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.jetbrains.php.PhpIndex;
@@ -56,20 +57,17 @@ public class PhpElementsUtil {
         return new PhpType().add(expectedClass).isConvertibleFrom(new PhpType().add(subjectClass), PhpIndex.getInstance(project));
     }
 
-    static public List<ResolveResult> getClassInterfaceResolveResult(Project project, String fqnClassOrInterfaceName) {
+    static public List<PsiElement> getClassInterfaceElements(Project project, String fqnClassOrInterfaceName) {
 
         // api workaround for at least interfaces
         if(!fqnClassOrInterfaceName.startsWith("\\")) {
             fqnClassOrInterfaceName = "\\" + fqnClassOrInterfaceName;
         }
 
-        List<ResolveResult> results = new ArrayList<ResolveResult>();
-        for (PhpClass phpClass : PhpIndex.getInstance(project).getAnyByFQN(fqnClassOrInterfaceName)) {
-            results.add(new PsiElementResolveResult(phpClass));
-        }
-
-        return results;
-    }
+        List<PsiElement> result = new ArrayList<>();
+        result.addAll(PhpIndex.getInstance(project).getAnyByFQN(fqnClassOrInterfaceName));
+        return result;
+   }
 
     @Nullable
     static public Method getClassMethod(@NotNull Project project, @NotNull String phpClassName, @NotNull String methodName) {

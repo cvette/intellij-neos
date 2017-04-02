@@ -21,12 +21,16 @@ package de.vette.idea.neos.lang.fusion.resolve;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.util.indexing.FileBasedIndex;
+import de.vette.idea.neos.indexes.DefaultContextFileIndex;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;
+import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -144,5 +148,25 @@ public class ResolveEngine {
         }
 
         return null;
+    }
+
+    public static List<PsiElement> getEelHelpers(Project project, String name) {
+        List<PsiElement> result = new ArrayList<>();
+        List<String> helpers = FileBasedIndex.getInstance().getValues(DefaultContextFileIndex.KEY, name, GlobalSearchScope.allScope(project));
+        for (String helper : helpers) {
+            result.addAll(PhpElementsUtil.getClassInterfaceElements(project, helper));
+        }
+
+        return result;
+    }
+
+    public static List<PsiElement> getEelHelperMethods(Project project, String helperName, String methodName) {
+        List<String> helpers = FileBasedIndex.getInstance().getValues(DefaultContextFileIndex.KEY, helperName, GlobalSearchScope.allScope(project));
+        List<PsiElement> methods = new ArrayList<>();
+        for (String helper : helpers) {
+            methods.add(PhpElementsUtil.getClassMethod(project, helper, methodName));
+        }
+
+        return methods;
     }
 }

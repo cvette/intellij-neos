@@ -16,25 +16,23 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.psi.impl;
+package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionCompositeIdentifierReference;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionCompositeElementImpl extends ASTWrapperPsiElement implements FusionCompositeElement {
+public abstract class FusionCompositeIdentifierImplMixin extends FusionCompositeElementImpl implements FusionCompositeIdentifier {
 
-    public FusionCompositeElementImpl(@NotNull ASTNode astNode) {
+    public FusionCompositeIdentifierImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
     }
 
     @Override
-    public String toString() {
-        return getNode().getElementType().toString();
+    public FusionReference getReference() {
+        return new FusionCompositeIdentifierReference(this);
     }
 }

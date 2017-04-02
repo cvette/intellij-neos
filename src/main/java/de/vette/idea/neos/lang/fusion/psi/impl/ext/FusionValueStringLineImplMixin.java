@@ -19,7 +19,6 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLine;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLineContent;
@@ -47,11 +46,5 @@ public class FusionValueStringLineImplMixin extends FusionNamedElementImpl imple
             return new FusionResourceStringReference(this);
         }
         return null;
-    }
-
-    @NotNull
-    @Override
-    public PsiReference[] getReferences() {
-        return super.getReferences();
     }
 }

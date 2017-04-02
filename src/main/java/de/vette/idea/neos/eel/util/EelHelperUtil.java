@@ -38,7 +38,7 @@ public class EelHelperUtil {
             defaultContext = YAMLUtil.getQualifiedKeyInFile((YAMLFile) psiFile, "TYPO3", "TypoScript", "defaultContext");
         }
 
-        HashMap<String, String> result = new HashMap<String, String>();
+        HashMap<String, String> result = new HashMap<>();
         if (defaultContext != null) {
             PsiElement mapping = defaultContext.getLastChild();
             if (mapping instanceof YAMLMapping) {

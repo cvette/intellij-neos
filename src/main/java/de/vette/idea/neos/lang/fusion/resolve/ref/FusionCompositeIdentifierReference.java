@@ -15,26 +15,28 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.resolve.ref;
 
-package de.vette.idea.neos.lang.fusion.psi.impl;
-
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
-import org.jetbrains.annotations.NotNull;
+import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 
-public abstract class FusionCompositeElementImpl extends ASTWrapperPsiElement implements FusionCompositeElement {
+import java.util.List;
 
-    public FusionCompositeElementImpl(@NotNull ASTNode astNode) {
-        super(astNode);
+public class FusionCompositeIdentifierReference extends FusionReferenceBase<FusionCompositeIdentifier> {
+
+    public FusionCompositeIdentifierReference(FusionCompositeIdentifier psiElement) {
+        super(psiElement);
     }
 
     @Override
-    public String toString() {
-        return getNode().getElementType().toString();
+    List<PsiElement> resolveInner() {
+        return ResolveEngine.getEelHelpers(getElement().getProject(), getElement().getText());
+    }
+
+    @Override
+    public TextRange getRangeInElement() {
+        return new TextRange(getElement().getStartOffsetInParent(), getElement().getStartOffsetInParent() + getElement().getTextLength());
     }
 }

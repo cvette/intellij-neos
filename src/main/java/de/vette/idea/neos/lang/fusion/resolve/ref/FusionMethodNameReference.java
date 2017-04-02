@@ -15,43 +15,41 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.resolve.ref;
 
-package de.vette.idea.neos.lang.fusion.references;
-
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.PsiReferenceProvider;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.ProcessingContext;
-import com.intellij.util.indexing.FileBasedIndex;
-import de.vette.idea.neos.indexes.DefaultContextFileIndex;
 import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
 import de.vette.idea.neos.lang.fusion.psi.FusionMethodCall;
-import org.jetbrains.annotations.NotNull;
+import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
+import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultContextMethodReferenceProvider extends PsiReferenceProvider {
+public class FusionMethodNameReference extends FusionReferenceBase<FusionMethodName> {
 
-    @NotNull
+    public FusionMethodNameReference(FusionMethodName psiElement) {
+        super(psiElement);
+    }
+
     @Override
-    public PsiReference[] getReferencesByElement(@NotNull PsiElement psiElement, @NotNull ProcessingContext processingContext) {
-        List<PsiReference> references = new ArrayList<PsiReference>();
-        PsiElement parentElement = psiElement.getParent();
+    List<PsiElement> resolveInner() {
+        PsiElement parentElement = getElement().getParent();
         if (parentElement != null && parentElement instanceof FusionMethodCall) {
             if (parentElement.getPrevSibling() != null && parentElement.getPrevSibling().getPrevSibling() != null) {
                 PsiElement compositeElement = parentElement.getPrevSibling().getPrevSibling();
                 if (compositeElement instanceof FusionCompositeIdentifier) {
-                    String value = compositeElement.getText();
-                    List<String> helpers = FileBasedIndex.getInstance().getValues(DefaultContextFileIndex.KEY, value, GlobalSearchScope.allScope(psiElement.getProject()));
-                    for (String helper : helpers) {
-                        references.add(new DefaultContextMethodReference(psiElement, helper, psiElement.getText()));
-                    }
-                    return references.toArray(new PsiReference[helpers.size()]);
+                    return ResolveEngine.getEelHelperMethods(getElement().getProject(), compositeElement.getText(), getElement().getText());
                 }
             }
         }
-        return new PsiReference[0];
+
+        return new ArrayList<>();
+    }
+
+    @Override
+    public TextRange getRangeInElement() {
+        return new TextRange(getElement().getStartOffsetInParent(), getElement().getStartOffsetInParent() + getElement().getTextLength());
     }
 }
