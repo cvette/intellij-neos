@@ -26,18 +26,6 @@ plugins {
     id "org.jetbrains.intellij" version "0.2.5"
 }
 
-apply plugin: 'idea'
-apply plugin: 'java'
-
-version "$version-$buildNumber"
-
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
-
-sourceSets {
-    main.java.srcDirs += 'src/gen'
-}
-
 // See http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
 // and https://plugins.jetbrains.com/plugin/6610-php
 def pluginsForIdeaVersion = [
@@ -64,9 +52,9 @@ def pluginsForIdeaVersion = [
         // to install additional plugins for development
         // 'PsiViewer:3.28.93'
     ],
-    '2016.3.6': [
+    '2016.3.5': [
         // Branch Number: 163
-        'com.jetbrains.php:163.9166.11',
+        'com.jetbrains.php:163.10504.2',
         'yaml',
 
         // test dependencies
@@ -96,26 +84,71 @@ def pluginsForIdeaVersion = [
     ]
 ]
 
-intellij {
-    version ideaVersion
-    pluginName 'neos-intellij-plugin'
-    updateSinceUntilBuild false
-    downloadSources Boolean.valueOf(downloadIdeaSources)
-    type = 'IU'
-    plugins = pluginsForIdeaVersion[ideaVersion]
-}
 
+apply plugin: 'idea'
 idea {
     module {
         generatedSourceDirs += file('src/gen')
     }
 }
 
+apply plugin: 'org.jetbrains.intellij'
+intellij {
+    version ideaVersion
+    pluginName 'neos-intellij-plugin'
+    updateSinceUntilBuild false
+    instrumentCode = false
+    downloadSources Boolean.valueOf(downloadIdeaSources)
+    type = 'IU'
+    plugins = pluginsForIdeaVersion[ideaVersion]
+}
+
+apply plugin: 'java'
+version "$version-$buildNumber"
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+sourceSets {
+    main {
+        java.srcDirs += 'src/gen'
+    }
+}
+
 test {
     testLogging {
-        events "failed"
-        exceptionFormat "short"
+        events "skipped", "failed"
+        exceptionFormat "full"
         showStackTraces true
+    }
+
+    beforeSuite { suite ->
+        if (suite.className != null) {
+            println()
+            println(suite.className)
+        }
+    }
+    afterTest { desc, result ->
+        def c = '.'
+        if (result.resultType == TestResult.ResultType.FAILURE) {
+            c = 'X'
+        } else if (result.resultType == TestResult.ResultType.SKIPPED) {
+            c = 'S'
+        }
+        print(c)
+        System.out.flush()
+    }
+    afterSuite { println() }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly('com.github.JetBrains:Grammar-Kit:34fd65b92af957c25d940b828d81ab3ba9b398b0') {
+        exclude group: 'org.jetbrains.plugins'
+        exclude module: 'idea'
     }
 }
 
@@ -153,7 +186,7 @@ def parserTask(project, parserName, pkg) {
         }
 
         main = 'org.intellij.grammar.Main'
-        classpath(configurations.compile + files('lib/grammar-kit.jar'))
+        classpath(configurations.compileOnly, configurations.compile)
 
         args = [dstRoot, file(src)]
 
