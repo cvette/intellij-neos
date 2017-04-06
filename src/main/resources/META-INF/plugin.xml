@@ -20,6 +20,7 @@
             <li>Structure view</li>
             <li>EEL helper references (Ctrl+Click navigation to class/method)</li>
             <li>Prototype references (Ctrl+Click navigation to prototype definition)</li>
+            <li>Resource references (Ctrl+Click navigation to resources)</li>
           </ul>
         </li>
         <li>Completion for node type definitions</li>
@@ -28,8 +29,15 @@
     </p>
     ]]></description>
 
+  <change-notes><![CDATA[
+    0.1.9
+    <ul>
+      <li>Add "Go to resource" for Fusion resource strings</li>
+    </ul>
+  ]]></change-notes>
+
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="162.0"/>
+  <idea-version since-build="145.0"/>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.jetbrains.php</depends>
