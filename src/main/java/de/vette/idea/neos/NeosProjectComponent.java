@@ -57,7 +57,7 @@ public class NeosProjectComponent implements ProjectComponent {
     }
 
     public static boolean isEnabled(@Nullable PsiElement element) {
-        return isEnabled(element.getProject());
+        return element != null && isEnabled(element.getProject());
     }
 
     @Override

@@ -22,6 +22,8 @@ import com.intellij.ide.actions.ShowSettingsUtilImpl;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +33,6 @@ import javax.swing.*;
 public class SettingsForm implements Configurable {
 
     private Project project;
-    private JPanel panel1;
     private JCheckBox pluginEnabled;
 
     public SettingsForm(@NotNull final Project project) {
@@ -53,6 +54,14 @@ public class SettingsForm implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
+        pluginEnabled = new JCheckBox("Enable plugin for this project");
+
+        GridLayoutManager layout = new GridLayoutManager(2,1);
+        GridConstraints c = new GridConstraints();
+        c.setAnchor(GridConstraints.ANCHOR_NORTHWEST);
+
+        JPanel panel1 = new JPanel(layout);
+        panel1.add(pluginEnabled, c);
         return panel1;
     }
 
