@@ -68,6 +68,8 @@
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
 
+    <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.EelHelperMethodAnnotator"/>
+
     <!-- Indices -->
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex"/>
