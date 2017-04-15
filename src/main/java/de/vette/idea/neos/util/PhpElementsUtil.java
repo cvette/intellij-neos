@@ -1,4 +1,4 @@
-package de.vette.idea.neos.util;/*
+/*
  *  IntelliJ IDEA plugin to support the Neos CMS.
  *  Copyright (C) 2016  Christian Vette
  *
@@ -15,11 +15,10 @@ package de.vette.idea.neos.util;/*
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.ResolveResult;
 import com.jetbrains.php.PhpIndex;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.PhpClass;

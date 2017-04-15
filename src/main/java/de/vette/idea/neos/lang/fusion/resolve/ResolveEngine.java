@@ -21,7 +21,6 @@ package de.vette.idea.neos.lang.fusion.resolve;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -33,6 +32,7 @@ import de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationInde
 import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.jetbrains.php.lang.psi.elements.Method;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -164,7 +164,10 @@ public class ResolveEngine {
         List<String> helpers = FileBasedIndex.getInstance().getValues(DefaultContextFileIndex.KEY, helperName, GlobalSearchScope.allScope(project));
         List<PsiElement> methods = new ArrayList<>();
         for (String helper : helpers) {
-            methods.add(PhpElementsUtil.getClassMethod(project, helper, methodName));
+            Method method = PhpElementsUtil.getClassMethod(project, helper, methodName);
+            if (method != null) {
+                methods.add(method);
+            }
         }
 
         return methods;
