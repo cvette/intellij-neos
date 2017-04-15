@@ -37,7 +37,7 @@ public class EelHelperMethodAnnotator implements Annotator {
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
         if (element instanceof FusionMethodCall) {
             FusionMethodCall methodCall = (FusionMethodCall) element;
-            if (methodCall.getPrevSibling().getPrevSibling() instanceof FusionCompositeIdentifier) {
+            if (methodCall.getPrevSibling() != null && methodCall.getPrevSibling().getPrevSibling() instanceof FusionCompositeIdentifier) {
                 FusionCompositeIdentifier compositeId = (FusionCompositeIdentifier) methodCall.getPrevSibling().getPrevSibling();
                 List<String> helpers = FileBasedIndex.getInstance().getValues(DefaultContextFileIndex.KEY, compositeId.getText(), GlobalSearchScope.allScope(element.getProject()));
                 if (!helpers.isEmpty()) {
