@@ -45,23 +45,18 @@ public class ResolveEngine {
             Pattern.compile("^resource://([^/]+)/(.*)");
 
 
-    @NotNull
-    public static List<PsiElement> getPrototypeDefinitions(Project project, FusionType type) {
-        if (type.getUnqualifiedType() == null) return new ArrayList<>();
-
-        String instanceNs = null;
-        String instanceName = type.getUnqualifiedType().getText();
+    public static List<PsiElement> getPrototypeDefinitions(Project project, String name, @Nullable String namespace)
+    {
         String instanceAliasNamespace = null;
-        if (type.getObjectTypeNamespace() != null) {
-            instanceNs = type.getObjectTypeNamespace().getText();
-            instanceAliasNamespace = findNamespaceByAlias(project, instanceNs);
+        if (namespace != null) {
+            instanceAliasNamespace = findNamespaceByAlias(project, namespace);
         }
 
         // find all prototypes that have the name of this instance
         List<PsiElement> result = new ArrayList<>();
         Collection<FusionPrototypeSignature> possiblePrototypes = StubIndex.getElements(
                 FusionPrototypeDeclarationIndex.KEY,
-                instanceName,
+                name,
                 project,
                 GlobalSearchScope.projectScope(project),
                 FusionPrototypeSignature.class);
@@ -73,7 +68,7 @@ public class ResolveEngine {
                 PsiElement prototypeNamespace = prototypeType.getObjectTypeNamespace();
                 if (prototypeNamespace != null) {
                     // check if prototype has default namespace
-                    if (instanceNs == null) {
+                    if (namespace == null) {
                         if (prototypeNamespace.getText().equals("TYPO3.Neos")
                                 || prototypeNamespace.getText().equals("Neos.Neos")) {
                             result.add(possiblePrototype);
@@ -82,17 +77,17 @@ public class ResolveEngine {
                     }
 
                     String prototypeNs = prototypeType.getObjectTypeNamespace().getText();
-                    if (prototypeNs.equals(instanceNs) || prototypeNs.equals(instanceAliasNamespace)) {
+                    if (prototypeNs.equals(namespace) || prototypeNs.equals(instanceAliasNamespace)) {
                         result.add(possiblePrototype);
                     } else {
                         prototypeNs = findNamespaceByAlias(project, prototypeNs);
-                        if (instanceNs.equals(prototypeNs)) {
+                        if (namespace.equals(prototypeNs)) {
                             result.add(possiblePrototype);
                         }
                     }
-                } else if (instanceNs == null
-                        || (instanceNs.equals("TYPO3.Neos")
-                        || instanceNs.equals("Neos.Neos"))) {
+                } else if (namespace == null
+                        || (namespace.equals("TYPO3.Neos")
+                        || namespace.equals("Neos.Neos"))) {
 
                     result.add(possiblePrototype);
                 }
@@ -109,6 +104,19 @@ public class ResolveEngine {
         }
 
         return result;
+    }
+
+    @NotNull
+    public static List<PsiElement> getPrototypeDefinitions(Project project, FusionType type) {
+        if (type.getUnqualifiedType() == null) return new ArrayList<>();
+
+        String instanceName = type.getUnqualifiedType().getText();
+        String instanceNs = null;
+        if (type.getObjectTypeNamespace() != null) {
+            instanceNs = type.getObjectTypeNamespace().getText();
+        }
+
+        return ResolveEngine.getPrototypeDefinitions(project, instanceName, instanceNs);
     }
 
     @Nullable

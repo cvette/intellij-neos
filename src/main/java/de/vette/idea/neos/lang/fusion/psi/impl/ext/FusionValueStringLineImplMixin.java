@@ -25,6 +25,7 @@ import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLineContent;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionResourceStringReference;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionStringReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,9 +43,14 @@ public class FusionValueStringLineImplMixin extends FusionNamedElementImpl imple
 
     @Override
     public FusionReference getReference() {
-        if (getValueStringLineContent() != null && getValueStringLineContent().getText().startsWith("resource://")) {
-            return new FusionResourceStringReference(this);
+        if (getValueStringLineContent() != null) {
+            if (getValueStringLineContent().getText().startsWith("resource://")) {
+                return new FusionResourceStringReference(this);
+            } else {
+                return new FusionStringReference(this);
+            }
         }
+
         return null;
     }
 }
