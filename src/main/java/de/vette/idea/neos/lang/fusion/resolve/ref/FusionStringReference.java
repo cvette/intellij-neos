@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLine;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLineContent;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
+import de.vette.idea.neos.util.PhpElementsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,16 @@ public class FusionStringReference extends FusionReferenceBase<FusionValueString
 
     @Override
     List<PsiElement> resolveInner() {
-        List<PsiElement> helpers = new ArrayList<>();
+        List<PsiElement> result = new ArrayList<>();
         if (getElement() != null && getElement().getValueStringLineContent() != null) {
+            // find classes
+            String value = getElement().getValueStringLineContent().getText();
+            result = PhpElementsUtil.getClassInterfaceElements(getElement().getProject(), value.replace("\\\\", "\\"));
+            if (!result.isEmpty()) {
+                return result;
+            }
+
+            // find prototypes
             String[] splitText = getElement().getValueStringLineContent().getText().split(":");
             String instanceName;
             String instanceNs = null;
@@ -46,13 +55,13 @@ public class FusionStringReference extends FusionReferenceBase<FusionValueString
             } else if (splitText.length > 0) {
                 instanceName = splitText[0];
             } else {
-                return helpers;
+                return result;
             }
 
-            helpers = ResolveEngine.getPrototypeDefinitions(getElement().getProject(), instanceName, instanceNs);
+            result = ResolveEngine.getPrototypeDefinitions(getElement().getProject(), instanceName, instanceNs);
         }
 
-        return helpers;
+        return result;
     }
 
     @Override
