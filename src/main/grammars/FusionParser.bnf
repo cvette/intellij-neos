@@ -81,7 +81,7 @@ expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE conditional_expression EEL_RIGH
 offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET
 method_call ::= method_name EEL_LEFT_PAREN [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_PAREN {pin=2}
 
-object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier|offset_access)) *
+object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier|offset_access)) * [array_literal]
 composite_identifier ::= identifier (EEL_DOT (identifier)) * {
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionCompositeIdentifierImplMixin"
@@ -96,7 +96,7 @@ method_name ::= EEL_FUNCTION {
 term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | VALUE_NUMBER | object_path | value_string_line
 
 simple_expression ::= wrapped_expression | array_literal | object_literal | term | not_expression
-wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN
+wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN [array_literal]
 not_expression ::= EEL_NEGATION_OPERATOR simple_expression
 conditional_expression ::= disjunction [IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression]
 disjunction ::= conjunction (EEL_BOOLEAN_OR conjunction) *
