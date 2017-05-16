@@ -44,6 +44,7 @@ OBJECT_TYPE_PART = [a-zA-Z0-9\.]+
 VALUE_NULL = NULL|null
 VALUE_BOOLEAN = true|TRUE|false|FALSE
 VALUE_NUMBER = [\-]?[0-9] [0-9]* ("." [0-9] [0-9]*)?
+VALUE_POSITIVE_NUMBER = [0-9] [0-9]* ("." [0-9] [0-9]*)?
 VALUE_SEPARATOR = ","
 
 VALUE_STRING_SINGLE_QUOTE =             [\']
@@ -310,7 +311,7 @@ IF_SEPARATOR = {COLON}
     {RIGHT_BRACKET}                         { return FusionTypes.EEL_RIGHT_BRACKET; }
     {VALUE_STRING_SINGLE_QUOTE}             { yybegin(VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_EXPRESSION); return FusionTypes.VALUE_STRING_QUOTE; }
     {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_EXPRESSION); return FusionTypes.VALUE_STRING_QUOTE; }
-    {VALUE_NUMBER}                          { return FusionTypes.VALUE_NUMBER; }
+    {VALUE_POSITIVE_NUMBER}                 { return FusionTypes.VALUE_NUMBER; }
     {VALUE_BOOLEAN}                         { return FusionTypes.VALUE_BOOLEAN; }
     {EXPRESSION_KEYWORD}                    { return FusionTypes.EXPRESSION_KEYWORD; }
     {BOOLEAN_AND}                           { return FusionTypes.EEL_BOOLEAN_AND; }
