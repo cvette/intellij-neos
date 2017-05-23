@@ -21,11 +21,14 @@ package de.vette.idea.neos.lang.fusion.resolve;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
 import de.vette.idea.neos.indexes.DefaultContextFileIndex;
+import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;
@@ -33,20 +36,67 @@ import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.jetbrains.php.lang.psi.elements.Method;
+import org.jetbrains.yaml.YAMLUtil;
+import org.jetbrains.yaml.psi.YAMLFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ResolveEngine {
     protected final static Pattern RESOURCE_PATTERN =
             Pattern.compile("^resource://([^/]+)/(.*)");
 
+    public static Collection<PsiElement> getNodeTypeDefinitions(Project project, String name, @Nullable String namespace) {
+        String fqn = "Neos.Neos" + ":" + name;
+        if (namespace != null) {
+            String aliasNamespace = findNamespaceByAlias(project, namespace);
+            if (aliasNamespace != null) {
+                fqn = aliasNamespace + ":" + name;
+            } else {
+                fqn = namespace + ":" + name;
+            }
+        }
 
-    public static List<PsiElement> getPrototypeDefinitions(Project project, String name, @Nullable String namespace)
-    {
+        Collection<VirtualFile> files = FileBasedIndex.getInstance().getContainingFiles(NodeTypesYamlFileIndex.KEY, fqn, GlobalSearchScope.allScope(project));
+
+        // Check for legacy namespace
+        if (files.isEmpty() && namespace == null) {
+            return getNodeTypeDefinitions(project, name, "TYPO3.Neos");
+        }
+
+        final String finalFqn = fqn;
+        return files
+                .stream()
+                // get the PSI for each file
+                .map(file -> PsiManager.getInstance(project).findFile(file))
+                // ensure we only have YAML files
+                .filter(psiFile -> psiFile instanceof YAMLFile)
+                .map(psiFile -> (YAMLFile) psiFile)
+                // get all YAML keys in these files
+                .flatMap(yamlFile -> YAMLUtil.getTopLevelKeys(yamlFile).stream())
+                // get the correct YAML key
+                .filter(yamlKeyValue -> yamlKeyValue.getKeyText().equals(finalFqn))
+                .collect(Collectors.toList());
+    }
+
+    @NotNull
+    public static Collection<PsiElement> getNodeTypeDefinitions(Project project, FusionType type) {
+        if (type.getUnqualifiedType() == null) return new ArrayList<>();
+
+        String instanceName = type.getUnqualifiedType().getText();
+        String instanceNs = null;
+        if (type.getObjectTypeNamespace() != null) {
+            instanceNs = type.getObjectTypeNamespace().getText();
+        }
+
+        return ResolveEngine.getNodeTypeDefinitions(project, instanceName, instanceNs);
+    }
+
+    public static List<PsiElement> getPrototypeDefinitions(Project project, String name, @Nullable String namespace) {
         String instanceAliasNamespace = null;
         if (namespace != null) {
             instanceAliasNamespace = findNamespaceByAlias(project, namespace);
