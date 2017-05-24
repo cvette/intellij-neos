@@ -27,7 +27,7 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.5"
+    id "org.jetbrains.intellij" version "0.2.11"
 }
 
 import org.jetbrains.grammarkit.tasks.GenerateLexer
@@ -57,7 +57,7 @@ def pluginsForIdeaVersion = [
         'properties',
         // DEV dependencies: UNCOMMENT the following lines during development
         // to install additional plugins for development
-        'PsiViewer:3.28.93'
+        // 'PsiViewer:3.28.93'
     ],
     '2016.3.5': [
         // Branch Number: 163
@@ -115,18 +115,18 @@ version "$version-$buildNumber"
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
-apply plugin: 'org.jetbrains.grammarkit'
-grammarKit {
-    grammarKitRelease = '1.5.1'
-    grammarKitTargetRoot = 'src/gen'
-    purgeOldFiles = true
-}
-
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 sourceSets {
     main {
         java.srcDirs += 'src/gen'
     }
+}
+
+apply plugin: 'org.jetbrains.grammarkit'
+grammarKit {
+    grammarKitRelease = '1.5.1'
+    grammarKitTargetRoot = 'src/gen'
+    purgeOldFiles = true
 }
 
 test {
@@ -169,7 +169,7 @@ dependencies {
 
 task generateFusionLexer(type: GenerateLexer) {
     source 'src/main/grammars/FusionLexer.flex'
-    targetDir 'src/gen/de/vette/idea/neos/lang/fusion/lexer'
+    targetDir 'src/gen/de/vette/idea/neos/lang/fusion/parser'
     targetClass 'FusionLexer'
 }
 
@@ -178,3 +178,6 @@ task generateFusionParser(type: GenerateParser) {
     pathToParser 'src/gen/de/vette/idea/neos/lang/fusion/parser/FusionParser.java'
     pathToPsiRoot '/de/vette/idea/neos/lang/core/psi'
 }
+
+compileJava.dependsOn generateFusionLexer, generateFusionParser
+compileTestJava.dependsOn generateFusionLexer, generateFusionParser
