@@ -18,13 +18,20 @@
 
 buildscript {
     repositories {
-        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+        maven { url 'https://dl.bintray.com/jetbrains/intellij-plugin-service' }
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath "com.github.hurricup:gradle-grammar-kit-plugin:354bb8c477"
     }
 }
 
 plugins {
     id "org.jetbrains.intellij" version "0.2.5"
 }
+
+import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateParser
 
 // See http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
 // and https://plugins.jetbrains.com/plugin/6610-php
@@ -39,7 +46,7 @@ def pluginsForIdeaVersion = [
         'java-i18n',
         'properties'
     ],
-    '2017.1': [
+    '2017.1.1': [
         // Branch Number: 171
         'com.jetbrains.php:171.3780.104',
         'yaml',
@@ -50,7 +57,7 @@ def pluginsForIdeaVersion = [
         'properties',
         // DEV dependencies: UNCOMMENT the following lines during development
         // to install additional plugins for development
-        // 'PsiViewer:3.28.93'
+        'PsiViewer:3.28.93'
     ],
     '2016.3.5': [
         // Branch Number: 163
@@ -108,6 +115,13 @@ version "$version-$buildNumber"
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
+apply plugin: 'org.jetbrains.grammarkit'
+grammarKit {
+    grammarKitRelease = '1.5.1'
+    grammarKitTargetRoot = 'src/gen'
+    purgeOldFiles = true
+}
+
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 sourceSets {
     main {
@@ -142,6 +156,7 @@ test {
 }
 
 repositories {
+    mavenCentral()
     maven { url 'https://jitpack.io' }
 }
 
@@ -152,45 +167,14 @@ dependencies {
     }
 }
 
-lexerTask(project, 'FusionLexer', 'de/vette/idea/neos/lang/fusion/lexer')
-parserTask(project, 'FusionParser', 'de/vette/idea/neos/lang/fusion/psi')
-
-compileJava.dependsOn(generateFusionLexer)
-compileJava.dependsOn(generateFusionParser)
-
-def lexerTask(project, lexerName, pkg) {
-    tasks.create("generate${lexerName}", JavaExec) {
-        def src = "$project.projectDir/src/main/grammars/${lexerName}.flex"
-        def dst = "$project.projectDir/src/gen/$pkg"
-
-        main = 'jflex.Main'
-        classpath = files('lib/jflex/jflex-1.7.0-SNAPSHOT.jar')
-
-        args = ['--skel', 'lib/jflex/idea-flex.skeleton',
-                '-d', dst,
-                src
-        ]
-
-        inputs.file file(src)
-        outputs.dir file("$dst/_${lexerName}.java")
-    }
+task generateFusionLexer(type: GenerateLexer) {
+    source 'src/main/grammars/FusionLexer.flex'
+    targetDir 'src/gen/de/vette/idea/neos/lang/fusion/lexer'
+    targetClass 'FusionLexer'
 }
 
-def parserTask(project, parserName, pkg) {
-    tasks.create("generate${parserName}", JavaExec) {
-        def dstRoot = "$project.projectDir/src/gen"
-        def src = "$project.projectDir/src/main/grammars/${parserName}.bnf"
-        def dst = "$dstRoot/$pkg"
-        doFirst {
-            delete file(dst)
-        }
-
-        main = 'org.intellij.grammar.Main'
-        classpath(configurations.compileOnly, configurations.compile)
-
-        args = [dstRoot, file(src)]
-
-        inputs.file file(src)
-        outputs.dir fileTree(dir: dst, include: '**/*.java')
-    }
+task generateFusionParser(type: GenerateParser) {
+    source 'src/main/grammars/FusionParser.bnf'
+    pathToParser 'src/gen/de/vette/idea/neos/lang/fusion/parser/FusionParser.java'
+    pathToPsiRoot '/de/vette/idea/neos/lang/core/psi'
 }
