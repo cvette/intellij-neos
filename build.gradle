@@ -38,7 +38,7 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
         // Branch Number: 171
-        'com.jetbrains.php:171.3780.104',
+        'com.jetbrains.php:172.2465.7',
         'yaml',
 
         // test dependencies
