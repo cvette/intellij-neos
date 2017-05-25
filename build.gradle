@@ -46,9 +46,9 @@ def pluginsForIdeaVersion = [
         'java-i18n',
         'properties'
     ],
-    '2017.1.1': [
+    '2017.1.3': [
         // Branch Number: 171
-        'com.jetbrains.php:171.3780.104',
+        'com.jetbrains.php:171.4424.11',
         'yaml',
 
         // test dependencies
