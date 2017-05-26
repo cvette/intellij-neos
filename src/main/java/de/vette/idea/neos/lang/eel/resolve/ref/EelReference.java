@@ -15,23 +15,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.eel.resolve.ref;
 
-package de.vette.idea.neos.lang.fusion.completion;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
+import de.vette.idea.neos.lang.eel.psi.EelCompositeElement;
+import org.jetbrains.annotations.Nullable;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
-import de.vette.idea.neos.lang.eel.completion.EelProvider;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+public interface EelReference extends PsiPolyVariantReference {
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
+    @Override
+    EelCompositeElement getElement();
 
-public class FusionCompletionContributor extends CompletionContributor
-{
-    public FusionCompletionContributor() {
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.UNQUALIFIED_TYPE),
-                new PrototypeProvider()
-        );
-    }
+    @Nullable
+    @Override
+    PsiElement resolve();
 }

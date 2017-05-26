@@ -15,23 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.eel.psi;
 
-package de.vette.idea.neos.lang.fusion.completion;
+import de.vette.idea.neos.lang.eel.resolve.ref.EelReference;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
-import de.vette.idea.neos.lang.eel.completion.EelProvider;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+public interface EelReferenceElement extends EelCompositeElement {
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-
-public class FusionCompletionContributor extends CompletionContributor
-{
-    public FusionCompletionContributor() {
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.UNQUALIFIED_TYPE),
-                new PrototypeProvider()
-        );
-    }
+    @Override
+    EelReference getReference();
 }

@@ -36,7 +36,7 @@ import java.util.Collection;
 public class PrototypeProvider extends CompletionProvider<CompletionParameters> {
 
     @Override
-    protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+    protected void addCompletions(@NotNull CompletionParameters parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet result) {
         Collection<String> keys = StubIndex.getInstance().getAllKeys(FusionPrototypeDeclarationIndex.KEY, parameters.getPosition().getProject());
         Project project = parameters.getPosition().getProject();
 

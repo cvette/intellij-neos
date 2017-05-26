@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.eel;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -29,31 +29,30 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import de.vette.idea.neos.lang.fusion.lexer.FusionLexerAdapter;
-import de.vette.idea.neos.lang.fusion.parser.FusionParser;
-import de.vette.idea.neos.lang.fusion.psi.FusionFile;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
-import de.vette.idea.neos.lang.fusion.stubs.FusionFileStub;
+import de.vette.idea.neos.lang.eel.lexer.EelLexerAdapter;
+import de.vette.idea.neos.lang.eel.parser.EelParser;
+import de.vette.idea.neos.lang.eel.psi.EelFile;
+import de.vette.idea.neos.lang.eel.psi.EelTypes;
 import org.jetbrains.annotations.NotNull;
 
-public class FusionParserDefinition implements ParserDefinition {
+public class EelParserDefinition implements ParserDefinition {
 
-    public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, FusionTypes.CRLF);
+    public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
 
     @NotNull
     @Override
     public Lexer createLexer(Project project) {
-        return new FusionLexerAdapter();
+        return new EelLexerAdapter();
     }
 
     @Override
     public PsiParser createParser(Project project) {
-        return new FusionParser();
+        return new EelParser();
     }
 
     @Override
     public IFileElementType getFileNodeType() {
-        return FusionFileStub.TYPE;
+        return new IFileElementType(EelLanguage.INSTANCE);
     }
 
     @NotNull
@@ -65,28 +64,28 @@ public class FusionParserDefinition implements ParserDefinition {
     @NotNull
     @Override
     public TokenSet getCommentTokens() {
-        return TokenSet.create(FusionTypes.SINGLE_LINE_COMMENT, FusionTypes.C_STYLE_COMMENT, FusionTypes.DOC_COMMENT);
+        return TokenSet.create();
     }
 
     @NotNull
     @Override
     public TokenSet getStringLiteralElements() {
-        return TokenSet.create(FusionTypes.VALUE_STRING, FusionTypes.VALUE_STRING_QUOTE, FusionTypes.VALUE_STRING_ESCAPED_QUOTE);
+        return TokenSet.create();
     }
 
     @NotNull
     @Override
     public PsiElement createElement(ASTNode astNode) {
-        return FusionTypes.Factory.createElement(astNode);
+        return EelTypes.Factory.createElement(astNode);
     }
 
     @Override
     public PsiFile createFile(FileViewProvider fileViewProvider) {
-        return new FusionFile(fileViewProvider);
+        return new EelFile(fileViewProvider);
     }
 
     @Override
-    public SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
+    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode astNode, ASTNode astNode1) {
         return SpaceRequirements.MAY;
     }
 }

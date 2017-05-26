@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.annotators;
+package de.vette.idea.neos.lang.eel.annotators;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
@@ -24,8 +24,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.indexing.FileBasedIndex;
 import de.vette.idea.neos.indexes.DefaultContextFileIndex;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodCall;
+import de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;
+import de.vette.idea.neos.lang.eel.psi.EelMethodCall;
 import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,10 +35,10 @@ public class EelHelperMethodAnnotator implements Annotator {
 
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-        if (element instanceof FusionMethodCall) {
-            FusionMethodCall methodCall = (FusionMethodCall) element;
-            if (methodCall.getPrevSibling() != null && methodCall.getPrevSibling().getPrevSibling() instanceof FusionCompositeIdentifier) {
-                FusionCompositeIdentifier compositeId = (FusionCompositeIdentifier) methodCall.getPrevSibling().getPrevSibling();
+        if (element instanceof EelMethodCall) {
+            EelMethodCall methodCall = (EelMethodCall) element;
+            if (methodCall.getPrevSibling() != null && methodCall.getPrevSibling().getPrevSibling() instanceof EelCompositeIdentifier) {
+                EelCompositeIdentifier compositeId = (EelCompositeIdentifier) methodCall.getPrevSibling().getPrevSibling();
                 List<String> helpers = FileBasedIndex.getInstance().getValues(DefaultContextFileIndex.KEY, compositeId.getText(), GlobalSearchScope.allScope(element.getProject()));
                 if (!helpers.isEmpty()) {
                     for (String helper : helpers) {

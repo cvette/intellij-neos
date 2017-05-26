@@ -16,22 +16,19 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.completion;
+package de.vette.idea.neos.lang.afx.psi;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
-import de.vette.idea.neos.lang.eel.completion.EelProvider;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import com.intellij.psi.tree.IElementType;
+import de.vette.idea.neos.lang.afx.AfxLanguage;
+import de.vette.idea.neos.lang.fusion.FusionLanguage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-
-public class FusionCompletionContributor extends CompletionContributor
-{
-    public FusionCompletionContributor() {
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.UNQUALIFIED_TYPE),
-                new PrototypeProvider()
-        );
+/**
+ * TypoScript2 token type
+ */
+public class AfxTokenType extends IElementType{
+    public AfxTokenType(@NotNull @NonNls String debugName) {
+        super(debugName, AfxLanguage.INSTANCE);
     }
 }

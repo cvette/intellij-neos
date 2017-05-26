@@ -1,0 +1,20 @@
+{
+	parserClass="de.vette.idea.neos.lang.afx.parser.AfxParser"
+	parserUtilClass="de.vette.idea.neos.lang.afx.parser.AfxParserUtil"
+
+	extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+	psiClassPrefix="Afx"
+	psiImplClassSuffix="Impl"
+	psiPackage="de.vette.idea.neos.lang.afx.psi"
+	psiImplPackage="de.vette.idea.neos.lang.afx.psi.impl"
+	elementTypeHolderClass="de.vette.idea.neos.lang.afx.psi.AfxTypes"
+	elementTypeClass="de.vette.idea.neos.lang.afx.psi.AfxElementType"
+	tokenTypeClass="de.vette.idea.neos.lang.afx.psi.AfxTokenType"
+}
+
+root ::= (structureToken)*
+private structureToken ::= outerHtml | eel
+private eel ::= LEFT_BRACE EEL_CONTENT RIGHT_BRACE
+
+outerHtml ::= T_TEXT;

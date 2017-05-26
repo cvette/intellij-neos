@@ -16,9 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.eel;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,24 +29,24 @@ import javax.swing.*;
 /**
  * Fusion file type
  */
-public class FusionFileType extends LanguageFileType {
-    public static final LanguageFileType INSTANCE = new FusionFileType();
-    public static final String DEFAULT_EXTENSION = "fusion";
+public class EelFileType extends LanguageFileType {
+    public static final LanguageFileType INSTANCE = new EelFileType();
+    public static final String DEFAULT_EXTENSION = "eel";
 
-    private FusionFileType() {
-        super(FusionLanguage.INSTANCE);
+    private EelFileType() {
+        super(EelLanguage.INSTANCE);
     }
 
     @NotNull
     @Override
     public String getName() {
-        return "Neos Fusion";
+        return "Neos EEL";
     }
 
     @NotNull
     @Override
     public String getDescription() {
-        return "Neos Fusion file";
+        return "Neos EEL file";
     }
 
     @NotNull

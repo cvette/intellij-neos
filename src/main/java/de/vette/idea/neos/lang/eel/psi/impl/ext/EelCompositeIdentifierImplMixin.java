@@ -15,31 +15,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.vette.idea.neos.lang.fusion.psi.impl.ext;
+
+package de.vette.idea.neos.lang.eel.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionMethodNameReference;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
+import de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;
+import de.vette.idea.neos.lang.eel.psi.impl.EelCompositeElementImpl;
+import de.vette.idea.neos.lang.eel.resolve.ref.EelCompositeIdentifierReference;
+import de.vette.idea.neos.lang.eel.resolve.ref.EelReference;
 import org.jetbrains.annotations.NotNull;
 
-public class FusionMethodNameImplMixin extends FusionCompositeElementImpl implements FusionMethodName {
+public abstract class EelCompositeIdentifierImplMixin extends EelCompositeElementImpl implements EelCompositeIdentifier {
 
-    public FusionMethodNameImplMixin(@NotNull ASTNode astNode) {
+    public EelCompositeIdentifierImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
     }
 
-
     @Override
-    public FusionReference getReference() {
-        return new FusionMethodNameReference(this);
-    }
-
-    @NotNull
-    @Override
-    public PsiElement getEelFunction() {
-        return null;
+    public EelReference getReference() {
+        return new EelCompositeIdentifierReference(this);
     }
 }

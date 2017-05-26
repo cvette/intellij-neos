@@ -16,22 +16,24 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.completion;
+package de.vette.idea.neos.lang.eel.psi;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
-import de.vette.idea.neos.lang.eel.completion.EelProvider;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
+import de.vette.idea.neos.lang.eel.EelFileType;
+import de.vette.idea.neos.lang.eel.EelLanguage;
+import org.jetbrains.annotations.NotNull;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
+public class EelFile extends PsiFileBase {
 
-public class FusionCompletionContributor extends CompletionContributor
-{
-    public FusionCompletionContributor() {
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.UNQUALIFIED_TYPE),
-                new PrototypeProvider()
-        );
+    public EelFile(@NotNull FileViewProvider fileViewProvider) {
+        super(fileViewProvider, EelLanguage.INSTANCE);
+    }
+
+    @NotNull
+    @Override
+    public FileType getFileType() {
+        return EelFileType.INSTANCE;
     }
 }

@@ -37,9 +37,7 @@ public class FusionBraceMatcher implements PairedBraceMatcher {
     private static final BracePair[] PAIRS = {
             new BracePair(FusionTypes.LEFT_BRACE, FusionTypes.RIGHT_BRACE, true),
             new BracePair(FusionTypes.LEFT_PAREN, FusionTypes.RIGHT_PAREN, false),
-            new BracePair(FusionTypes.EEL_LEFT_BRACE, FusionTypes.EEL_RIGHT_BRACE, false),
-            new BracePair(FusionTypes.EEL_LEFT_PAREN, FusionTypes.EEL_RIGHT_PAREN, false),
-            new BracePair(FusionTypes.EEL_LEFT_BRACKET, FusionTypes.EEL_RIGHT_BRACKET, false),
+            new BracePair(FusionTypes.EEL_LEFT_BRACE, FusionTypes.EEL_RIGHT_BRACE, false)
     };
 
     /**

@@ -153,8 +153,15 @@ test {
 
 task generateFusionLexer(type: GenerateLexer) {
     source = 'src/main/grammars/FusionLexer.flex'
-    targetDir = 'src/gen/de/vette/idea/neos/lang/fusion/parser'
+    targetDir = 'src/gen/de/vette/idea/neos/lang/fusion/lexer'
     targetClass = 'FusionLexer'
+    purgeOldFiles = true
+}
+
+task generateEelLexer(type: GenerateLexer) {
+    source = 'src/main/grammars/EelLexer.flex'
+    targetDir = 'src/gen/de/vette/idea/neos/lang/eel/lexer'
+    targetClass = 'EelLexer'
     purgeOldFiles = true
 }
 
@@ -166,5 +173,28 @@ task generateFusionParser(type: GenerateParser) {
     purgeOldFiles = true
 }
 
-compileJava.dependsOn generateFusionLexer, generateFusionParser
-compileTestJava.dependsOn generateFusionLexer, generateFusionParser
+task generateAfxLexer(type: GenerateLexer) {
+    source = 'src/main/grammars/AfxLexer.flex'
+    targetDir = 'src/gen/de/vette/idea/neos/lang/afx/lexer'
+    targetClass = 'AfxLexer'
+    purgeOldFiles = true
+}
+
+task generateAfxParser(type: GenerateParser) {
+    source = 'src/main/grammars/AfxParser.bnf'
+    targetRoot = 'src/gen'
+    pathToParser = 'src/gen/de/vette/idea/neos/lang/afx/parser/AfxParser.java'
+    pathToPsiRoot = '/de/vette/idea/neos/lang/core/psi'
+    purgeOldFiles = true
+}
+
+task generateEelParser(type: GenerateParser) {
+    source = 'src/main/grammars/EelParser.bnf'
+    targetRoot = 'src/gen'
+    pathToParser = 'src/gen/de/vette/idea/neos/lang/eel/parser/EelParser.java'
+    pathToPsiRoot = '/de/vette/idea/neos/lang/core/psi'
+    purgeOldFiles = true
+}
+
+compileJava.dependsOn generateFusionLexer, generateEelLexer, generateAfxLexer,  generateFusionParser, generateAfxParser, generateEelParser
+compileTestJava.dependsOn generateFusionLexer, generateEelLexer, generateAfxLexer, generateFusionParser, generateAfxParser, generateEelParser

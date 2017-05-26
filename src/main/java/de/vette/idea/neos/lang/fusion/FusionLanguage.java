@@ -24,7 +24,6 @@ public class FusionLanguage extends Language {
     public static final Language INSTANCE = new FusionLanguage();
 
     public FusionLanguage() {
-        super("NeosFusion", "text/neos-fusion");
-
+        super("Neos Fusion", "text/neos-fusion");
     }
 }

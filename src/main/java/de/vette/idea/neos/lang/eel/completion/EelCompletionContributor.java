@@ -16,22 +16,21 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.completion;
+package de.vette.idea.neos.lang.eel.completion;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
-import de.vette.idea.neos.lang.eel.completion.EelProvider;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import de.vette.idea.neos.lang.eel.psi.EelTypes;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
-public class FusionCompletionContributor extends CompletionContributor
+public class EelCompletionContributor extends CompletionContributor
 {
-    public FusionCompletionContributor() {
+    public EelCompletionContributor() {
         extend(
                 CompletionType.BASIC,
-                psiElement(FusionTypes.UNQUALIFIED_TYPE),
-                new PrototypeProvider()
+                psiElement(EelTypes.EEL_IDENTIFIER),
+                new EelProvider()
         );
     }
 }

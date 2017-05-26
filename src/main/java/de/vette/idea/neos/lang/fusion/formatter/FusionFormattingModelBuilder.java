@@ -78,6 +78,23 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
         .before(FusionTypes.EEL_RIGHT_BRACE).none()
         .between(FusionTypes.BLOCK, FusionTypes.PATH).blankLines(1);
 
+                spacingBuilder.before(FusionTypes.UNSET_OPERATOR).spaces(1)
+                .around(FusionTypes.COPY_OPERATOR).spaces(1)
+                .around(FusionTypes.EEL_ADDITION_OPERATOR).spaces(1)
+                .around(FusionTypes.EEL_SUBTRACTION_OPERATOR).spaces(1)
+                .around(FusionTypes.EEL_MULTIPLICATION_OPERATOR).spaces(1)
+                .around(FusionTypes.EEL_DIVISION_OPERATOR).spaces(1)
+                .around(FusionTypes.EEL_MODULO_OPERATOR).spaces(1)
+                .around(FusionTypes.EEL_COMPARISON_OPERATOR).spaces(1)
+                .around(FusionTypes.NAMESPACE_ALIAS_SEPARATOR).spaces(1)
+                .before(FusionTypes.NAMESPACE_SEPARATOR).none()
+                .after(FusionTypes.NAMESPACE_SEPARATOR).spaces(1)
+                .before(FusionTypes.INCLUDE_SEPARATOR).none()
+                .after(FusionTypes.INCLUDE_SEPARATOR).spaces(1)
+                .after(FusionTypes.EEL_LEFT_BRACE).none()
+                .before(FusionTypes.EEL_RIGHT_BRACE).none()
+                .between(FusionTypes.BLOCK, FusionTypes.PATH).blankLines(1);
+
         return spacingBuilder;
     }
 

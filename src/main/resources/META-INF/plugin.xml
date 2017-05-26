@@ -52,25 +52,25 @@
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
     <lang.psiStructureViewFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.structure.FusionStructureViewBuilderFactory"/>
 
-    <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.NodeTypesYamlFileIndex"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
-    <completion.contributor language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.completion.FusionCompletionContributor"/>
+    <completion.contributor language="Neos Fusion" implementationClass="de.vette.idea.neos.lang.fusion.completion.FusionCompletionContributor"/>
+    <completion.contributor language="Neos EEL" implementationClass="de.vette.idea.neos.lang.eel.completion.EelCompletionContributor"/>
 
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.value.ValueReferenceContributor"/>
 
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
 
-    <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.EelHelperMethodAnnotator"/>
-    <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.PrototypeInheritanceAnnotator"/>
+    <annotator language="Neos EEL" implementationClass="de.vette.idea.neos.lang.eel.annotators.EelHelperMethodAnnotator"/>
+    <annotator language="Neos Fusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.PrototypeInheritanceAnnotator"/>
 
     <!-- Line Marker Providers -->
-    <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
+    <codeInsight.lineMarkerProvider language="Neos Fusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
     <codeInsight.lineMarkerProvider language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.annotators.PrototypeLineMarkerProvider"/>
     <codeInsight.lineMarkerProvider language="PHP" implementationClass="de.vette.idea.neos.lang.php.annotators.MethodLineMarkerProvider"/>
 
@@ -84,6 +84,16 @@
     <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
     <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
     <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxFusionElementDescriptorProvider" />
+
+    <lang.fileViewProviderFactory language="Neos Fusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionFileViewProviderFactory" />
+
+    <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
+    <fileTypeFactory implementation="de.vette.idea.neos.lang.afx.AfxFileTypeFactory"/>
+    <fileTypeFactory implementation="de.vette.idea.neos.lang.eel.EelFileTypeFactory"/>
+
+    <lang.parserDefinition language="Neos Fusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
+    <lang.parserDefinition language="Neos AFX" implementationClass="de.vette.idea.neos.lang.afx.AfxParserDefinition"/>
+    <lang.parserDefinition language="Neos EEL" implementationClass="de.vette.idea.neos.lang.eel.EelParserDefinition"/>
   </extensions>
 
 

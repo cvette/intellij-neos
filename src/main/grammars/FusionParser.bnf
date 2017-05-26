@@ -22,6 +22,7 @@ FusionFile ::= item_*
 private item_ ::= (namespace_declaration | include_declaration | property | SINGLE_LINE_COMMENT | C_STYLE_COMMENT | DOC_COMMENT) {
     recoverWhile="item_recovery"
 }
+
 private item_recovery ::= !(PROTOTYPE_KEYWORD|PATH_PART|EOF|VALUE_STRING_QUOTE|RIGHT_BRACE|LEFT_BRACE|INCLUDE_KEYWORD|NAMESPACE_KEYWORD|META_PROPERTY_KEYWORD|SINGLE_LINE_COMMENT|C_STYLE_COMMENT|DOC_COMMENT)
 
 inner block ::= LEFT_BRACE [item_ *] RIGHT_BRACE {pin=1}
@@ -43,11 +44,18 @@ resource ::= RESOURCE_KEYWORD RESOURCE_PATH {pin=1}
 private property ::= path (property_block|property_deletion|property_copy|property_assignment)
 left property_block ::= block
 left property_deletion ::= UNSET_OPERATOR
-left property_assignment ::= ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_dsl|value_string_line|expression|prototype_instance) {pin=1}
+left property_assignment ::= ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|expression|value_dsl|value_string_line|prototype_instance) {pin=1}
 left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance|(prototype_signature [block])) {
     pin=1
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPropertyCopyMixin"]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPropertyCopyImplMixin"
+}
+
+expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE expression_content EEL_RIGHT_BRACE {pin=1}
+
+expression_content ::= EEL_CONTENT {
+    implements = ["de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement"; "com.intellij.psi.tree.ILazyParseableElementTypeBase"]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.FusionLazyParsableElement"
 }
 
 type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {
@@ -93,36 +101,4 @@ value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_
 }
 
 value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)*
-
 value_string_single_line ::= VALUE_STRING_QUOTE (VALUE_STRING | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}
-expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE conditional_expression EEL_RIGHT_BRACE {pin=1}
-
-offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET {pin=1}
-method_call ::= method_name EEL_LEFT_PAREN [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_PAREN {pin=2}
-
-object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier|offset_access)) * [array_literal *]
-composite_identifier ::= identifier (EEL_DOT (identifier)) * {
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
-    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionCompositeIdentifierImplMixin"
-}
-
-identifier ::= EEL_IDENTIFIER
-method_name ::= EEL_FUNCTION {
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
-    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionMethodNameImplMixin"
-}
-
-term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | VALUE_NUMBER | object_path | value_string_line
-
-simple_expression ::= wrapped_expression | array_literal | object_literal | term | not_expression
-wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN [array_literal *]
-not_expression ::= EEL_NEGATION_OPERATOR simple_expression
-conditional_expression ::= disjunction [IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression]
-disjunction ::= conjunction (EEL_BOOLEAN_OR conjunction) *
-conjunction ::= comparison (EEL_BOOLEAN_AND comparison) *
-comparison ::= sum_calculation [EEL_COMPARISON_OPERATOR sum_calculation]
-sum_calculation ::= prod_calculation ((EEL_ADDITION_OPERATOR|EEL_SUBTRACTION_OPERATOR) prod_calculation) *
-prod_calculation ::= simple_expression ((EEL_DIVISION_OPERATOR|EEL_MODULO_OPERATOR|EEL_MULTIPLICATION_OPERATOR) simple_expression) *
-array_literal ::= EEL_LEFT_BRACKET [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_BRACKET
-object_literal_property ::= (value_string_line|EEL_IDENTIFIER) ':' conditional_expression
-object_literal ::= EEL_OBJECT_LEFT_BRACE [object_literal_property] (VALUE_SEPARATOR object_literal_property) * EEL_OBJECT_RIGHT_BRACE

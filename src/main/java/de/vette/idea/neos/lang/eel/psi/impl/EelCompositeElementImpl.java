@@ -16,23 +16,22 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.psi.impl.ext;
+package de.vette.idea.neos.lang.eel.psi.impl;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionCompositeIdentifierReference;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
+import de.vette.idea.neos.lang.eel.psi.EelCompositeElement;
+import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionCompositeIdentifierImplMixin extends FusionCompositeElementImpl implements FusionCompositeIdentifier {
+public abstract class EelCompositeElementImpl extends ASTWrapperPsiElement implements EelCompositeElement {
 
-    public FusionCompositeIdentifierImplMixin(@NotNull ASTNode astNode) {
+    public EelCompositeElementImpl(@NotNull ASTNode astNode) {
         super(astNode);
     }
 
     @Override
-    public FusionReference getReference() {
-        return new FusionCompositeIdentifierReference(this);
+    public String toString() {
+        return getNode().getElementType().toString();
     }
 }

@@ -15,28 +15,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.vette.idea.neos.lang.fusion.resolve.ref;
+package de.vette.idea.neos.lang.eel.psi.impl.ext;
 
-import com.intellij.openapi.util.TextRange;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
+import de.vette.idea.neos.lang.eel.psi.EelMethodName;
+import de.vette.idea.neos.lang.eel.psi.impl.EelCompositeElementImpl;
+import de.vette.idea.neos.lang.eel.resolve.ref.EelMethodNameReference;
+import de.vette.idea.neos.lang.eel.resolve.ref.EelReference;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+public class EelMethodNameImplMixin extends EelCompositeElementImpl implements EelMethodName {
 
-public class FusionCompositeIdentifierReference extends FusionReferenceBase<FusionCompositeIdentifier> {
-
-    public FusionCompositeIdentifierReference(FusionCompositeIdentifier psiElement) {
-        super(psiElement);
+    public EelMethodNameImplMixin(@NotNull ASTNode astNode) {
+        super(astNode);
     }
 
-    @Override
-    List<PsiElement> resolveInner() {
-        return ResolveEngine.getEelHelpers(getElement().getProject(), getElement().getText());
-    }
 
     @Override
-    public TextRange getRangeInElement() {
-        return new TextRange(getElement().getStartOffsetInParent(), getElement().getStartOffsetInParent() + getElement().getTextLength());
+    public EelReference getReference() {
+        return new EelMethodNameReference(this);
     }
 }

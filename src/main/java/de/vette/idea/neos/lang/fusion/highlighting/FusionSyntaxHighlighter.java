@@ -22,7 +22,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import de.vette.idea.neos.lang.fusion.FusionLexerAdapter;
+import de.vette.idea.neos.lang.fusion.lexer.FusionLexerAdapter;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +33,7 @@ public class FusionSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final Map<IElementType, TextAttributesKey> ourMap1;
 
     static {
-        ourMap1 = new HashMap<IElementType, TextAttributesKey>();
+        ourMap1 = new HashMap<>();
         ourMap1.put(FusionTypes.SINGLE_LINE_COMMENT, FusionHighlightingColors.SINGLE_LINE_COMMENT);
         ourMap1.put(FusionTypes.C_STYLE_COMMENT, FusionHighlightingColors.BLOCK_COMMENT);
         ourMap1.put(FusionTypes.DOC_COMMENT, FusionHighlightingColors.BLOCK_COMMENT);
@@ -63,16 +63,6 @@ public class FusionSyntaxHighlighter extends SyntaxHighlighterBase {
         ourMap1.put(FusionTypes.EXPRESSION_KEYWORD, FusionHighlightingColors.EEL_WRAPPER);
         ourMap1.put(FusionTypes.EEL_LEFT_BRACE, FusionHighlightingColors.EEL_WRAPPER);
         ourMap1.put(FusionTypes.EEL_RIGHT_BRACE, FusionHighlightingColors.EEL_WRAPPER);
-        ourMap1.put(FusionTypes.EEL_FUNCTION, FusionHighlightingColors.EEL_FUNCTION);
-        ourMap1.put(FusionTypes.EEL_IDENTIFIER, FusionHighlightingColors.EEL_IDENTIFIER);
-        ourMap1.put(FusionTypes.EEL_BOOLEAN_AND, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_BOOLEAN_OR, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_ADDITION_OPERATOR, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_SUBTRACTION_OPERATOR, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_COMPARISON_OPERATOR, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_DIVISION_OPERATOR, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_MULTIPLICATION_OPERATOR, FusionHighlightingColors.EEL_OPERATOR);
-        ourMap1.put(FusionTypes.EEL_MODULO_OPERATOR, FusionHighlightingColors.EEL_OPERATOR);
 
         ourMap1.put(FusionTypes.PROTOTYPE_KEYWORD, FusionHighlightingColors.PROTOTYPE);
         ourMap1.put(FusionTypes.OBJECT_TYPE_NAMESPACE, FusionHighlightingColors.OBJECT_TYPE);

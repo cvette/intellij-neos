@@ -15,31 +15,31 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.vette.idea.neos.lang.fusion.resolve.ref;
+package de.vette.idea.neos.lang.eel.resolve.ref;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodCall;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
+import de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;
+import de.vette.idea.neos.lang.eel.psi.EelMethodCall;
+import de.vette.idea.neos.lang.eel.psi.EelMethodName;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FusionMethodNameReference extends FusionReferenceBase<FusionMethodName> {
+public class EelMethodNameReference extends EelReferenceBase<EelMethodName> {
 
-    public FusionMethodNameReference(FusionMethodName psiElement) {
+    public EelMethodNameReference(EelMethodName psiElement) {
         super(psiElement);
     }
 
     @Override
     List<PsiElement> resolveInner() {
         PsiElement parentElement = getElement().getParent();
-        if (parentElement != null && parentElement instanceof FusionMethodCall) {
+        if (parentElement != null && parentElement instanceof EelMethodCall) {
             if (parentElement.getPrevSibling() != null && parentElement.getPrevSibling().getPrevSibling() != null) {
                 PsiElement compositeElement = parentElement.getPrevSibling().getPrevSibling();
-                if (compositeElement instanceof FusionCompositeIdentifier) {
+                if (compositeElement instanceof EelCompositeIdentifier) {
                     return ResolveEngine.getEelHelperMethods(getElement().getProject(), compositeElement.getText(), getElement().getText());
                 }
             }

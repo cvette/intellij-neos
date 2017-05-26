@@ -19,7 +19,7 @@
 package de.vette.idea.neos.lang.fusion;
 
 import com.intellij.lexer.FlexAdapter;
-import de.vette.idea.neos.lang.fusion.parser.FusionLexer;
+import de.vette.idea.neos.lang.fusion.lexer.FusionLexer;
 
 public class FusionLexerAdapter extends FlexAdapter {
     public FusionLexerAdapter() {

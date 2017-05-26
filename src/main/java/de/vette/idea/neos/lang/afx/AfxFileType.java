@@ -16,9 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.afx;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,26 +27,26 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * Fusion file type
+ * Afx file type
  */
-public class FusionFileType extends LanguageFileType {
-    public static final LanguageFileType INSTANCE = new FusionFileType();
-    public static final String DEFAULT_EXTENSION = "fusion";
+public class AfxFileType extends LanguageFileType {
+    public static final LanguageFileType INSTANCE = new AfxFileType();
+    public static final String DEFAULT_EXTENSION = "afx";
 
-    private FusionFileType() {
-        super(FusionLanguage.INSTANCE);
+    private AfxFileType() {
+        super(AfxLanguage.INSTANCE);
     }
 
     @NotNull
     @Override
     public String getName() {
-        return "Neos Fusion";
+        return "Neos Fusion AFX";
     }
 
     @NotNull
     @Override
     public String getDescription() {
-        return "Neos Fusion file";
+        return "Neos Fusion AFX file";
     }
 
     @NotNull
