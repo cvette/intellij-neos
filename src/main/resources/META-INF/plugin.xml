@@ -70,6 +70,9 @@
 
     <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.EelHelperMethodAnnotator"/>
 
+    <!-- Line Marker Providers -->
+    <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
+
     <!-- Indices -->
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex"/>
