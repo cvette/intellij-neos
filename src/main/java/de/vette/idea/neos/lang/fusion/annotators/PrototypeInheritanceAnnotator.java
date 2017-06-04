@@ -33,7 +33,8 @@ public class PrototypeInheritanceAnnotator implements Annotator {
             FusionPropertyCopy copy = (FusionPropertyCopy) element;
             if (copy.isPrototypeInheritance()
                     && !(element.getParent() instanceof FusionFile)
-                    || copy.getPath().getLastChild() instanceof FusionPrototypeSignature
+                    || !copy.isPrototypeInheritance()
+                    && copy.getPath().getLastChild() instanceof FusionPrototypeSignature
                     && copy.getPrototypeSignature() != null) {
 
                 holder.createErrorAnnotation(element, "Prototype inheritance can only be defined globally");
