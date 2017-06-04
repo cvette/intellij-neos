@@ -56,17 +56,12 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
             Boolean isDefinition = false;
             Boolean isInheritance = false;
 
-            if (psi.getParent() instanceof FusionPrototypeInheritance
-                    && psi.getParent().getParent() instanceof FusionFile && psi.getPrevSibling() == null) {
+            if (psi.isInheritanceDefinition()) {
                 isDefinition = true;
                 isInheritance = true;
             }
 
-            if ((psi.getParent().getParent() instanceof FusionPropertyAssignment
-                    || psi.getParent().getParent() instanceof FusionPropertyBlock)
-                    && psi.getParent().getParent().getParent() instanceof FusionFile
-                    && psi.getParent() instanceof FusionPath
-                    && psi.getPrevSibling() == null) {
+            if (psi.isDefinition()) {
                 isDefinition = true;
             }
 
@@ -76,9 +71,7 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
                     namespace = type.getObjectTypeNamespace().getText();
                 }
 
-                if (type.getUnqualifiedType() != null) {
-                    name = type.getUnqualifiedType().getText();
-                }
+                name = type.getUnqualifiedType().getText();
                 return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), namespace, name, isDefinition, isInheritance);
             }
             return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), null, name, isDefinition, isInheritance);

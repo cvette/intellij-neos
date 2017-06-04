@@ -18,10 +18,8 @@
 
 package de.vette.idea.neos.lang.fusion.editor;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.psi.*;
@@ -52,12 +50,12 @@ public class FusionBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider {
                 } else {
                     currentElement = currentElement.getPrevSibling();
                 }
-            } while (currentElement != null && !(currentElement instanceof FusionPath) && !(currentElement instanceof FusionPrototypeInheritance));
+            } while (currentElement != null && !(currentElement instanceof FusionPath));
 
             if (currentElement != null) {
-                if (currentElement instanceof FusionPath) {
-                    elementInfo = currentElement.getText();
-                } else if (currentElement.getFirstChild() instanceof FusionPrototypeSignature) {
+                elementInfo = currentElement.getText();
+
+                if (currentElement.getFirstChild() instanceof FusionPrototypeSignature) {
                     FusionType type = ((FusionPrototypeSignature) currentElement.getFirstChild()).getType();
                     if (type != null) {
                         elementInfo = type.getText();

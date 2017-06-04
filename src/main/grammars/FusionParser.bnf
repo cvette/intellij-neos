@@ -19,7 +19,10 @@
 }
 
 FusionFile ::= item_*
-private item_ ::= namespace_declaration | include_declaration | property | SINGLE_LINE_COMMENT | C_STYLE_COMMENT | DOC_COMMENT
+private item_ ::= (namespace_declaration | include_declaration | property | SINGLE_LINE_COMMENT | C_STYLE_COMMENT | DOC_COMMENT) {
+    recoverWhile="item_recovery"
+}
+private item_recovery ::= !(PROTOTYPE_KEYWORD|PATH_PART|EOF|VALUE_STRING_QUOTE|RIGHT_BRACE|LEFT_BRACE|INCLUDE_KEYWORD|NAMESPACE_KEYWORD|META_PROPERTY_KEYWORD|SINGLE_LINE_COMMENT|C_STYLE_COMMENT|DOC_COMMENT)
 
 inner block ::= LEFT_BRACE [item_ *] RIGHT_BRACE {pin=1}
 
@@ -35,18 +38,19 @@ alias ::= NAMESPACE_ALIAS
 namespace ::= PACKAGE_KEY
 
 include_declaration ::= INCLUDE_KEYWORD INCLUDE_SEPARATOR (resource|INCLUDE_PATH) {pin=1}
-
 resource ::= RESOURCE_KEYWORD RESOURCE_PATH {pin=1}
 
-private property ::= (property_block|property_deletion|property_copy|property_assignment|prototype_inheritance)
-property_block ::= path block {pin=2}
-property_deletion ::= path UNSET_OPERATOR {pin=2}
-property_copy ::= path COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance) {pin=2}
-property_assignment ::= path ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|expression|prototype_instance) {pin=2}
+private property ::= path (property_block|property_deletion|property_copy|property_assignment)
+left property_block ::= block
+left property_deletion ::= UNSET_OPERATOR
+left property_assignment ::= ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|expression|prototype_instance) {pin=1}
+left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance|(prototype_signature [block])) {
+    pin=1
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPropertyCopyMixin"]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPropertyCopyImplMixin"
+}
 
-prototype_inheritance ::= prototype_signature PROTOTYPE_COPY_OPERATOR prototype_signature [block] {pin=2}
-
-type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {pin=1}
+type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {pin=2}
 prototype_instance ::= type [block] {
     pin=1
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
@@ -55,14 +59,14 @@ prototype_instance ::= type [block] {
 
 path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))* {
     pin=2
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement" ]
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement";  "de.vette.idea.neos.lang.fusion.psi.ext.FusionPathMixin"]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPathImplMixin"
 }
 
 meta_property ::= META_PROPERTY_KEYWORD META_PROPERTY_NAME {pin=1}
 prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
     pin=1
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPrototypeSignature" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeSignatureImplMixin"
     stubClass = "de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub"
     elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
@@ -78,7 +82,7 @@ value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)
 value_string_single_line ::= VALUE_STRING_QUOTE (VALUE_STRING | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}
 expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE conditional_expression EEL_RIGHT_BRACE {pin=1}
 
-offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET
+offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET {pin=1}
 method_call ::= method_name EEL_LEFT_PAREN [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_PAREN {pin=2}
 
 object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier|offset_access)) * [array_literal]

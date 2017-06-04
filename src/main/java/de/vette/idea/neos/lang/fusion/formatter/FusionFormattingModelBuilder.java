@@ -62,7 +62,6 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
 
 
                 spacingBuilder.before(FusionTypes.UNSET_OPERATOR).spaces(1)
-                .around(FusionTypes.PROTOTYPE_COPY_OPERATOR).spaces(1)
                 .around(FusionTypes.COPY_OPERATOR).spaces(1)
                 .around(FusionTypes.EEL_ADDITION_OPERATOR).spaces(1)
                 .around(FusionTypes.EEL_SUBTRACTION_OPERATOR).spaces(1)

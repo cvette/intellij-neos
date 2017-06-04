@@ -84,8 +84,6 @@ public class ResolveEngine {
 
     @NotNull
     public static Collection<PsiElement> getNodeTypeDefinitions(Project project, FusionType type) {
-        if (type.getUnqualifiedType() == null) return new ArrayList<>();
-
         String instanceName = type.getUnqualifiedType().getText();
         String instanceNs = null;
         if (type.getObjectTypeNamespace() != null) {
@@ -145,7 +143,8 @@ public class ResolveEngine {
 
         // If one of the results is a prototype inheritance, return it as the only result
         for (PsiElement resultPrototype : result) {
-            if (resultPrototype.getParent() != null && resultPrototype.getParent() instanceof FusionPrototypeInheritance) {
+            if (resultPrototype instanceof FusionPrototypeSignature
+                    && ((FusionPrototypeSignature)resultPrototype).isInheritanceDefinition()) {
                 result.clear();
                 result.add(resultPrototype);
                 return result;
@@ -157,8 +156,6 @@ public class ResolveEngine {
 
     @NotNull
     public static List<PsiElement> getPrototypeDefinitions(Project project, FusionType type) {
-        if (type.getUnqualifiedType() == null) return new ArrayList<>();
-
         String instanceName = type.getUnqualifiedType().getText();
         String instanceNs = null;
         if (type.getObjectTypeNamespace() != null) {

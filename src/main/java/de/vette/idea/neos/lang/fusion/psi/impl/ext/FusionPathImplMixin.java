@@ -18,14 +18,21 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import de.vette.idea.neos.lang.fusion.psi.FusionPath;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
+import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class FusionPathImplMixin extends FusionNamedElementImpl implements FusionPath {
     public FusionPathImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
+    }
+
+    public boolean isPrototypeSignature() {
+        return findChildrenByType(FusionTypes.PATH_PART).isEmpty()
+                && findChildrenByType(FusionTypes.PATH_SEPARATOR).isEmpty()
+                && getValueStringSingleLine() == null
+                && getMetaPropertyList().isEmpty()
+                && getPrototypeSignatureList().size() == 1;
     }
 
     @Override

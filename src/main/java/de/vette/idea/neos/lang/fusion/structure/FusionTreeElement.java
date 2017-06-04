@@ -66,15 +66,14 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
         }
 
         for (PsiElement element : blockElement.getChildren()) {
-            if (element instanceof FusionPropertyAssignment
-                    || element instanceof FusionPropertyBlock
-                    || element instanceof FusionPropertyCopy
-                    || element instanceof FusionPropertyDeletion) {
-                if (element.getFirstChild() instanceof FusionPath) {
+            if (element.getFirstChild() instanceof FusionPath) {
+                if (element instanceof FusionPropertyAssignment
+                        || element instanceof FusionPropertyBlock
+                        || element instanceof FusionPropertyDeletion
+                        || element instanceof FusionPropertyCopy) {
+
                     result.add(new FusionTreeElement(element.getFirstChild()));
                 }
-            } else if (element instanceof FusionPrototypeInheritance) {
-                result.add(new FusionTreeElement(element));
             }
         }
 
@@ -86,8 +85,6 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
         PsiElement blockElement = null;
         if (getElement() instanceof FusionFile) {
             return getElement();
-        } else if (getElement() instanceof FusionPrototypeInheritance) {
-            return ((FusionPrototypeInheritance) getElement()).getBlock();
         } else if (getElement() instanceof FusionPath) {
             PsiElement currentSibling = getElement();
             do {
@@ -114,17 +111,6 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
             return ((FusionFile) getElement()).getName();
         }
 
-        if (getElement() instanceof FusionPrototypeInheritance
-                && getElement().getFirstChild() instanceof FusionPrototypeSignature) {
-
-            FusionType type = ((FusionPrototypeSignature) getElement().getFirstChild()).getType();
-            if (type != null) {
-                return type.getText();
-            }
-
-            return "Prototype";
-        }
-
         if (getElement().getFirstChild() != null
                 && getElement().getFirstChild() instanceof FusionPrototypeSignature) {
             return ((FusionNamedElement)getElement()).getName();
@@ -143,7 +129,8 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
             return FusionIcons.FILE;
         }
 
-        if (getElement() instanceof FusionPrototypeInheritance) {
+        if (getElement() instanceof FusionPropertyCopy
+                && ((FusionPropertyCopy) getElement()).isPrototypeInheritance()) {
             return FusionIcons.PROTOTYPE;
         }
 

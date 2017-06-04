@@ -194,7 +194,7 @@ IF_SEPARATOR = {COLON}
 }
 
 <PROTOTYPE_IN_PATH_NEXT> {
-    {COPY_OPERATOR}                         { yybegin(PROTOTYPE_EXPECTED); return FusionTypes.PROTOTYPE_COPY_OPERATOR; }
+    {COPY_OPERATOR}                         { yybegin(PROTOTYPE_EXPECTED); return FusionTypes.COPY_OPERATOR; }
     {UNSET_OPERATOR}                        { yybegin(CRLF_EXPECTED); return FusionTypes.UNSET_OPERATOR; }
     {PATH_SEPARATOR}                        { yybegin(PATH_FOUND); return FusionTypes.PATH_SEPARATOR; }
     {LEFT_BRACE}                            { yybegin(YYINITIAL); return FusionTypes.LEFT_BRACE; }
