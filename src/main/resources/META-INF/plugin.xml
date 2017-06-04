@@ -72,6 +72,7 @@
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
 
     <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.EelHelperMethodAnnotator"/>
+    <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.PrototypeInheritanceAnnotator"/>
 
     <!-- Line Marker Providers -->
     <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
