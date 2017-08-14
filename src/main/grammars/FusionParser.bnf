@@ -76,13 +76,17 @@ value_dsl ::= DSL_IDENTIFIER BACKTICK value_dsl_content BACKTICK {
     pin=1
 }
 
-value_dsl_content ::= (VALUE_STRING | CRLF | ESCAPED_BACKTICK)*
+value_dsl_content ::= (VALUE_STRING | CRLF | ESCAPED_BACKTICK)* {
+    implements = [ "com.intellij.psi.PsiLanguageInjectionHost" ]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionValueDslContentImplMixin"
+}
 
 value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_QUOTE {
     pin=1
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionValueStringLineImplMixin"
 }
+
 value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)*
 
 value_string_single_line ::= VALUE_STRING_QUOTE (VALUE_STRING | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}

@@ -43,6 +43,11 @@
   <depends>com.jetbrains.php</depends>
   <depends>org.jetbrains.plugins.yaml</depends>
 
+  <extensions defaultExtensionNs="org.intellij.intelliLang">
+    <languageSupport implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjectionSupport"/>
+    <injectionConfig config="de/vette/idea/neos/lang/fusion/injection/fusionInjections.xml"/>
+  </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="de.vette.idea.neos.Settings"/>
     <projectConfigurable instance="de.vette.idea.neos.SettingsForm"
@@ -83,6 +88,9 @@
     <!-- Indices -->
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex"/>
+
+    <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
+    <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
   </extensions>
 
   <project-components>

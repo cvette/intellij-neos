@@ -49,6 +49,7 @@ def pluginsForIdeaVersion = [
         // Branch Number: 172
         'com.jetbrains.php:172.3317.83',
         'yaml',
+        'IntelliLang',
 
         // test dependencies
         'CSS',
@@ -56,7 +57,7 @@ def pluginsForIdeaVersion = [
         'properties',
         // DEV dependencies: UNCOMMENT the following lines during development
         // to install additional plugins for development
-        // 'PsiViewer:3.28.93'
+        'PsiViewer:3.28.93'
     ],
     '2017.1.3': [
         // Branch Number: 171
