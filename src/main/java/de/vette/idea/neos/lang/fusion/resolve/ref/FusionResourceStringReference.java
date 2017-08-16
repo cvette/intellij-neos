@@ -39,7 +39,7 @@ public class FusionResourceStringReference extends FusionReferenceBase<FusionVal
         List<PsiElement> result = new ArrayList<>();
 
         if (getElement() != null && getElement().getValueStringLineContent() != null) {
-            VirtualFile resourceFile = ResolveEngine.findResource(getElement().getProject(), getElement().getValueStringLineContent().getText());
+            VirtualFile resourceFile = ResolveEngine.findResource(getElement().getContainingFile(), getElement().getValueStringLineContent().getText());
             if (resourceFile != null && !resourceFile.isDirectory()) {
                 result.add(PsiManager.getInstance(getElement().getProject()).findFile(resourceFile));
             }

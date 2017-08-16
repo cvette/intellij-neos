@@ -21,9 +21,8 @@ package de.vette.idea.neos.lang.fusion.resolve;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
@@ -188,20 +187,47 @@ public class ResolveEngine {
         return null;
     }
 
-    public static VirtualFile findResource(Project project, String resourcePath) {
+    @Nullable
+    public static VirtualFile findResource(PsiFile file, String resourcePath) {
         Matcher m = RESOURCE_PATTERN.matcher(resourcePath);
         if (m.matches()) {
-            Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, m.group(1), GlobalSearchScope.projectScope(project));
-            VirtualFile baseDir = project.getBaseDir().findChild("Packages");
-            if (baseDir == null) {
-                return null;
-            }
-
             resourcePath = "Resources/" + m.group(2);
-            for (VirtualFile file : files) {
-                if (file.getPath().startsWith(baseDir.getPath())) {
-                    return file.findFileByRelativePath(resourcePath);
+            VirtualFile packagesDir = findPackagesDirectory(file);
+            if (packagesDir == null) {
+                return file.getProject().getBaseDir().findFileByRelativePath(resourcePath);
+            } else {
+                VirtualFile packageDir = findPackageDirectory(packagesDir, m.group(1));
+                if (packageDir != null) {
+                    return packageDir.findFileByRelativePath(resourcePath);
                 }
+            }
+        }
+
+        return null;
+    }
+
+    @Nullable
+    protected static VirtualFile findPackageDirectory(VirtualFile packagesDirectory, String packageName) {
+        VirtualFile packageDir;
+        for (VirtualFile packageChild : packagesDirectory.getChildren()) {
+            if (packageChild.isDirectory()) {
+                packageDir = packageChild.findChild(packageName);
+                if (packageDir != null) {
+                    return packageDir;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    @Nullable
+    protected static VirtualFile findPackagesDirectory(PsiFile file) {
+        VirtualFile currentFile = file.getVirtualFile();
+        while (currentFile != null && !currentFile.equals(file.getProject().getBaseDir())) {
+            currentFile = currentFile.getParent();
+            if (currentFile.isDirectory() && currentFile.getName().equals("Packages")) {
+                return currentFile;
             }
         }
 
