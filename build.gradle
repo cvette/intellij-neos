@@ -22,22 +22,21 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath "com.github.hurricup:gradle-grammar-kit-plugin:354bb8c477"
+        classpath "com.github.hurricup:gradle-grammar-kit-plugin:2017.1.1"
     }
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.11"
+    id "org.jetbrains.intellij" version "0.2.15"
 }
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+import org.jetbrains.grammarkit.tasks.*
 
 // See http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
 // and https://plugins.jetbrains.com/plugin/6610-php
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
-        // Branch Number: 171
+        // Branch Number: 172
         'com.jetbrains.php:172.2465.7',
         'yaml',
 
@@ -46,9 +45,9 @@ def pluginsForIdeaVersion = [
         'java-i18n',
         'properties'
     ],
-    '2017.1.3': [
-        // Branch Number: 171
-        'com.jetbrains.php:171.4424.11',
+    '2017.2': [
+        // Branch Number: 172
+        'com.jetbrains.php:172.3317.83',
         'yaml',
 
         // test dependencies
@@ -58,6 +57,16 @@ def pluginsForIdeaVersion = [
         // DEV dependencies: UNCOMMENT the following lines during development
         // to install additional plugins for development
         // 'PsiViewer:3.28.93'
+    ],
+    '2017.1.3': [
+        // Branch Number: 171
+        'com.jetbrains.php:171.4424.11',
+        'yaml',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
     ],
     '2016.3.5': [
         // Branch Number: 163
@@ -124,9 +133,8 @@ sourceSets {
 
 apply plugin: 'org.jetbrains.grammarkit'
 grammarKit {
-    grammarKitRelease = '1.5.1'
-    grammarKitTargetRoot = 'src/gen'
-    purgeOldFiles = true
+    jflexRelease = '1.7.0'
+    grammarKitRelease = '1.5.2'
 }
 
 test {
@@ -160,23 +168,19 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-dependencies {
-    compileOnly('com.github.JetBrains:Grammar-Kit:34fd65b92af957c25d940b828d81ab3ba9b398b0') {
-        exclude group: 'org.jetbrains.plugins'
-        exclude module: 'idea'
-    }
-}
-
 task generateFusionLexer(type: GenerateLexer) {
-    source 'src/main/grammars/FusionLexer.flex'
-    targetDir 'src/gen/de/vette/idea/neos/lang/fusion/parser'
-    targetClass 'FusionLexer'
+    source = 'src/main/grammars/FusionLexer.flex'
+    targetDir = 'src/gen/de/vette/idea/neos/lang/fusion/parser'
+    targetClass = 'FusionLexer'
+    purgeOldFiles = true
 }
 
 task generateFusionParser(type: GenerateParser) {
-    source 'src/main/grammars/FusionParser.bnf'
-    pathToParser 'src/gen/de/vette/idea/neos/lang/fusion/parser/FusionParser.java'
-    pathToPsiRoot '/de/vette/idea/neos/lang/core/psi'
+    source = 'src/main/grammars/FusionParser.bnf'
+    targetRoot = 'src/gen'
+    pathToParser = 'src/gen/de/vette/idea/neos/lang/fusion/parser/FusionParser.java'
+    pathToPsiRoot = '/de/vette/idea/neos/lang/core/psi'
+    purgeOldFiles = true
 }
 
 compileJava.dependsOn generateFusionLexer, generateFusionParser
