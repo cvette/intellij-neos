@@ -65,7 +65,10 @@
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.NodeTypesYamlFileIndex"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
+
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
+    <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.value.ValueReferenceContributor"/>
+
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
 
     <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.EelHelperMethodAnnotator"/>
