@@ -58,7 +58,6 @@ public class FusionSyntaxHighlighter extends SyntaxHighlighterBase {
 
         ourMap1.put(FusionTypes.ASSIGNMENT_OPERATOR, FusionHighlightingColors.ASSIGNMENT_OPERATOR);
         ourMap1.put(FusionTypes.COPY_OPERATOR, FusionHighlightingColors.COPY_OPERATOR);
-        ourMap1.put(FusionTypes.PROTOTYPE_COPY_OPERATOR, FusionHighlightingColors.COPY_OPERATOR);
         ourMap1.put(FusionTypes.UNSET_OPERATOR, FusionHighlightingColors.UNSET_OPERATOR);
 
         ourMap1.put(FusionTypes.EXPRESSION_KEYWORD, FusionHighlightingColors.EEL_WRAPPER);

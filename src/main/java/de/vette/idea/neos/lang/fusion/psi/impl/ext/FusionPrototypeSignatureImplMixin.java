@@ -21,8 +21,7 @@ package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeInheritance;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
+import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionPrototypeInheritanceReference;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
@@ -41,9 +40,7 @@ public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedEle
 
     @Override
     public FusionReference getReference() {
-        if (this.getParent() == null
-                || !(this.getParent() instanceof FusionPrototypeInheritance)
-                || this.getPrevSibling() == null) {
+        if (!isInheritedInDefinition()) {
             return null;
         }
 
@@ -54,5 +51,23 @@ public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedEle
     @Override
     public PsiReference[] getReferences() {
         return super.getReferences();
+    }
+
+    public boolean isInheritedInDefinition() {
+        return (getParent() instanceof FusionPropertyCopy);
+    }
+
+    public boolean isInheritanceDefinition() {
+        return getParent() instanceof FusionPath
+                && getParent().getParent() instanceof FusionPropertyCopy
+                && getParent().getParent().getParent() instanceof FusionFile;
+    }
+
+    public boolean isDefinition() {
+        return (getParent().getParent() instanceof FusionPropertyAssignment
+                || getParent().getParent() instanceof FusionPropertyBlock)
+                && getParent().getParent().getParent() instanceof FusionFile
+                && getParent() instanceof FusionPath
+                && getPrevSibling() == null;
     }
 }

@@ -42,33 +42,19 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
     @Override
     public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
         for (PsiElement el : elements) {
-            if (!(el instanceof FusionPropertyBlock) && !(el instanceof FusionPrototypeInheritance)) {
+            if (!(el instanceof FusionType)) {
                 continue;
             }
 
-            FusionType type = null;
-            if (el instanceof FusionPropertyBlock) {
-                FusionPath path = ((FusionPropertyBlock) el).getPath();
-                if (path.getFirstChild() instanceof FusionPrototypeSignature
-                        && (el.getLastChild() instanceof FusionBlock
-                        || path.getLastChild() instanceof FusionPrototypeSignature)) {
-                    FusionPrototypeSignature signature = (FusionPrototypeSignature) path.getFirstChild();
-                    type = signature.getType();
-                }
-            } else {
-                type = ((FusionPrototypeSignature)el.getFirstChild()).getType();
-            }
-
-            if (type != null) {
-                Collection<PsiElement> targets = ResolveEngine.getNodeTypeDefinitions(el.getProject(), type);
-                if (!targets.isEmpty()) {
-                    RelatedItemLineMarkerInfo info = NavigationGutterIconBuilder
-                            .create(NeosIcons.NODE_TYPE)
-                            .setTargets(targets)
-                            .setTooltipText("Go to node type definition")
-                            .createLineMarkerInfo(el);
-                    result.add(info);
-                }
+            FusionType type = (FusionType) el;
+            Collection<PsiElement> targets = ResolveEngine.getNodeTypeDefinitions(el.getProject(), type);
+            if (!targets.isEmpty()) {
+                RelatedItemLineMarkerInfo info = NavigationGutterIconBuilder
+                        .create(NeosIcons.NODE_TYPE)
+                        .setTargets(targets)
+                        .setTooltipText("Go to node type definition")
+                        .createLineMarkerInfo(el);
+                result.add(info);
             }
         }
     }
