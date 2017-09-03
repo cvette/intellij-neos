@@ -7,7 +7,7 @@ This is a **work in progress**. There may be performance and stability problems.
 Features
 --------
 
-* Fusion / TypoScript2 language support
+* Neos Fusion / TypoScript2 language support
  * Configurable syntax highlighting
  * Basic formatting
  * Brace matching
