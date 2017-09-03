@@ -1,10 +1,6 @@
 IntelliJ IDEA / PhpStorm Neos Plugin
 ====================================
 [![Build Status](https://travis-ci.org/cvette/intellij-neos.svg?branch=master)](https://travis-ci.org/cvette/intellij-neos)
-[![Version](https://christianvette.de/badge/9362/version)](https://plugins.jetbrains.com/plugin/9362)
-[![Downloads](https://christianvette.de/badge/9362/downloads)](https://plugins.jetbrains.com/plugin/9362)
-[![Downloads last month](https://christianvette.de/badge/9362/last-month)](https://plugins.jetbrains.com/plugin/9362)
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/intellij-neos/Lobby)
 
 This is a **work in progress**. There may be performance and stability problems.
 
