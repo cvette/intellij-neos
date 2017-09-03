@@ -8,14 +8,14 @@ Features
 --------
 
 * Neos Fusion / TypoScript2 language support
- * Configurable syntax highlighting
- * Basic formatting
- * Brace matching
- * Breadcrumb navigation
- * Code folding
- * Structure view
- * EEL helper references (Ctrl+Click navigation to class/method)
- * Prototype references (Ctrl+Click navigation to prototype definition)
+  * Configurable syntax highlighting
+  * Basic formatting
+  * Brace matching
+  * Breadcrumb navigation
+  * Code folding
+  * Structure view
+  * EEL helper references (Ctrl+Click navigation to class/method)
+  * Prototype references (Ctrl+Click navigation to prototype definition)
 * Completion for node type definitions
 * "Go to definition" for node types / supertypes / constraints in NodeTypes.yaml
 
