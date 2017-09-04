@@ -66,4 +66,6 @@ public class FusionHighlightingColors {
             createTextAttributesKey("FUSION_EEL_OPERATOR", DefaultLanguageHighlighterColors.BRACES);
     public static final TextAttributesKey PARENTHESES  =
             createTextAttributesKey("FUSION_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES);
+    public static final TextAttributesKey DSL_IDENTIFIER  =
+            createTextAttributesKey("FUSION_DSL_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
 }

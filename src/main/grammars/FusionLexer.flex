@@ -54,6 +54,10 @@ VALUE_STRING_DOUBLE_QUOTE =             [\"]
 ESCAPED_DOUBLE_QUOTE =                  "\\\\"* "\\\""
 VALUE_STRING_IN_DOUBLE_QUOTE =          [^\n\r\"\\]*
 
+BACKTICK = "`"
+ESCAPED_BACKTICK = "\\\\"* "\\\`"
+VALUE_STRING_IN_BACKTICKS = [^\n\r\`\\]*
+
 LEFT_BRACE = "{"
 RIGHT_BRACE = "}"
 LEFT_BRACKET = "["
@@ -103,9 +107,9 @@ IF_SEPARATOR = {COLON}
 
 // Value states
 %states VALUE_EXPECTED,
-%states VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE, VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE
+%states VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE, VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE, VALUE_STRING_EXPECTED_IN_BACKTICKS
 %states VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_PATH, VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_PATH
-%states OBJECT_TYPE_FOUND
+%states OBJECT_TYPE_FOUND, DSL_IDENTIFIER_FOUND
 
 // Expression states
 %states EXPRESSION_FOUND
@@ -167,11 +171,16 @@ IF_SEPARATOR = {COLON}
     {EXPRESSION_KEYWORD}/{LEFT_BRACE}       { yybegin(EXPRESSION_FOUND); return FusionTypes.EXPRESSION_KEYWORD; }
     {OBJECT_TYPE_PART}                      { yybegin(CRLF_OR_LEFT_BRACE_EXPECTED); return FusionTypes.UNQUALIFIED_TYPE; }
     {OBJECT_TYPE_PART}/{COLON}              { yybegin(OBJECT_TYPE_FOUND); return FusionTypes.OBJECT_TYPE_NAMESPACE; }
+    {OBJECT_TYPE_PART}/{BACKTICK}           { yybegin(DSL_IDENTIFIER_FOUND); return FusionTypes.DSL_IDENTIFIER; }
 }
 
 <OBJECT_TYPE_FOUND> {
     {COLON}                                 { return FusionTypes.OBJECT_TYPE_SEPARATOR; }
     {OBJECT_TYPE_PART}                      { yybegin(CRLF_OR_LEFT_BRACE_EXPECTED); return FusionTypes.UNQUALIFIED_TYPE; }
+}
+
+<DSL_IDENTIFIER_FOUND> {
+    {BACKTICK}                              { yybegin(VALUE_STRING_EXPECTED_IN_BACKTICKS); return FusionTypes.BACKTICK; }
 }
 
 <CRLF_OR_LEFT_BRACE_EXPECTED> {
@@ -294,6 +303,14 @@ IF_SEPARATOR = {COLON}
     {ESCAPED_DOUBLE_QUOTE}*                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
     {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_DOUBLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
+}
+
+<VALUE_STRING_EXPECTED_IN_BACKTICKS> {
+    {CRLF}                                  { return FusionTypes.CRLF; }
+    {ESCAPED_BACKTICK}*                     { return FusionTypes.ESCAPED_BACKTICK; }
+    {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
+    {VALUE_STRING_IN_BACKTICKS}             { return FusionTypes.VALUE_STRING; }
+    {BACKTICK}                              { yybegin(CRLF_EXPECTED); return FusionTypes.BACKTICK; }
 }
 
 <EXPRESSION_FOUND> {

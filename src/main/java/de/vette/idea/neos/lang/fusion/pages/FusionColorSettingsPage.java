@@ -57,7 +57,8 @@ public class FusionColorSettingsPage implements ColorSettingsPage, DisplayPriori
             new AttributesDescriptor("EEL Wrapper", FusionHighlightingColors.EEL_WRAPPER),
             new AttributesDescriptor("EEL Identifier", FusionHighlightingColors.EEL_IDENTIFIER),
             new AttributesDescriptor("EEL Function", FusionHighlightingColors.EEL_FUNCTION),
-            new AttributesDescriptor("EEL Operator", FusionHighlightingColors.EEL_OPERATOR)
+            new AttributesDescriptor("EEL Operator", FusionHighlightingColors.EEL_OPERATOR),
+            new AttributesDescriptor("DSL Identifier", FusionHighlightingColors.DSL_IDENTIFIER)
     };
 
     @Nullable
@@ -77,15 +78,23 @@ public class FusionColorSettingsPage implements ColorSettingsPage, DisplayPriori
     @Override
     public String getDemoText() {
         return "include: NodeTypes/**/*\n" +
-                "namespace: ts=TYPO3.TypoScript\n" +
+                "namespace: neos=Neos.Fusion\n" +
                 "\n" +
                 "/**\n" +
                 " * Change default page\n" +
                 " **/\n" +
                 "prototype(Neos.NodeTypes:Page.Document) < prototype(My.Package:DefaultPage) {\n" +
                 "    body {\n" +
-                "        content = ts:Template {\n" +
+                "        content = neos:Template {\n" +
                 "            templatePath = 'resource://My.Package/Private/Templates/TypoScript/PageContent.html'\n" +
+                "\n" +
+                "            renderer = afx`\n" +
+                "                <div>\n" +
+                "                     <h1 @key=\"headline\" class=\"headline\">{props.title}</h1>\n" +
+                "                     <h2 @key=\"subheadline\" class=\"subheadline\" @if.hasSubtitle={props.subtitle ? true : false}>{props.subtitle}</h2>\n" +
+                "                    <PackageFactory.AtomicFusion.AFX:Image @key=\"image\" uri={props.imageUri} />\n" +
+                "                </div>\n" +
+                "            `" +
                 "\n" +
                 "            // The default content section\n" +
                 "            main = PrimaryContent {\n" +

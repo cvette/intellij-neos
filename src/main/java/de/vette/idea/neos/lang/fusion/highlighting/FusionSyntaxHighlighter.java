@@ -80,6 +80,7 @@ public class FusionSyntaxHighlighter extends SyntaxHighlighterBase {
         ourMap1.put(FusionTypes.UNQUALIFIED_TYPE, FusionHighlightingColors.OBJECT_TYPE);
         ourMap1.put(FusionTypes.NAMESPACE_ALIAS, FusionHighlightingColors.OBJECT_TYPE);
         ourMap1.put(FusionTypes.PACKAGE_KEY, FusionHighlightingColors.OBJECT_TYPE);
+        ourMap1.put(FusionTypes.DSL_IDENTIFIER, FusionHighlightingColors.DSL_IDENTIFIER);
 
         ourMap1.put(FusionTypes.LEFT_BRACE, FusionHighlightingColors.BRACES);
         ourMap1.put(FusionTypes.RIGHT_BRACE, FusionHighlightingColors.BRACES);
