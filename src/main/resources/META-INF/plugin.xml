@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin url="https://github.com/cvette/intellij-neos">
   <id>vette.neos</id>
   <name>Neos Support</name>
   <vendor email="neos@christianvette.de" url="https://github.com/cvette/intellij-neos">Christian Vette</vendor>
@@ -58,6 +58,8 @@
     <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
     <lang.psiStructureViewFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.structure.FusionStructureViewBuilderFactory"/>
+    <lang.findUsagesProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.PrototypeUsagesProvider"/>
+
     <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
@@ -77,6 +79,7 @@
     <!-- Line Marker Providers -->
     <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
     <codeInsight.lineMarkerProvider language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.annotators.PrototypeLineMarkerProvider"/>
+    <codeInsight.lineMarkerProvider language="PHP" implementationClass="de.vette.idea.neos.lang.php.annotators.MethodLineMarkerProvider"/>
 
     <!-- Indices -->
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
