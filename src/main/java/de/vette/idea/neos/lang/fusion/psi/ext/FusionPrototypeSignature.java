@@ -21,6 +21,7 @@ public interface FusionPrototypeSignature {
 
     /**
      * Check if this prototype signature is inherited as part of an inheritance definition
+     * e.g. prototype(Foo:Bar) < prototype(Bar:Baz)
      *
      * @return boolean
      */
@@ -35,6 +36,7 @@ public interface FusionPrototypeSignature {
 
     /**
      * Check if this prototype is defined by inheriting another prototype
+     * e.g. prototype(Foo:Bar) < prototype(Bar:Baz)
      *
      * @return boolean
      */

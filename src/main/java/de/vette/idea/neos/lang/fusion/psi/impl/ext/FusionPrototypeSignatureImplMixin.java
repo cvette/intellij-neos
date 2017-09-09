@@ -28,7 +28,9 @@ import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedElementImpl<FusionPrototypeSignatureStub> implements FusionPrototypeSignature {
+public abstract class FusionPrototypeSignatureImplMixin
+        extends FusionStubbedElementImpl<FusionPrototypeSignatureStub>
+        implements FusionPrototypeSignature {
 
     public FusionPrototypeSignatureImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
@@ -57,17 +59,29 @@ public abstract class FusionPrototypeSignatureImplMixin extends FusionStubbedEle
         return (getParent() instanceof FusionPropertyCopy);
     }
 
+    public boolean isDefinition() {
+        return isSingleLineDefinition()
+                || (isSingleElementInPathAtFileRoot()
+                    && (getParent().getParent() instanceof FusionPropertyBlock
+                    || getParent().getParent() instanceof FusionPropertyCopy));
+    }
+
     public boolean isInheritanceDefinition() {
+        return isSingleElementInPathAtFileRoot()
+                && getParent().getParent() instanceof FusionPropertyCopy;
+
+    }
+
+    protected boolean isSingleLineDefinition() {
         return getParent() instanceof FusionPath
-                && getParent().getParent() instanceof FusionPropertyCopy
+                && ((FusionPath) getParent()).isPrototypeClassProperty()
+                && getParent().getParent() instanceof FusionPropertyAssignment
                 && getParent().getParent().getParent() instanceof FusionFile;
     }
 
-    public boolean isDefinition() {
-        return (getParent().getParent() instanceof FusionPropertyAssignment
-                || getParent().getParent() instanceof FusionPropertyBlock)
-                && getParent().getParent().getParent() instanceof FusionFile
-                && getParent() instanceof FusionPath
-                && getPrevSibling() == null;
+    protected boolean isSingleElementInPathAtFileRoot() {
+        return getParent() instanceof FusionPath
+                && ((FusionPath) getParent()).isPrototypeSignature()
+                && getParent().getParent().getParent() instanceof FusionFile;
     }
 }

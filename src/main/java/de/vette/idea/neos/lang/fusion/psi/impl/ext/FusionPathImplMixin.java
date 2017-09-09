@@ -18,6 +18,7 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -27,12 +28,26 @@ public abstract class FusionPathImplMixin extends FusionNamedElementImpl impleme
         super(astNode);
     }
 
+    @Override
     public boolean isPrototypeSignature() {
         return findChildrenByType(FusionTypes.PATH_PART).isEmpty()
                 && findChildrenByType(FusionTypes.PATH_SEPARATOR).isEmpty()
                 && getValueStringSingleLine() == null
                 && getMetaPropertyList().isEmpty()
                 && getPrototypeSignatureList().size() == 1;
+    }
+
+    @Override
+    public boolean isPrototypeClassProperty() {
+        if (getPrototypeSignatureList().size() == 1
+                && getLastChild() instanceof FusionMetaProperty
+                && getChildren().length == 2) {
+
+            PsiElement element = ((FusionMetaProperty) getLastChild()).getMetaPropertyName();
+            return element != null && element.getText().equals("class");
+        }
+
+        return false;
     }
 
     @Override
@@ -46,4 +61,5 @@ public abstract class FusionPathImplMixin extends FusionNamedElementImpl impleme
 
         return this.getText();
     }
+
 }

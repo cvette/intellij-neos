@@ -31,18 +31,17 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
     protected String namespace;
     protected String name;
     protected Boolean isDefinition;
-    protected Boolean isInheritance;
 
-    public FusionPrototypeSignatureStub(StubElement parent, IStubElementType elementType, String namespace, String name, Boolean isDefinition, Boolean isInheritance) {
+    public FusionPrototypeSignatureStub(StubElement parent, IStubElementType elementType, String namespace, String name, Boolean isDefinition) {
         super(parent, elementType);
 
         this.namespace = namespace;
         this.name = name;
         this.isDefinition = isDefinition;
-        this.isInheritance = isInheritance;
     }
 
-    public static FusionStubElementType TYPE = new FusionStubElementType<FusionPrototypeSignatureStub , FusionPrototypeSignature>("FUSION_PROTOTYPE_SIGNATURE") {
+    protected static FusionStubElementType TYPE = new FusionStubElementType<FusionPrototypeSignatureStub , FusionPrototypeSignature>("FUSION_PROTOTYPE_SIGNATURE") {
+
         @Override
         public FusionPrototypeSignature createPsi(@NotNull FusionPrototypeSignatureStub stub) {
             return new FusionPrototypeSignatureImpl(stub, stub.getStubType());
@@ -54,12 +53,6 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
             String name = "";
             String namespace = "";
             Boolean isDefinition = false;
-            Boolean isInheritance = false;
-
-            if (psi.isInheritanceDefinition()) {
-                isDefinition = true;
-                isInheritance = true;
-            }
 
             if (psi.isDefinition()) {
                 isDefinition = true;
@@ -72,9 +65,9 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
                 }
 
                 name = type.getUnqualifiedType().getText();
-                return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), namespace, name, isDefinition, isInheritance);
+                return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), namespace, name, isDefinition);
             }
-            return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), null, name, isDefinition, isInheritance);
+            return new FusionPrototypeSignatureStub(parentStub, psi.getElementType(), null, name, isDefinition);
         }
 
         @Override
@@ -82,13 +75,12 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
             dataStream.writeName(stub.namespace);
             dataStream.writeName(stub.name);
             dataStream.writeBoolean(stub.isDefinition);
-            dataStream.writeBoolean(stub.isInheritance);
         }
 
         @NotNull
         @Override
         public FusionPrototypeSignatureStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-            return new FusionPrototypeSignatureStub(parentStub, this, getNameAsString(dataStream.readName()), getNameAsString(dataStream.readName()), dataStream.readBoolean(), dataStream.readBoolean());
+            return new FusionPrototypeSignatureStub(parentStub, this, getNameAsString(dataStream.readName()), getNameAsString(dataStream.readName()), dataStream.readBoolean());
         }
 
         @Override

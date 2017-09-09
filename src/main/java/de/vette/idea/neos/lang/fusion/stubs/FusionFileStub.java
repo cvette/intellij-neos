@@ -38,7 +38,7 @@ public class FusionFileStub extends PsiFileStubImpl<FusionFile> {
 
         @Override
         public int getStubVersion() {
-            return 3;
+            return 4;
         }
 
         @NotNull
