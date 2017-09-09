@@ -42,7 +42,10 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
     @Override
     public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
         for (PsiElement el : elements) {
-            if (!(el instanceof FusionType)) {
+            if (!(el instanceof FusionType)
+                    || !(el.getParent() instanceof FusionPrototypeSignature)
+                    || (((FusionPrototypeSignature) el.getParent()).isInheritedInDefinition())
+                    || (el.getParent().getParent().getParent() instanceof FusionPropertyDeletion)) {
                 continue;
             }
 
