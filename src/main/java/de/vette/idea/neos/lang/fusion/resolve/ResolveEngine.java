@@ -18,19 +18,23 @@
 
 package de.vette.idea.neos.lang.fusion.resolve;
 
+import com.intellij.json.psi.JsonFile;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
+import de.vette.idea.neos.NeosProjectComponent;
 import de.vette.idea.neos.indexes.DefaultContextFileIndex;
 import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;
+import de.vette.idea.neos.util.ComposerUtil;
 import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +45,7 @@ import org.jetbrains.yaml.psi.YAMLFile;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -252,5 +257,44 @@ public class ResolveEngine {
         }
 
         return methods;
+    }
+
+    /**
+     * Find template for controller action
+     *
+     * @param method Controller action method
+     * @return VirtualFile
+     */
+    public static VirtualFile findTemplate(Method method) {
+        PsiFile file = method.getContainingFile();
+        if (method.getContainingClass() != null) {
+            String actionName = method.getName();
+            actionName = actionName.replace("Action", "");
+            actionName = actionName.substring(0, 1).toUpperCase() + actionName.substring(1);
+
+            String controllerName = method.getContainingClass().getName();
+            controllerName = controllerName.replace("Controller", "");
+
+            JsonFile composerFile = ComposerUtil.getComposerManifest(file.getContainingDirectory());
+            if (composerFile != null) {
+                String namespace = method.getNamespaceName();
+                namespace = namespace.substring(1);
+
+                Map<String, String> namespaceMappings = ComposerUtil.getNamespaceMappings(composerFile);
+                for(String key : namespaceMappings.keySet()) {
+                    if (namespace.startsWith(key)) {
+                        namespace = namespace.replace(key, "")
+                                .replace("\\", "/")
+                                .replace("/Controller/", "");
+                        break;
+                    }
+                }
+
+                String resourceFile = "Resources/Private/Templates/" + namespace + controllerName + "/" + actionName + ".html";
+                return composerFile.getContainingDirectory().getVirtualFile().findFileByRelativePath(resourceFile);
+            }
+        }
+
+        return null;
     }
 }
