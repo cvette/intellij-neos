@@ -33,8 +33,11 @@ public class ComposerUtil {
 
     @Nullable
     public static JsonFile getComposerManifest(PsiDirectory currentDirectory) {
-        JsonFile composerFile;
+        if (currentDirectory == null) {
+            return null;
+        }
 
+        JsonFile composerFile;
         do {
             composerFile = getComposerManifestInDirectory(currentDirectory);
             currentDirectory = currentDirectory.getParentDirectory();
