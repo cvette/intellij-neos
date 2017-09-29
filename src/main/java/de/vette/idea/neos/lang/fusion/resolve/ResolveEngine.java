@@ -269,7 +269,15 @@ public class ResolveEngine {
         PsiFile file = method.getContainingFile();
         if (method.getContainingClass() != null) {
             String actionName = method.getName();
+            if (!actionName.endsWith("Action")) {
+                return null;
+            }
+
             actionName = actionName.replace("Action", "");
+            if (actionName.length() < 2) {
+                return null;
+            }
+
             actionName = actionName.substring(0, 1).toUpperCase() + actionName.substring(1);
 
             String controllerName = method.getContainingClass().getName();
@@ -284,8 +292,13 @@ public class ResolveEngine {
                 for(String key : namespaceMappings.keySet()) {
                     if (namespace.startsWith(key)) {
                         namespace = namespace.replace(key, "")
-                                .replace("\\", "/")
-                                .replace("/Controller/", "");
+                            .replace("\\", "/");
+
+                        if (namespace.startsWith("/") && namespace.length() > 1) {
+                            namespace = namespace.substring(1);
+                        }
+
+                        namespace = namespace.replace("Controller/", "");
                         break;
                     }
                 }
