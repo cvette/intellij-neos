@@ -60,7 +60,7 @@ public class PrototypeLineMarkerProvider implements LineMarkerProvider {
                 String nodeType = ((YAMLKeyValue) el).getKeyText();
                 String[] nodeTypeSplit = nodeType.split(":");
 
-                if (nodeTypeSplit.length == 0) {
+                if (nodeTypeSplit.length < 2) {
                     continue;
                 }
 
