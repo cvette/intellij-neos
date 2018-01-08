@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLDocument;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
+import org.jetbrains.yaml.psi.YAMLMapping;
 
 import java.util.Collection;
 import java.util.List;
@@ -56,7 +57,8 @@ public class PrototypeLineMarkerProvider implements LineMarkerProvider {
                 continue;
             }
 
-            if (((YAMLKeyValue) el).getParentMapping().getParent() instanceof YAMLDocument) {
+            YAMLMapping parentMapping = ((YAMLKeyValue) el).getParentMapping();
+            if (parentMapping != null && parentMapping.getParent() instanceof YAMLDocument) {
                 String nodeType = ((YAMLKeyValue) el).getKeyText();
                 String[] nodeTypeSplit = nodeType.split(":");
 
