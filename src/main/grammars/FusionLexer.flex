@@ -209,6 +209,7 @@ IF_SEPARATOR = {COLON}
     {LEFT_BRACE}                            { yybegin(YYINITIAL); return FusionTypes.LEFT_BRACE; }
 }
 
+
 <PROTOTYPE_FOUND> {
     {OBJECT_TYPE_PART}                      { return FusionTypes.UNQUALIFIED_TYPE; }
     {OBJECT_TYPE_PART}/{COLON}              { yybegin(OBJECT_TYPE_IN_PROTOTYPE_FOUND); return FusionTypes.OBJECT_TYPE_NAMESPACE; }
