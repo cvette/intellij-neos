@@ -6,10 +6,8 @@ env:
   global: ORG_GRADLE_PROJECT_downloadIdeaSources=false
   matrix:
     - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
-    - ORG_GRADLE_PROJECT_ideaVersion=2017.1.3
-    - ORG_GRADLE_PROJECT_ideaVersion=2016.3.5
-    - ORG_GRADLE_PROJECT_ideaVersion=2016.2.5
-    - ORG_GRADLE_PROJECT_ideaVersion=2016.1.4
+    - ORG_GRADLE_PROJECT_ideaVersion=2017.3.3
+    - ORG_GRADLE_PROJECT_ideaVersion=2017.2.6
 
 matrix:
   allow_failures:
@@ -22,7 +20,7 @@ script:
   # BACKCOMPAT:
   # HACK: Force grammar kit to use current IDEA version when generating parser.
   # For actual compilation and running the version from the matrix will be used.
-  - ORG_GRADLE_PROJECT_ideaVersion=2017.1 ./gradlew generateFusionParser
+  - ORG_GRADLE_PROJECT_ideaVersion=2017.3.3 ./gradlew generateFusionParser
   - ./gradlew check -x generateFusionParser
 
 # https://docs.travis-ci.com/user/languages/java/#Caching

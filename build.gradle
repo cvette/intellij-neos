@@ -36,18 +36,8 @@ import org.jetbrains.grammarkit.tasks.*
 // and https://plugins.jetbrains.com/plugin/6610-php
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
-        // Branch Number: 172
-        'com.jetbrains.php:172.2465.7',
-        'yaml',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties'
-    ],
-    '2017.2': [
-        // Branch Number: 172
-        'com.jetbrains.php:172.3317.83',
+        // Branch Number: 181
+        'com.jetbrains.php:181.3007.10',
         'yaml',
         'IntelliLang',
 
@@ -55,49 +45,40 @@ def pluginsForIdeaVersion = [
         'CSS',
         'java-i18n',
         'properties',
+
         // DEV dependencies: UNCOMMENT the following lines during development
         // to install additional plugins for development
-        'PsiViewer:3.28.93'
+        //'PsiViewer:3.28.93'
     ],
-    '2017.1.3': [
-        // Branch Number: 171
-        'com.jetbrains.php:171.4424.11',
+    '2017.3.3': [
+        // Branch Number: 173
+        'com.jetbrains.php:173.4301.34',
         'yaml',
+        'IntelliLang',
 
         // test dependencies
         'CSS',
         'java-i18n',
-        'properties'
+        'properties',
+
+        // DEV dependencies: UNCOMMENT the following lines during development
+        // to install additional plugins for development
+        //'PsiViewer:3.28.93'
     ],
-    '2016.3.5': [
-        // Branch Number: 163
-        'com.jetbrains.php:163.10504.2',
+    '2017.2.6': [
+        // Branch Number: 172
+        'com.jetbrains.php:172.4155.41',
         'yaml',
+        'IntelliLang',
 
         // test dependencies
         'CSS',
         'java-i18n',
-        'properties'
-    ],
-    '2016.2.5': [
-        // Branch Number: 162
-        'com.jetbrains.php:162.1121.34',
-        'yaml',
+        'properties',
 
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties'
-    ],
-    '2016.1.4': [
-        // Branch Number: 145
-        'com.jetbrains.php:145.970.40',
-        'yaml',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties'
+        // DEV dependencies: UNCOMMENT the following lines during development
+        // to install additional plugins for development
+        //'PsiViewer:3.28.93'
     ]
 ]
 
