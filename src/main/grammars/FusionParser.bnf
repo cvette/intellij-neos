@@ -50,7 +50,12 @@ left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|valu
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPropertyCopyImplMixin"
 }
 
-type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {pin=2}
+type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {
+    pin=2
+    implements = "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement"
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionTypeImplMixin"
+}
+
 prototype_instance ::= type [block] {
     pin=1
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
