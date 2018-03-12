@@ -43,7 +43,9 @@ public class PrototypeProvider extends CompletionProvider<CompletionParameters> 
         for (String key : keys) {
             Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class );
             for (FusionPrototypeSignature signature : prototypes) {
-                result.addElement(LookupElementBuilder.create(signature.getType()).withIcon(FusionIcons.PROTOTYPE));
+                if (signature.getType() != null) {
+                    result.addElement(LookupElementBuilder.create(signature.getType().getText()).withIcon(FusionIcons.PROTOTYPE));
+                }
             }
         }
     }
