@@ -50,6 +50,21 @@ def pluginsForIdeaVersion = [
         // to install additional plugins for development
         //'PsiViewer:3.28.93'
     ],
+    '2018.1': [
+            // Branch Number: 181
+            'com.jetbrains.php:181.4203.565',
+            'yaml',
+            'IntelliLang',
+
+            // test dependencies
+            'CSS',
+            'java-i18n',
+            'properties',
+
+            // DEV dependencies: UNCOMMENT the following lines during development
+            // to install additional plugins for development
+            // 'PsiViewer:3.28.93'
+    ],
     '2017.3.3': [
         // Branch Number: 173
         'com.jetbrains.php:173.4301.34',
@@ -59,11 +74,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
-        'properties',
-
-        // DEV dependencies: UNCOMMENT the following lines during development
-        // to install additional plugins for development
-        //'PsiViewer:3.28.93'
+        'properties'
     ],
     '2017.2.6': [
         // Branch Number: 172
@@ -74,11 +85,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
-        'properties',
-
-        // DEV dependencies: UNCOMMENT the following lines during development
-        // to install additional plugins for development
-        //'PsiViewer:3.28.93'
+        'properties'
     ]
 ]
 
