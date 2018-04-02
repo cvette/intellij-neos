@@ -1,0 +1,21 @@
+foo >
+bar = Foo.Bar:Baz
+bar = Baz
+bar = Foo.Bar:Baz {
+    foo = Baz
+}
+
+@if.1 = 'foo'
+
+@cache.foo.bar = 'foo'
+foo.@cache.bar = 'foo'
+foo.bar.@cache = 'foo'
+
+prototype(Foo).bar = 'baz'
+prototype(Foo).some.thing = 'baz2'
+
+some.path.prototype(Foo).some = 'baz2'
+
+prototype(Foo).prototype(Bar).some = 'baz2'
+prototype(Foo).left.prototype(Bar).some = 'baz2'
+prototype(Foo).prototype(Bar).@some = 'baz2'

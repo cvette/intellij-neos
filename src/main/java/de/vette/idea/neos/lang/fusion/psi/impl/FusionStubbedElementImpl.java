@@ -34,4 +34,9 @@ public abstract class FusionStubbedElementImpl<StubT extends StubElement> extend
     public FusionStubbedElementImpl(@NotNull ASTNode node) {
         super(node);
     }
+
+    @Override
+    public String toString() {
+        return getNode().getElementType().toString();
+    }
 }

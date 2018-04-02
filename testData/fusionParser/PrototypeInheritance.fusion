@@ -1,0 +1,2 @@
+prototype(Foo.Bar:Baz)<prototype(Neos.Fusion:Template)
+prototype(Baz)<prototype(Template)

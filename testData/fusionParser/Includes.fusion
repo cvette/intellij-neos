@@ -1,0 +1,4 @@
+include: resource://Foo.Bar:Baz/Public/Fusion/foo.fusion
+include: 'resource://Foo.Bar:Baz/Public/Fusion/foo.fusion'
+include: NodeTypes/**/*
+include: 'NodeTypes/**/*'

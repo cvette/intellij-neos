@@ -1,0 +1,7 @@
+string = ${'foo'}
+concat = ${'foo' + this.bar}
+math = ${1 * (2 + 2 - 1) / 1}
+negation = ${!this.bar}
+logic = ${foo && !(bar || !baz)}
+helper = ${Type.isArray(['Foo', 1 + 2])}
+arrayAccess = ${foo[0] + bar['baz']}
