@@ -228,7 +228,7 @@ public class ResolveEngine {
         VirtualFile currentFile = file.getVirtualFile();
         while (currentFile != null && !currentFile.equals(file.getProject().getBaseDir())) {
             currentFile = currentFile.getParent();
-            if (currentFile.isDirectory() && currentFile.getName().equals("Packages")) {
+            if (currentFile != null && currentFile.isDirectory() && currentFile.getName().equals("Packages")) {
                 return currentFile;
             }
         }
