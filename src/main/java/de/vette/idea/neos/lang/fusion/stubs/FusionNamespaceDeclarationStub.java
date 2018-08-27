@@ -47,7 +47,10 @@ public class FusionNamespaceDeclarationStub extends StubBase<FusionNamespaceDecl
         @NotNull
         @Override
         public FusionNamespaceDeclarationStub createStub(@NotNull FusionNamespaceDeclaration psi, StubElement parentStub) {
-            return new FusionNamespaceDeclarationStub(parentStub, this, psi.getAlias().getText(), psi.getNamespace().getText());
+            String alias = psi.getAlias() != null ? psi.getAlias().getText() : "";
+            String namespace = psi.getNamespace() != null ? psi.getNamespace().getText() : "";
+
+            return new FusionNamespaceDeclarationStub(parentStub, this, alias, namespace);
         }
 
         @Override
