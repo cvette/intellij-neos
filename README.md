@@ -8,7 +8,7 @@ This is a **work in progress**. There may be performance and stability problems.
 Features
 --------
 
-* Neos Fusion / TypoScript2 language support
+* Neos Fusion language support
   * Configurable syntax highlighting
   * Basic formatting
   * Brace matching
@@ -17,8 +17,9 @@ Features
   * Structure view
   * EEL helper references (Ctrl+Click navigation to class/method)
   * Prototype references (Ctrl+Click navigation to prototype definition)
-* Completion for node type definitions
-* "Go to definition" for node types / supertypes / constraints in NodeTypes.yaml
+* Support for node type definitions
+  * Configuration keys completion
+  * "Go to definition" for node types / supertypes / constraints
 
 Usage
 -----
