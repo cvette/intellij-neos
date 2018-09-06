@@ -2,7 +2,7 @@
   <id>vette.neos</id>
   <name>Neos Support</name>
   <vendor email="neos@christianvette.de" url="https://github.com/cvette/intellij-neos">Christian Vette</vendor>
-  <version>0.1</version>
+  <version>0.1.27</version>
 
   <description><![CDATA[
     <p>Support for the Neos CMS.</p>
@@ -30,9 +30,9 @@
     ]]></description>
 
   <change-notes><![CDATA[
-    0.1.9
+    0.1.27
     <ul>
-      <li>Add "Go to resource" for Fusion resource strings</li>
+      <li>Some small bug fixes</li>
     </ul>
   ]]></change-notes>
 
