@@ -25,7 +25,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class FusionHighlightingColors {
     public static final TextAttributesKey DECLARATION =
-            createTextAttributesKey("FUSION_INCLUDE", DefaultLanguageHighlighterColors.KEYWORD);
+            createTextAttributesKey("FUSION_DECLARATION", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey INCLUDE_PATH =
             createTextAttributesKey("FUSION_INCLUDE_PATH", DefaultLanguageHighlighterColors.STRING);
     public static final TextAttributesKey META_PROPERTY =
@@ -51,9 +51,9 @@ public class FusionHighlightingColors {
     public static final TextAttributesKey PATH =
             createTextAttributesKey("FUSION_PATH", DefaultLanguageHighlighterColors.IDENTIFIER);
     public static final TextAttributesKey SINGLE_LINE_COMMENT =
-            createTextAttributesKey("FUSION_COMMENT_TYPE", DefaultLanguageHighlighterColors.LINE_COMMENT);
+            createTextAttributesKey("FUSION_SINGLE_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
     public static final TextAttributesKey BLOCK_COMMENT =
-            createTextAttributesKey("FUSION_COMMENT_TYPE", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+            createTextAttributesKey("FUSION_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
     public static final TextAttributesKey EEL_WRAPPER =
             createTextAttributesKey("FUSION_EEL_WRAPPER", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey EEL_IDENTIFIER =
@@ -63,7 +63,7 @@ public class FusionHighlightingColors {
     public static final TextAttributesKey EEL_OPERATOR =
             createTextAttributesKey("FUSION_EEL_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
     public static final TextAttributesKey BRACES =
-            createTextAttributesKey("FUSION_EEL_OPERATOR", DefaultLanguageHighlighterColors.BRACES);
+            createTextAttributesKey("FUSION_BRACES", DefaultLanguageHighlighterColors.BRACES);
     public static final TextAttributesKey PARENTHESES  =
             createTextAttributesKey("FUSION_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES);
     public static final TextAttributesKey DSL_IDENTIFIER  =
