@@ -16,18 +16,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-buildscript {
-    repositories {
-        maven { url 'https://dl.bintray.com/jetbrains/intellij-plugin-service' }
-        maven { url 'https://jitpack.io' }
-    }
-    dependencies {
-        classpath "com.github.hurricup:gradle-grammar-kit-plugin:2017.1.1"
-    }
-}
-
 plugins {
     id "org.jetbrains.intellij" version "0.2.15"
+    id "org.jetbrains.grammarkit" version "2018.2.2"
 }
 
 import org.jetbrains.grammarkit.tasks.*
@@ -60,7 +51,7 @@ def pluginsForIdeaVersion = [
         'properties'
     ],
     '2018.2': [
-        'com.jetbrains.php:182.4892.16',
+        'com.jetbrains.php:182.3684.42',
         'yaml',
         'IntelliLang',
 
@@ -80,7 +71,6 @@ def pluginsForIdeaVersion = [
         'properties'
     ]
 ]
-
 
 apply plugin: 'idea'
 idea {
@@ -142,11 +132,6 @@ test {
         System.out.flush()
     }
     afterSuite { println() }
-}
-
-repositories {
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 task generateFusionLexer(type: GenerateLexer) {
