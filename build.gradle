@@ -17,8 +17,8 @@
  */
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.15"
-    id "org.jetbrains.grammarkit" version "2018.2.2"
+    id "org.jetbrains.intellij" version "0.4.2"
+    id "org.jetbrains.grammarkit" version "2018.3"
 }
 
 import org.jetbrains.grammarkit.tasks.*
@@ -104,8 +104,8 @@ sourceSets {
 
 apply plugin: 'org.jetbrains.grammarkit'
 grammarKit {
-    jflexRelease = '1.7.0'
-    grammarKitRelease = '1.5.2'
+    jflexRelease = '1.7.0-1'
+    grammarKitRelease = '2017.1.7'
 }
 
 test {
