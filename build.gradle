@@ -18,7 +18,7 @@
 
 plugins {
     id "org.jetbrains.intellij" version "0.4.2"
-    id "org.jetbrains.grammarkit" version "2018.3"
+    id "org.jetbrains.grammarkit" version "2019.1"
 }
 
 import org.jetbrains.grammarkit.tasks.*
@@ -27,7 +27,7 @@ import org.jetbrains.grammarkit.tasks.*
 // and https://plugins.jetbrains.com/plugin/6610-php
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
-        'com.jetbrains.php:183.4886.22',
+        'com.jetbrains.php:191.7141.52',
         'yaml',
         'IntelliLang',
 
@@ -40,6 +40,17 @@ def pluginsForIdeaVersion = [
         // to install additional plugins for development
         //'PsiViewer:3.28.93'
     ],
+    '2019.1': [
+        'com.jetbrains.php:191.6183.95',
+        'yaml',
+        'IntelliLang',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties',
+        //'PsiViewer:3.28.93'
+    ],
     '2018.3': [
         'com.jetbrains.php:183.4284.150',
         'yaml',
@@ -48,20 +59,11 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
-        'properties'
+        'properties',
+        'PsiViewer:3.28.93'
     ],
     '2018.2': [
         'com.jetbrains.php:182.3684.42',
-        'yaml',
-        'IntelliLang',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties'
-    ],
-    '2018.1': [
-        'com.jetbrains.php:181.4203.565',
         'yaml',
         'IntelliLang',
 
@@ -81,12 +83,12 @@ idea {
 
 apply plugin: 'org.jetbrains.intellij'
 intellij {
+    type = 'IU'
     version ideaVersion
     pluginName 'neos-intellij-plugin'
     updateSinceUntilBuild false
     instrumentCode = false
     downloadSources Boolean.valueOf(downloadIdeaSources)
-    type = 'IU'
     plugins = pluginsForIdeaVersion[ideaVersion]
 }
 
