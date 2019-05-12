@@ -2,39 +2,6 @@
   <id>vette.neos</id>
   <name>Neos Support</name>
   <vendor email="neos@christianvette.de" url="https://github.com/cvette/intellij-neos">Christian Vette</vendor>
-  <version>0.1.27</version>
-
-  <description><![CDATA[
-    <p>Support for the Neos CMS.</p>
-    <br/>
-    <p>
-      <b>Features</b>
-      <ul>
-        <li>Fusion / TypoScript2 language support
-          <ul>
-            <li>Configurable syntax highlighting</li>
-            <li>Basic formatting</li>
-            <li>Brace matching</li>
-            <li>Breadcrumb navigation</li>
-            <li>Code folding</li>
-            <li>Structure view</li>
-            <li>EEL helper references (Ctrl+Click navigation to class/method)</li>
-            <li>Prototype references (Ctrl+Click navigation to prototype definition)</li>
-            <li>Resource references (Ctrl+Click navigation to resources)</li>
-          </ul>
-        </li>
-        <li>Completion for node type definitions</li>
-        <li>"Go to definition" for node types / supertypes / constraints in NodeTypes.yaml</li>
-      </ul>
-    </p>
-    ]]></description>
-
-  <change-notes><![CDATA[
-    0.1.27
-    <ul>
-      <li>Some small bug fixes</li>
-    </ul>
-  ]]></change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="145.0"/>
