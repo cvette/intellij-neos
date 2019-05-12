@@ -43,6 +43,10 @@
   <depends>com.jetbrains.php</depends>
   <depends>org.jetbrains.plugins.yaml</depends>
 
+  <extensions defaultExtensionNs="com.jetbrains.php">
+    <libraryRoot id="doctrine_meta" path="doctrine-phpstorm-meta/" runtime="false"/>
+  </extensions>
+
   <extensions defaultExtensionNs="org.intellij.intelliLang">
     <languageSupport implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjectionSupport"/>
     <injectionConfig config="de/vette/idea/neos/lang/fusion/injection/fusionInjections.xml"/>

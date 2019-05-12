@@ -1,0 +1,3 @@
+[submodule "doctrine-phpstorm-meta"]
+	path = src/main/resources/doctrine-phpstorm-meta
+	url = https://github.com/King2500/doctrine-phpstorm-meta.git
