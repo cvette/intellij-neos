@@ -17,7 +17,7 @@
  */
 
 plugins {
-    id "org.jetbrains.intellij" version "0.4.2"
+    id "org.jetbrains.intellij" version "0.4.8"
     id "org.jetbrains.grammarkit" version "2019.1"
 }
 
@@ -92,6 +92,11 @@ intellij {
     plugins = pluginsForIdeaVersion[ideaVersion]
 }
 
+patchPluginXml {
+    pluginDescription = htmlFixer('src/main/resources/META-INF/description.html')
+    changeNotes = htmlFixer('src/main/resources/META-INF/change-notes.html')
+}
+
 apply plugin: 'java'
 version "$version-$buildNumber"
 sourceCompatibility = javaVersion
@@ -102,6 +107,15 @@ sourceSets {
     main {
         java.srcDirs += 'src/gen'
     }
+}
+
+/**
+ * Simple function to load HTML files and remove the surrounding `<html>` tags. This is useful for maintaining changes-notes
+ * and the description of plugins in separate HTML files which makes them much more readable.
+ */
+static def htmlFixer(filename) {
+    String fileContents = new File(filename).text
+    return fileContents.replace('<html>', '').replace('</html>', '')
 }
 
 apply plugin: 'org.jetbrains.grammarkit'
