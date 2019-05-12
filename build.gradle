@@ -98,7 +98,7 @@ patchPluginXml {
 }
 
 apply plugin: 'java'
-version "$version-$buildNumber"
+version "$version"
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
