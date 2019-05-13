@@ -40,6 +40,26 @@ def pluginsForIdeaVersion = [
         // to install additional plugins for development
         //'PsiViewer:3.28.93'
     ],
+    '2019.1.2': [
+        'com.jetbrains.php:191.7141.52',
+        'yaml',
+        'IntelliLang',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
+    ],
+    '2019.1.1': [
+        'com.jetbrains.php:191.6183.95',
+        'yaml',
+        'IntelliLang',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'properties'
+    ],
     '2019.1': [
         'com.jetbrains.php:191.6183.95',
         'yaml',
@@ -48,22 +68,10 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
-        'properties',
-        //'PsiViewer:3.28.93'
+        'properties'
     ],
     '2018.3': [
         'com.jetbrains.php:183.4284.150',
-        'yaml',
-        'IntelliLang',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties',
-        'PsiViewer:3.28.93'
-    ],
-    '2018.2': [
-        'com.jetbrains.php:182.3684.42',
         'yaml',
         'IntelliLang',
 
