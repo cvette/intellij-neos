@@ -27,7 +27,7 @@ import org.jetbrains.grammarkit.tasks.*
 // and https://plugins.jetbrains.com/plugin/6610-php
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
-        'com.jetbrains.php:191.7141.52',
+        'com.jetbrains.php:192.5728.26',
         'yaml',
         'IntelliLang',
 
