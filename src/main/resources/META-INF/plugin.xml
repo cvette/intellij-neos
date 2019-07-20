@@ -63,6 +63,7 @@
 
     <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
     <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
+    <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxFusionElementDescriptorProvider" />
   </extensions>
 
   <project-components>
