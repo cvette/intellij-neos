@@ -1,0 +1,19 @@
+#
+# Figure fragment for text and textWithImage
+#
+prototype(Neos.Demo:Content.Fragment.Image.Figure) < prototype(Neos.Fusion:Component) {
+src = Neos.Fusion:Case {
+dummy {
+condition = ${node.context.inBackend}
+}
+}
+renderer = afx`
+<figure class={props.class}>
+<img src={props.src} title={props.title} alt={props.alt}/>
+<figcaption @if.has={props.hasCaption && props.caption}>
+{props.caption}
+</figcaption>
+</figure>
+    `
+}
+

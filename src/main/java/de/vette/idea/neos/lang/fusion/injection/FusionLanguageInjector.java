@@ -32,15 +32,9 @@ import java.util.*;
 
 public class FusionLanguageInjector implements LanguageInjector {
 
-    private final Configuration myInjectionConfiguration;
-
-    public FusionLanguageInjector(Configuration configuration) {
-        myInjectionConfiguration = configuration;
-    }
-
     @Override
     public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar) {
-        Iterator it = myInjectionConfiguration.getInjections("fusion").iterator();
+        Iterator it = Configuration.getProjectInstance(host.getProject()).getInjections("fusion").iterator();
         while(it.hasNext()) {
             BaseInjection injection = (BaseInjection) it.next();
             if (injection.acceptsPsiElement(host)) {

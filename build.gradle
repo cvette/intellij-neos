@@ -34,6 +34,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
+        'java',
         'properties',
 
         // DEV dependencies: UNCOMMENT the following lines during development
@@ -48,6 +49,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
+        'java',
         'properties'
     ],
     '2019.1.1': [
@@ -58,6 +60,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
+        'java',
         'properties'
     ],
     '2019.1': [
@@ -68,6 +71,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
+        'java',
         'properties'
     ],
     '2018.3': [
@@ -78,6 +82,7 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
+        'java',
         'properties'
     ]
 ]

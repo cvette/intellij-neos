@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.editor.FusionBlock;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
@@ -37,7 +38,7 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
     @Override
     public FormattingModel createModel(PsiElement psiElement, CodeStyleSettings settings) {
         SpacingBuilder spacingBuilder = createSpaceBuilder(settings);
-        final FusionBlock block = new FusionBlock(psiElement.getNode(), null, null, settings, spacingBuilder);
+        final FusionBlock block = new FusionBlock(psiElement.getNode(), null, null, settings, spacingBuilder, new DefaultInjectedLanguageBlockBuilder(settings));
         return FormattingModelProvider.createFormattingModelForPsiFile(psiElement.getContainingFile(), block, settings);
     }
 
