@@ -23,6 +23,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.AbstractBlock;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.tree.IElementType;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,7 @@ public class FusionBlock extends AbstractBlock {
     private final Indent MY_INDENT;
     private final CommonCodeStyleSettings MY_SETTINGS;
     private final SpacingBuilder MY_SPACING_BUILDER;
+    private final InjectedLanguageBlockBuilder injectedLanguageBlockBuilder;
     private List<Block> mySubBlocks;
 
     /**
@@ -45,11 +47,14 @@ public class FusionBlock extends AbstractBlock {
                        @Nullable Alignment alignment,
                        @Nullable Wrap wrap,
                        @NotNull CommonCodeStyleSettings settings,
-                       @NotNull SpacingBuilder spacingBuilder) {
+                       @NotNull SpacingBuilder spacingBuilder,
+                       @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+    ) {
         super(node, wrap, alignment);
         MY_SETTINGS = settings;
         MY_SPACING_BUILDER = spacingBuilder;
         MY_INDENT = FusionIndentProcessor.getIndent(node);
+        this.injectedLanguageBlockBuilder = injectedLanguageBlockBuilder;
     }
 
     /**
@@ -78,13 +83,29 @@ public class FusionBlock extends AbstractBlock {
     private List<Block> buildSubBlocks() {
         List<Block> blocks = new ArrayList<Block>();
         for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
+            if (child.getElementType() == FusionTypes.VALUE_DSL_CONTENT) {
+                // This is a special case to handle auto-formatting of AFX code (which is implemented as
+                // Language Injection; see fusionInjections.xml):
+                //
+                // We try to delegate block creation to the nested language (i.e. HTML in case of AFX). If this
+                // is successful (`addInjectedBlocks` returns TRUE), we skip creating a block for this part on our own.
+                // In this case, the blocks covering the afx`...` part of the code are from the embedded language. Thus,
+                // autoformatting works properly for AFX code.
+                //
+                // a hint to this method has been found via https://intellij-support.jetbrains.com/hc/en-us/community/posts/206749635-Injected-languages-formatting
+                if (injectedLanguageBlockBuilder.addInjectedBlocks(blocks, child, getWrap(), getAlignment(), Indent.getNormalIndent())) {
+                    continue;
+                }
+            }
+
+
             IElementType childType = child.getElementType();
             if (child.getTextRange().getLength() == 0 || childType == TokenType.WHITE_SPACE ||
                     childType == FusionTypes.CRLF
                     ) {
                 continue;
             }
-            blocks.add(new FusionBlock(child, null, null, MY_SETTINGS, MY_SPACING_BUILDER));
+            blocks.add(new FusionBlock(child, null, null, MY_SETTINGS, MY_SPACING_BUILDER, injectedLanguageBlockBuilder));
         }
         return Collections.unmodifiableList(blocks);
     }
