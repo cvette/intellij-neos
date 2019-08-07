@@ -23,7 +23,7 @@ import org.intellij.plugins.intelliLang.inject.AbstractLanguageInjectionSupport;
 import org.jetbrains.annotations.NotNull;
 
 public class FusionLanguageInjectionSupport extends AbstractLanguageInjectionSupport {
-    private final String SUPPORT_ID = "fusion";
+    protected static final String SUPPORT_ID = "fusion";
 
     @NotNull
     @Override

@@ -5,7 +5,7 @@
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.eadzc
+ *  (at your option) any later version.
  *
  *
  *  This program is distributed in the hope that it will be useful,
@@ -31,11 +31,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class FusionLanguageInjector implements LanguageInjector {
+    private Configuration myConfiguration;
+
+    public FusionLanguageInjector(Configuration configuration) {
+        myConfiguration = configuration;
+    }
 
     @Override
     public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar) {
-        Iterator it = Configuration.getProjectInstance(host.getProject()).getInjections("fusion").iterator();
-        while(it.hasNext()) {
+        Iterator it = myConfiguration.getInjections(FusionLanguageInjectionSupport.SUPPORT_ID).iterator();
+        while (it.hasNext()) {
             BaseInjection injection = (BaseInjection) it.next();
             if (injection.acceptsPsiElement(host)) {
                 Language language = InjectedLanguage.findLanguageById(injection.getInjectedLanguageId());
