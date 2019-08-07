@@ -22,3 +22,17 @@ Development Tips and Tricks
 - to log, use `NeosProjectComponent.getLogger().warn("Foo")`
   and run `tail -f build/idea-sandbox/system/log/idea.log`.
 - If you use debug level, you have to add the "Neos" debug category via Help > Debug Log Settings.
+
+
+Parsing
+--------------------------
+
+EEL in Fusion (Fusion Language):
+- Outer Language: Fusion
+- Inner Language: Eel
+- Two-Layer Lexer: FusionEelLexer
+
+EEL in HTML (AFX Language):
+- Outer Language: HTML
+- Inner Language: Eel
+- Two-Layer Lexer: AfxEelLexer

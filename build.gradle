@@ -33,8 +33,7 @@ def pluginsForIdeaVersion = [
 
         // test dependencies
         'CSS',
-        'java-i18n',
-        'java',
+        'java-i18n', 
         'properties',
 
         // DEV dependencies: UNCOMMENT the following lines during development
@@ -71,6 +70,17 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
+        'properties'
+    ],
+    '2018.3': [
+        'com.jetbrains.php:183.4284.150',
+        'yaml',
+        'IntelliLang',
+
+        // test dependencies
+        'CSS',
+        'java-i18n',
+        'java',
         'properties'
     ]
 ]
@@ -165,14 +175,6 @@ task generateEelLexer(type: GenerateLexer) {
     purgeOldFiles = true
 }
 
-task generateFusionParser(type: GenerateParser) {
-    source = 'src/main/grammars/FusionParser.bnf'
-    targetRoot = 'src/gen'
-    pathToParser = 'src/gen/de/vette/idea/neos/lang/fusion/parser/FusionParser.java'
-    pathToPsiRoot = '/de/vette/idea/neos/lang/core/psi'
-    purgeOldFiles = true
-}
-
 task generateAfxLexer(type: GenerateLexer) {
     source = 'src/main/grammars/AfxLexer.flex'
     targetDir = 'src/gen/de/vette/idea/neos/lang/afx/lexer'
@@ -192,6 +194,14 @@ task generateEelParser(type: GenerateParser) {
     source = 'src/main/grammars/EelParser.bnf'
     targetRoot = 'src/gen'
     pathToParser = 'src/gen/de/vette/idea/neos/lang/eel/parser/EelParser.java'
+    pathToPsiRoot = '/de/vette/idea/neos/lang/core/psi'
+    purgeOldFiles = true
+}
+
+task generateFusionParser(type: GenerateParser) {
+    source = 'src/main/grammars/FusionParser.bnf'
+    targetRoot = 'src/gen'
+    pathToParser = 'src/gen/de/vette/idea/neos/lang/fusion/parser/FusionParser.java'
     pathToPsiRoot = '/de/vette/idea/neos/lang/core/psi'
     purgeOldFiles = true
 }

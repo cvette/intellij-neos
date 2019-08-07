@@ -16,18 +16,26 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.psi;
+package de.vette.idea.neos.lang.fusion.psi.impl;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.impl.source.tree.LazyParseablePsiElement;
+import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
-import de.vette.idea.neos.lang.fusion.FusionLanguage;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-/**
- * Fusion token type
- */
-public class FusionTokenType extends IElementType {
-    public FusionTokenType(@NotNull @NonNls String debugName) {
-        super(debugName, FusionLanguage.INSTANCE);
+public class FusionLazyParsableElementImpl extends LazyParseablePsiElement {
+
+    public FusionLazyParsableElementImpl(@NotNull IElementType type, @Nullable CharSequence buffer) {
+        super(type, buffer);
+    }
+
+    public FusionLazyParsableElementImpl(ASTNode parsed) {
+        super(parsed.getElementType(), null);
+
+        assert parsed instanceof TreeElement;
+
+        rawAddChildrenWithoutNotifications((TreeElement)parsed);
     }
 }

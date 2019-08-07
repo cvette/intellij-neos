@@ -49,26 +49,12 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
         SpacingBuilder spacingBuilder = new SpacingBuilder(settings, FusionLanguage.INSTANCE);
         spacingBuilder.before(FusionTypes.BLOCK).spaces(1);
 
-        if (commonSettings.SPACE_AFTER_COMMA) {
-            spacingBuilder.after(FusionTypes.VALUE_SEPARATOR).spaces(1);
-        } else {
-            spacingBuilder.after(FusionTypes.VALUE_SEPARATOR).none();
-        }
-
         if (commonSettings.SPACE_AROUND_ASSIGNMENT_OPERATORS) {
             spacingBuilder.around(FusionTypes.ASSIGNMENT_OPERATOR).spaces(1);
-        } else {
-            spacingBuilder.around(FusionTypes.VALUE_SEPARATOR).none();
         }
 
         spacingBuilder.before(FusionTypes.UNSET_OPERATOR).spaces(1)
         .around(FusionTypes.COPY_OPERATOR).spaces(1)
-        .around(FusionTypes.EEL_ADDITION_OPERATOR).spaces(1)
-        .around(FusionTypes.EEL_SUBTRACTION_OPERATOR).spaces(1)
-        .around(FusionTypes.EEL_MULTIPLICATION_OPERATOR).spaces(1)
-        .around(FusionTypes.EEL_DIVISION_OPERATOR).spaces(1)
-        .around(FusionTypes.EEL_MODULO_OPERATOR).spaces(1)
-        .around(FusionTypes.EEL_COMPARISON_OPERATOR).spaces(1)
         .around(FusionTypes.NAMESPACE_ALIAS_SEPARATOR).spaces(1)
         .before(FusionTypes.NAMESPACE_SEPARATOR).none()
         .after(FusionTypes.NAMESPACE_SEPARATOR).spaces(1)
@@ -80,12 +66,6 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
 
                 spacingBuilder.before(FusionTypes.UNSET_OPERATOR).spaces(1)
                 .around(FusionTypes.COPY_OPERATOR).spaces(1)
-                .around(FusionTypes.EEL_ADDITION_OPERATOR).spaces(1)
-                .around(FusionTypes.EEL_SUBTRACTION_OPERATOR).spaces(1)
-                .around(FusionTypes.EEL_MULTIPLICATION_OPERATOR).spaces(1)
-                .around(FusionTypes.EEL_DIVISION_OPERATOR).spaces(1)
-                .around(FusionTypes.EEL_MODULO_OPERATOR).spaces(1)
-                .around(FusionTypes.EEL_COMPARISON_OPERATOR).spaces(1)
                 .around(FusionTypes.NAMESPACE_ALIAS_SEPARATOR).spaces(1)
                 .before(FusionTypes.NAMESPACE_SEPARATOR).none()
                 .after(FusionTypes.NAMESPACE_SEPARATOR).spaces(1)

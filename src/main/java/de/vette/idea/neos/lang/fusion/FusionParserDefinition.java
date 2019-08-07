@@ -27,12 +27,14 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.impl.source.tree.LazyParseablePsiElement;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import de.vette.idea.neos.lang.fusion.lexer.FusionLexerAdapter;
 import de.vette.idea.neos.lang.fusion.parser.FusionParser;
 import de.vette.idea.neos.lang.fusion.psi.FusionFile;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionLazyParsableElementImpl;
 import de.vette.idea.neos.lang.fusion.stubs.FusionFileStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -77,6 +79,10 @@ public class FusionParserDefinition implements ParserDefinition {
     @NotNull
     @Override
     public PsiElement createElement(ASTNode astNode) {
+        if (astNode.getElementType().equals(LazyParsableElementTypes.EXPRESSION_CONTENT)) {
+            return new FusionLazyParsableElementImpl(LazyParsableElementTypes.EXPRESSION_CONTENT, astNode.getChars());
+        }
+
         return FusionTypes.Factory.createElement(astNode);
     }
 

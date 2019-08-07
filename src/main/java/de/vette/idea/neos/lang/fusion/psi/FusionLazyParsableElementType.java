@@ -18,7 +18,7 @@
 
 package de.vette.idea.neos.lang.fusion.psi;
 
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.ILazyParseableElementType;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Fusion token type
  */
-public class FusionTokenType extends IElementType {
-    public FusionTokenType(@NotNull @NonNls String debugName) {
+public class FusionLazyParsableElementType extends ILazyParseableElementType {
+    public FusionLazyParsableElementType(@NotNull @NonNls String debugName) {
         super(debugName, FusionLanguage.INSTANCE);
     }
 }
