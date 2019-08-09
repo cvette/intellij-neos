@@ -18,7 +18,7 @@
 
 plugins {
     id "org.jetbrains.intellij" version "0.4.8"
-    id "org.jetbrains.grammarkit" version "2019.1"
+    id "org.jetbrains.grammarkit" version "2019.2"
 }
 
 import org.jetbrains.grammarkit.tasks.*
@@ -41,15 +41,25 @@ def pluginsForIdeaVersion = [
         // to install additional plugins for development
         //'PsiViewer:3.28.93'
     ],
+    '2019.2': [
+        'com.jetbrains.php:192.5728.108',
+        'yaml',
+        'IntelliLang',
+
+        // test dependencies
+        'CSS',
+        'java',
+        'java-i18n',
+        'properties'
+    ],
     '2019.1.2': [
-        'com.jetbrains.php:191.7141.52',
+        'com.jetbrains.php:191.6183.95',
         'yaml',
         'IntelliLang',
 
         // test dependencies
         'CSS',
         'java-i18n',
-        'java',
         'properties'
     ],
     '2019.1.1': [
@@ -60,29 +70,6 @@ def pluginsForIdeaVersion = [
         // test dependencies
         'CSS',
         'java-i18n',
-        'java',
-        'properties'
-    ],
-    '2019.1': [
-        'com.jetbrains.php:191.6183.95',
-        'yaml',
-        'IntelliLang',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'java',
-        'properties'
-    ],
-    '2018.3': [
-        'com.jetbrains.php:183.4284.150',
-        'yaml',
-        'IntelliLang',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'java',
         'properties'
     ]
 ]
