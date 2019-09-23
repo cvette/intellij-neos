@@ -52,7 +52,7 @@
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
     <lang.psiStructureViewFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.structure.FusionStructureViewBuilderFactory"/>
 
-    <fileTypeFactory implementation="de.vette.idea.neos.lang.fusion.FusionFileTypeFactory"/>
+    <fileType name="Neos Fusion" language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionFileType" extensions="fusion;ts2" />
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
