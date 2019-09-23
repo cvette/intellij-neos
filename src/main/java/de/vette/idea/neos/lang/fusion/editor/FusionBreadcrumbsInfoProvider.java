@@ -20,14 +20,14 @@ package de.vette.idea.neos.lang.fusion.editor;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
-import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
+import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.FusionBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FusionBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider {
+public class FusionBreadcrumbsInfoProvider implements BreadcrumbsProvider {
     @Override
     public Language[] getLanguages() {
         return new Language[]{FusionLanguage.INSTANCE};
