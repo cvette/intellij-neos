@@ -8,6 +8,7 @@
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.jetbrains.php</depends>
+  <depends>org.intellij.intelliLang</depends>
   <depends>org.jetbrains.plugins.yaml</depends>
 
   <extensions defaultExtensionNs="com.jetbrains.php">
