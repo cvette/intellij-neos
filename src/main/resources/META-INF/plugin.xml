@@ -4,7 +4,7 @@
   <vendor email="neos@christianvette.de" url="https://github.com/cvette/intellij-neos">Christian Vette</vendor>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="182.3341.11"/>
+  <idea-version since-build="183.2407.10"/>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.jetbrains.php</depends>
