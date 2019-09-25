@@ -20,7 +20,7 @@ package de.vette.idea.neos.lang.fusion.formatter;
 
 import com.intellij.application.options.CodeStyleAbstractConfigurable;
 import com.intellij.application.options.CodeStyleAbstractPanel;
-import com.intellij.openapi.options.Configurable;
+import com.intellij.psi.codeStyle.CodeStyleConfigurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
@@ -37,8 +37,8 @@ public class FusionCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
     @NotNull
     @Override
-    public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSettings) {
-        return new CodeStyleAbstractConfigurable(settings, originalSettings, "Neos Fusion") {
+    public CodeStyleConfigurable createConfigurable(@NotNull CodeStyleSettings settings, @NotNull CodeStyleSettings modelSettings) {
+        return new CodeStyleAbstractConfigurable(settings, modelSettings, "Neos Fusion") {
             @Override
             protected CodeStyleAbstractPanel createPanel(CodeStyleSettings codeStyleSettings) {
                 return new FusionCodeStyleMainPanel(getCurrentSettings(), codeStyleSettings);
