@@ -20,15 +20,14 @@ package de.vette.idea.neos.lang.fusion.resolve;
 
 import com.intellij.json.psi.JsonFile;
 import com.intellij.openapi.project.Project;
+import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
-import de.vette.idea.neos.NeosProjectComponent;
 import de.vette.idea.neos.indexes.DefaultContextFileIndex;
 import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex;
 import de.vette.idea.neos.lang.fusion.psi.*;
@@ -196,7 +195,12 @@ public class ResolveEngine {
             resourcePath = "Resources/" + m.group(2);
             VirtualFile packagesDir = findPackagesDirectory(file);
             if (packagesDir == null) {
-                return file.getProject().getBaseDir().findFileByRelativePath(resourcePath);
+                VirtualFile projectDir = guessProjectDir(file.getProject());
+                if (projectDir == null) {
+                    return null;
+                }
+
+                return projectDir.findFileByRelativePath(resourcePath);
             } else {
                 VirtualFile packageDir = findPackageDirectory(packagesDir, m.group(1));
                 if (packageDir != null) {
@@ -225,8 +229,9 @@ public class ResolveEngine {
 
     @Nullable
     protected static VirtualFile findPackagesDirectory(PsiFile file) {
+        VirtualFile projectDir = guessProjectDir(file.getProject());
         VirtualFile currentFile = file.getVirtualFile();
-        while (currentFile != null && !currentFile.equals(file.getProject().getBaseDir())) {
+        while (currentFile != null && !currentFile.equals(projectDir)) {
             currentFile = currentFile.getParent();
             if (currentFile != null && currentFile.isDirectory() && currentFile.getName().equals("Packages")) {
                 return currentFile;

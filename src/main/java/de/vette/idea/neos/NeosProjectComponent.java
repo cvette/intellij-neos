@@ -22,10 +22,13 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.util.IdeHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 
 public class NeosProjectComponent implements ProjectComponent {
 
@@ -91,9 +94,10 @@ public class NeosProjectComponent implements ProjectComponent {
     }
 
     public static boolean isNeosProject(Project project) {
-        return (VfsUtil.findRelativeFile(project.getBaseDir(), "Packages") != null
-                && VfsUtil.findRelativeFile(project.getBaseDir(), "Configuration") != null
-                && (VfsUtil.findRelativeFile(project.getBaseDir(), "Packages", "Application", "TYPO3.Neos") != null
-                || VfsUtil.findRelativeFile(project.getBaseDir(), "Packages", "Application", "Neos.Neos") != null));
+        VirtualFile projectDir = guessProjectDir(project);
+        return (VfsUtil.findRelativeFile(projectDir, "Packages") != null
+                && VfsUtil.findRelativeFile(projectDir, "Configuration") != null
+                && (VfsUtil.findRelativeFile(projectDir, "Packages", "Application", "TYPO3.Neos") != null
+                || VfsUtil.findRelativeFile(projectDir, "Packages", "Application", "Neos.Neos") != null));
     }
 }

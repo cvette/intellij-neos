@@ -29,6 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
+
 public class ComposerUtil {
 
     @Nullable
@@ -41,7 +43,7 @@ public class ComposerUtil {
         do {
             composerFile = getComposerManifestInDirectory(currentDirectory);
             currentDirectory = currentDirectory.getParentDirectory();
-        } while (composerFile == null && currentDirectory != null && !currentDirectory.equals(currentDirectory.getProject().getBaseDir()) );
+        } while (composerFile == null && currentDirectory != null && !currentDirectory.equals(guessProjectDir(currentDirectory.getProject())));
 
         return composerFile;
     }
