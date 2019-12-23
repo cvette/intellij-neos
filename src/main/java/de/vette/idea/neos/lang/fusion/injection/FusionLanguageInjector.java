@@ -28,20 +28,10 @@ import org.intellij.plugins.intelliLang.inject.InjectedLanguage;
 import org.intellij.plugins.intelliLang.inject.config.BaseInjection;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-
 public class FusionLanguageInjector implements LanguageInjector {
-    private Configuration myConfiguration;
-
-    public FusionLanguageInjector(Configuration configuration) {
-        myConfiguration = configuration;
-    }
-
     @Override
     public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar) {
-        Iterator it = myConfiguration.getInjections(FusionLanguageInjectionSupport.SUPPORT_ID).iterator();
-        while (it.hasNext()) {
-            BaseInjection injection = (BaseInjection) it.next();
+        for (BaseInjection injection : Configuration.getInstance().getInjections(FusionLanguageInjectionSupport.SUPPORT_ID)) {
             if (injection.acceptsPsiElement(host)) {
                 Language language = InjectedLanguage.findLanguageById(injection.getInjectedLanguageId());
                 if (language != null) {
