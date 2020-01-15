@@ -64,6 +64,8 @@
     
     <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.stubs.FusionFileStub"/>
 
+    <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.psi.FusionTypes"/>
+
     <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
     <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
     <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxFusionElementDescriptorProvider" />
