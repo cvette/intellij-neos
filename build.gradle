@@ -59,6 +59,7 @@ def pluginsForIdeaVersion = [
 
         // test dependencies
         'CSS',
+        'java',
         'java-i18n',
         'properties'
     ],
