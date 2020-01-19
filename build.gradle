@@ -121,7 +121,7 @@ static def htmlFixer(filename) {
 apply plugin: 'org.jetbrains.grammarkit'
 grammarKit {
     jflexRelease = '1.7.0-1'
-    grammarKitRelease = '2017.1.7'
+    grammarKitRelease = grammarKitVersion
 }
 
 test {

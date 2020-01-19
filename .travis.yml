@@ -6,14 +6,14 @@ jdk:
 env:
   global: ORG_GRADLE_PROJECT_downloadIdeaSources=false
   matrix:
-    - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
-    - ORG_GRADLE_PROJECT_ideaVersion=2019.3.1
-    - ORG_GRADLE_PROJECT_ideaVersion=2019.2.4
-    - ORG_GRADLE_PROJECT_ideaVersion=2019.1.4
+    - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
+    - ORG_GRADLE_PROJECT_ideaVersion=2019.3.1 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
+    - ORG_GRADLE_PROJECT_ideaVersion=2019.2.4 ORG_GRADLE_PROJECT_grammarKitVersion=2019.1.1
+    - ORG_GRADLE_PROJECT_ideaVersion=2019.1.4 ORG_GRADLE_PROJECT_grammarKitVersion=2019.1.1
 
 matrix:
   allow_failures:
-    - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
   fast_finish: true
 
 install: true
@@ -22,7 +22,7 @@ script:
   # BACKCOMPAT:
   # HACK: Force grammar kit to use current IDEA version when generating parser.
   # For actual compilation and running the version from the matrix will be used.
-  - ORG_GRADLE_PROJECT_ideaVersion=2019.3.1 ./gradlew generateFusionParser
+  - ORG_GRADLE_PROJECT_ideaVersion=2019.3.1 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3 ./gradlew generateFusionParser
   - ./gradlew check -x generateFusionParser
 
 # https://docs.travis-ci.com/user/languages/java/#Caching
