@@ -29,7 +29,7 @@
                          nonDefaultProject="true"
     />
     <lang.parserDefinition language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
-    <lang.syntaxHighlighterFactory key="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
+    <lang.syntaxHighlighterFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
     <lang.braceMatcher language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionBraceMatcher"/>
     <lang.formatter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.formatter.FusionFormattingModelBuilder"/>
     <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
@@ -61,9 +61,8 @@
     <!-- Indices -->
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex"/>
-    
-    <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.stubs.FusionFileStub"/>
 
+    <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.stubs.FusionFileStub"/>
     <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.psi.FusionTypes"/>
 
     <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
