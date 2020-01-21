@@ -28,6 +28,9 @@
                          parentId="reference.webide.settings.project.settings.php"
                          nonDefaultProject="true"
     />
+
+    <defaultTemplatePropertiesProvider implementation="de.vette.idea.neos.actions.FusionTemplatePropertiesProvider"/>
+
     <lang.parserDefinition language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
     <lang.syntaxHighlighterFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
     <lang.braceMatcher language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionBraceMatcher"/>
@@ -69,6 +72,13 @@
     <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
     <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxFusionElementDescriptorProvider" />
   </extensions>
+
+
+  <actions>
+    <action id="Neos.NewFusionFile" class="de.vette.idea.neos.actions.CreateFusionFile" text="Fusion File" description="Create new Fusion file">
+      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
+    </action>
+  </actions>
 
   <project-components>
     <component>

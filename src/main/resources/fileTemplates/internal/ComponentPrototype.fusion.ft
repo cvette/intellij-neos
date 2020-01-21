@@ -1,0 +1,5 @@
+prototype(${FUSION_PACKAGE_NAME}:Component.${NAME}) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <div></div>
+    `
+}

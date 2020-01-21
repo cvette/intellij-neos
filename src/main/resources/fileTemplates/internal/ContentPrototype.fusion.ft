@@ -1,0 +1,3 @@
+prototype(${FUSION_PACKAGE_NAME}:Content.${NAME}) < prototype(Neos.Neos:ContentComponent) {
+    renderer = ${FUSION_PACKAGE_NAME}:Component.${NAME}
+}
