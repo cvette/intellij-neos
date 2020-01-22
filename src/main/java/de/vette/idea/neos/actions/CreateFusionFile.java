@@ -19,8 +19,9 @@ public class CreateFusionFile extends CreateFileFromTemplateAction implements Du
 
     @Override
     protected void buildDialog(Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
-        builder.setTitle(NEW_FUSION_FILE).addKind("Content Prototype", FusionIcons.PROTOTYPE, "ContentPrototype");
-        builder.setTitle(NEW_FUSION_FILE).addKind("Component Prototype", FusionIcons.PROTOTYPE, "ComponentPrototype");
+        builder.setTitle(NEW_FUSION_FILE).addKind("Empty File", FusionIcons.FILE, "Fusion File");
+        builder.setTitle(NEW_FUSION_FILE).addKind("Content Prototype", FusionIcons.PROTOTYPE, "Fusion Content Prototype");
+        builder.setTitle(NEW_FUSION_FILE).addKind("Component Prototype", FusionIcons.PROTOTYPE, "Fusion Component Prototype");
     }
 
     @Override

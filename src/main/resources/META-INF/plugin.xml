@@ -29,7 +29,12 @@
                          nonDefaultProject="true"
     />
 
+    <internalFileTemplate name="Fusion File"/>
+    <internalFileTemplate name="Fusion Content Prototype"/>
+    <internalFileTemplate name="Fusion Component Prototype"/>
+
     <defaultTemplatePropertiesProvider implementation="de.vette.idea.neos.actions.FusionTemplatePropertiesProvider"/>
+    <createFromTemplateHandler implementation="de.vette.idea.neos.actions.FusionCreateFromTemplateHandler"/>
 
     <lang.parserDefinition language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
     <lang.syntaxHighlighterFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
