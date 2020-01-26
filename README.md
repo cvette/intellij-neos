@@ -3,8 +3,6 @@ IntelliJ IDEA / PhpStorm Neos Plugin
 [![Build Status](https://travis-ci.org/cvette/intellij-neos.svg?branch=master)](https://travis-ci.org/cvette/intellij-neos)
 [![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/9362-neos-support.svg)](https://plugins.jetbrains.com/plugin/9362-neos-support)
 
-This is a **work in progress**. There may be performance and stability problems.
-
 Features
 --------
 
