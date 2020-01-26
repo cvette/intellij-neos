@@ -1,0 +1,3 @@
+${NEOS_PACKAGE_NAME}:${NEOS_NODE_TYPE_NAME}:
+  superTypes:
+    'Neos.Neos:Content': true

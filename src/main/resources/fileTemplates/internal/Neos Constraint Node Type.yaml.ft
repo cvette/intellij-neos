@@ -1,0 +1,4 @@
+${NEOS_PACKAGE_NAME}:${NEOS_NODE_TYPE_NAME}
+  abstract: true
+  constraints:
+    nodeTypes:
