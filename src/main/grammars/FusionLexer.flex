@@ -31,6 +31,7 @@ COMMENT_TAIL=([^"*"]*("*"+[^"*""/"])?)*("*"+"/")?
 WHITE_SPACE = [ \t\f]*
 CRLF = \n | \r | \r\n
 EQUALS = "="
+ARROW = "=>"
 COLON = ":"
 DOT = "."
 INCLUDE_KEYWORD = "include"
@@ -337,6 +338,7 @@ IF_SEPARATOR = {COLON}
     {IF_KEYWORD}                            { return FusionTypes.IF_KEYWORD; }
     {IF_SEPARATOR}                          { return FusionTypes.IF_SEPARATOR; }
     {COMPARISION_OPERATOR}                  { return FusionTypes.EEL_COMPARISON_OPERATOR; }
+    {ARROW}                                 { return FusionTypes.EEL_ARROW; }
     {VALUE_SEPARATOR}                       { return FusionTypes.VALUE_SEPARATOR; }
     {EEL_IDENTIFIER}                        { return FusionTypes.EEL_IDENTIFIER; }
     {EEL_IDENTIFIER}/{LEFT_PAREN}           { return FusionTypes.EEL_FUNCTION; }
