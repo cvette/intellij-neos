@@ -112,7 +112,7 @@ method_name ::= EEL_FUNCTION {
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionMethodNameImplMixin"
 }
 
-term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | VALUE_NUMBER | object_path | value_string_line
+term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | EEL_SUBTRACTION_OPERATOR? VALUE_NUMBER | object_path | value_string_line
 
 simple_expression ::= arrow_function | wrapped_expression | array_literal | object_literal | term | not_expression
 arrow_function ::= method_arguments EEL_ARROW conditional_expression
