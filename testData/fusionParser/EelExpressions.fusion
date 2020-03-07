@@ -4,5 +4,5 @@ math = ${1 * (2 + 2 - 1) / 1 - -2.5}
 negation = ${!this.bar}
 logic = ${foo && !(bar || !baz)}
 helper = ${Type.isArray(['Foo', 1 + 2])}
-arrayAccess = ${foo[0] + bar['baz'] + baz[0][0]}
+arrayAccess = ${foo[0] + bar['baz'] + baz[0][0] + foo[0].bar}
 arrowFunction =  ${map(foo, (bar) => bar * bar)}

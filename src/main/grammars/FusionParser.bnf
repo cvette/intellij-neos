@@ -100,7 +100,7 @@ expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE conditional_expression EEL_RIGH
 offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET {pin=1}
 method_call ::= method_name EEL_LEFT_PAREN [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_PAREN {pin=2}
 
-object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier|offset_access)) * [array_literal *]
+object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier) | offset_access) *
 composite_identifier ::= identifier (EEL_DOT (identifier)) * {
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionCompositeIdentifierImplMixin"
