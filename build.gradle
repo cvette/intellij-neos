@@ -62,16 +62,6 @@ def pluginsForIdeaVersion = [
         'java',
         'java-i18n',
         'properties'
-    ],
-    '2019.1.4': [
-        'com.jetbrains.php:191.6183.95',
-        'yaml',
-        'IntelliLang',
-
-        // test dependencies
-        'CSS',
-        'java-i18n',
-        'properties'
     ]
 ]
 
