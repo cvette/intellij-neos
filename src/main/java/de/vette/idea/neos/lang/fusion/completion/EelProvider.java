@@ -50,6 +50,12 @@ public class EelProvider extends CompletionProvider<CompletionParameters> {
                     Collection<PhpClass> classes = PhpIndex.getInstance(project).getClassesByFQN(helper);
                     for (PhpClass phpClass : classes) {
                         for (Method method : phpClass.getMethods()) {
+                            if (method.getAccess().isPrivate() || method.getAccess().isProtected()) {
+                                continue;
+                            }
+                            if (method.getName().equals("allowsCallOfMethod")) {
+                                continue;
+                            }
                             String completionText = eelHelper + "." + method.getName() + "()";
                             result.addElement(LookupElementBuilder.create(completionText).withIcon(PhpIcons.METHOD_ICON));
                         }
