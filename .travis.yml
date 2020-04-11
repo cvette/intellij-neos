@@ -7,8 +7,8 @@ env:
   global: ORG_GRADLE_PROJECT_downloadIdeaSources=false
   matrix:
     - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
-    - ORG_GRADLE_PROJECT_ideaVersion=2019.3.1 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
-    - ORG_GRADLE_PROJECT_ideaVersion=2019.2.4 ORG_GRADLE_PROJECT_grammarKitVersion=2019.1.1
+    - ORG_GRADLE_PROJECT_ideaVersion=2020.1 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
+    - ORG_GRADLE_PROJECT_ideaVersion=2019.3.4 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3
 
 matrix:
   allow_failures:
