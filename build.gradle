@@ -27,7 +27,7 @@ import org.jetbrains.grammarkit.tasks.*
 // and https://plugins.jetbrains.com/plugin/6610-php
 def pluginsForIdeaVersion = [
     'LATEST-EAP-SNAPSHOT': [
-        'com.jetbrains.php:201.6073.9',
+        'com.jetbrains.php:201.6668.113',
         'yaml',
         'IntelliLang',
 
@@ -41,7 +41,18 @@ def pluginsForIdeaVersion = [
         // to install additional plugins for development
         //'PsiViewer:3.28.93'
     ],
-    '2019.3.1': [
+    '2020.1': [
+        'com.jetbrains.php:201.6668.113',
+        'yaml',
+        'IntelliLang',
+
+        // test dependencies
+        'CSS',
+        'java',
+        'java-i18n',
+        'properties'
+    ],
+    '2019.3.4': [
         'com.jetbrains.php:193.5662.63',
         'yaml',
         'IntelliLang',
@@ -52,8 +63,8 @@ def pluginsForIdeaVersion = [
         'java-i18n',
         'properties'
     ],
-    '2019.2.4': [
-        'com.jetbrains.php:192.7142.51',
+    '2019.3.3': [
+        'com.jetbrains.php:193.5662.63',
         'yaml',
         'IntelliLang',
 
