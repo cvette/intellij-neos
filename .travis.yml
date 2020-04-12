@@ -21,7 +21,7 @@ script:
   # BACKCOMPAT:
   # HACK: Force grammar kit to use current IDEA version when generating parser.
   # For actual compilation and running the version from the matrix will be used.
-  - ORG_GRADLE_PROJECT_ideaVersion=2020.1 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3 ./gradlew generateFusionParser
+  - ORG_GRADLE_PROJECT_ideaVersion=2019.3.4 ORG_GRADLE_PROJECT_grammarKitVersion=2019.3 ./gradlew generateFusionParser
   - ./gradlew check -x generateFusionParser
 
 # https://docs.travis-ci.com/user/languages/java/#Caching
