@@ -25,7 +25,7 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,10 +51,10 @@ public class YamlCompletionProvider extends CompletionProvider<CompletionParamet
     }
 
     @Override
-    protected void addCompletions(@NotNull CompletionParameters completionParameters, ProcessingContext processingContext, @NotNull CompletionResultSet completionResultSet) {
+    protected void addCompletions(@NotNull CompletionParameters completionParameters, @NotNull ProcessingContext processingContext, @NotNull CompletionResultSet completionResultSet) {
 
         PsiElement psiElement = completionParameters.getPosition();
-        if (!NeosProjectComponent.isEnabled(psiElement)) {
+        if (!NeosProjectService.isEnabled(psiElement)) {
             return;
         }
 

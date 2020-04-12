@@ -20,7 +20,7 @@ package de.vette.idea.neos.eel.util;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.YAMLUtil;
 import org.jetbrains.yaml.psi.YAMLFile;
@@ -46,7 +46,7 @@ public class EelHelperUtil {
                     if (mappingElement instanceof YAMLKeyValue) {
                         YAMLKeyValue keyValue = (YAMLKeyValue) mappingElement;
                         result.put(keyValue.getKeyText(), keyValue.getValueText());
-                        NeosProjectComponent.getLogger().debug(keyValue.getKeyText() + ": " + keyValue.getValueText());
+                        NeosProjectService.getLogger().debug(keyValue.getKeyText() + ": " + keyValue.getValueText());
                     }
                 }
             }

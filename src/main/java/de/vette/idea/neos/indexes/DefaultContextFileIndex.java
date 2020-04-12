@@ -23,7 +23,7 @@ import com.intellij.util.indexing.*;
 import com.intellij.util.io.DataExternalizer;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import com.intellij.util.io.KeyDescriptor;
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.eel.util.EelHelperUtil;
 import de.vette.idea.neos.indexes.externalizer.StringDataExternalizer;
 import gnu.trove.THashMap;
@@ -35,8 +35,8 @@ import java.util.Map;
 public class DefaultContextFileIndex extends FileBasedIndexExtension<String, String> {
     private final KeyDescriptor<String> myKeyDescriptor = new EnumeratorStringDescriptor();
     public static final ID<String, String> KEY = ID.create("de.vette.idea.neos.default_context");
-    private static StringDataExternalizer EXTERNALIZER = new StringDataExternalizer();
-    private static int MAX_FILE_BYTE_SIZE = 5242880;
+    private static final StringDataExternalizer EXTERNALIZER = new StringDataExternalizer();
+    private static final int MAX_FILE_BYTE_SIZE = 5242880;
 
     @NotNull
     @Override
@@ -61,7 +61,7 @@ public class DefaultContextFileIndex extends FileBasedIndexExtension<String, Str
         return fileContent -> {
             Map<String, String> map = new THashMap<>();
             PsiFile psiFile = fileContent.getPsiFile();
-            if(!NeosProjectComponent.isEnabledForIndex(psiFile.getProject())
+            if(!NeosProjectService.isEnabledForIndex(psiFile.getProject())
                     || !isValidForIndex(fileContent, psiFile)) {
                 return map;
             }

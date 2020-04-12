@@ -18,7 +18,6 @@
 
 package de.vette.idea.neos.config.nodeTypes;
 
-import com.intellij.codeInsight.lookup.Lookup;
 import com.intellij.codeInsight.lookup.LookupElement;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class NodeTypesConfigLookupBuilder {
     }
 
     public ArrayList<LookupElement> ListToYmlElements(List<String> items) {
-        ArrayList<LookupElement> lookups = new ArrayList<LookupElement>();
+        ArrayList<LookupElement> lookups = new ArrayList<>();
         for (String answer : items) {
             lookups.add(new NodeTypesConfigLookup(answer));
         }

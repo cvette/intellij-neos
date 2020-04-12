@@ -16,32 +16,25 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.config.nodeTypes;
+package de.vette.idea.neos;
 
-import com.intellij.codeInsight.completion.InsertHandler;
-import com.intellij.codeInsight.completion.InsertionContext;
-import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupActivity;
+import de.vette.idea.neos.util.IdeHelper;
 import org.jetbrains.annotations.NotNull;
 
-public class NodeTypesConfigLookup extends LookupElement{
-
-    private String name;
-    private InsertHandler<LookupElement> insertHandler = null;
-
-    public NodeTypesConfigLookup(String name) {
-        this.name = name;
-    }
+public class NeosStartupActivity implements StartupActivity {
 
     @Override
-    public void handleInsert(@NotNull InsertionContext context) {
-        if (this.insertHandler != null) {
-            this.insertHandler.handleInsert(context, this);
+    public void runActivity(@NotNull Project project) {
+        NeosProjectService projectService = project.getService(NeosProjectService.class);
+
+        if (!projectService.isEnabled() && !Settings.getInstance(project).dismissEnableNotification) {
+            NeosProjectService.getLogger().info("test");
+            if (projectService.isNeosProject()) {
+                NeosProjectService.getLogger().info("is neos project");
+                IdeHelper.notifyEnableMessage(project);
+            }
         }
-    }
-
-    @NotNull
-    @Override
-    public String getLookupString() {
-        return name;
     }
 }

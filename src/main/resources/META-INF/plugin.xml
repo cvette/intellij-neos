@@ -4,7 +4,7 @@
   <vendor email="neos@christianvette.de" url="https://github.com/cvette/intellij-neos">Christian Vette</vendor>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="192.7142.36"/>
+  <idea-version since-build="193.2252"/>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.jetbrains.php</depends>
@@ -84,6 +84,9 @@
     <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
     <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
     <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxFusionElementDescriptorProvider" />
+
+    <projectService serviceImplementation="de.vette.idea.neos.NeosProjectService"/>
+    <postStartupActivity implementation="de.vette.idea.neos.NeosStartupActivity" />
   </extensions>
 
 
@@ -95,10 +98,4 @@
       <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
     </action>
   </actions>
-
-  <project-components>
-    <component>
-      <implementation-class>de.vette.idea.neos.NeosProjectComponent</implementation-class>
-    </component>
-  </project-components>
 </idea-plugin>

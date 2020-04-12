@@ -28,8 +28,8 @@ import de.vette.idea.neos.lang.fusion.psi.FusionFile;
 import org.jetbrains.annotations.NotNull;
 
 public class FusionStructureViewModel extends TextEditorBasedStructureViewModel implements StructureViewModel.ElementInfoProvider {
-    private FusionFile fusionFile;
-    private Sorter[] mySorters;
+    private final FusionFile fusionFile;
+    private final Sorter[] mySorters;
 
     public FusionStructureViewModel(Editor editor, PsiFile file) {
         super(editor, file);

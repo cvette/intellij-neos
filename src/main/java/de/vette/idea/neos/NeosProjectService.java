@@ -18,33 +18,31 @@
 
 package de.vette.idea.neos;
 
-import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.util.IdeHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 
-public class NeosProjectComponent implements ProjectComponent {
-
+public class NeosProjectService {
     final private static Logger LOG = Logger.getInstance("Neos");
-    private Project project;
+    protected Project project;
 
-    public NeosProjectComponent(Project project) {
+    public NeosProjectService(Project project) {
         this.project = project;
+    }
+
+    public static NeosProjectService getInstance(@NotNull Project project) {
+        return ServiceManager.getService(project, NeosProjectService.class);
     }
 
     public static Logger getLogger() {
         return LOG;
-    }
-
-    public boolean isEnabled() {
-        return Settings.getInstance(project).pluginEnabled;
     }
 
     /**
@@ -52,7 +50,11 @@ public class NeosProjectComponent implements ProjectComponent {
      * index until a forced cache rebuild, we check also for vendor path
      */
     public static boolean isEnabledForIndex(Project project) {
-        return (NeosProjectComponent.isEnabled(project) || NeosProjectComponent.isNeosProject(project));
+        return (isEnabled(project) || isNeosProject(project));
+    }
+
+    public boolean isEnabled() {
+        return NeosProjectService.isEnabled(this.project);
     }
 
     public static boolean isEnabled(@Nullable Project project) {
@@ -63,34 +65,8 @@ public class NeosProjectComponent implements ProjectComponent {
         return element != null && isEnabled(element.getProject());
     }
 
-    @Override
-    public void projectOpened() {
-        if (!this.isEnabled() && !Settings.getInstance(project).dismissEnableNotification) {
-            if (NeosProjectComponent.isNeosProject(this.project)) {
-                IdeHelper.notifyEnableMessage(project);
-            }
-        }
-    }
-
-    @Override
-    public void projectClosed() {
-
-    }
-
-    @Override
-    public void initComponent() {
-
-    }
-
-    @Override
-    public void disposeComponent() {
-
-    }
-
-    @NotNull
-    @Override
-    public String getComponentName() {
-        return "NeosProjectComponent";
+    public boolean isNeosProject() {
+        return NeosProjectService.isNeosProject(this.project);
     }
 
     public static boolean isNeosProject(Project project) {

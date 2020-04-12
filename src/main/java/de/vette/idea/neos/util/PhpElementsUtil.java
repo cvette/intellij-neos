@@ -23,7 +23,7 @@ import com.jetbrains.php.PhpIndex;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +72,7 @@ public class PhpElementsUtil {
     static public Method getClassMethod(@NotNull Project project, @NotNull String phpClassName, @NotNull String methodName) {
         // we need here an each; because eg Command is non unique because of phar file
         for(PhpClass phpClass: PhpIndex.getInstance(project).getClassesByFQN(phpClassName)) {
-            NeosProjectComponent.getLogger().debug(phpClass.getFQN());
+            NeosProjectService.getLogger().debug(phpClass.getFQN());
             Method method = phpClass.findMethodByName(methodName);
             if(method != null) {
                 return method;

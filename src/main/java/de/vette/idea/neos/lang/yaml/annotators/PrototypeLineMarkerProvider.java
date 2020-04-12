@@ -22,7 +22,7 @@ import com.intellij.codeInsight.daemon.LineMarkerProvider;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +45,7 @@ public class PrototypeLineMarkerProvider implements LineMarkerProvider {
     @Override
     public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
         for (PsiElement el : elements) {
-            if (!NeosProjectComponent.isEnabled(el)) {
+            if (!NeosProjectService.isEnabled(el)) {
                 return;
             }
 

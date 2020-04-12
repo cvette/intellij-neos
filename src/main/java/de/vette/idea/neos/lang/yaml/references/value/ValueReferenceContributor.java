@@ -21,7 +21,7 @@ package de.vette.idea.neos.lang.yaml.references.value;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.psi.YAMLValue;
 
@@ -42,7 +42,7 @@ public class ValueReferenceContributor extends PsiReferenceContributor {
         @NotNull
         @Override
         public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
-            if(!NeosProjectComponent.isEnabled(element)) {
+            if(!NeosProjectService.isEnabled(element)) {
                 return new PsiReference[0];
             }
 

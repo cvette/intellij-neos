@@ -27,7 +27,7 @@ import com.intellij.util.indexing.ScalarIndexExtension;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import com.intellij.util.io.KeyDescriptor;
 
-import de.vette.idea.neos.NeosProjectComponent;
+import de.vette.idea.neos.NeosProjectService;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.YAMLFileType;
@@ -83,13 +83,13 @@ public class NodeTypesYamlFileIndex extends ScalarIndexExtension<String> {
     }
 
     private static class NodeTypesYamlIndexer implements DataIndexer<String, Void, FileContent> {
-        private static int MAX_FILE_BYTE_SIZE = 5242880;
+        private static final int MAX_FILE_BYTE_SIZE = 5242880;
 
         @NotNull
         @Override
         public Map<String, Void> map(@NotNull FileContent fileContent) {
             PsiFile psiFile = fileContent.getPsiFile();
-            if (NeosProjectComponent.isEnabledForIndex(psiFile.getProject())
+            if (NeosProjectService.isEnabledForIndex(psiFile.getProject())
                     && isValidForIndex(fileContent, psiFile)) {
                 return doIndex(fileContent);
             }
