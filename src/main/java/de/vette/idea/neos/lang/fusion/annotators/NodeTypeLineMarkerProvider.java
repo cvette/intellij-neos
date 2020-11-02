@@ -40,7 +40,7 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
     }
 
     @Override
-    public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
+    public void collectSlowLineMarkers(@NotNull List<? extends PsiElement> elements, @NotNull Collection<? super LineMarkerInfo<?>> result) {
         for (PsiElement el : elements) {
             if (!(el instanceof FusionType)
                     || !(el.getParent() instanceof FusionPrototypeSignature)
@@ -52,7 +52,7 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
             FusionType type = (FusionType) el;
             Collection<PsiElement> targets = ResolveEngine.getNodeTypeDefinitions(el.getProject(), type);
             if (!targets.isEmpty()) {
-                RelatedItemLineMarkerInfo info = NavigationGutterIconBuilder
+                RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
                         .create(NeosIcons.NODE_TYPE)
                         .setTargets(targets)
                         .setTooltipText("Go to node type definition")

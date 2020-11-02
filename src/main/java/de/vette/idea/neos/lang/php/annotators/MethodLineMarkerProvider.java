@@ -43,13 +43,13 @@ public class MethodLineMarkerProvider implements LineMarkerProvider {
     }
 
     @Override
-    public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
+    public void collectSlowLineMarkers(@NotNull List<? extends PsiElement> elements, @NotNull Collection<? super LineMarkerInfo<?>> result) {
         for (PsiElement el : elements) {
             if (el instanceof Method && ((Method) el).getAccess().isPublic()) {
                 VirtualFile template = ResolveEngine.findTemplate((Method) el);
                 if (template != null) {
                     PsiFile target = PsiManager.getInstance(el.getProject()).findFile(template);
-                    RelatedItemLineMarkerInfo info = NavigationGutterIconBuilder
+                    RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
                             .create(NeosIcons.NODE_TYPE)
                             .setTarget(target)
                             .setTooltipText("Go to template")
