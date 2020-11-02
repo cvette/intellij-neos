@@ -2,7 +2,7 @@
 
 # IntelliJ Neos Changelog
 
-## [1.5.0]
+## [Unreleased]
 ### Added
 
 - Live template context for Fusion file type
