@@ -37,11 +37,6 @@ val jFlexVersion: String by project
 group = pluginGroup
 version = pluginVersion
 
-apply {
-    plugin("idea")
-    plugin("org.jetbrains.grammarkit")
-    plugin("org.jetbrains.intellij")
-}
 
 // Configure project's dependencies
 repositories {
