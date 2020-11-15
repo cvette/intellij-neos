@@ -1,6 +1,6 @@
 IntelliJ IDEA / PhpStorm Neos Plugin
 ====================================
-[![Build Status](https://travis-ci.org/cvette/intellij-neos.svg?branch=master)](https://travis-ci.org/cvette/intellij-neos)
+[![Build](https://github.com/cvette/intellij-neos/workflows/Build/badge.svg)](https://github.com/cvette/intellij-neos/actions?query=workflow%3ABuild)
 [![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/9362-neos-support.svg)](https://plugins.jetbrains.com/plugin/9362-neos-support)
 
 <!-- Plugin description -->
