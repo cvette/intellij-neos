@@ -95,12 +95,6 @@ val generateFusionParser = task<GenerateParser>("GenerateParser") {
 }
 
 tasks {
-    buildPlugin {
-        // Set proper name for final plugin zip.
-        // Otherwise, base name is the same as gradle module name
-        archiveBaseName.set("intellij-neos")
-    }
-
     // Set the compatibility versions to 1.8
     withType<JavaCompile> {
         sourceCompatibility = "1.8"
