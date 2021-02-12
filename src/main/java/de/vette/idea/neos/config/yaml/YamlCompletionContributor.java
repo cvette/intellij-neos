@@ -98,8 +98,54 @@ public class YamlCompletionContributor extends CompletionContributor {
         put("reloadIfChanged", null);
         put("reloadPageIfChanged", null);
         put("inlineEditable", null);
-        put("aloha", null);
+        put("inline", null);
         put("inspector", null);
+    }});
+
+    private static final Map<String, String> UI_PROPERTIES_UI_INLINE_KEYS = Collections.unmodifiableMap(new HashMap<String, String>() {{
+        put("editorOptions", null);
+    }});
+
+    private static final Map<String, String> UI_PROPERTIES_UI_INLINE_EDITOR_OPTIONS_KEYS = Collections.unmodifiableMap(new HashMap<String, String>() {{
+        put("placeholder", null);
+        put("autoparagraph", null);
+        put("linking", null);
+        put("formatting", null);
+    }});
+
+    private static final Map<String, String> UI_PROPERTIES_UI_INLINE_EDITOR_OPTIONS_LINKING_KEYS = Collections.unmodifiableMap(new HashMap<String, String>() {{
+        put("anchor", null);
+        put("title", null);
+        put("relNofollow", null);
+        put("targetBlank", null);
+        put("startingPoint", null);
+    }});
+
+    private static final Map<String, String> UI_PROPERTIES_UI_INLINE_EDITOR_OPTIONS_FORMATTING_KEYS = Collections.unmodifiableMap(new HashMap<String, String>() {{
+        put("strong", null);
+        put("em", null);
+        put("u", null);
+        put("sub", null);
+        put("sup", null);
+        put("del", null);
+        put("h1", null);
+        put("h2", null);
+        put("h3", null);
+        put("h4", null);
+        put("h5", null);
+        put("h6", null);
+        put("pre", null);
+        put("underline", null);
+        put("strikethrough", null);
+        put("removeFormat", null);
+        put("left", null);
+        put("right", null);
+        put("center", null);
+        put("justify", null);
+        put("table", null);
+        put("ol", null);
+        put("ul", null);
+        put("a", null);
     }});
 
     private static final Map<String, String> UI_PROPERTIES_UI_INSPECTOR_KEYS = Collections.unmodifiableMap(new HashMap<String, String>() {{
@@ -145,7 +191,7 @@ public class YamlCompletionContributor extends CompletionContributor {
                 uiHelpElementPattern,
                 new YamlCompletionProvider(UI_HELP_KEYS));
 
-        // ui.help
+        // ui.inspector
         PsiElementPattern.Capture<PsiElement> uiInspectorElementPattern =
                 getNodeTypeElementMatcher("inspector", "ui");
         extend(CompletionType.BASIC,
@@ -186,6 +232,34 @@ public class YamlCompletionContributor extends CompletionContributor {
         extend(CompletionType.BASIC,
                 uiPropertiesInspectorElementPattern,
                 new YamlCompletionProvider(UI_PROPERTIES_UI_INSPECTOR_KEYS));
+
+        // properties.*.ui.inline
+        PsiElementPattern.Capture<PsiElement> uiPropertiesInlineElementPattern =
+                getNodeTypeElementMatcher("inline", "ui", "*", "properties");
+        extend(CompletionType.BASIC,
+                uiPropertiesInlineElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_UI_INLINE_KEYS));
+
+        // properties.*.ui.inline.editorOptions
+        PsiElementPattern.Capture<PsiElement> uiPropertiesInlineEditorOptionsElementPattern =
+                getNodeTypeElementMatcher("editorOptions", "inline", "ui", "*", "properties");
+        extend(CompletionType.BASIC,
+                uiPropertiesInlineEditorOptionsElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_UI_INLINE_EDITOR_OPTIONS_KEYS));
+
+        // properties.*.ui.inline.editorOptions.linking
+        PsiElementPattern.Capture<PsiElement> uiPropertiesInlineEditorOptionsLinkingElementPattern =
+                getNodeTypeElementMatcher("linking", "editorOptions", "inline", "ui", "*", "properties");
+        extend(CompletionType.BASIC,
+                uiPropertiesInlineEditorOptionsLinkingElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_UI_INLINE_EDITOR_OPTIONS_LINKING_KEYS));
+
+        // properties.*.ui.inline.editorOptions.formatting
+        PsiElementPattern.Capture<PsiElement> uiPropertiesInlineEditorOptionsFormattingElementPattern =
+                getNodeTypeElementMatcher("formatting", "editorOptions", "inline", "ui", "*", "properties");
+        extend(CompletionType.BASIC,
+                uiPropertiesInlineEditorOptionsFormattingElementPattern,
+                new YamlCompletionProvider(UI_PROPERTIES_UI_INLINE_EDITOR_OPTIONS_FORMATTING_KEYS));
 
         // label
         PsiElementPattern.Capture<PsiElement> labelElementPattern =
