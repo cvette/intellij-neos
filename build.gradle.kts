@@ -8,11 +8,11 @@ plugins {
     // Java support
     java
     // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-    id("org.jetbrains.intellij") version "0.6.3"
+    id("org.jetbrains.intellij") version "0.6.5"
     // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
-    id("org.jetbrains.changelog") version "0.6.2"
+    id("org.jetbrains.changelog") version "1.1.1"
     // gradle-grammar-kit-plugin - read more: https://github.com/JetBrains/gradle-grammar-kit-plugin
-    id("org.jetbrains.grammarkit") version "2020.2.1"
+    id("org.jetbrains.grammarkit") version "2020.3.2"
 }
 
 // Import variables from gradle.properties file
@@ -103,16 +103,26 @@ tasks {
         untilBuild(pluginUntilBuild)
 
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
-        pluginDescription(closure {
-            File("./README.md").readText().lines().run {
-                subList(indexOf("<!-- Plugin description -->") + 1, indexOf("<!-- Plugin description end -->"))
-            }.joinToString("\n").run { markdownToHTML(this) }
-        })
+        pluginDescription(
+                closure {
+                    File("./README.md").readText().lines().run {
+                        val start = "<!-- Plugin description -->"
+                        val end = "<!-- Plugin description end -->"
+
+                        if (!containsAll(listOf(start, end))) {
+                            throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                        }
+                        subList(indexOf(start) + 1, indexOf(end))
+                    }.joinToString("\n").run { markdownToHTML(this) }
+                }
+        )
 
         // Get the latest available change notes from the changelog file
-        changeNotes(closure {
-            changelog.getLatest().toHTML()
-        })
+        changeNotes(
+                closure {
+                    changelog.getLatest().toHTML()
+                }
+        )
     }
 
     runPluginVerifier {
