@@ -34,6 +34,8 @@ val platformDownloadSources: String by project
 val grammarKitVersion: String by project
 val jFlexVersion: String by project
 
+val javaVersion: String by project
+
 group = pluginGroup
 version = pluginVersion
 
@@ -92,8 +94,8 @@ val generateFusionParser = task<GenerateParser>("GenerateParser") {
 tasks {
     // Set the compatibility versions to 1.8
     withType<JavaCompile> {
-        sourceCompatibility = "1.8"
-        targetCompatibility = "1.8"
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
         dependsOn(generateFusionLexer, generateFusionParser)
     }
 
