@@ -28,7 +28,7 @@ C_STYLE_COMMENT=("/*"[^"*"]{COMMENT_TAIL})|"/*"
 DOC_COMMENT="/*""*"+("/"|([^"/""*"]{COMMENT_TAIL}))?
 COMMENT_TAIL=([^"*"]*("*"+[^"*""/"])?)*("*"+"/")?
 
-WHITE_SPACE = [ \t\f]*
+WHITE_SPACE = [ \t\f]+
 CRLF = \n | \r | \r\n
 EQUALS = "="
 ARROW = "=>"
@@ -50,14 +50,14 @@ VALUE_SEPARATOR = ","
 
 VALUE_STRING_SINGLE_QUOTE =             [\']
 ESCAPED_SINGLE_QUOTE =                  "\\\\"* "\\\'"
-VALUE_STRING_IN_SINGLE_QUOTE =          [^\n\r\'\\]*
+VALUE_STRING_IN_SINGLE_QUOTE =          [^\n\r\'\\]+
 VALUE_STRING_DOUBLE_QUOTE =             [\"]
 ESCAPED_DOUBLE_QUOTE =                  "\\\\"* "\\\""
-VALUE_STRING_IN_DOUBLE_QUOTE =          [^\n\r\"\\]*
+VALUE_STRING_IN_DOUBLE_QUOTE =          [^\n\r\"\\]+
 
 BACKTICK = "`"
 ESCAPED_BACKTICK = "\\\\"* "\\\`"
-VALUE_STRING_IN_BACKTICKS = [^\n\r\`\\]*
+VALUE_STRING_IN_BACKTICKS = [^\n\r\`\\]+
 
 LEFT_BRACE = "{"
 RIGHT_BRACE = "}"
@@ -72,7 +72,7 @@ PATH_PART = [a-zA-Z0-9:_\-]+
 
 EEL_IDENTIFIER = [a-zA-Z_] [a-zA-Z0-9_\-]*
 PATH_SEPARATOR = {DOT}
-ANY_STRING = [^ \t\f\n\r]*
+ANY_STRING = [^ \t\f\n\r]+
 COPY_OPERATOR = "<"
 UNSET_OPERATOR = ">"
 ASSIGNMENT_OPERATOR = "="
@@ -273,15 +273,15 @@ IF_SEPARATOR = {COLON}
 
 <VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_PATH> {
     {VALUE_STRING_SINGLE_QUOTE}             { yybegin(PATH_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
-    {ESCAPED_SINGLE_QUOTE}*                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
-    {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
+    {ESCAPED_SINGLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
+    {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_SINGLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
 }
 
 <VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE, VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_EXPRESSION> {
     {CRLF}                                  { return FusionTypes.CRLF; }
-    {ESCAPED_SINGLE_QUOTE}*                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
-    {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
+    {ESCAPED_SINGLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
+    {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_SINGLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
 }
 
@@ -295,22 +295,22 @@ IF_SEPARATOR = {COLON}
 
 <VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_PATH> {
     {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(PATH_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
-    {ESCAPED_DOUBLE_QUOTE}*                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
-    {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
+    {ESCAPED_DOUBLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
+    {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_DOUBLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
 }
 
 <VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE, VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_EXPRESSION> {
     {CRLF}                                  { return FusionTypes.CRLF; }
-    {ESCAPED_DOUBLE_QUOTE}*                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
-    {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
+    {ESCAPED_DOUBLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
+    {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_DOUBLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
 }
 
 <VALUE_STRING_EXPECTED_IN_BACKTICKS> {
     {CRLF}                                  { return FusionTypes.CRLF; }
-    {ESCAPED_BACKTICK}*                     { return FusionTypes.ESCAPED_BACKTICK; }
-    {BACKSLASH}*                            { return FusionTypes.VALUE_STRING; }
+    {ESCAPED_BACKTICK}+                     { return FusionTypes.ESCAPED_BACKTICK; }
+    {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_BACKTICKS}             { return FusionTypes.VALUE_STRING; }
     {BACKTICK}                              { yybegin(CRLF_EXPECTED); return FusionTypes.BACKTICK; }
 }
