@@ -19,6 +19,7 @@ package de.vette.idea.neos.lang.fusion.annotators;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionFile;
 import de.vette.idea.neos.lang.fusion.psi.FusionPropertyCopy;
@@ -37,7 +38,7 @@ public class PrototypeInheritanceAnnotator implements Annotator {
                     && copy.getPath().getLastChild() instanceof FusionPrototypeSignature
                     && copy.getPrototypeSignature() != null) {
 
-                holder.createErrorAnnotation(element, "Prototype inheritance can only be defined globally");
+                holder.newAnnotation(HighlightSeverity.ERROR, "Prototype inheritance can only be defined globally").create();
             }
         }
     }

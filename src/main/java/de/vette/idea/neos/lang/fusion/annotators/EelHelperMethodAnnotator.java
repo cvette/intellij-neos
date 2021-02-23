@@ -20,6 +20,7 @@ package de.vette.idea.neos.lang.fusion.annotators;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.indexing.FileBasedIndex;
@@ -47,7 +48,7 @@ public class EelHelperMethodAnnotator implements Annotator {
                          }
                     }
 
-                    holder.createErrorAnnotation(methodCall, "Unresolved EEL helper method");
+                    holder.newAnnotation(HighlightSeverity.ERROR, "Unresolved EEL helper method").create();
                 }
             }
         }
