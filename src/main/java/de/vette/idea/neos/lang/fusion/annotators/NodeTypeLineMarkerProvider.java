@@ -51,12 +51,14 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
 
             FusionType type = (FusionType) el;
             Collection<PsiElement> targets = ResolveEngine.getNodeTypeDefinitions(el.getProject(), type);
+            PsiElement unqualifiedType = type.getUnqualifiedType();
+
             if (!targets.isEmpty()) {
                 RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
                         .create(NeosIcons.NODE_TYPE)
                         .setTargets(targets)
                         .setTooltipText("Go to node type definition")
-                        .createLineMarkerInfo(el);
+                        .createLineMarkerInfo(unqualifiedType);
                 result.add(info);
             }
         }
