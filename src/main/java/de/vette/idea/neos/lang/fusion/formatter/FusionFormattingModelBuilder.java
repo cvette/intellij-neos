@@ -21,7 +21,6 @@ package de.vette.idea.neos.lang.fusion.formatter;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -34,16 +33,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class FusionFormattingModelBuilder implements FormattingModelBuilder {
 
-    @NotNull
     @Override
-    public FormattingModel createModel(PsiElement psiElement, CodeStyleSettings settings) {
+    public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
+        CodeStyleSettings settings = formattingContext.getCodeStyleSettings();
         SpacingBuilder spacingBuilder = createSpaceBuilder(settings);
-        final FusionBlock block = new FusionBlock(psiElement.getNode(), null, null, settings, spacingBuilder, new DefaultInjectedLanguageBlockBuilder(settings));
-        return FormattingModelProvider.createFormattingModelForPsiFile(psiElement.getContainingFile(), block, settings);
+        final FusionBlock block = new FusionBlock(formattingContext.getPsiElement().getNode(), null, null, formattingContext.getCodeStyleSettings(), spacingBuilder, new DefaultInjectedLanguageBlockBuilder(settings));
+        return FormattingModelProvider.createFormattingModelForPsiFile(formattingContext.getPsiElement().getContainingFile(), block, settings);
     }
 
     private static SpacingBuilder createSpaceBuilder(CodeStyleSettings settings) {
-        final FusionCodeStyleSettings fusionSettings = settings.getCustomSettings(FusionCodeStyleSettings.class);
         final CommonCodeStyleSettings commonSettings = settings.getCommonSettings(FusionLanguage.INSTANCE);
 
         SpacingBuilder spacingBuilder = new SpacingBuilder(settings, FusionLanguage.INSTANCE);

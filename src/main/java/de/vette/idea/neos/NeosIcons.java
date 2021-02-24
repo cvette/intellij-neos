@@ -23,5 +23,5 @@ import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 public class NeosIcons {
-    public static final Icon NODE_TYPE = IconLoader.getIcon("/de/vette/idea/neos/icons/neos.png");
+    public static final Icon NODE_TYPE = IconLoader.getIcon("/de/vette/idea/neos/icons/neos.png", NeosIcons.class);
 }
