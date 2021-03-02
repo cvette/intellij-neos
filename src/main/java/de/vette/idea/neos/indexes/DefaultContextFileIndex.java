@@ -76,7 +76,7 @@ public class DefaultContextFileIndex extends FileBasedIndexExtension<String, Str
             return false;
         }
 
-        return psiFile.getName().equals("Settings.yaml");
+        return psiFile.getName().matches("Settings(\\..+)?\\.yaml");
     }
 
     @NotNull
@@ -93,6 +93,6 @@ public class DefaultContextFileIndex extends FileBasedIndexExtension<String, Str
 
     @Override
     public int getVersion() {
-        return 1;
+        return 2;
     }
 }

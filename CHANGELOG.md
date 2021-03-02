@@ -3,15 +3,9 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
 ### Fixed
+- Index split settings files (Settings.*.yaml)
+
 
 ### Security
 ## [1.5.0]
