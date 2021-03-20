@@ -21,13 +21,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import de.vette.idea.neos.lang.fusion.psi.*;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedNamedElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionPrototypeInstanceReference;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FusionPrototypeInstanceImplMixin extends FusionStubbedNamedElementImpl implements FusionPrototypeInstance {
+public class FusionPrototypeInstanceImplMixin extends FusionElementImpl implements FusionPrototypeInstance {
 
     public FusionPrototypeInstanceImplMixin(@NotNull ASTNode node) {
         super(node);
@@ -52,7 +52,7 @@ public class FusionPrototypeInstanceImplMixin extends FusionStubbedNamedElementI
 
     @NotNull
     @Override
-    public PsiReference[] getReferences() {
+    public PsiReference @NotNull [] getReferences() {
         return super.getReferences();
     }
 }

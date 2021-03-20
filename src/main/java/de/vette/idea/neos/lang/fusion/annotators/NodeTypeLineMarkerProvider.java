@@ -35,7 +35,7 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
 
     @Nullable
     @Override
-    public LineMarkerInfo getLineMarkerInfo(@NotNull PsiElement element) {
+    public LineMarkerInfo<?> getLineMarkerInfo(@NotNull PsiElement element) {
         return null;
     }
 
@@ -44,7 +44,6 @@ public class NodeTypeLineMarkerProvider implements LineMarkerProvider {
         for (PsiElement el : elements) {
             if (!(el instanceof FusionType)
                     || !(el.getParent() instanceof FusionPrototypeSignature)
-                    || (((FusionPrototypeSignature) el.getParent()).isInheritedInDefinition())
                     || (el.getParent().getParent().getParent() instanceof FusionPropertyDeletion)) {
                 continue;
             }

@@ -19,8 +19,9 @@
 package de.vette.idea.neos.lang.fusion.psi;
 
 import com.intellij.psi.NavigatablePsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.PsiNamedElement;
 
-public interface FusionNamedElement extends FusionCompositeElement, PsiNamedElement, NavigatablePsiElement {
+public interface FusionNamedElement extends FusionElement, PsiNameIdentifierOwner, NavigatablePsiElement {
 
 }

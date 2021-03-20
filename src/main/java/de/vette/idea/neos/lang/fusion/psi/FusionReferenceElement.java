@@ -19,7 +19,7 @@ package de.vette.idea.neos.lang.fusion.psi;
 
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 
-public interface FusionReferenceElement extends FusionCompositeElement {
+public interface FusionReferenceElement extends FusionElement {
 
     @Override
     FusionReference getReference();

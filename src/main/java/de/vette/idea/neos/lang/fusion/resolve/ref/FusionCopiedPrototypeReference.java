@@ -15,34 +15,36 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.vette.idea.neos.lang.fusion.resolve.ref;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
+import de.vette.idea.neos.lang.fusion.psi.FusionCopiedPrototypeSignature;
+import de.vette.idea.neos.lang.fusion.psi.FusionType;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
-public class FusionPrototypeInheritanceReference extends FusionReferenceBase<FusionPrototypeSignature> {
+public class FusionCopiedPrototypeReference extends FusionReferenceBase<FusionCopiedPrototypeSignature> implements FusionReference {
 
-    public FusionPrototypeInheritanceReference(FusionPrototypeSignature psiElement) {
+    public FusionCopiedPrototypeReference(FusionCopiedPrototypeSignature psiElement) {
         super(psiElement);
     }
 
     @Override
     List<PsiElement> resolveInner() {
-        return ResolveEngine.getPrototypeDefinitions(getElement().getProject(), getElement().getType());
+        return ResolveEngine.getPrototypeDefinitions(getElement().getProject(), Objects.requireNonNull(getElement().getType()));
     }
 
     @Override
-    public TextRange getRangeInElement() {
-        if (myElement.getType() == null) {
-            return myElement.getTextRange();
+    public @NotNull TextRange getRangeInElement() {
+        FusionType type  = myElement.getType();
+        if (type == null) {
+            return new TextRange(0,0);
         }
 
-        int startOffset = myElement.getType().getStartOffsetInParent();
-        return new TextRange(startOffset, startOffset + myElement.getType().getTextLength());
+        return type.getTextRangeInParent();
     }
 }

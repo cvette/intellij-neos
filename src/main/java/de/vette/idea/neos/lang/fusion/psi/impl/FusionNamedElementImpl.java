@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public abstract class FusionNamedElementImpl extends FusionCompositeElementImpl implements FusionNamedElement, PsiNameIdentifierOwner {
+public abstract class FusionNamedElementImpl extends FusionElementImpl implements FusionNamedElement, PsiNameIdentifierOwner {
 
     public FusionNamedElementImpl(@NotNull ASTNode astNode) {
         super(astNode);
@@ -66,13 +66,11 @@ public abstract class FusionNamedElementImpl extends FusionCompositeElementImpl 
     @Override
     public ItemPresentation getPresentation() {
         return new ItemPresentation() {
-            @Nullable
             @Override
             public String getPresentableText() {
                 return "";
             }
 
-            @Nullable
             @Override
             public String getLocationString() {
                 return "";

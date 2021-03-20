@@ -20,16 +20,12 @@ package de.vette.idea.neos.lang.fusion.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeIdentifier;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
+import de.vette.idea.neos.lang.fusion.psi.FusionElement;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionCompositeElementImpl extends ASTWrapperPsiElement implements FusionCompositeElement {
+public abstract class FusionElementImpl extends ASTWrapperPsiElement implements FusionElement {
 
-    public FusionCompositeElementImpl(@NotNull ASTNode astNode) {
+    public FusionElementImpl(@NotNull ASTNode astNode) {
         super(astNode);
     }
 

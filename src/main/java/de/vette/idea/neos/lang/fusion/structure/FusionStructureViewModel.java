@@ -55,7 +55,7 @@ public class FusionStructureViewModel extends TextEditorBasedStructureViewModel 
 
     @NotNull
     @Override
-    public Sorter[] getSorters() {
+    public Sorter @NotNull [] getSorters() {
         return this.mySorters;
     }
 }

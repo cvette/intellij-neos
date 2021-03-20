@@ -21,6 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class FusionPrototypeInstanceReference extends FusionReferenceBase<Fusion
     }
 
     @Override
-    public TextRange getRangeInElement() {
+    public @NotNull TextRange getRangeInElement() {
         return new TextRange(myElement.getType().getStartOffsetInParent(), myElement.getType().getTextLength());
     }
 }

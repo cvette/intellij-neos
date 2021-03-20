@@ -20,6 +20,7 @@ package de.vette.idea.neos.lang.fusion.structure;
 
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
+import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.psi.*;
@@ -30,6 +31,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 
 public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
 
@@ -67,11 +69,7 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
 
         for (PsiElement element : blockElement.getChildren()) {
             if (element.getFirstChild() instanceof FusionPath) {
-                if (element instanceof FusionPropertyAssignment
-                        || element instanceof FusionPropertyBlock
-                        || element instanceof FusionPropertyDeletion
-                        || element instanceof FusionPropertyCopy) {
-
+                if (element instanceof NavigatablePsiElement) {
                     result.add(new FusionTreeElement(element.getFirstChild()));
                 }
             }
@@ -113,7 +111,7 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
 
         if (getElement().getFirstChild() != null
                 && getElement().getFirstChild() instanceof FusionPrototypeSignature) {
-            return ((FusionNamedElement)getElement()).getName();
+            return Objects.requireNonNull(((FusionPrototypeSignature) getElement().getFirstChild()).getType()).getText();
         }
 
         return getElement().getText();

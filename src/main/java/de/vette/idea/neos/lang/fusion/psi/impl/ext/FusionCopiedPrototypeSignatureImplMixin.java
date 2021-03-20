@@ -21,27 +21,26 @@ package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import de.vette.idea.neos.lang.fusion.psi.*;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionTypeImpl;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionCopiedPrototypeReference;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionPrototypeInstanceReference;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public abstract class FusionPrototypeSignatureImplMixin
-        extends FusionStubbedElementImpl<FusionPrototypeSignatureStub>
-        implements FusionPrototypeSignature {
+public abstract class FusionCopiedPrototypeSignatureImplMixin extends FusionElementImpl implements FusionCopiedPrototypeSignature {
 
-    public FusionPrototypeSignatureImplMixin(@NotNull ASTNode astNode) {
+    public FusionCopiedPrototypeSignatureImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
-    }
-
-    public FusionPrototypeSignatureImplMixin(@NotNull FusionPrototypeSignatureStub stub, @NotNull IStubElementType nodeType) {
-        super(stub, nodeType);
     }
 
     public boolean isInheritedInDefinition() {
@@ -75,12 +74,7 @@ public abstract class FusionPrototypeSignatureImplMixin
     }
 
     @Override
-    public @Nullable PsiElement getNameIdentifier() {
-        return getType();
-    }
-
-    @Override
-    public PsiElement setName(@NlsSafe @NotNull String name) throws IncorrectOperationException {
-        return Objects.requireNonNull(getType()).replace(new FusionTypeImpl(getType().getNode()));
+    public FusionReference getReference() {
+        return new FusionCopiedPrototypeReference(this);
     }
 }

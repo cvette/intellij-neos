@@ -27,6 +27,7 @@ import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
 import de.vette.idea.neos.lang.fusion.stubs.FusionNamespaceDeclarationStub;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class FusionNamespaceDeclarationImplMixin extends FusionStubbedElementImpl<FusionNamespaceDeclarationStub> implements FusionNamespaceDeclaration {
 
@@ -41,5 +42,10 @@ public abstract class FusionNamespaceDeclarationImplMixin extends FusionStubbedE
     @Override
     public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
         return null;
+    }
+
+    @Override
+    public @Nullable PsiElement getNameIdentifier() {
+        return getNamespace();
     }
 }

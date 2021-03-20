@@ -52,7 +52,7 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
         public FusionPrototypeSignatureStub createStub(@NotNull FusionPrototypeSignature psi, StubElement parentStub) {
             String name = "";
             String namespace = "";
-            Boolean isDefinition = false;
+            boolean isDefinition = false;
 
             if (psi.isDefinition()) {
                 isDefinition = true;

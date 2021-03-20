@@ -22,10 +22,10 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
+import de.vette.idea.neos.lang.fusion.psi.FusionElement;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionStubbedElementImpl<StubT extends StubElement> extends StubBasedPsiElementBase<StubT> implements FusionCompositeElement {
+public abstract class FusionStubbedElementImpl<StubT extends StubElement> extends StubBasedPsiElementBase<StubT> implements FusionElement {
 
     public FusionStubbedElementImpl(@NotNull StubT stub, @NotNull IStubElementType nodeType) {
         super(stub, nodeType);

@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * TypoScript2 token type
+ * Fusion token type
  */
 public class FusionTokenType extends IElementType{
     public FusionTokenType(@NotNull @NonNls String debugName) {

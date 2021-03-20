@@ -22,11 +22,11 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.io.StringRef;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
+import de.vette.idea.neos.lang.fusion.psi.FusionElement;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionStubElementType<StubT extends StubElement<?>, PsiT extends FusionCompositeElement>
+public abstract class FusionStubElementType<StubT extends StubElement<?>, PsiT extends FusionElement>
         extends IStubElementType<StubT, PsiT> {
 
     public FusionStubElementType(@NotNull @NonNls String debugName) {

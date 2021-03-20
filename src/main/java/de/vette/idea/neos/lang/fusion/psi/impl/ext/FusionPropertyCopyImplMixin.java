@@ -21,20 +21,20 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import de.vette.idea.neos.lang.fusion.psi.*;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static de.vette.idea.neos.lang.fusion.psi.FusionTypes.*;
 
-public class FusionPropertyCopyImplMixin extends FusionCompositeElementImpl implements FusionPropertyCopy {
+public class FusionPropertyCopyImplMixin extends FusionElementImpl implements FusionPropertyCopy {
 
     public FusionPropertyCopyImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
     }
 
     public boolean isPrototypeInheritance() {
-        return getParent() instanceof FusionFile && getPath().isPrototypeSignature() && getPrototypeSignature() != null;
+        return getParent() instanceof FusionFile && getPath().isPrototypeSignature() && getCopiedPrototypeSignature() != null;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class FusionPropertyCopyImplMixin extends FusionCompositeElementImpl impl
 
     @Override
     @Nullable
-    public FusionPrototypeSignature getPrototypeSignature() {
-        return PsiTreeUtil.getChildOfType(this, FusionPrototypeSignature.class);
+    public FusionCopiedPrototypeSignature getCopiedPrototypeSignature() {
+        return PsiTreeUtil.getChildOfType(this, FusionCopiedPrototypeSignature.class);
     }
 
     @Override

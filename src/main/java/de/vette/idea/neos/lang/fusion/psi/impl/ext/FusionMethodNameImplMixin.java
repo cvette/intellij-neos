@@ -20,12 +20,12 @@ package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionMethodNameReference;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import org.jetbrains.annotations.NotNull;
 
-public class FusionMethodNameImplMixin extends FusionCompositeElementImpl implements FusionMethodName {
+public class FusionMethodNameImplMixin extends FusionElementImpl implements FusionMethodName {
 
     public FusionMethodNameImplMixin(@NotNull ASTNode astNode) {
         super(astNode);

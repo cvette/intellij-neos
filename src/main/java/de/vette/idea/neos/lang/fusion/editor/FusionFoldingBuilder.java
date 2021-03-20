@@ -38,10 +38,10 @@ public class FusionFoldingBuilder implements FoldingBuilder{
      * @return The folding regions of the given document, for the given node.
      */
     @NotNull
-    public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
+    public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
         List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
         appendDescriptors(node, document, descriptors);
-        return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+        return descriptors.toArray(new FoldingDescriptor[0]);
     }
 
     /**

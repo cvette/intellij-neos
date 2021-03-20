@@ -20,6 +20,6 @@ package de.vette.idea.neos.lang.fusion.psi;
 
 import com.intellij.psi.PsiElement;
 
-public interface FusionCompositeElement extends PsiElement {
+public interface FusionElement extends PsiElement {
 
 }

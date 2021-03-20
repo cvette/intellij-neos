@@ -20,10 +20,10 @@ package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.lang.fusion.psi.*;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class FusionPathImplMixin extends FusionNamedElementImpl implements FusionPath {
+public abstract class FusionPathImplMixin extends FusionElementImpl implements FusionPath {
     public FusionPathImplMixin(@NotNull ASTNode astNode) {
         super(astNode);
     }

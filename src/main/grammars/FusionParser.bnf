@@ -5,8 +5,8 @@
     parserClass="de.vette.idea.neos.lang.fusion.parser.FusionParser"
     parserUtilClass="de.vette.idea.neos.lang.fusion.parser.FusionParserUtil"
 
-    implements='de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement'
-    extends="de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl"
+    implements='de.vette.idea.neos.lang.fusion.psi.FusionElement'
+    extends="de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl"
 
     psiClassPrefix="Fusion"
     psiImplClassSuffix="Impl"
@@ -22,6 +22,7 @@ FusionFile ::= item_*
 private item_ ::= (namespace_declaration | include_declaration | property | SINGLE_LINE_COMMENT | C_STYLE_COMMENT | DOC_COMMENT) {
     recoverWhile="item_recovery"
 }
+
 private item_recovery ::= !(PROTOTYPE_KEYWORD|PATH_PART|EOF|VALUE_STRING_QUOTE|RIGHT_BRACE|LEFT_BRACE|INCLUDE_KEYWORD|NAMESPACE_KEYWORD|META_PROPERTY_KEYWORD|SINGLE_LINE_COMMENT|C_STYLE_COMMENT|DOC_COMMENT)
 
 inner block ::= LEFT_BRACE [item_ *] RIGHT_BRACE {pin=1}
@@ -44,15 +45,15 @@ private property ::= path (property_block|property_deletion|property_copy|proper
 left property_block ::= block
 left property_deletion ::= UNSET_OPERATOR
 left property_assignment ::= ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_dsl|value_string_line|expression|prototype_instance) {pin=1}
-left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance|(prototype_signature [block])) {
+left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance|(copied_prototype_signature [block])) {
     pin=1
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPropertyCopyMixin"]
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPropertyCopyMixin"]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPropertyCopyImplMixin"
 }
 
 type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {
     pin=2
-    implements = "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement"
+    implements = "de.vette.idea.neos.lang.fusion.psi.FusionElement"
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionTypeImplMixin"
 }
 
@@ -64,17 +65,24 @@ prototype_instance ::= type [block] {
 
 path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))* {
     pin=2
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement";  "de.vette.idea.neos.lang.fusion.psi.ext.FusionPathMixin"]
+    implements = ["de.vette.idea.neos.lang.fusion.psi.FusionElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPathMixin"]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPathImplMixin"
 }
 
 meta_property ::= META_PROPERTY_KEYWORD META_PROPERTY_NAME {pin=1}
+
 prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
     pin=1
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPrototypeSignature" ]
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPrototypeSignature" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeSignatureImplMixin"
     stubClass = "de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub"
     elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
+}
+
+copied_prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
+    pin=1
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionCopiedPrototypeSignature" ]
+    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionCopiedPrototypeSignatureImplMixin"
 }
 
 value_dsl ::= DSL_IDENTIFIER BACKTICK value_dsl_content BACKTICK {

@@ -5,7 +5,7 @@
 ## [Unreleased]
 ### Fixed
 - Index split settings files (Settings.*.yaml)
-
+- Weird behavior when trying to navigate to prototype definitions (sometimes only the namespace was clickable)
 
 ### Security
 ## [1.5.0]

@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * TypoScript2 element type
+ * Fusion element type
  */
 public class FusionElementType extends IElementType {
 

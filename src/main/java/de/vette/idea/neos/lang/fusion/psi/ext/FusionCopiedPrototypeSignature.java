@@ -17,7 +17,7 @@
  */
 package de.vette.idea.neos.lang.fusion.psi.ext;
 
-public interface FusionPrototypeSignature {
+public interface FusionCopiedPrototypeSignature {
     /**
      * Check if this prototype signature is part of a prototype definition
      *

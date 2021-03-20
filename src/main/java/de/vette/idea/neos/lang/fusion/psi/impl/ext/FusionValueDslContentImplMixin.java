@@ -23,10 +23,10 @@ import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import de.vette.idea.neos.lang.fusion.injection.FusionDslTextEscaper;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueDslContent;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionCompositeElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import org.jetbrains.annotations.NotNull;
 
-public class FusionValueDslContentImplMixin extends FusionCompositeElementImpl implements FusionValueDslContent {
+public class FusionValueDslContentImplMixin extends FusionElementImpl implements FusionValueDslContent {
 
     public FusionValueDslContentImplMixin(@NotNull ASTNode astNode) {
         super(astNode);

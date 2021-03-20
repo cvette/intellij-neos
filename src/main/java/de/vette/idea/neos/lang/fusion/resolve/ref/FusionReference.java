@@ -19,13 +19,15 @@ package de.vette.idea.neos.lang.fusion.resolve.ref;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
-import de.vette.idea.neos.lang.fusion.psi.FusionCompositeElement;
+import de.vette.idea.neos.lang.fusion.psi.FusionElement;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface FusionReference extends PsiPolyVariantReference {
 
     @Override
-    FusionCompositeElement getElement();
+    @NotNull
+    FusionElement getElement();
 
     @Nullable
     @Override
