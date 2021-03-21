@@ -19,8 +19,11 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiReference;
 import de.vette.idea.neos.lang.fusion.psi.FusionType;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
+import de.vette.idea.neos.lang.fusion.resolve.ref.FusionTypeReference;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class FusionTypeImplMixin extends FusionElementImpl implements FusionType {
@@ -31,10 +34,19 @@ public abstract class FusionTypeImplMixin extends FusionElementImpl implements F
 
     @Override
     public String getName() {
-        if (getObjectTypeNamespace() != null) {
-            return getObjectTypeNamespace().getText().concat(":").concat(getUnqualifiedType().getText());
-        }
-
-        return getUnqualifiedType().getText();
+        return getText();
     }
+
+    @Override
+    public FusionReference getReference() {
+        return new FusionTypeReference(this);
+    }
+
+    @NotNull
+    @Override
+    public PsiReference @NotNull [] getReferences() {
+        return super.getReferences();
+    }
+
+
 }

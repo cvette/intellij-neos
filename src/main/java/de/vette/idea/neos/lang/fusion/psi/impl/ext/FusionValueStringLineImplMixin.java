@@ -22,14 +22,14 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.util.PsiTreeUtil;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLine;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueStringLineContent;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionNamedElementImpl;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionResourceStringReference;
 import de.vette.idea.neos.lang.fusion.resolve.ref.FusionStringReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FusionValueStringLineImplMixin extends FusionNamedElementImpl implements FusionValueStringLine {
+public class FusionValueStringLineImplMixin extends FusionElementImpl implements FusionValueStringLine {
 
     public FusionValueStringLineImplMixin(@NotNull ASTNode astNode) {
         super(astNode);

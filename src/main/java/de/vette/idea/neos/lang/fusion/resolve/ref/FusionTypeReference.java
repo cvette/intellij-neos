@@ -17,27 +17,40 @@
  */
 package de.vette.idea.neos.lang.fusion.resolve.ref;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
 import de.vette.idea.neos.lang.fusion.psi.*;
+import de.vette.idea.neos.lang.fusion.psi.impl.FusionTypeImpl;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class FusionPrototypeInstanceReference extends FusionReferenceBase<FusionPrototypeInstance> implements FusionReference {
+public class FusionTypeReference extends FusionReferenceBase<FusionType> implements FusionReference {
 
-    public FusionPrototypeInstanceReference(FusionPrototypeInstance psiElement) {
+    public FusionTypeReference(FusionType psiElement) {
         super(psiElement);
     }
 
     @Override
     List<PsiElement> resolveInner() {
-        return ResolveEngine.getPrototypeDefinitions(getElement().getProject(), getElement().getType());
+        return ResolveEngine.getPrototypeDefinitions(getElement().getProject(), getElement());
     }
 
     @Override
     public @NotNull TextRange getRangeInElement() {
-        return new TextRange(myElement.getType().getStartOffsetInParent(), myElement.getType().getTextLength());
+        return new TextRange(0, myElement.getTextLength());
+    }
+
+    @Override
+    public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
+        FusionTypeImpl type = (FusionTypeImpl)FusionElementFactory.createType(myElement.getProject(), newElementName);
+        ASTNode node = myElement.getNode();
+        ASTNode newTypeNode = type.getNode();
+
+        node.getTreeParent().replaceChild(node, newTypeNode);
+        return myElement;
     }
 }

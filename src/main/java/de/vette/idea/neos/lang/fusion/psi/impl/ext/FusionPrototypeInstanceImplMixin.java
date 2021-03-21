@@ -18,12 +18,9 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionPrototypeInstanceReference;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,16 +40,5 @@ public class FusionPrototypeInstanceImplMixin extends FusionElementImpl implemen
     @Override
     public FusionType getType() {
         return notNullChild(PsiTreeUtil.getChildOfType(this, FusionType.class));
-    }
-
-    @Override
-    public FusionReference getReference() {
-        return new FusionPrototypeInstanceReference(this);
-    }
-
-    @NotNull
-    @Override
-    public PsiReference @NotNull [] getReferences() {
-        return super.getReferences();
     }
 }

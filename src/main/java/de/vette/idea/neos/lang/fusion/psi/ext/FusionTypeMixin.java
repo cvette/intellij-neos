@@ -15,27 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package de.vette.idea.neos.lang.fusion.psi.ext;
 
-package de.vette.idea.neos.lang.fusion.psi;
-
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import de.vette.idea.neos.lang.fusion.FusionLanguage;
-import de.vette.idea.neos.lang.fusion.FusionFileType;
-import org.jetbrains.annotations.NotNull;
-
-public class FusionFile extends PsiFileBase {
-
-    public FusionFile(@NotNull FileViewProvider fileViewProvider) {
-        super(fileViewProvider, FusionLanguage.INSTANCE);
-    }
-
-    @NotNull
-    @Override
-    public FileType getFileType() {
-        return FusionFileType.INSTANCE;
-    }
-
-
+public interface FusionTypeMixin {
 }

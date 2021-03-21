@@ -30,57 +30,9 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public abstract class FusionNamedElementImpl extends FusionElementImpl implements FusionNamedElement, PsiNameIdentifierOwner {
+public abstract class FusionNamedElementImpl extends FusionElementImpl implements FusionNamedElement {
 
     public FusionNamedElementImpl(@NotNull ASTNode astNode) {
         super(astNode);
-    }
-
-    @Nullable
-    @Override
-    public PsiElement getNameIdentifier() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-        return null;
-    }
-
-    @NotNull
-    @Override
-    public PsiElement getNavigationElement() {
-        return super.getNavigationElement();
-    }
-
-    @Override
-    public int getTextOffset() {
-        return super.getTextOffset();
-    }
-
-    @Override
-    public ItemPresentation getPresentation() {
-        return new ItemPresentation() {
-            @Override
-            public String getPresentableText() {
-                return "";
-            }
-
-            @Override
-            public String getLocationString() {
-                return "";
-            }
-
-            @Nullable
-            @Override
-            public Icon getIcon(boolean unused) {
-                return null;
-            }
-        };
     }
 }

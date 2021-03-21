@@ -19,23 +19,9 @@
 package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.NlsSafe;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.util.IncorrectOperationException;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionTypeImpl;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionCopiedPrototypeReference;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionPrototypeInstanceReference;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
-import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public abstract class FusionCopiedPrototypeSignatureImplMixin extends FusionElementImpl implements FusionCopiedPrototypeSignature {
 
@@ -43,21 +29,11 @@ public abstract class FusionCopiedPrototypeSignatureImplMixin extends FusionElem
         super(astNode);
     }
 
-    public boolean isInheritedInDefinition() {
-        return (getParent() instanceof FusionPropertyCopy);
-    }
-
     public boolean isDefinition() {
         return isSingleLineDefinition()
                 || (isSingleElementInPathAtFileRoot()
                 && (getParent().getParent() instanceof FusionPropertyBlock
                 || getParent().getParent() instanceof FusionPropertyCopy));
-    }
-
-    public boolean isInheritanceDefinition() {
-        return isSingleElementInPathAtFileRoot()
-                && getParent().getParent() instanceof FusionPropertyCopy;
-
     }
 
     protected boolean isSingleLineDefinition() {
@@ -71,10 +47,5 @@ public abstract class FusionCopiedPrototypeSignatureImplMixin extends FusionElem
         return getParent() instanceof FusionPath
                 && ((FusionPath) getParent()).isPrototypeSignature()
                 && getParent().getParent().getParent() instanceof FusionFile;
-    }
-
-    @Override
-    public FusionReference getReference() {
-        return new FusionCopiedPrototypeReference(this);
     }
 }

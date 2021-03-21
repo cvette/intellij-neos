@@ -27,6 +27,7 @@ import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionTypeImpl;
 import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
+import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,10 +43,6 @@ public abstract class FusionPrototypeSignatureImplMixin
 
     public FusionPrototypeSignatureImplMixin(@NotNull FusionPrototypeSignatureStub stub, @NotNull IStubElementType nodeType) {
         super(stub, nodeType);
-    }
-
-    public boolean isInheritedInDefinition() {
-        return (getParent() instanceof FusionPropertyCopy);
     }
 
     public boolean isDefinition() {
@@ -80,7 +77,32 @@ public abstract class FusionPrototypeSignatureImplMixin
     }
 
     @Override
+    public String getName() {
+        if (getType() == null) {
+            return "";
+        }
+
+        return getType().getText();
+    }
+
+    @Override
     public PsiElement setName(@NlsSafe @NotNull String name) throws IncorrectOperationException {
-        return Objects.requireNonNull(getType()).replace(new FusionTypeImpl(getType().getNode()));
+        FusionTypeImpl type = (FusionTypeImpl)FusionElementFactory.createType(getProject(), name);
+
+        if (getType() == null) {
+            return this;
+        }
+
+        ASTNode typeNode = getType().getNode();
+        ASTNode newTypeNode = type.getNode();
+
+        if (typeNode == null) {
+            getNode().addChild(newTypeNode);
+        }
+        else {
+            getNode().replaceChild(typeNode, newTypeNode);
+        }
+
+        return this;
     }
 }

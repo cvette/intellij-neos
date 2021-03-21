@@ -51,6 +51,10 @@
     <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
     <lang.psiStructureViewFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.structure.FusionStructureViewBuilderFactory"/>
+    <lang.namesValidator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.refactoring.FusionNamesValidator"/>
+    <lang.findUsagesProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.usages.PrototypeFindUsagesProvider"/>
+    <lang.refactoringSupport language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.refactoring.FusionRefactoringSupportProvider"/>
+    <usageTypeProvider implementation="de.vette.idea.neos.lang.fusion.usages.UsagesTypeProvider"/>
 
     <liveTemplateContext implementation="de.vette.idea.neos.lang.fusion.livetemplates.FusionContext"/>
 

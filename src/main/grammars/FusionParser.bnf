@@ -53,13 +53,13 @@ left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|valu
 
 type ::= [OBJECT_TYPE_NAMESPACE OBJECT_TYPE_SEPARATOR] UNQUALIFIED_TYPE {
     pin=2
-    implements = "de.vette.idea.neos.lang.fusion.psi.FusionElement"
+    implements = ["de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionTypeMixin"]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionTypeImplMixin"
 }
 
 prototype_instance ::= type [block] {
     pin=1
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionElement" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeInstanceImplMixin"
 }
 
@@ -81,7 +81,7 @@ prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
 
 copied_prototype_signature ::= PROTOTYPE_KEYWORD LEFT_PAREN type RIGHT_PAREN {
     pin=1
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionCopiedPrototypeSignature" ]
+    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionCopiedPrototypeSignature" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionCopiedPrototypeSignatureImplMixin"
 }
 

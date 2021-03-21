@@ -36,7 +36,7 @@ public abstract class FusionReferenceBase<T extends FusionReferenceElement> exte
 
     @NotNull
     @Override
-    public ResolveResult[] multiResolve(boolean incompleteCode) {
+    public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         return ResolveCache.getInstance(myElement.getProject())
                 .resolveWithCaching(this, (r, incomplete) -> {
                     List<PsiElement> elements = r.resolveInner();
@@ -58,7 +58,7 @@ public abstract class FusionReferenceBase<T extends FusionReferenceElement> exte
 
     @NotNull
     @Override
-    public Object[] getVariants() {
+    public Object @NotNull [] getVariants() {
         return new Object[0];
     }
 }

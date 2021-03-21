@@ -1,0 +1,4 @@
+prototype(<caret>Test:FindThisPrototype) < prototype(Neos.Fusion:Component)
+test = Test:FindThisPrototype
+prototype(Test:Inherits) < prototype(Test:FindThisPrototype)
+prototype(Test:FindThisPrototype) >

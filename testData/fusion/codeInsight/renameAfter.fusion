@@ -1,0 +1,4 @@
+prototype(Test:RenamedThisPrototype) < prototype(Neos.Fusion:Component)
+test = Test:RenamedThisPrototype
+prototype(Test:Inherits) < prototype(Test:RenamedThisPrototype)
+prototype(Test:RenamedThisPrototype) >

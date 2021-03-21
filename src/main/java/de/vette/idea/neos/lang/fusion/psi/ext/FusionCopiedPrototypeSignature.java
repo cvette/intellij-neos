@@ -24,12 +24,4 @@ public interface FusionCopiedPrototypeSignature {
      * @return boolean
      */
     boolean isDefinition();
-
-    /**
-     * Check if this prototype is defined by inheriting another prototype
-     * e.g. prototype(Foo:Bar) < prototype(Bar:Baz)
-     *
-     * @return boolean
-     */
-    boolean isInheritanceDefinition();
 }

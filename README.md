@@ -15,6 +15,8 @@ Support for the Neos CMS in Intellij IDEA / PhpStorm
   * Structure view
   * EEL helper references (Ctrl+Click navigation to class/method)
   * Prototype references (Ctrl+Click navigation to prototype definition)
+  * Find usages of prototypes
+  * Rename refactoring for prototypes
 
 **Support for node type definitions**
   * Configuration keys completion
