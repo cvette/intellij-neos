@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.6.0]
+### Added
 - Rename refactoring for Fusion prototypes
 - Find usages of Fusion prototypes
 
