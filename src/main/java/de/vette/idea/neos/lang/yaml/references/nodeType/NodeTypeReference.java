@@ -24,19 +24,18 @@ public class NodeTypeReference extends PsiPolyVariantReferenceBase<YAMLPsiElemen
 
     private static TextRange textRangeFromElement(YAMLPsiElement yamlElement, boolean isKey) {
         int sourceStart = 0;
-        int sourceEnd = yamlElement.getTextLength();
+        int sourceLength;
         if (isKey && yamlElement instanceof YAMLKeyValue) {
-            sourceEnd = ((YAMLKeyValue) yamlElement).getKey().getTextLength();
+            sourceLength = ((YAMLKeyValue) yamlElement).getKey().getTextLength();
         } else if (yamlElement instanceof YAMLKeyValue) {
             sourceStart = ((YAMLKeyValue) yamlElement).getValue().getStartOffsetInParent();
-            sourceEnd = ((YAMLKeyValue) yamlElement).getValue().getTextLength();
+            sourceLength = ((YAMLKeyValue) yamlElement).getValue().getTextLength();
         } else if (yamlElement instanceof YAMLSequenceItem) {
-            sourceStart = ((YAMLSequenceItem) yamlElement).getValue().getStartOffsetInParent();
-            sourceEnd = ((YAMLSequenceItem) yamlElement).getValue().getTextLength();
+            sourceLength = ((YAMLSequenceItem) yamlElement).getValue().getTextLength();
         } else {
             return yamlElement.getTextRange();
         }
-        return new TextRange(sourceStart, sourceStart + sourceEnd);
+        return new TextRange(sourceStart, sourceStart + sourceLength);
     }
 
     public NodeTypeReference(YAMLKeyValue yamlElement, boolean isKey) {
