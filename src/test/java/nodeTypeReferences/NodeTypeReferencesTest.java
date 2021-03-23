@@ -10,6 +10,7 @@ import de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReference;
 
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -75,6 +76,43 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
         );
     }
 
+    public void testChildNodesHaveReference() {
+        loadFixture("NodeTypes.childNodes.yaml");
+        resolveAtPosition(myFixture.getCaretOffset(), resolveResult -> {
+            assertEquals("Not the right number of references found", 1, resolveResult.length);
+
+            YAMLKeyValue yamlKeyValue = assertInstanceOf(resolveResult[0].getElement(), YAMLKeyValue.class);
+
+            assertEquals("keyText does not match", "Neos.NodeTypes:Item", yamlKeyValue.getKeyText());
+            assertEquals("wrong file name", "NodeTypes.childNodes.yaml", yamlKeyValue.getContainingFile().getName());
+            assertTrue("Text offset fits", yamlKeyValue.getTextOffset() < 5);
+        }, e -> e.getParent().getParent());
+    }
+
+    public void testArrayItemsHaveReference() {
+        loadFixture("NodeTypes.references.yaml");
+        int i = 0;
+        String[] expectedNodeTypes = new String[]{
+            "Neos.NodeTypes:Headline",
+            "Neos.NodeTypes:Text",
+            "Neos.NodeTypes:Headline",
+            "Neos.NodeTypes:Text",
+            "Neos.NodeTypes:Image",
+        };
+        for (var caret : myFixture.getEditor().getCaretModel().getAllCarets()) {
+            var expectedNodeType = expectedNodeTypes[i];
+            resolveAtPosition(caret.getOffset(), resolveResult -> {
+                assertEquals("Not the right number of references found", 1, resolveResult.length);
+
+                YAMLKeyValue yamlKeyValue = assertInstanceOf(resolveResult[0].getElement(), YAMLKeyValue.class);
+
+                assertEquals("keyText does not match", expectedNodeType, yamlKeyValue.getKeyText());
+                assertEquals("wrong file name", "NodeTypes.Basic.yaml", yamlKeyValue.getContainingFile().getName());
+            });
+            i++;
+        }
+    }
+
     /**
      * Helper actually running the testcase
      */
@@ -90,15 +128,29 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
         });
     }
 
-    private void doRunTestWithCustomAssertions(String fileNameToInclude, Consumer<ResolveResult[]> assertResults) {
+    private void loadFixture(String fileNameToInclude) {
         myFixture.configureByFiles(fileNameToInclude, "NodeTypes.Basic.yaml");
 
         // actually trigger indexing
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    }
 
-        PsiElement element = myFixture.getFile().findElementAt(myFixture.getCaretOffset()).getParent();
+    private void resolveAtPosition(int offset, Consumer<ResolveResult[]> assertResults, Function<PsiElement, PsiElement> getElement) {
+        PsiElement element = getElement.apply(myFixture.getFile().findElementAt(offset));
 
-        ResolveResult[] resolveResult = ((NodeTypeReference) element.getReferences()[0]).multiResolve(false);
+        ResolveResult[] resolveResult = ((NodeTypeReference) Arrays.stream(element.getReferences())
+            .filter(r -> r instanceof NodeTypeReference)
+            .toArray()[0]).multiResolve(false);
         assertResults.accept(resolveResult);
+    }
+
+    private void resolveAtPosition(int offset, Consumer<ResolveResult[]> assertResults) {
+        resolveAtPosition(offset, assertResults, PsiElement::getParent);
+    }
+
+    private void doRunTestWithCustomAssertions(String fileNameToInclude, Consumer<ResolveResult[]> assertResults) {
+        loadFixture(fileNameToInclude);
+
+        resolveAtPosition(myFixture.getCaretOffset(), assertResults);
     }
 }

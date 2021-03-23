@@ -1,0 +1,22 @@
+'Neos.NodeTypes:WithInlineReferences':
+  abstract: true
+  properties:
+    references:
+      type: references
+      ui:
+        inspector:
+          editorOptions:
+            nodeTypes: ['Neos.NodeTypes:H<caret>eadline', Neos.NodeTypes:T<caret>ext]
+'Neos.NodeTypes:WithMultilineReferences':
+  abstract: true
+  properties:
+    references:
+      type: references
+      ui:
+        inspector:
+          editorOptions:
+            nodeTypes:
+              - 'Neos.NodeTypes:H<caret>eadline'
+              - Neos.NodeTypes:T<caret>ext
+              -
+                Neos.NodeTypes:Im<caret>age
