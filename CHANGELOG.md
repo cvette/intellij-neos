@@ -3,17 +3,9 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
 ### Fixed
+- Exception when using completion for prototypes
 
-### Security
 ## [1.6.0]
 ### Added
 - Rename refactoring for Fusion prototypes

@@ -26,19 +26,17 @@ import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.psi.FusionFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
 public class FusionFileStub extends PsiFileStubImpl<FusionFile> {
 
     public FusionFileStub(FusionFile file) {
         super(file);
     }
 
-    public static IStubFileElementType TYPE = new IStubFileElementType<FusionFileStub>(FusionLanguage.INSTANCE) {
+    public static IStubFileElementType<FusionFileStub> TYPE = new IStubFileElementType<>(FusionLanguage.INSTANCE) {
 
         @Override
         public int getStubVersion() {
-            return 4;
+            return 5;
         }
 
         @NotNull
@@ -49,7 +47,7 @@ public class FusionFileStub extends PsiFileStubImpl<FusionFile> {
 
         @NotNull
         @Override
-        public FusionFileStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+        public FusionFileStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) {
             return new FusionFileStub(null);
         }
 
@@ -58,7 +56,7 @@ public class FusionFileStub extends PsiFileStubImpl<FusionFile> {
             return new DefaultStubBuilder() {
                 @NotNull
                 @Override
-                protected StubElement createStubForFile(@NotNull PsiFile file) {
+                protected StubElement<FusionFile> createStubForFile(@NotNull PsiFile file) {
                     return new FusionFileStub((FusionFile) file);
                 }
             };
