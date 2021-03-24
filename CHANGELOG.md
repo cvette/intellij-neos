@@ -3,6 +3,18 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.6.1]
 ### Fixed
 - Exception when using completion for prototypes
 
