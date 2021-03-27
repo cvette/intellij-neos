@@ -21,6 +21,7 @@ package de.vette.idea.neos.lang.fusion.usages;
 import com.intellij.psi.PsiElement;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
+import de.vette.idea.neos.lang.fusion.FusionBundle;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,10 +30,10 @@ import org.jetbrains.annotations.Nullable;
  */
 public class UsagesTypeProvider implements UsageTypeProvider {
 
-    UsageType INHERITED = new UsageType("Inherited");
-    UsageType DELETED = new UsageType("Deleted");
-    UsageType DEFINITION = new UsageType("Deleted");
-    UsageType INSTANCE = new UsageType("Instance");
+    UsageType INHERITED = new UsageType(FusionBundle.messagePointer("usage.type.inherited"));
+    UsageType DELETED = new UsageType(FusionBundle.messagePointer("usage.type.deleted"));
+    UsageType DEFINITION = new UsageType(FusionBundle.messagePointer("usage.type.definition"));
+    UsageType INSTANCE = new UsageType(FusionBundle.messagePointer("usage.type.instance"));
 
     @Override
     public @Nullable UsageType getUsageType(PsiElement element) {
