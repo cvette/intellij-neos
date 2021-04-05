@@ -5,6 +5,13 @@
 ## [Unreleased]
 ### Added
 - Node type references in childNodes and editorOptions.nodeTypes
+- Allow Eel in AFX attributes. It is handled as a simple value for now.
+- Suppress unknown attribute inspection for AFX meta attributes and prototypes
+- Suppress unknown namespace inspection for AFX
+- Suppress unknown target inspection for AFX
+
+### Changed
+- AFX is now a custom language. If you changed the injection settings, make sure "Neos Afx" is used
 
 ## [1.6.1]
 ### Fixed

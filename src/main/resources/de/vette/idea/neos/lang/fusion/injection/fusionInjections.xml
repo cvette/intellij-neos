@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <component name="LanguageInjectionConfiguration">
-    <injection language="HTML" injector-id="fusion">
+    <injection language="NeosAfx" injector-id="fusion">
         <display-name>AFX</display-name>
         <place><![CDATA[fusionValueDsl("afx")]]></place>
     </injection>
