@@ -4,16 +4,8 @@
 
 ## [Unreleased]
 ### Added
+- Node type references in childNodes and editorOptions.nodeTypes
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.6.1]
 ### Fixed
 - Exception when using completion for prototypes
