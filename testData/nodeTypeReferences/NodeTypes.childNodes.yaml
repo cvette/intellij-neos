@@ -1,0 +1,6 @@
+'Neos.NodeTypes:Item':
+  abstract: true
+'Neos.NodeTypes:Container':
+  childNodes:
+    item:
+      type: 'Neos.NodeTypes:I<caret>tem'
