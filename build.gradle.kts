@@ -82,9 +82,16 @@ grammarKit {
     grammarKitRelease = grammarKitVersion
 }
 
-val generateFusionLexer = task<GenerateLexer>("GenerateLexer") {
+val generateAfxLexer = task<GenerateLexer>("GenerateAfxLexer") {
+    source = "src/main/grammars/AfxLexer.flex"
+    targetDir = "src/gen/de/vette/idea/neos/lang/afx/parser"
+    targetClass = "AfxLexer"
+    purgeOldFiles = true
+}
+
+val generateFusionLexer = task<GenerateLexer>("GenerateFusionLexer") {
     source = "src/main/grammars/FusionLexer.flex"
-    targetDir = "src/gen/de/vette/idea/neos/lang/core/lexer"
+    targetDir = "src/gen/de/vette/idea/neos/lang/fusion/parser"
     targetClass = "FusionLexer"
     purgeOldFiles = true
 }
@@ -102,7 +109,7 @@ tasks {
     withType<JavaCompile> {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
-        dependsOn(generateFusionLexer, generateFusionParser)
+        dependsOn(generateAfxLexer, generateFusionLexer, generateFusionParser)
     }
 
     patchPluginXml {

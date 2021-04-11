@@ -29,6 +29,16 @@
                          nonDefaultProject="true"
     />
 
+    <!-- AFX -->
+    <fileType name="Neos Afx" language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.AfxFileType" extensions="afx" fieldName="INSTANCE"/>
+    <lang.parserDefinition language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.parser.AfxParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.AfxSyntaxHighlighterFactory" />
+    <lang.braceMatcher language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.editor.AfxBraceMatcher" />
+    <lang.ast.factory language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.parser.AfxASTFactory"/>
+    <xml.xmlSuppressionProvider implementation="de.vette.idea.neos.lang.afx.AfxInspectionSuppressor"/>
+    <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxTagProvider" />
+    <xml.xmlExtension implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxXmlExtension" />
+
     <internalFileTemplate name="Fusion File"/>
     <internalFileTemplate name="Fusion Content Prototype"/>
     <internalFileTemplate name="Fusion Component Prototype"/>
@@ -89,7 +99,6 @@
 
     <patterns.patternClass className="de.vette.idea.neos.lang.fusion.patterns.FusionPatterns" alias="fusion"/>
     <languageInjector implementation="de.vette.idea.neos.lang.fusion.injection.FusionLanguageInjector" />
-    <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxFusionElementDescriptorProvider" />
 
     <projectService serviceImplementation="de.vette.idea.neos.NeosProjectService"/>
     <postStartupActivity implementation="de.vette.idea.neos.NeosStartupActivity" />
