@@ -3,6 +3,8 @@ import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
 
+fun properties(key: String) = project.findProperty(key).toString()
+
 plugins {
     idea
     // Java support
@@ -15,29 +17,8 @@ plugins {
     id("org.jetbrains.grammarkit") version "2021.1.2"
 }
 
-// Import variables from gradle.properties file
-val pluginGroup: String by project
-// `pluginName_` variable ends with `_` because of the collision with Kotlin magic getter in the `intellij` closure.
-// Read more about the issue: https://github.com/JetBrains/intellij-platform-plugin-template/issues/29
-val pluginName_: String by project
-val pluginVersion: String by project
-val pluginSinceBuild: String by project
-val pluginUntilBuild: String by project
-
-val pluginVerifierIdeVersions: String by project
-
-val platformType: String by project
-val platformVersion: String by project
-val platformPlugins: String by project
-val platformDownloadSources: String by project
-
-val grammarKitVersion: String by project
-val jFlexVersion: String by project
-
-val javaVersion: String by project
-
-group = pluginGroup
-version = pluginVersion
+group = properties("pluginGroup")
+version = properties("pluginVersion")
 
 
 // Configure project's dependencies
@@ -61,25 +42,25 @@ sourceSets {
 // Configure gradle-intellij-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
-    pluginName = pluginName_
-    version = platformVersion
-    type = platformType
-    downloadSources = platformDownloadSources.toBoolean()
+    pluginName = properties("pluginName")
+    version = properties("platformVersion")
+    type = properties("platformType")
+    downloadSources = properties("platformDownloadSources").toBoolean()
     updateSinceUntilBuild = true
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-    setPlugins(*platformPlugins.split(',').map(String::trim).filter(String::isNotEmpty).toTypedArray())
+    setPlugins(*properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toTypedArray())
 }
 
 // Configure gradle-changelog-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
-    version = pluginVersion
+    version = properties("pluginVersion")
 }
 
 grammarKit {
-    jflexRelease = jFlexVersion
-    grammarKitRelease = grammarKitVersion
+    jflexRelease = properties("jFlexVersion")
+    grammarKitRelease = properties("grammarKitVersion")
 }
 
 val generateAfxLexer = task<GenerateLexer>("GenerateAfxLexer") {
@@ -107,20 +88,20 @@ val generateFusionParser = task<GenerateParser>("GenerateParser") {
 tasks {
     // Set the compatibility versions to 1.8
     withType<JavaCompile> {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
+        sourceCompatibility = properties("javaVersion")
+        targetCompatibility = properties("javaVersion")
         dependsOn(generateAfxLexer, generateFusionLexer, generateFusionParser)
     }
 
     patchPluginXml {
-        version(pluginVersion)
-        sinceBuild(pluginSinceBuild)
-        untilBuild(pluginUntilBuild)
+        version(properties("pluginVersion"))
+        sinceBuild(properties("pluginSinceBuild"))
+        untilBuild(properties("pluginUntilBuild"))
 
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         pluginDescription(
                 closure {
-                    File("./README.md").readText().lines().run {
+                    File(projectDir, "README.md").readText().lines().run {
                         val start = "<!-- Plugin description -->"
                         val end = "<!-- Plugin description end -->"
 
@@ -141,7 +122,7 @@ tasks {
     }
 
     runPluginVerifier {
-        ideVersions(pluginVerifierIdeVersions)
+        ideVersions(properties("pluginVerifierIdeVersions"))
     }
 
     publishPlugin {
@@ -150,6 +131,6 @@ tasks {
         // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://jetbrains.org/intellij/sdk/docs/tutorials/build_system/deployment.html#specifying-a-release-channel
-        channels(pluginVersion.split('-').getOrElse(1) { "default" }.split('.').first())
+        channels(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first())
     }
 }
