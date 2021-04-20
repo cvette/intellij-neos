@@ -20,6 +20,10 @@
     <injectionConfig config="de/vette/idea/neos/lang/fusion/injection/fusionInjections.xml"/>
   </extensions>
 
+  <extensions defaultExtensionNs="JavaScript">
+    <JsonSchema.ProviderFactory implementation="de.vette.idea.neos.config.yaml.schema.NodeTypeYamlSchemaProviderFactory"/>
+  </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="de.vette.idea.neos.Settings"/>
     <projectConfigurable instance="de.vette.idea.neos.SettingsForm"
