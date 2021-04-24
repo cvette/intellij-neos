@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 ### Added
+- Error report submitter
 - Provide JSON schema for Node Types (https://github.com/Sebobo/Shel.Neos.Schema) 
 - Node type references in childNodes and editorOptions.nodeTypes
 - Allow Eel in AFX attributes. It is handled as a simple value for now.

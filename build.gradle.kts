@@ -6,9 +6,10 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
 fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
-    idea
+    id("idea")
     // Java support
-    java
+    id("java")
+    id("java-library")
     // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
     id("org.jetbrains.intellij") version "0.7.2"
     // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
@@ -31,6 +32,10 @@ idea {
     module {
         generatedSourceDirs.add(file("src/gen"))
     }
+}
+
+dependencies {
+    implementation("io.sentry:sentry:4.3.0")
 }
 
 sourceSets {
