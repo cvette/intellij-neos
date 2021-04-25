@@ -10,6 +10,8 @@ import com.intellij.lexer.FlexLexer;import de.vette.idea.neos.lang.afx.psi.AfxEl
 %%
 
 %{
+  public int bracesNestingLevel = 0;
+
   public _AfxLexer() {
     this((java.io.Reader)null);
   }
@@ -31,6 +33,10 @@ import com.intellij.lexer.FlexLexer;import de.vette.idea.neos.lang.afx.psi.AfxEl
   }
 %}
 
+%eof{
+  bracesNestingLevel = 0;
+%eof}
+
 %public
 %class _AfxLexer
 %implements FlexLexer
@@ -47,6 +53,7 @@ import com.intellij.lexer.FlexLexer;import de.vette.idea.neos.lang.afx.psi.AfxEl
 %state ATTRIBUTE_VALUE_DQ
 %state ATTRIBUTE_VALUE_SQ
 %state ATTRIBUTE_VALUE_EEL
+%state EEL_IN_TAG_CONTENT
 %state PROCESSING_INSTRUCTION
 %state TAG_CHARACTERS
 %state C_COMMENT_START
@@ -64,6 +71,13 @@ ATTRIBUTE_NAME=([^ \n\r\t\f\"\'<>/=])+
 
 <YYINITIAL> {WHITE_SPACE_CHARS} { return XmlTokenType.XML_REAL_WHITE_SPACE; }
 <YYINITIAL> "<" {TAG_NAME} { yybegin(START_TAG_NAME); yypushback(yylength()); }
+
+<YYINITIAL> \\\$ {
+  return XmlTokenType.XML_DATA_CHARACTERS;
+}
+
+<YYINITIAL> "{" { yybegin(EEL_IN_TAG_CONTENT); return AfxElementTypes.AFX_EEL_START_DELIMITER; }
+
 <START_TAG_NAME> "<" { return XmlTokenType.XML_START_TAG_START; }
 
 <YYINITIAL> "</" {TAG_NAME} { yybegin(END_TAG_NAME); yypushback(yylength()); }
@@ -88,8 +102,16 @@ ATTRIBUTE_NAME=([^ \n\r\t\f\"\'<>/=])+
 <ATTRIBUTE_VALUE_START> "'" { yybegin(ATTRIBUTE_VALUE_SQ); return XmlTokenType.XML_ATTRIBUTE_VALUE_START_DELIMITER; }
 <ATTRIBUTE_VALUE_START> "{" { yybegin(ATTRIBUTE_VALUE_EEL); return AfxElementTypes.AFX_EEL_START_DELIMITER; }
 
-<ATTRIBUTE_VALUE_EEL> {
-  "}" { yybegin(TAG_ATTRIBUTES); return AfxElementTypes.AFX_EEL_END_DELIMITER; }
+
+<ATTRIBUTE_VALUE_EEL, EEL_IN_TAG_CONTENT> {
+  "{" { bracesNestingLevel++; return AfxElementTypes.AFX_EEL_VALUE; }
+  "}" {
+          if (bracesNestingLevel > 0) { bracesNestingLevel--; return AfxElementTypes.AFX_EEL_VALUE; }
+          if (yystate() == EEL_IN_TAG_CONTENT) yybegin(YYINITIAL);
+          if (yystate() == ATTRIBUTE_VALUE_EEL) yybegin(TAG_ATTRIBUTES);
+          return AfxElementTypes.AFX_EEL_END_DELIMITER;
+      }
+
   \\\$ { return AfxElementTypes.AFX_EEL_VALUE; }
   [^] { return AfxElementTypes.AFX_EEL_VALUE;}
 }
@@ -106,6 +128,6 @@ ATTRIBUTE_NAME=([^ \n\r\t\f\"\'<>/=])+
   [^] { return XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN;}
 }
 
-<YYINITIAL> ([^<&\$# \n\r\t\f]|(\\\$)|(\\#))* { return XmlTokenType.XML_DATA_CHARACTERS; }
+<YYINITIAL> ([^<{&\$# \n\r\t\f]|(\\\$)|(\\#))* { return XmlTokenType.XML_DATA_CHARACTERS; }
 <YYINITIAL> [^] { return XmlTokenType.XML_DATA_CHARACTERS; }
 [^] { return TokenType.BAD_CHARACTER; }

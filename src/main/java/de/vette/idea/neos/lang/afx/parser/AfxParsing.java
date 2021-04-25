@@ -17,9 +17,28 @@ public class AfxParsing extends HtmlParsing {
         return AfxElementTypes.AFX_TAG;
     }
 
+    protected void parseAfxTag() {
+        getBuilder().advanceLexer();
+    }
+
+    @Override
+    protected PsiBuilder.Marker parseCustomTagContent(PsiBuilder.Marker xmlText) {
+        terminateText(xmlText);
+        parseAfxTag();
+        return null;
+    }
+
+    @Override
+    protected PsiBuilder.Marker parseCustomTopLevelContent(PsiBuilder.Marker error) {
+        flushError(error);
+        parseAfxTag();
+        return null;
+    }
+
     @Override
     protected boolean hasCustomTagContent() {
-        return this.token() == AfxElementTypes.AFX_EEL_START_DELIMITER;
+        IElementType type = this.token();
+        return type == AfxElementTypes.AFX_EEL_START_DELIMITER;
     }
 
     @Override
