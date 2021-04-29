@@ -33,6 +33,8 @@
                          nonDefaultProject="true"
     />
 
+    <testSourcesFilter implementation="de.vette.idea.neos.NeosTestSourcesFilter" />
+
     <errorHandler implementation="de.vette.idea.neos.errorReporting.SentryErrorReporter" />
 
     <!-- EEL -->
