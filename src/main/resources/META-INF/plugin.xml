@@ -35,6 +35,16 @@
 
     <errorHandler implementation="de.vette.idea.neos.errorReporting.SentryErrorReporter" />
 
+    <!-- EEL -->
+    <fileType name="Neos Eel" language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.EelFileType" extensions="eel" fieldName="INSTANCE"/>
+    <lang.parserDefinition language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.EelParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.highlighting.EelSyntaxHighlighterFactory" />
+    <lang.formatter language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.formatter.EelFormattingModelBuilder"/>
+
+    <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.eel.formatter.EelCodeStyleSettingsProvider" />
+    <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.eel.formatter.EelLanguageCodeStyleSettingsProvider"/>
+    <completion.contributor language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.completion.EelCompletionContributor"/>
+
     <!-- AFX -->
     <fileType name="Neos Afx" language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.AfxFileType" extensions="afx" fieldName="INSTANCE"/>
     <lang.parserDefinition language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.parser.AfxParserDefinition"/>
@@ -42,9 +52,11 @@
     <lang.braceMatcher language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.editor.AfxBraceMatcher" />
     <lang.ast.factory language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.parser.AfxASTFactory"/>
     <xml.xmlSuppressionProvider implementation="de.vette.idea.neos.lang.afx.AfxInspectionSuppressor"/>
-    <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.AfxTagProvider" />
     <xml.xmlExtension implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxXmlExtension" />
+    <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxTagProvider" />
+    <xml.tagNameProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxTagProvider"/>
 
+    <!-- Fusion -->
     <internalFileTemplate name="Fusion File"/>
     <internalFileTemplate name="Fusion Content Prototype"/>
     <internalFileTemplate name="Fusion Component Prototype"/>
@@ -87,7 +99,6 @@
 
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
 
-    <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.EelHelperMethodAnnotator"/>
     <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.PrototypeInheritanceAnnotator"/>
 
     <!-- Line Marker Providers -->
@@ -108,7 +119,6 @@
     <projectService serviceImplementation="de.vette.idea.neos.NeosProjectService"/>
     <postStartupActivity implementation="de.vette.idea.neos.NeosStartupActivity" />
   </extensions>
-
 
   <actions>
     <!--Action for throwing an exception just to test the reporting of errors to Sentry-->

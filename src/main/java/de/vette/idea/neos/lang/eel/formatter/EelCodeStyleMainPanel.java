@@ -16,14 +16,22 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.eel.formatter;
 
-import com.intellij.lang.Language;
+import com.intellij.application.options.TabbedLanguageCodeStylePanel;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import de.vette.idea.neos.lang.eel.EelLanguage;
 
-public class FusionLanguage extends Language {
-    public static final Language INSTANCE = new FusionLanguage();
+public class EelCodeStyleMainPanel extends TabbedLanguageCodeStylePanel {
 
-    public FusionLanguage() {
-        super("NeosFusion", "text/neos-fusion");
+    public EelCodeStyleMainPanel(CodeStyleSettings settings, CodeStyleSettings originalSettings) {
+        super(EelLanguage.INSTANCE, settings, originalSettings);
+    }
+
+    @Override
+    protected void initTabs(CodeStyleSettings codeStyleSettings) {
+        addIndentOptionsTab(codeStyleSettings);
+        addSpacesTab(codeStyleSettings);
+        addBlankLinesTab(codeStyleSettings);
     }
 }

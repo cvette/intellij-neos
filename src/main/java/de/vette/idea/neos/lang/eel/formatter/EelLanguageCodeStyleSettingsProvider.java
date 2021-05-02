@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.formatter;
+package de.vette.idea.neos.lang.eel.formatter;
 
 import com.intellij.application.options.IndentOptionsEditor;
 import com.intellij.application.options.SmartIndentOptionsEditor;
@@ -24,22 +24,19 @@ import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
-import de.vette.idea.neos.lang.fusion.FusionLanguage;
+import de.vette.idea.neos.lang.eel.EelLanguage;
 import org.jetbrains.annotations.NotNull;
 
-public class FusionLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
+public class EelLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
     @NotNull
     @Override
     public Language getLanguage() {
-        return FusionLanguage.INSTANCE;
+        return EelLanguage.INSTANCE;
     }
 
     @Override
     public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType) {
         if (settingsType == SettingsType.SPACING_SETTINGS) {
-            consumer.showStandardOptions("SPACE_AROUND_ASSIGNMENT_OPERATORS");
-            consumer.renameStandardOption("SPACE_AROUND_ASSIGNMENT_OPERATORS", "Assignment Operators");
-            consumer.showStandardOptions("SPACES_BEFORE_LEFT_BRACE");
             consumer.showStandardOptions("SPACE_AFTER_COMMA");
             consumer.showStandardOptions("SPACE_BEFORE_COMMA");
         } else if (settingsType == SettingsType.BLANK_LINES_SETTINGS) {
@@ -49,13 +46,7 @@ public class FusionLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSe
 
     @Override
     public String getCodeSample(@NotNull SettingsType settingsType) {
-        return "root {\n" +
-                "    case1 = 'case1'\n" +
-                "    case2 = 'case2'\n" +
-                "    case3 {\n" +
-                "        test = 'test'\n" +
-                "    }\n" +
-                "}";
+        return "String.test(a + b, [0, 1, 2]) + 'test'";
     }
 
     @Override

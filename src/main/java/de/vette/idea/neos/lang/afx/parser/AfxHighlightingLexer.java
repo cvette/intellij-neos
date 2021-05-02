@@ -14,7 +14,6 @@ class BaseAfxHighlightingLexer extends HtmlHighlightingLexer {
         super(new InnerAfxLexer(), true, null);
     }
 
-
     protected boolean isHtmlTagState(int state) {
         return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;
     }

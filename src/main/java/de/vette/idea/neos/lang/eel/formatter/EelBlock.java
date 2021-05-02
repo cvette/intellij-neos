@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.editor;
+package de.vette.idea.neos.lang.eel.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
@@ -25,6 +25,7 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.tree.IElementType;
+import de.vette.idea.neos.lang.fusion.editor.FusionIndentProcessor;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FusionBlock extends AbstractBlock {
+public class EelBlock extends AbstractBlock {
     private final Indent MY_INDENT;
     private final CommonCodeStyleSettings MY_SETTINGS;
     private final SpacingBuilder MY_SPACING_BUILDER;
@@ -43,12 +44,12 @@ public class FusionBlock extends AbstractBlock {
     /**
      * Constructor
      */
-    public FusionBlock(@NotNull ASTNode node,
-                       @Nullable Alignment alignment,
-                       @Nullable Wrap wrap,
-                       @NotNull CommonCodeStyleSettings settings,
-                       @NotNull SpacingBuilder spacingBuilder,
-                       @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+    public EelBlock(@NotNull ASTNode node,
+                    @Nullable Alignment alignment,
+                    @Nullable Wrap wrap,
+                    @NotNull CommonCodeStyleSettings settings,
+                    @NotNull SpacingBuilder spacingBuilder,
+                    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
     ) {
         super(node, wrap, alignment);
         MY_SETTINGS = settings;
@@ -81,31 +82,15 @@ public class FusionBlock extends AbstractBlock {
      * @return An ArrayList of all child elements of this block.
      */
     private List<Block> buildSubBlocks() {
-        List<Block> blocks = new ArrayList<Block>();
+        List<Block> blocks = new ArrayList<>();
         for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-            if (child.getElementType() == FusionTypes.VALUE_DSL_CONTENT) {
-                // This is a special case to handle auto-formatting of AFX code (which is implemented as
-                // Language Injection; see fusionInjections.xml):
-                //
-                // We try to delegate block creation to the nested language (i.e. HTML in case of AFX). If this
-                // is successful (`addInjectedBlocks` returns TRUE), we skip creating a block for this part on our own.
-                // In this case, the blocks covering the afx`...` part of the code are from the embedded language. Thus,
-                // autoformatting works properly for AFX code.
-                //
-                // a hint to this method has been found via https://intellij-support.jetbrains.com/hc/en-us/community/posts/206749635-Injected-languages-formatting
-                if (injectedLanguageBlockBuilder.addInjectedBlocks(blocks, child, getWrap(), getAlignment(), Indent.getNormalIndent())) {
-                    continue;
-                }
-            }
-
-
             IElementType childType = child.getElementType();
             if (child.getTextRange().getLength() == 0 || childType == TokenType.WHITE_SPACE ||
                     childType == FusionTypes.CRLF
                     ) {
                 continue;
             }
-            blocks.add(new FusionBlock(child, null, null, MY_SETTINGS, MY_SPACING_BUILDER, injectedLanguageBlockBuilder));
+            blocks.add(new EelBlock(child, null, null, MY_SETTINGS, MY_SPACING_BUILDER, injectedLanguageBlockBuilder));
         }
         return Collections.unmodifiableList(blocks);
     }
@@ -137,9 +122,6 @@ public class FusionBlock extends AbstractBlock {
     @Override
     public ChildAttributes getChildAttributes(int newChildIndex) {
         Indent indent = Indent.getNoneIndent();
-        if (FusionIndentProcessor.TYPES_WHICH_PROVOKE_AN_INDENT.contains(myNode.getElementType())) {
-            indent = Indent.getNormalIndent();
-        }
         return new ChildAttributes(indent, null);
     }
 }

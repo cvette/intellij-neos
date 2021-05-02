@@ -4,16 +4,14 @@
 
 ## [Unreleased]
 ### Added
-- Error report submitter
-- Provide JSON schema for Node Types (https://github.com/Sebobo/Shel.Neos.Schema) 
+- AFX is now a custom language. If you changed the injection settings, make sure "Neos Afx" is used
+- Handle EEL in AFX
+- Provide JSON schema for Node Types (https://github.com/Sebobo/Shel.Neos.Schema)
+- Errors can now be submitted
 - Node type references in childNodes and editorOptions.nodeTypes
-- Allow Eel in AFX attributes. It is handled as a simple value for now.
 - Suppress unknown attribute inspection for AFX meta attributes and prototypes
 - Suppress unknown namespace inspection for AFX
 - Suppress unknown target inspection for AFX
-
-### Changed
-- AFX is now a custom language. If you changed the injection settings, make sure "Neos Afx" is used
 
 ## [1.6.1]
 ### Fixed

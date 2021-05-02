@@ -3,12 +3,12 @@ package de.vette.idea.neos.lang.fusion.parser;
 import com.intellij.lexer.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import de.vette.idea.neos.lang.fusion.psi.FusionTypes;import de.vette.idea.neos.lang.fusion.psi.FusionValueDsl;import groovyjarjarantlr.Token;
 
 %%
 
 %{
-  private int eelNestingLevel = 0;
+  private int bracesNestingLevel = 0;
 
   public FusionLexer() {
     this((java.io.Reader)null);
@@ -31,7 +31,6 @@ COMMENT_TAIL=([^"*"]*("*"+[^"*""/"])?)*("*"+"/")?
 WHITE_SPACE = [ \t\f]+
 CRLF = \n | \r | \r\n
 EQUALS = "="
-ARROW = "=>"
 COLON = ":"
 DOT = "."
 INCLUDE_KEYWORD = "include"
@@ -45,8 +44,6 @@ OBJECT_TYPE_PART = [a-zA-Z0-9\.]+
 VALUE_NULL = NULL|null
 VALUE_BOOLEAN = true|TRUE|false|FALSE
 VALUE_NUMBER = [\-]?[0-9] [0-9]* ("." [0-9] [0-9]*)?
-VALUE_POSITIVE_NUMBER = [0-9] [0-9]* ("." [0-9] [0-9]*)?
-VALUE_SEPARATOR = ","
 
 VALUE_STRING_SINGLE_QUOTE =             [\']
 ESCAPED_SINGLE_QUOTE =                  "\\\\"* "\\\'"
@@ -61,8 +58,6 @@ VALUE_STRING_IN_BACKTICKS = [^\n\r\`\\]+
 
 LEFT_BRACE = "{"
 RIGHT_BRACE = "}"
-LEFT_BRACKET = "["
-RIGHT_BRACKET = "]"
 PROTOTYPE_KEYWORD = "prototype"
 LEFT_PAREN = "("
 RIGHT_PAREN = ")"
@@ -70,7 +65,6 @@ META_PROPERTY_KEYWORD = "@"
 META_PROPERTY_NAME = [a-zA-Z0-9:_\-]+
 PATH_PART = [a-zA-Z0-9:_\-]+
 
-EEL_IDENTIFIER = [a-zA-Z_] [a-zA-Z0-9_\-]*
 PATH_SEPARATOR = {DOT}
 ANY_STRING = [^ \t\f\n\r]+
 COPY_OPERATOR = "<"
@@ -81,19 +75,6 @@ BACKSLASH = "\\"
 EXPRESSION_KEYWORD = "$"
 DECLARATION_SEPARATOR_LOOKAHEAD = [ \t\f]*:
 
-BOOLEAN_AND = "||" | "or" | "OR"
-BOOLEAN_OR = "&&" | "and" | "AND"
-
-ADDITION_OPERATOR = "+"
-SUBTRACTION_OPERATOR = "-"
-MODULO_OPERATOR = "%" | "/"
-DIVISION_OPERATOR = "/"
-MULTIPLICATION_OPERATOR = "*"
-COMPARISION_OPERATOR = "==" | "!=" | "<=" | ">=" | "<" | ">"
-NEGATION_OPERATOR = "not" | "!"
-
-IF_KEYWORD = "?"
-IF_SEPARATOR = {COLON}
 
 // Declaration states
 %state INCLUDE_FOUND
@@ -114,8 +95,6 @@ IF_SEPARATOR = {COLON}
 
 // Expression states
 %states EXPRESSION_FOUND
-%states VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_EXPRESSION
-%states VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_EXPRESSION
 
 // Comment states
 %state MULTI_LINE_COMMENT
@@ -154,7 +133,6 @@ IF_SEPARATOR = {COLON}
     {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_PATH); return FusionTypes.VALUE_STRING_QUOTE; }
     {WHITE_SPACE}                           { yybegin(OPERATOR_OR_LEFT_BRACE_EXPECTED); return TokenType.WHITE_SPACE; }
 }
-
 
 <OPERATOR_OR_LEFT_BRACE_EXPECTED> {
     {LEFT_BRACE}                            { yybegin(CRLF_OR_BLOCK_EXPECTED); return FusionTypes.LEFT_BRACE; }
@@ -210,7 +188,6 @@ IF_SEPARATOR = {COLON}
     {LEFT_BRACE}                            { yybegin(YYINITIAL); return FusionTypes.LEFT_BRACE; }
 }
 
-
 <PROTOTYPE_FOUND> {
     {OBJECT_TYPE_PART}                      { return FusionTypes.UNQUALIFIED_TYPE; }
     {OBJECT_TYPE_PART}/{COLON}              { yybegin(OBJECT_TYPE_IN_PROTOTYPE_FOUND); return FusionTypes.OBJECT_TYPE_NAMESPACE; }
@@ -242,7 +219,6 @@ IF_SEPARATOR = {COLON}
     {RIGHT_BRACE}                           { yybegin(YYINITIAL); return FusionTypes.RIGHT_BRACE; }
 }
 
-
 <INCLUDE_FOUND> {
     {DECLARATION_SEPARATOR}                 { yybegin(INCLUDE_FOUND); return FusionTypes.INCLUDE_SEPARATOR; }
     {RESOURCE_KEYWORD}                      { yybegin(RESOURCE); return FusionTypes.RESOURCE_KEYWORD; }
@@ -267,10 +243,6 @@ IF_SEPARATOR = {COLON}
     {VALUE_STRING_SINGLE_QUOTE}             { yybegin(CRLF_EXPECTED); return FusionTypes.VALUE_STRING_QUOTE; }
 }
 
-<VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_EXPRESSION> {
-    {VALUE_STRING_SINGLE_QUOTE}             { yybegin(EXPRESSION_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
-}
-
 <VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_PATH> {
     {VALUE_STRING_SINGLE_QUOTE}             { yybegin(PATH_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
     {ESCAPED_SINGLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
@@ -278,7 +250,7 @@ IF_SEPARATOR = {COLON}
     {VALUE_STRING_IN_SINGLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
 }
 
-<VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE, VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_EXPRESSION> {
+<VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE> {
     {CRLF}                                  { return FusionTypes.CRLF; }
     {ESCAPED_SINGLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
     {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
@@ -287,21 +259,14 @@ IF_SEPARATOR = {COLON}
 
 <VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE> {
     {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(CRLF_EXPECTED); return FusionTypes.VALUE_STRING_QUOTE; }
-}
-
-<VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_EXPRESSION> {
-    {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(EXPRESSION_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
-}
-
-<VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_PATH> {
-    {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(PATH_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
+    {CRLF}                                  { return FusionTypes.CRLF; }
     {ESCAPED_DOUBLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
     {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_DOUBLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
 }
 
-<VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE, VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_EXPRESSION> {
-    {CRLF}                                  { return FusionTypes.CRLF; }
+<VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_PATH> {
+    {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(PATH_FOUND); return FusionTypes.VALUE_STRING_QUOTE; }
     {ESCAPED_DOUBLE_QUOTE}+                 { return FusionTypes.VALUE_STRING_ESCAPED_QUOTE; }
     {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
     {VALUE_STRING_IN_DOUBLE_QUOTE}          { return FusionTypes.VALUE_STRING; }
@@ -316,35 +281,30 @@ IF_SEPARATOR = {COLON}
 }
 
 <EXPRESSION_FOUND> {
-    {LEFT_BRACE}                            { eelNestingLevel++; if (eelNestingLevel == 1) { return FusionTypes.EEL_LEFT_BRACE; } else { return FusionTypes.EEL_OBJECT_LEFT_BRACE; } }
-    {RIGHT_BRACE}                           { eelNestingLevel--; if (eelNestingLevel == 0) { yybegin(CRLF_EXPECTED); return FusionTypes.EEL_RIGHT_BRACE; } else { return FusionTypes.EEL_OBJECT_RIGHT_BRACE; }}
-    {LEFT_PAREN}                            { return FusionTypes.EEL_LEFT_PAREN; }
-    {RIGHT_PAREN}                           { return FusionTypes.EEL_RIGHT_PAREN; }
-    {ADDITION_OPERATOR}                     { return FusionTypes.EEL_ADDITION_OPERATOR; }
-    {SUBTRACTION_OPERATOR}                  { return FusionTypes.EEL_SUBTRACTION_OPERATOR; }
-    {MULTIPLICATION_OPERATOR}               { return FusionTypes.EEL_MULTIPLICATION_OPERATOR; }
-    {DIVISION_OPERATOR}                     { return FusionTypes.EEL_DIVISION_OPERATOR; }
-    {MODULO_OPERATOR}                       { return FusionTypes.EEL_MODULO_OPERATOR; }
-    {NEGATION_OPERATOR}                     { return FusionTypes.EEL_NEGATION_OPERATOR; }
-    {LEFT_BRACKET}                          { return FusionTypes.EEL_LEFT_BRACKET; }
-    {RIGHT_BRACKET}                         { return FusionTypes.EEL_RIGHT_BRACKET; }
-    {VALUE_STRING_SINGLE_QUOTE}             { yybegin(VALUE_STRING_EXPECTED_IN_SINGLE_QUOTE_EXPRESSION); return FusionTypes.VALUE_STRING_QUOTE; }
-    {VALUE_STRING_DOUBLE_QUOTE}             { yybegin(VALUE_STRING_EXPECTED_IN_DOUBLE_QUOTE_EXPRESSION); return FusionTypes.VALUE_STRING_QUOTE; }
-    {VALUE_POSITIVE_NUMBER}                 { return FusionTypes.VALUE_NUMBER; }
-    {VALUE_BOOLEAN}                         { return FusionTypes.VALUE_BOOLEAN; }
-    {EXPRESSION_KEYWORD}                    { return FusionTypes.EXPRESSION_KEYWORD; }
-    {BOOLEAN_AND}                           { return FusionTypes.EEL_BOOLEAN_AND; }
-    {BOOLEAN_OR}                            { return FusionTypes.EEL_BOOLEAN_OR; }
-    {IF_KEYWORD}                            { return FusionTypes.IF_KEYWORD; }
-    {IF_SEPARATOR}                          { return FusionTypes.IF_SEPARATOR; }
-    {COMPARISION_OPERATOR}                  { return FusionTypes.EEL_COMPARISON_OPERATOR; }
-    {ARROW}                                 { return FusionTypes.EEL_ARROW; }
-    {VALUE_SEPARATOR}                       { return FusionTypes.VALUE_SEPARATOR; }
-    {EEL_IDENTIFIER}                        { return FusionTypes.EEL_IDENTIFIER; }
-    {EEL_IDENTIFIER}/{LEFT_PAREN}           { return FusionTypes.EEL_FUNCTION; }
-    {PATH_SEPARATOR}                        { return FusionTypes.EEL_DOT; }
+    "{" {
+          bracesNestingLevel++;
+          if (bracesNestingLevel < 2) {
+              return FusionTypes.EEL_START_DELIMITER;
+          }
+
+          return FusionTypes.EEL_VALUE;
+      }
+    "}" {
+          bracesNestingLevel--;
+
+          if (bracesNestingLevel > 0) {
+              return FusionTypes.EEL_VALUE;
+          }
+
+          yybegin(YYINITIAL);
+          return FusionTypes.EEL_END_DELIMITER;
+    }
+
+    {WHITE_SPACE}                           { return FusionTypes.EEL_VALUE; }
+    \\\$                                    { return FusionTypes.EEL_VALUE; }
+    [^]                                     { return FusionTypes.EEL_VALUE; }
 }
 
 {WHITE_SPACE}                               { return TokenType.WHITE_SPACE; }
-{CRLF}                                      { yybegin(YYINITIAL); eelNestingLevel = 0; return FusionTypes.CRLF; }
+{CRLF}                                      { yybegin(YYINITIAL); return FusionTypes.CRLF; }
 .                                           { return TokenType.BAD_CHARACTER; }

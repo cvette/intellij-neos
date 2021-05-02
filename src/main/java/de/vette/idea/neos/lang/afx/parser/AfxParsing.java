@@ -7,6 +7,7 @@ import com.intellij.psi.xml.XmlElementType;
 import com.intellij.psi.xml.XmlTokenType;
 import com.intellij.xml.psi.XmlPsiBundle;
 import de.vette.idea.neos.lang.afx.psi.AfxElementTypes;
+import de.vette.idea.neos.lang.afx.psi.AfxLazyElementTypes;
 
 public class AfxParsing extends HtmlParsing {
     public AfxParsing(PsiBuilder builder) {
@@ -18,7 +19,20 @@ public class AfxParsing extends HtmlParsing {
     }
 
     protected void parseAfxTag() {
-        getBuilder().advanceLexer();
+        getBuilder().advanceLexer(); // {
+        PsiBuilder.Marker marker = getBuilder().mark();
+
+        while (!getBuilder().eof() && getBuilder().getTokenType() != AfxElementTypes.AFX_EEL_END_DELIMITER) {
+            getBuilder().advanceLexer();
+        }
+
+        marker.collapse(AfxLazyElementTypes.CONTENT_EXPRESSION);
+
+        if (getBuilder().getTokenType() == AfxElementTypes.AFX_EEL_END_DELIMITER) {
+            getBuilder().advanceLexer(); // }
+        } else {
+            getBuilder().error("Missing }");
+        }
     }
 
     @Override
@@ -39,6 +53,11 @@ public class AfxParsing extends HtmlParsing {
     protected boolean hasCustomTagContent() {
         IElementType type = this.token();
         return type == AfxElementTypes.AFX_EEL_START_DELIMITER;
+    }
+
+    @Override
+    protected boolean hasCustomTopLevelContent() {
+        return hasCustomTagContent();
     }
 
     @Override
@@ -99,7 +118,10 @@ public class AfxParsing extends HtmlParsing {
         advance(); // {
 
         // Guard against empty expressions
-        if (token() == AfxElementTypes.AFX_EEL_VALUE) advance();
+        if (token() == AfxElementTypes.AFX_EEL_VALUE) {
+            getBuilder().remapCurrentToken(AfxLazyElementTypes.CONTENT_EXPRESSION);
+            advance();
+        }
 
         advance(); // }
     }

@@ -32,11 +32,5 @@ public class FusionCompletionContributor extends CompletionContributor
                 psiElement(FusionTypes.UNQUALIFIED_TYPE),
                 new PrototypeProvider()
         );
-
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.EEL_IDENTIFIER),
-                new EelProvider()
-        );
     }
 }

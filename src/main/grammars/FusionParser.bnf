@@ -16,6 +16,7 @@
     elementTypeHolderClass="de.vette.idea.neos.lang.fusion.psi.FusionTypes"
     elementTypeClass="de.vette.idea.neos.lang.fusion.psi.FusionElementType"
     tokenTypeClass="de.vette.idea.neos.lang.fusion.psi.FusionTokenType"
+    tokenTypeFactory="de.vette.idea.neos.lang.fusion.psi.TokenTypeFactory.getTokenType"
 }
 
 FusionFile ::= item_*
@@ -103,38 +104,4 @@ value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_
 value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)*
 
 value_string_single_line ::= VALUE_STRING_QUOTE (VALUE_STRING | VALUE_STRING_ESCAPED_QUOTE)* VALUE_STRING_QUOTE {pin=1}
-expression ::= EXPRESSION_KEYWORD EEL_LEFT_BRACE conditional_expression EEL_RIGHT_BRACE {pin=1}
-
-offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET {pin=1}
-method_call ::= method_name EEL_LEFT_PAREN [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_PAREN {pin=2}
-
-object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier) | offset_access) *
-composite_identifier ::= identifier (EEL_DOT (identifier)) * {
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
-    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionCompositeIdentifierImplMixin"
-}
-
-identifier ::= EEL_IDENTIFIER
-method_name ::= EEL_FUNCTION {
-    implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionReferenceElement" ]
-    mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionMethodNameImplMixin"
-}
-
-term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | EEL_SUBTRACTION_OPERATOR? VALUE_NUMBER | object_path | value_string_line
-
-simple_expression ::= arrow_function | wrapped_expression | array_literal | object_literal | term | not_expression
-arrow_function ::= method_arguments EEL_ARROW conditional_expression
-method_arguments ::= method_arguments_with_parens | method_arguments_without_parens
-method_arguments_with_parens ::= EEL_LEFT_PAREN EEL_IDENTIFIER? (VALUE_SEPARATOR EEL_IDENTIFIER)* EEL_RIGHT_PAREN
-method_arguments_without_parens ::= EEL_IDENTIFIER
-wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN
-not_expression ::= EEL_NEGATION_OPERATOR simple_expression
-conditional_expression ::= disjunction [IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression]
-disjunction ::= conjunction (EEL_BOOLEAN_OR conjunction) *
-conjunction ::= comparison (EEL_BOOLEAN_AND comparison) *
-comparison ::= sum_calculation [EEL_COMPARISON_OPERATOR sum_calculation]
-sum_calculation ::= prod_calculation ((EEL_ADDITION_OPERATOR|EEL_SUBTRACTION_OPERATOR) prod_calculation) *
-prod_calculation ::= simple_expression ((EEL_DIVISION_OPERATOR|EEL_MODULO_OPERATOR|EEL_MULTIPLICATION_OPERATOR) simple_expression) *
-array_literal ::= EEL_LEFT_BRACKET [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_BRACKET
-object_literal_property ::= (value_string_line|EEL_IDENTIFIER) ':' conditional_expression
-object_literal ::= EEL_OBJECT_LEFT_BRACE [object_literal_property] (VALUE_SEPARATOR object_literal_property) * EEL_OBJECT_RIGHT_BRACE
+expression ::= EXPRESSION_KEYWORD EEL_START_DELIMITER EEL_VALUE* EEL_END_DELIMITER {pin=1}

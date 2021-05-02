@@ -19,10 +19,15 @@
 package de.vette.idea.neos.lang.fusion;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.MergingLexerAdapter;
+import com.intellij.psi.tree.TokenSet;
 import de.vette.idea.neos.lang.fusion.parser.FusionLexer;
+import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 
-public class FusionLexerAdapter extends FlexAdapter {
+public class FusionLexerAdapter extends MergingLexerAdapter {
+    private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(FusionTypes.EEL_VALUE);
+
     public FusionLexerAdapter() {
-        super(new FusionLexer());
+        super(new FlexAdapter(new FusionLexer()), TOKENS_TO_MERGE);
     }
 }
