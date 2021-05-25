@@ -16,14 +16,19 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.eel.psi;
 
-import com.intellij.lang.Language;
+import com.intellij.psi.tree.IElementType;
+import de.vette.idea.neos.lang.eel.EelLanguage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
-public class FusionLanguage extends Language {
-    public static final Language INSTANCE = new FusionLanguage();
+/**
+ * Eel element type
+ */
+public class EelElementType extends IElementType {
 
-    public FusionLanguage() {
-        super("NeosFusion", "text/neos-fusion");
+    public EelElementType(@NotNull @NonNls String debugName) {
+        super(debugName, EelLanguage.INSTANCE);
     }
 }

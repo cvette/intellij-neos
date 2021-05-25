@@ -1,4 +1,4 @@
-package de.vette.idea.neos.lang.afx;
+package de.vette.idea.neos.lang.afx.codeInsight;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.xml.TagNameReference;

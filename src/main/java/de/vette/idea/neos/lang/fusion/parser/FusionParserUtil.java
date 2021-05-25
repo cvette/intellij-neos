@@ -18,7 +18,13 @@
 
 package de.vette.idea.neos.lang.fusion.parser;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 
 public class FusionParserUtil extends GeneratedParserUtilBase {
+
+    public static boolean parseExpressionValue(PsiBuilder builder, int level)
+    {
+        return false;
+    }
 }

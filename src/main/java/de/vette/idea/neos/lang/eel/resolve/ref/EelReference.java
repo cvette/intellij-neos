@@ -15,31 +15,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.vette.idea.neos.lang.fusion.psi.impl.ext;
+package de.vette.idea.neos.lang.eel.resolve.ref;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import de.vette.idea.neos.lang.fusion.psi.FusionMethodName;
-import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionMethodNameReference;
-import de.vette.idea.neos.lang.fusion.resolve.ref.FusionReference;
+import com.intellij.psi.PsiPolyVariantReference;
+import de.vette.idea.neos.lang.eel.psi.EelElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class FusionMethodNameImplMixin extends FusionElementImpl implements FusionMethodName {
-
-    public FusionMethodNameImplMixin(@NotNull ASTNode astNode) {
-        super(astNode);
-    }
-
+public interface EelReference extends PsiPolyVariantReference {
 
     @Override
-    public FusionReference getReference() {
-        return new FusionMethodNameReference(this);
-    }
-
     @NotNull
+    EelElement getElement();
+
+    @Nullable
     @Override
-    public PsiElement getEelFunction() {
-        return null;
-    }
+    PsiElement resolve();
 }

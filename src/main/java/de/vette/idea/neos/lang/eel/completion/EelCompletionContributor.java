@@ -16,14 +16,21 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.eel.completion;
 
-import com.intellij.lang.Language;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
+import de.vette.idea.neos.lang.eel.psi.EelTypes;
 
-public class FusionLanguage extends Language {
-    public static final Language INSTANCE = new FusionLanguage();
+import static com.intellij.patterns.PlatformPatterns.psiElement;
 
-    public FusionLanguage() {
-        super("NeosFusion", "text/neos-fusion");
+public class EelCompletionContributor extends CompletionContributor
+{
+    public EelCompletionContributor() {
+        extend(
+                CompletionType.BASIC,
+                psiElement(EelTypes.EEL_IDENTIFIER),
+                new EelCompletionProvider()
+        );
     }
 }

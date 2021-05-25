@@ -102,7 +102,6 @@ ATTRIBUTE_NAME=([^ \n\r\t\f\"\'<>/=])+
 <ATTRIBUTE_VALUE_START> "'" { yybegin(ATTRIBUTE_VALUE_SQ); return XmlTokenType.XML_ATTRIBUTE_VALUE_START_DELIMITER; }
 <ATTRIBUTE_VALUE_START> "{" { yybegin(ATTRIBUTE_VALUE_EEL); return AfxElementTypes.AFX_EEL_START_DELIMITER; }
 
-
 <ATTRIBUTE_VALUE_EEL, EEL_IN_TAG_CONTENT> {
   "{" { bracesNestingLevel++; return AfxElementTypes.AFX_EEL_VALUE; }
   "}" {

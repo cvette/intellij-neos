@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion.formatter;
+package de.vette.idea.neos.lang.eel.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
@@ -25,32 +25,24 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
+import de.vette.idea.neos.lang.eel.EelLanguage;
 import de.vette.idea.neos.lang.eel.psi.EelTypes;
-import de.vette.idea.neos.lang.fusion.FusionLanguage;
-import de.vette.idea.neos.lang.fusion.editor.FusionBlock;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FusionFormattingModelBuilder implements FormattingModelBuilder {
+public class EelFormattingModelBuilder implements FormattingModelBuilder {
 
     @Override
     public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
         CodeStyleSettings settings = formattingContext.getCodeStyleSettings();
         SpacingBuilder spacingBuilder = createSpaceBuilder(settings);
-        final FusionBlock block = new FusionBlock(formattingContext.getPsiElement().getNode(), null, null, formattingContext.getCodeStyleSettings(), spacingBuilder, new DefaultInjectedLanguageBlockBuilder(settings));
+        final EelBlock block = new EelBlock(formattingContext.getPsiElement().getNode(), null, null, formattingContext.getCodeStyleSettings(), spacingBuilder, new DefaultInjectedLanguageBlockBuilder(settings));
         return FormattingModelProvider.createFormattingModelForPsiFile(formattingContext.getPsiElement().getContainingFile(), block, settings);
     }
 
     private static SpacingBuilder createSpaceBuilder(CodeStyleSettings settings) {
-        final CommonCodeStyleSettings commonSettings = settings.getCommonSettings(FusionLanguage.INSTANCE);
-
-        SpacingBuilder spacingBuilder = new SpacingBuilder(settings, FusionLanguage.INSTANCE);
-        spacingBuilder.before(FusionTypes.BLOCK).spaces(1);
-
-        if (commonSettings.SPACE_AROUND_ASSIGNMENT_OPERATORS) {
-            spacingBuilder.around(FusionTypes.ASSIGNMENT_OPERATOR).spaces(1);
-        }
+        SpacingBuilder spacingBuilder = new SpacingBuilder(settings, EelLanguage.INSTANCE);
+        final CommonCodeStyleSettings commonSettings = settings.getCommonSettings(EelLanguage.INSTANCE);
 
         if (commonSettings.SPACE_AFTER_COMMA) {
             spacingBuilder.after(EelTypes.VALUE_SEPARATOR).spaces(1);
@@ -64,23 +56,15 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
             spacingBuilder.before(EelTypes.VALUE_SEPARATOR).none();
         }
 
-        spacingBuilder.before(FusionTypes.UNSET_OPERATOR).spaces(1)
+        spacingBuilder.around(EelTypes.EEL_ADDITION_OPERATOR).spaces(1)
                 .before(EelTypes.EEL_DOT).none()
                 .after(EelTypes.EEL_DOT).none()
-                .around(EelTypes.EEL_ADDITION_OPERATOR).spaces(1)
                 .around(EelTypes.EEL_SUBTRACTION_OPERATOR).spaces(1)
                 .around(EelTypes.EEL_MULTIPLICATION_OPERATOR).spaces(1)
                 .around(EelTypes.EEL_DIVISION_OPERATOR).spaces(1)
                 .around(EelTypes.EEL_MODULO_OPERATOR).spaces(1)
                 .around(EelTypes.EEL_COMPARISON_OPERATOR).spaces(1)
-                .around(EelTypes.EEL_ARROW).spaces(1)
-                .around(FusionTypes.COPY_OPERATOR).spaces(1)
-                .around(FusionTypes.NAMESPACE_ALIAS_SEPARATOR).spaces(1)
-                .before(FusionTypes.NAMESPACE_SEPARATOR).none()
-                .after(FusionTypes.NAMESPACE_SEPARATOR).spaces(1)
-                .before(FusionTypes.INCLUDE_SEPARATOR).none()
-                .after(FusionTypes.INCLUDE_SEPARATOR).spaces(1)
-                .between(FusionTypes.BLOCK, FusionTypes.PATH).blankLines(1);
+                .around(EelTypes.EEL_ARROW).spaces(1);
 
         return spacingBuilder;
     }

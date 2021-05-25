@@ -16,14 +16,24 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos.lang.fusion;
+package de.vette.idea.neos.lang.eel.psi;
 
-import com.intellij.lang.Language;
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
+import de.vette.idea.neos.lang.eel.EelFileType;
+import de.vette.idea.neos.lang.eel.EelLanguage;
+import org.jetbrains.annotations.NotNull;
 
-public class FusionLanguage extends Language {
-    public static final Language INSTANCE = new FusionLanguage();
+public class EelFile extends PsiFileBase {
 
-    public FusionLanguage() {
-        super("NeosFusion", "text/neos-fusion");
+    public EelFile(@NotNull FileViewProvider fileViewProvider) {
+        super(fileViewProvider, EelLanguage.INSTANCE);
+    }
+
+    @NotNull
+    @Override
+    public FileType getFileType() {
+        return EelFileType.INSTANCE;
     }
 }

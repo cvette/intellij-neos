@@ -19,19 +19,20 @@
 package fusionParser;
 
 import com.intellij.testFramework.ParsingTestCase;
+import de.vette.idea.neos.lang.eel.EelParserDefinition;
 import de.vette.idea.neos.lang.fusion.FusionParserDefinition;
 
 public class FusionParserTest extends ParsingTestCase {
 
     public FusionParserTest() {
-        super("", "fusion", new FusionParserDefinition());
+        super("", "fusion", false, new FusionParserDefinition(), new EelParserDefinition());
     }
 
     public void testPrototypeInheritance() {
         doTest(true);
     }
 
-    public void testEelExpressions() {
+    public void testEelExpression() {
         doTest(true);
     }
 

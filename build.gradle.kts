@@ -25,7 +25,6 @@ version = properties("pluginVersion")
 // Configure project's dependencies
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 idea {
@@ -68,6 +67,13 @@ grammarKit {
     grammarKitRelease = properties("grammarKitVersion")
 }
 
+val generateEelLexer = task<GenerateLexer>("GenerateEelLexer") {
+    source = "src/main/grammars/EelLexer.flex"
+    targetDir = "src/gen/de/vette/idea/neos/lang/eel/parser"
+    targetClass = "EelLexer"
+    purgeOldFiles = true
+}
+
 val generateAfxLexer = task<GenerateLexer>("GenerateAfxLexer") {
     source = "src/main/grammars/AfxLexer.flex"
     targetDir = "src/gen/de/vette/idea/neos/lang/afx/parser"
@@ -82,7 +88,15 @@ val generateFusionLexer = task<GenerateLexer>("GenerateFusionLexer") {
     purgeOldFiles = true
 }
 
-val generateFusionParser = task<GenerateParser>("GenerateParser") {
+val generateEelParser = task<GenerateParser>("GenerateEelParser") {
+    source = "src/main/grammars/EelParser.bnf"
+    targetRoot = "src/gen"
+    pathToParser = "/de/vette/idea/neos/lang/eel/parser/EelParser.java"
+    pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
+    purgeOldFiles = true
+}
+
+val generateFusionParser = task<GenerateParser>("GenerateFusionParser") {
     source = "src/main/grammars/FusionParser.bnf"
     targetRoot = "src/gen"
     pathToParser = "/de/vette/idea/neos/lang/fusion/parser/FusionParser.java"
@@ -95,7 +109,7 @@ tasks {
     withType<JavaCompile> {
         sourceCompatibility = properties("javaVersion")
         targetCompatibility = properties("javaVersion")
-        dependsOn(generateAfxLexer, generateFusionLexer, generateFusionParser)
+        dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
     }
 
     patchPluginXml {
