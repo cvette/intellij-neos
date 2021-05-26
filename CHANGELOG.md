@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.7.0]
+### Added
 - AFX is now a custom language. If you changed the injection settings, make sure "Neos Afx" is used
 - Handle EEL in AFX
 - Provide JSON schema for Node Types (https://github.com/Sebobo/Shel.Neos.Schema)
