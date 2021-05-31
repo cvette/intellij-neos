@@ -2,10 +2,7 @@ package de.vette.idea.neos.lang.yaml.references.nodeType;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiPolyVariantReferenceBase;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.indexing.FileBasedIndex;
 import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex;
@@ -24,17 +21,28 @@ public class NodeTypeReference extends PsiPolyVariantReferenceBase<YAMLPsiElemen
 
     private static TextRange textRangeFromElement(YAMLPsiElement yamlElement, boolean isKey) {
         int sourceStart = 0;
-        int sourceLength;
+        int sourceLength = 0;
+
         if (isKey && yamlElement instanceof YAMLKeyValue) {
-            sourceLength = ((YAMLKeyValue) yamlElement).getKey().getTextLength();
+            PsiElement key = ((YAMLKeyValue) yamlElement).getKey();
+            if (key != null) {
+                sourceLength = key.getTextLength();
+            }
         } else if (yamlElement instanceof YAMLKeyValue) {
-            sourceStart = ((YAMLKeyValue) yamlElement).getValue().getStartOffsetInParent();
-            sourceLength = ((YAMLKeyValue) yamlElement).getValue().getTextLength();
+            PsiElement value = ((YAMLKeyValue) yamlElement).getValue();
+            if (value != null) {
+                sourceStart = value.getStartOffsetInParent();
+                sourceLength = value.getTextLength();
+            }
         } else if (yamlElement instanceof YAMLSequenceItem) {
-            sourceLength = ((YAMLSequenceItem) yamlElement).getValue().getTextLength();
+            PsiElement value = ((YAMLSequenceItem) yamlElement).getValue();
+            if (value != null) {
+                sourceLength = value.getTextLength();
+            }
         } else {
             return yamlElement.getTextRange();
         }
+
         return new TextRange(sourceStart, sourceStart + sourceLength);
     }
 
