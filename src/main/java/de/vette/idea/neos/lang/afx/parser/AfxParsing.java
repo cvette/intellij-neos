@@ -22,11 +22,17 @@ public class AfxParsing extends HtmlParsing {
         getBuilder().advanceLexer(); // {
         PsiBuilder.Marker marker = getBuilder().mark();
 
+        boolean hasContentExpression = false;
         while (!getBuilder().eof() && getBuilder().getTokenType() != AfxElementTypes.AFX_EEL_END_DELIMITER) {
             getBuilder().advanceLexer();
+            hasContentExpression = true;
         }
 
-        marker.collapse(AfxLazyElementTypes.CONTENT_EXPRESSION);
+        if (hasContentExpression) {
+            marker.collapse(AfxLazyElementTypes.CONTENT_EXPRESSION);
+        } else {
+            marker.error("Expression expected");
+        }
 
         if (getBuilder().getTokenType() == AfxElementTypes.AFX_EEL_END_DELIMITER) {
             getBuilder().advanceLexer(); // }
