@@ -3,6 +3,18 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.7.1]
 ### Fixed
 - Empty EEL in AFX tag content no longer throws an exception
 - NullPointerException when using node type references
