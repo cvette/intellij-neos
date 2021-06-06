@@ -273,10 +273,10 @@ DECLARATION_SEPARATOR_LOOKAHEAD = [ \t\f]*:
 }
 
 <VALUE_STRING_EXPECTED_IN_BACKTICKS> {
-    {CRLF}                                  { return FusionTypes.CRLF; }
-    {ESCAPED_BACKTICK}+                     { return FusionTypes.ESCAPED_BACKTICK; }
-    {BACKSLASH}+                            { return FusionTypes.VALUE_STRING; }
-    {VALUE_STRING_IN_BACKTICKS}             { return FusionTypes.VALUE_STRING; }
+    {CRLF}                                  { return FusionTypes.DSL_VALUE; }
+    {ESCAPED_BACKTICK}+                     { return FusionTypes.DSL_VALUE; }
+    {BACKSLASH}+                            { return FusionTypes.DSL_VALUE; }
+    {VALUE_STRING_IN_BACKTICKS}             { return FusionTypes.DSL_VALUE; }
     {BACKTICK}                              { yybegin(CRLF_EXPECTED); return FusionTypes.BACKTICK; }
 }
 

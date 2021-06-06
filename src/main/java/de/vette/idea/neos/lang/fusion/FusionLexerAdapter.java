@@ -25,7 +25,7 @@ import de.vette.idea.neos.lang.fusion.parser.FusionLexer;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 
 public class FusionLexerAdapter extends MergingLexerAdapter {
-    private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(FusionTypes.EEL_VALUE);
+    private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(FusionTypes.EEL_VALUE, FusionTypes.DSL_VALUE);
 
     public FusionLexerAdapter() {
         super(new FlexAdapter(new FusionLexer()), TOKENS_TO_MERGE);

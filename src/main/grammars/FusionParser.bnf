@@ -90,7 +90,7 @@ value_dsl ::= DSL_IDENTIFIER BACKTICK value_dsl_content BACKTICK {
     pin=1
 }
 
-value_dsl_content ::= (VALUE_STRING | CRLF | ESCAPED_BACKTICK)* {
+value_dsl_content ::= DSL_VALUE* {
     implements = [ "com.intellij.psi.PsiLanguageInjectionHost" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionValueDslContentImplMixin"
 }
