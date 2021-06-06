@@ -103,6 +103,9 @@
 
     <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.PrototypeInheritanceAnnotator"/>
 
+    <gotoSymbolContributor implementation="de.vette.idea.neos.search.NodeTypeContributor"/>
+    <gotoSymbolContributor implementation="de.vette.idea.neos.search.FusionPrototypeDeclarationContributor"/>
+
     <!-- Line Marker Providers -->
     <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
     <codeInsight.lineMarkerProvider language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.annotators.PrototypeLineMarkerProvider"/>
