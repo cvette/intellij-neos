@@ -4,16 +4,8 @@
 
 ## [Unreleased]
 ### Added
+- AFX tag name synchronization
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.7.1]
 ### Fixed
 - Empty EEL in AFX tag content no longer throws an exception

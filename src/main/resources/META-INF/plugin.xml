@@ -118,6 +118,8 @@
 
     <projectService serviceImplementation="de.vette.idea.neos.NeosProjectService"/>
     <postStartupActivity implementation="de.vette.idea.neos.NeosStartupActivity" />
+
+    <xml.xmlTypedHandlersAdditionalSupport implementation="de.vette.idea.neos.lang.fusion.editor.FusionXmlTypedHandlersAdditionalSupport" />
   </extensions>
 
   <actions>
