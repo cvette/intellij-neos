@@ -5,6 +5,7 @@
 ## [Unreleased]
 ### Added
 - AFX tag name synchronization
+- Symbol contributors for node types and Fusion prototypes
 
 ## [1.7.1]
 ### Fixed
