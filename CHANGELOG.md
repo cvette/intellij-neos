@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.8.0]
+### Added
 - AFX tag name synchronization
 - Symbol contributors for node types and Fusion prototypes
 
