@@ -4,16 +4,8 @@
 
 ## [Unreleased]
 ### Added
+- Provide JSON schema for node migrations (https://github.com/Sebobo/Shel.Neos.Schema)
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.8.0]
 ### Added
 - AFX tag name synchronization

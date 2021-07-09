@@ -21,7 +21,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="JavaScript">
-    <JsonSchema.ProviderFactory implementation="de.vette.idea.neos.config.yaml.schema.NodeTypeYamlSchemaProviderFactory"/>
+    <JsonSchema.ProviderFactory implementation="de.vette.idea.neos.config.yaml.schema.NeosYamlSchemaProviderFactory"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

@@ -7,10 +7,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class NodeTypeYamlSchemaProviderFactory implements JsonSchemaProviderFactory {
-
+public class NeosYamlSchemaProviderFactory implements JsonSchemaProviderFactory {
     @Override
     public @NotNull List<JsonSchemaFileProvider> getProviders(@NotNull Project project) {
-        return List.of(new NodeTypeYamlSchemaProvider(project));
+        return List.of(
+                new NodeTypeYamlSchemaProvider(project),
+                new NodeMigrationYamlSchemaProvider(project)
+        );
     }
 }
