@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.8.1]
+### Added
 - Provide JSON schema for node migrations (https://github.com/Sebobo/Shel.Neos.Schema)
 
 ## [1.8.0]
