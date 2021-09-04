@@ -58,7 +58,7 @@ intellij {
 // Configure gradle-changelog-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
-    version = properties("pluginVersion")
+    version.set(properties("pluginVersion"))
 }
 
 grammarKit {
