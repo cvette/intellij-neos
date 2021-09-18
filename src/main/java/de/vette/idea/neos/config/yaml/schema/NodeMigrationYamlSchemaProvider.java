@@ -26,6 +26,7 @@ public class NodeMigrationYamlSchemaProvider implements JsonSchemaFileProvider {
     public boolean isAvailable(@NotNull VirtualFile file) {
         return !project.isDisposed()
                 && NeosProjectService.isEnabled(project)
+                && file.getParent() != null
                 && file.getParent().isDirectory()
                 && (file.getParent().getParent().getName().equals("Migrations")
                 && file.getParent().getName().equals("ContentRepository") || file.getParent().getName().equals("TYPO3CR"));
