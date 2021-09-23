@@ -4,16 +4,11 @@
 
 ## [Unreleased]
 ### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
+- Provide JSON schema for cache configuration (https://github.com/Sebobo/Shel.Neos.Schema)
 
 ### Fixed
+- NullPointerException when opening files with embedded YAML
 
-### Security
 ## [1.8.1]
 ### Added
 - Provide JSON schema for node migrations (https://github.com/Sebobo/Shel.Neos.Schema)
