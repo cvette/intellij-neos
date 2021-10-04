@@ -4,7 +4,34 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.9.0]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.9.0]
+### Added
 - Provide JSON schema for cache configuration (https://github.com/Sebobo/Shel.Neos.Schema)
+
 
 ### Fixed
 - NullPointerException when opening files with embedded YAML
@@ -23,7 +50,6 @@
 - Empty EEL in AFX tag content no longer throws an exception
 - NullPointerException when using node type references
 
-### Security
 ## [1.7.0]
 ### Added
 - AFX is now a custom language. If you changed the injection settings, make sure "Neos Afx" is used
@@ -50,6 +76,5 @@
 
 ## [1.5.0]
 ### Added
-
 - Completion for inline editor options in node type definitions
 - Live template context for Fusion file type
