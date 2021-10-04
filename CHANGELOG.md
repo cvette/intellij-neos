@@ -17,19 +17,6 @@
 
 ## [1.9.0]
 ### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
-## [1.9.0]
-### Added
 - Provide JSON schema for cache configuration (https://github.com/Sebobo/Shel.Neos.Schema)
 
 
