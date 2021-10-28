@@ -1,13 +1,29 @@
 package de.vette.idea.neos.util;
 
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
+import org.jetbrains.yaml.YAMLFileType;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 
 public class NeosUtil {
+    public static final Pattern NODE_TYPES_PATH_PATTERN = Pattern.compile("(^|/)(NodeTypes/|Configuration/NodeTypes\\.)");
+
+    /**
+     * Check if the given virtual file is a node type definition
+     */
+    public static Boolean isNodeTypeDefinition(VirtualFile virtualFile)
+    {
+        if (virtualFile.getFileType() != YAMLFileType.YML) {
+            return false;
+        }
+
+        return NODE_TYPES_PATH_PATTERN.matcher(virtualFile.getPath()).find();
+    }
 
     /**
      * Collect all parent directories until a directory named "Fusion" is found.

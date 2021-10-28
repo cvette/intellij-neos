@@ -29,8 +29,8 @@ import com.intellij.util.io.KeyDescriptor;
 
 import de.vette.idea.neos.NeosProjectService;
 
+import de.vette.idea.neos.util.NeosUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.yaml.YAMLFileType;
 import org.jetbrains.yaml.YAMLUtil;
 import org.jetbrains.yaml.psi.YAMLFile;
 
@@ -51,7 +51,7 @@ public class NodeTypesYamlFileIndex extends ScalarIndexExtension<String> {
     @NotNull
     @Override
     public FileBasedIndex.InputFilter getInputFilter() {
-        return (virtualFile) -> virtualFile.getFileType() == YAMLFileType.YML;
+        return NeosUtil::isNodeTypeDefinition;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class NodeTypesYamlFileIndex extends ScalarIndexExtension<String> {
 
     @Override
     public int getVersion() {
-        return 1;
+        return 2;
     }
 
     private static class NodeTypesYamlIndexer implements DataIndexer<String, Void, FileContent> {
@@ -89,10 +89,11 @@ public class NodeTypesYamlFileIndex extends ScalarIndexExtension<String> {
         @Override
         public Map<String, Void> map(@NotNull FileContent fileContent) {
             PsiFile psiFile = fileContent.getPsiFile();
-            if (NeosProjectService.isEnabledForIndex(psiFile.getProject())
-                    && isValidForIndex(fileContent, psiFile)) {
+
+            if (NeosProjectService.isEnabledForIndex(psiFile.getProject()) && isValidForIndex(fileContent)) {
                 return doIndex(fileContent);
             }
+
             return Collections.emptyMap();
         }
 
@@ -104,12 +105,8 @@ public class NodeTypesYamlFileIndex extends ScalarIndexExtension<String> {
             return result;
         }
 
-        private static boolean isValidForIndex(FileContent inputData, PsiFile psiFile) {
-            if (inputData.getFile().getLength() > MAX_FILE_BYTE_SIZE) {
-                return false;
-            }
-
-            return psiFile.getName().startsWith("NodeTypes.");
+        private static boolean isValidForIndex(FileContent inputData) {
+            return inputData.getFile().getLength() <= MAX_FILE_BYTE_SIZE;
         }
     }
 }

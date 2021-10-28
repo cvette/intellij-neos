@@ -7,6 +7,7 @@ import com.jetbrains.jsonSchema.extension.SchemaType;
 import com.jetbrains.jsonSchema.impl.JsonSchemaVersion;
 import com.jetbrains.jsonSchema.remote.JsonFileResolver;
 import de.vette.idea.neos.NeosProjectService;
+import de.vette.idea.neos.util.NeosUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -15,14 +16,15 @@ import org.jetbrains.annotations.Nullable;
 public class NodeTypeYamlSchemaProvider implements JsonSchemaFileProvider {
     protected Project project;
 
-
     public NodeTypeYamlSchemaProvider(Project project) {
         this.project = project;
     }
 
     @Override
     public boolean isAvailable(@NotNull VirtualFile file) {
-        return !project.isDisposed() && NeosProjectService.isEnabled(project) && file.getName().startsWith("NodeTypes.");
+        return !project.isDisposed()
+                && NeosProjectService.isEnabled(project)
+                && NeosUtil.isNodeTypeDefinition(file);
     }
 
     @Override

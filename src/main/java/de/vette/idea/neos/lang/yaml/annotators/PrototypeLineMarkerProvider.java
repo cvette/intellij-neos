@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
+import de.vette.idea.neos.util.NeosUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLDocument;
@@ -49,7 +50,7 @@ public class PrototypeLineMarkerProvider implements LineMarkerProvider {
                 return;
             }
 
-            if (!el.getContainingFile().getVirtualFile().getName().startsWith("NodeTypes.")) {
+            if (!NeosUtil.isNodeTypeDefinition(el.getContainingFile().getVirtualFile())) {
                 continue;
             }
 
