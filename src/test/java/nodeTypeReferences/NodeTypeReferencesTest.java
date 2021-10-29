@@ -38,7 +38,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
 
     public void testSupertypeInSameFile() {
         doRunTest(
-                "NodeTypes.supertypeInSameFile.yaml",
+                "Configuration/NodeTypes.supertypeInSameFile.yaml",
                 1,
                 "Neos.NodeTypes:Page",
                 "NodeTypes.supertypeInSameFile.yaml",
@@ -48,7 +48,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
 
     public void testSupertypeInOtherFile() {
         doRunTest(
-                "NodeTypes.supertypeInOtherFile.yaml",
+                "Configuration/NodeTypes.supertypeInOtherFile.yaml",
                 1,
                 "Neos.NodeTypes:Image",
                 "NodeTypes.Basic.yaml",
@@ -58,7 +58,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
 
     public void testConstraint() {
         doRunTest(
-                "NodeTypes.constraint.yaml",
+                "Configuration/NodeTypes.constraint.yaml",
                 1,
                 "Neos.NodeTypes:Image",
                 "NodeTypes.Basic.yaml",
@@ -68,7 +68,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
 
     public void testAllDefinitionsAreFound() {
         doRunTestWithCustomAssertions(
-                "NodeTypes.allDefinitionsAreFound.yaml",
+                "Configuration/NodeTypes.allDefinitionsAreFound.yaml",
                 resolveResult -> {
                     // one element shall be skipped; which is the element where we are currently
                     assertEquals("Length does not match", 2, resolveResult.length);
@@ -77,7 +77,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
     }
 
     public void testChildNodesHaveReference() {
-        loadFixture("NodeTypes.childNodes.yaml");
+        loadFixture("Configuration/NodeTypes.childNodes.yaml");
         resolveAtPosition(myFixture.getCaretOffset(), resolveResult -> {
             assertEquals("Not the right number of references found", 1, resolveResult.length);
 
@@ -90,7 +90,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
     }
 
     public void testArrayItemsHaveReference() {
-        loadFixture("NodeTypes.references.yaml");
+        loadFixture("Configuration/NodeTypes.references.yaml");
         int i = 0;
         String[] expectedNodeTypes = new String[]{
             "Neos.NodeTypes:Headline",
@@ -129,7 +129,7 @@ public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestC
     }
 
     private void loadFixture(String fileNameToInclude) {
-        myFixture.configureByFiles(fileNameToInclude, "NodeTypes.Basic.yaml");
+        myFixture.configureByFiles(fileNameToInclude, "Configuration/NodeTypes.Basic.yaml");
 
         // actually trigger indexing
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
