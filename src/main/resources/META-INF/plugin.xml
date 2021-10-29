@@ -125,6 +125,8 @@
     <postStartupActivity implementation="de.vette.idea.neos.NeosStartupActivity" />
 
     <xml.xmlTypedHandlersAdditionalSupport implementation="de.vette.idea.neos.lang.fusion.editor.FusionXmlTypedHandlersAdditionalSupport" />
+
+    <lang.inspectionSuppressor language="PHP" implementationClass="de.vette.idea.neos.lang.php.inspections.suppression.FlowUnusedMethodSuppressor"/>
   </extensions>
 
   <actions>
