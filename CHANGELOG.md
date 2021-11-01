@@ -4,21 +4,12 @@
 
 ## [Unreleased]
 ### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
+- Support NodeTypes in subfolders
+- Suppress PHP unused declaration inspection for Flow magic methods
 
 ## [1.9.0]
 ### Added
 - Provide JSON schema for cache configuration (https://github.com/Sebobo/Shel.Neos.Schema)
-
 
 ### Fixed
 - NullPointerException when opening files with embedded YAML
