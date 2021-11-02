@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+
+## [1.10.0]
 ### Added
 - Support NodeTypes in subfolders
 - Suppress PHP unused declaration inspection for Flow magic methods
@@ -10,6 +12,7 @@
 ## [1.9.0]
 ### Added
 - Provide JSON schema for cache configuration (https://github.com/Sebobo/Shel.Neos.Schema)
+
 
 ### Fixed
 - NullPointerException when opening files with embedded YAML
@@ -47,6 +50,7 @@
 ### Added
 - Rename refactoring for Fusion prototypes
 - Find usages of Fusion prototypes
+
 
 ### Fixed
 - Index split settings files (Settings.*.yaml)
