@@ -99,6 +99,8 @@
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.value.ValueReferenceContributor"/>
 
+    <codeInsight.parameterNameHints language="NeosFusion" implementationClass="de.vette.idea.neos.lang.eel.codeInsight.hints.EelInlayParameterHintsProvider"/>
+
     <breadcrumbsInfoProvider implementation="de.vette.idea.neos.lang.fusion.editor.FusionBreadcrumbsInfoProvider"/>
 
     <annotator language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.PrototypeInheritanceAnnotator"/>

@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+### Added
+- Inlay parameter hints for EEL helper methods in Fusion
 
 ## [1.10.0]
 ### Added
