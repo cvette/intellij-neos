@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+
+## [1.11.0]
 ### Added
 - Inlay parameter hints for EEL helper methods in Fusion
 
@@ -14,7 +16,6 @@
 ## [1.9.0]
 ### Added
 - Provide JSON schema for cache configuration (https://github.com/Sebobo/Shel.Neos.Schema)
-
 
 ### Fixed
 - NullPointerException when opening files with embedded YAML
@@ -52,7 +53,6 @@
 ### Added
 - Rename refactoring for Fusion prototypes
 - Find usages of Fusion prototypes
-
 
 ### Fixed
 - Index split settings files (Settings.*.yaml)
