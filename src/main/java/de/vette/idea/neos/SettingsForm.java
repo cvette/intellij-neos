@@ -20,29 +20,39 @@ package de.vette.idea.neos;
 
 import com.intellij.ide.actions.ShowSettingsUtilImpl;
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.jetbrains.php.frameworks.PhpFrameworkConfigurable;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class SettingsForm implements Configurable {
-
-    private Project project;
+public class SettingsForm implements PhpFrameworkConfigurable {
     private JCheckBox pluginEnabled;
+    private final Project project;
 
     public SettingsForm(@NotNull final Project project) {
         this.project = project;
     }
 
+    @Override
+    public boolean isBeingUsed() {
+        return this.pluginEnabled.isSelected();
+    }
+
+    @Override
+    public @NotNull @NonNls String getId() {
+        return "Neos.SettingsForm";
+    }
+
     @Nls
     @Override
     public String getDisplayName() {
-        return "Neos Plugin";
+        return "Neos";
     }
 
     @Nullable
@@ -71,7 +81,7 @@ public class SettingsForm implements Configurable {
     }
 
     @Override
-    public void apply() throws ConfigurationException {
+    public void apply() {
         getSettings().pluginEnabled = pluginEnabled.isSelected();
     }
 
@@ -85,7 +95,7 @@ public class SettingsForm implements Configurable {
     }
 
     private Settings getSettings() {
-        return Settings.getInstance(this.project);
+        return Settings.getInstance(project);
     }
 
     public static void show(@NotNull Project project) {

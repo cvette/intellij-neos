@@ -18,7 +18,6 @@
 
 package de.vette.idea.neos;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -38,7 +37,7 @@ public class NeosProjectService {
     }
 
     public static NeosProjectService getInstance(@NotNull Project project) {
-        return ServiceManager.getService(project, NeosProjectService.class);
+        return project.getService(NeosProjectService.class);
     }
 
     public static Logger getLogger() {
@@ -58,7 +57,7 @@ public class NeosProjectService {
     }
 
     public static boolean isEnabled(@Nullable Project project) {
-        return project != null && Settings.getInstance(project).pluginEnabled;
+        return false;
     }
 
     public static boolean isEnabled(@Nullable PsiElement element) {

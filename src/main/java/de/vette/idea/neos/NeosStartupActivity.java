@@ -23,16 +23,14 @@ import com.intellij.openapi.startup.StartupActivity;
 import de.vette.idea.neos.util.IdeHelper;
 import org.jetbrains.annotations.NotNull;
 
-public class NeosStartupActivity implements StartupActivity {
+public class NeosStartupActivity implements StartupActivity.DumbAware {
 
     @Override
     public void runActivity(@NotNull Project project) {
-        NeosProjectService projectService = project.getService(NeosProjectService.class);
+        NeosProjectService projectService = NeosProjectService.getInstance(project);
 
         if (!projectService.isEnabled() && !Settings.getInstance(project).dismissEnableNotification) {
-            NeosProjectService.getLogger().info("test");
             if (projectService.isNeosProject()) {
-                NeosProjectService.getLogger().info("is neos project");
                 IdeHelper.notifyEnableMessage(project);
             }
         }

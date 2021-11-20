@@ -13,6 +13,8 @@
 
   <extensions defaultExtensionNs="com.jetbrains.php">
     <libraryRoot id="doctrine_meta" path="doctrine-phpstorm-meta/" runtime="false"/>
+    <frameworkUsageProvider implementation="de.vette.idea.neos.FrameworkUsageProvider"/>
+    <frameworkProjectConfigurableProvider implementation="de.vette.idea.neos.FrameworkConfigurableProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="org.intellij.intelliLang">
@@ -26,12 +28,6 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="de.vette.idea.neos.Settings"/>
-    <projectConfigurable instance="de.vette.idea.neos.SettingsForm"
-                         displayName="Neos"
-                         id="Neos.SettingsForm"
-                         parentId="reference.webide.settings.project.settings.php"
-                         nonDefaultProject="true"
-    />
 
     <testSourcesFilter implementation="de.vette.idea.neos.NeosTestSourcesFilter" />
 

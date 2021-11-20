@@ -30,8 +30,8 @@ public class Settings implements PersistentStateComponent<Settings> {
     public boolean pluginEnabled = false;
     public boolean dismissEnableNotification = false;
 
-    public static Settings getInstance(Project project) {
-        return ServiceManager.getService(project, Settings.class);
+    public static Settings getInstance(@NotNull Project project) {
+        return project.getService(Settings.class);
     }
 
     @Nullable
