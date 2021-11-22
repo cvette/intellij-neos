@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Compatibility with 2021.3
+
 ## [1.11.0]
 ### Added
 - Inlay parameter hints for EEL helper methods in Fusion
