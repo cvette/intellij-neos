@@ -57,7 +57,7 @@ public class NeosProjectService {
     }
 
     public static boolean isEnabled(@Nullable Project project) {
-        return false;
+        return project != null && Settings.getInstance(project) != null && Settings.getInstance(project).pluginEnabled;
     }
 
     public static boolean isEnabled(@Nullable PsiElement element) {
