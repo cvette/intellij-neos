@@ -12,6 +12,7 @@ import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 
 public class NeosUtil {
     public static final Pattern NODE_TYPES_PATH_PATTERN = Pattern.compile("(^|/)(NodeTypes/|Configuration/NodeTypes\\.)");
+    public static final Pattern NODE_MIGRATION_PATH_PATTERN = Pattern.compile("(^|/)Migrations/(ContentRepository|TYPO3CR)/");
 
     /**
      * Check if the given virtual file is a node type definition
@@ -23,6 +24,18 @@ public class NeosUtil {
         }
 
         return NODE_TYPES_PATH_PATTERN.matcher(virtualFile.getPath()).find();
+    }
+
+    /**
+     * Check if the given virtual file is a node migration
+     */
+    public static Boolean isNodeMigration(VirtualFile virtualFile)
+    {
+        if (virtualFile.getFileType() != YAMLFileType.YML) {
+            return false;
+        }
+
+        return NODE_MIGRATION_PATH_PATTERN.matcher(virtualFile.getPath()).find();
     }
 
     /**
