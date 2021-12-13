@@ -29,7 +29,6 @@ COLON = ":"
 DOT = "."
 
 VALUE_BOOLEAN = true|TRUE|false|FALSE
-VALUE_NUMBER = [\-]?[0-9] [0-9]* ("." [0-9] [0-9]*)?
 VALUE_POSITIVE_NUMBER = [0-9] [0-9]* ("." [0-9] [0-9]*)?
 VALUE_SEPARATOR = ","
 
