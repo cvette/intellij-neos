@@ -1,6 +1,6 @@
 import org.jetbrains.changelog.markdownToHTML
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
 fun properties(key: String) = project.findProperty(key).toString()
 
@@ -14,7 +14,9 @@ plugins {
     // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // gradle-grammar-kit-plugin - read more: https://github.com/JetBrains/gradle-grammar-kit-plugin
-    id("org.jetbrains.grammarkit") version "2021.1.3"
+    id("org.jetbrains.grammarkit") version "2021.2.1"
+    // Gradle Qodana Plugin
+    id("org.jetbrains.qodana") version "0.1.13"
 }
 
 group = properties("pluginGroup")
@@ -62,46 +64,54 @@ changelog {
     groups.set(emptyList())
 }
 
+// Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
+qodana {
+    cachePath.set(projectDir.resolve(".qodana").canonicalPath)
+    reportPath.set(projectDir.resolve("build/reports/inspections").canonicalPath)
+    saveReport.set(true)
+    showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
+}
+
 grammarKit {
-    jflexRelease = properties("jFlexVersion")
-    grammarKitRelease = properties("grammarKitVersion")
+    jflexRelease.set(properties("jFlexVersion"))
+    grammarKitRelease.set(properties("grammarKitVersion"))
 }
 
-val generateEelLexer = task<GenerateLexer>("GenerateEelLexer") {
-    source = "src/main/grammars/EelLexer.flex"
-    targetDir = "src/gen/de/vette/idea/neos/lang/eel/parser"
-    targetClass = "EelLexer"
-    purgeOldFiles = true
+val generateEelLexer = task<GenerateLexerTask>("GenerateEelLexer") {
+    source.set("src/main/grammars/EelLexer.flex")
+    targetDir.set("src/gen/de/vette/idea/neos/lang/eel/parser")
+    targetClass.set("EelLexer")
+    purgeOldFiles.set(true)
 }
 
-val generateAfxLexer = task<GenerateLexer>("GenerateAfxLexer") {
-    source = "src/main/grammars/AfxLexer.flex"
-    targetDir = "src/gen/de/vette/idea/neos/lang/afx/parser"
-    targetClass = "AfxLexer"
-    purgeOldFiles = true
+val generateAfxLexer = task<GenerateLexerTask>("GenerateAfxLexer") {
+    source.set("src/main/grammars/AfxLexer.flex")
+    targetDir.set("src/gen/de/vette/idea/neos/lang/afx/parser")
+    targetClass.set("AfxLexer")
+    purgeOldFiles.set(true)
 }
 
-val generateFusionLexer = task<GenerateLexer>("GenerateFusionLexer") {
-    source = "src/main/grammars/FusionLexer.flex"
-    targetDir = "src/gen/de/vette/idea/neos/lang/fusion/parser"
-    targetClass = "FusionLexer"
-    purgeOldFiles = true
+val generateFusionLexer = task<GenerateLexerTask>("GenerateFusionLexer") {
+    source.set("src/main/grammars/FusionLexer.flex")
+    targetDir.set("src/gen/de/vette/idea/neos/lang/fusion/parser")
+    targetClass.set("FusionLexer")
+    purgeOldFiles.set(true)
 }
 
-val generateEelParser = task<GenerateParser>("GenerateEelParser") {
-    source = "src/main/grammars/EelParser.bnf"
-    targetRoot = "src/gen"
-    pathToParser = "/de/vette/idea/neos/lang/eel/parser/EelParser.java"
-    pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
-    purgeOldFiles = true
+val generateEelParser = task<GenerateParserTask>("GenerateEelParser") {
+    source.set("src/main/grammars/EelParser.bnf")
+    targetRoot.set("src/gen")
+    pathToParser.set("/de/vette/idea/neos/lang/eel/parser/EelParser.java")
+    pathToPsiRoot.set("/de/vette/idea/neos/lang/core/psi")
+    purgeOldFiles.set(true)
 }
 
-val generateFusionParser = task<GenerateParser>("GenerateFusionParser") {
-    source = "src/main/grammars/FusionParser.bnf"
-    targetRoot = "src/gen"
-    pathToParser = "/de/vette/idea/neos/lang/fusion/parser/FusionParser.java"
-    pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
-    purgeOldFiles = true
+val generateFusionParser = task<GenerateParserTask>("GenerateFusionParser") {
+    source.set("src/main/grammars/FusionParser.bnf")
+    targetRoot.set("src/gen")
+    pathToParser.set("/de/vette/idea/neos/lang/fusion/parser/FusionParser.java")
+    pathToPsiRoot.set("/de/vette/idea/neos/lang/core/psi")
+    purgeOldFiles.set(true)
 }
 
 tasks {
@@ -146,6 +156,15 @@ tasks {
 
     runPluginVerifier {
         ideVersions.set(properties("pluginVerifierIdeVersions").split(',').map(String::trim).filter(String::isNotEmpty))
+    }
+
+    // Configure UI tests plugin
+    // Read more: https://github.com/JetBrains/intellij-ui-test-robot
+    runIdeForUiTests {
+        systemProperty("robot-server.port", "8082")
+        systemProperty("ide.mac.message.dialogs.as.sheets", "false")
+        systemProperty("jb.privacy.policy.text", "<!--999.999-->")
+        systemProperty("jb.consents.confirmation.enabled", "false")
     }
 
     signPlugin {
