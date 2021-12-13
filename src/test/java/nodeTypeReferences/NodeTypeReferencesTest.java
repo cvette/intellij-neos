@@ -3,7 +3,7 @@ package nodeTypeReferences;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase;
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 
 import de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReference;
@@ -19,7 +19,7 @@ import helpers.NeosProjectDescriptor;
 /**
  * Testcase for node type references
  */
-public class NodeTypeReferencesTest extends LightPlatformCodeInsightFixtureTestCase {
+public class NodeTypeReferencesTest extends BasePlatformTestCase {
 
     @Override
     protected String getTestDataPath() {
