@@ -3,7 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
-
+### Fixed
+- NullPointer Exception in NodeMigrationYamlSchemaProvider
 
 ## [1.12.0]
 - Compatibility with 2021.3
