@@ -3,6 +3,10 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+- Compatibility with 2022.1
+
+### Fixed
+- NullPointer Exception in NodeTypeReferenceContributor
 
 ## [1.12.1]
 ### Fixed
