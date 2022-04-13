@@ -108,6 +108,10 @@ public class NodeTypeReferenceContributor extends PsiReferenceContributor {
             YAMLSequenceItem yamlItem = getParent((YAMLPsiElement) element, YAMLSequenceItem.class);
             YAMLKeyValue yamlElement = getParentKey(yamlItem);
 
+            if (yamlElement == null) {
+                return PsiReference.EMPTY_ARRAY;
+            }
+
             // we support
             // - editorOptions.nodeTypes
             if (yamlElement.getKeyText().equals("nodeTypes") && parentKeyIs(yamlElement, "editorOptions")) {
