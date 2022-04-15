@@ -3,6 +3,12 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+
+## [1.12.2]
+- Compatibility with 2022.1
+
+## [1.12.2]
+- Compatibility with 2022.1
 - Compatibility with 2022.1
 
 ### Fixed
