@@ -80,7 +80,9 @@ public class FusionFormattingModelBuilder implements FormattingModelBuilder {
                 .after(FusionTypes.NAMESPACE_SEPARATOR).spaces(1)
                 .before(FusionTypes.INCLUDE_SEPARATOR).none()
                 .after(FusionTypes.INCLUDE_SEPARATOR).spaces(1)
-                .between(FusionTypes.BLOCK, FusionTypes.PATH).blankLines(1);
+                .between(FusionTypes.BLOCK, FusionTypes.PATH).blankLines(1)
+                .after(FusionTypes.EEL_VALUE).none()
+                .before(FusionTypes.EEL_VALUE).none();
 
         return spacingBuilder;
     }
