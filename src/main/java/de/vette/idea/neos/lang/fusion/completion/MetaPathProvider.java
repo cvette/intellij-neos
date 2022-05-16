@@ -18,25 +18,19 @@
 
 package de.vette.idea.neos.lang.fusion.completion;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
-import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.util.ProcessingContext;
+import org.jetbrains.annotations.NotNull;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
+public class MetaPathProvider extends CompletionProvider<CompletionParameters> {
 
-public class FusionCompletionContributor extends CompletionContributor
-{
-    public FusionCompletionContributor() {
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.UNQUALIFIED_TYPE),
-                new PrototypeProvider()
-        );
-
-        extend(
-                CompletionType.BASIC,
-                psiElement(FusionTypes.META_PROPERTY_NAME),
-                new MetaPathProvider()
-        );
+    @Override
+    protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+        result.addElement(LookupElementBuilder.create("process"));
+        result.addElement(LookupElementBuilder.create("context"));
+        result.addElement(LookupElementBuilder.create("cache"));
     }
 }
