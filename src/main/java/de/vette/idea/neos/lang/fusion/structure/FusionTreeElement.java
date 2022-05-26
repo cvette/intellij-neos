@@ -111,7 +111,11 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
 
         if (getElement().getFirstChild() != null
                 && getElement().getFirstChild() instanceof FusionPrototypeSignature) {
-            return Objects.requireNonNull(((FusionPrototypeSignature) getElement().getFirstChild()).getType()).getText();
+            FusionPrototypeSignature signature = (FusionPrototypeSignature) getElement().getFirstChild();
+
+            if (signature.getType() != null) {
+                return signature.getType().getText();
+            }
         }
 
         return getElement().getText();
