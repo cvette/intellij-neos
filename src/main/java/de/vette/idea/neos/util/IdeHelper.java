@@ -23,35 +23,33 @@ import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.project.Project;
+import de.vette.idea.neos.NeosIcons;
 import de.vette.idea.neos.Settings;
 import de.vette.idea.neos.SettingsForm;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.event.HyperlinkEvent;
-
 public class IdeHelper {
 
     public static void notifyEnableMessage(final Project project) {
-        NotificationListener listener = new NotificationListener() {
-            @Override
-            public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent hyperlinkEvent) {
-                // handle html click events
-                if("config".equals(hyperlinkEvent.getDescription())) {
-                    // open settings dialog and show panel
-                    SettingsForm.show(project);
-                } else if("enable".equals(hyperlinkEvent.getDescription())) {
-                    enablePluginAndConfigure(project);
-                    Notifications.Bus.notify(new Notification("Neos Plugin", "Neos Plugin", "Plugin enabled", NotificationType.INFORMATION), project);
-                } else if("dismiss".equals(hyperlinkEvent.getDescription())) {
-                    // user doesn't want to show notification again
-                    Settings.getInstance(project).dismissEnableNotification = true;
-                }
-
-                notification.expire();
+        NotificationListener listener = (notification, hyperlinkEvent) -> {
+            // handle html click events
+            if("config".equals(hyperlinkEvent.getDescription())) {
+                // open settings dialog and show panel
+                SettingsForm.show(project);
+            } else if("enable".equals(hyperlinkEvent.getDescription())) {
+                enablePluginAndConfigure(project);
+                Notifications.Bus.notify(new Notification("Neos Plugin", "Neos Plugin", "Plugin enabled", NotificationType.INFORMATION), project);
+            } else if("dismiss".equals(hyperlinkEvent.getDescription())) {
+                // user doesn't want to show notification again
+                Settings.getInstance(project).dismissEnableNotification = true;
             }
+
+            notification.expire();
         };
 
-        Notification notification = new Notification("Neos Plugin", "Neos Plugin", "Enable the Neos Plugin <a href=\"enable\">with auto configuration now</a>, open <a href=\"config\">Project Settings</a> or <a href=\"dismiss\">dismiss</a> further messages", NotificationType.INFORMATION, listener);
+        Notification notification = new Notification("Neos Plugin", "Neos Plugin", "Enable the Neos Plugin <a href=\"enable\">with auto configuration now</a>, open <a href=\"config\">Project Settings</a> or <a href=\"dismiss\">dismiss</a> further messages", NotificationType.INFORMATION);
+        notification.setListener(listener);
+        notification.setIcon(NeosIcons.NODE_TYPE);
         Notifications.Bus.notify(notification, project);
     }
 
