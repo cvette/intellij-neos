@@ -66,11 +66,6 @@ public class ResolveEngine {
 
         Collection<VirtualFile> files = FileBasedIndex.getInstance().getContainingFiles(NodeTypesYamlFileIndex.KEY, fqn, GlobalSearchScope.allScope(project));
 
-        // Check for legacy namespace
-        if (files.isEmpty() && namespace == null) {
-            return getNodeTypeDefinitions(project, name, "TYPO3.Neos");
-        }
-
         final String finalFqn = fqn;
         return files
                 .stream()
@@ -120,8 +115,7 @@ public class ResolveEngine {
                 if (prototypeNamespace != null) {
                     // check if prototype has default namespace
                     if (namespace == null) {
-                        if (prototypeNamespace.getText().equals("TYPO3.Neos")
-                                || prototypeNamespace.getText().equals("Neos.Neos")) {
+                        if (prototypeNamespace.getText().equals("Neos.Neos")) {
                             result.add(possiblePrototype);
                         }
                         continue;
@@ -136,10 +130,7 @@ public class ResolveEngine {
                             result.add(possiblePrototype);
                         }
                     }
-                } else if (namespace == null
-                        || (namespace.equals("TYPO3.Neos")
-                        || namespace.equals("Neos.Neos"))) {
-
+                } else if (namespace == null || namespace.equals("Neos.Neos")) {
                     result.add(possiblePrototype);
                 }
             }

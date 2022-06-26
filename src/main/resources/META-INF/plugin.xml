@@ -84,7 +84,7 @@
 
     <liveTemplateContext implementation="de.vette.idea.neos.lang.fusion.livetemplates.FusionContext"/>
 
-    <fileType name="Neos Fusion" language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionFileType" extensions="fusion;ts2" />
+    <fileType name="Neos Fusion" language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionFileType" extensions="fusion" />
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
