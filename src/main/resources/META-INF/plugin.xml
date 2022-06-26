@@ -112,6 +112,7 @@
     <!-- Indices -->
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex"/>
     <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex"/>
+    <stubIndex implementation="de.vette.idea.neos.lang.fusion.stubs.index.FusionPropertyAssignmentIndex"/>
 
     <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.stubs.FusionFileStub"/>
     <stubElementTypeHolder class="de.vette.idea.neos.lang.fusion.psi.FusionTypes"/>

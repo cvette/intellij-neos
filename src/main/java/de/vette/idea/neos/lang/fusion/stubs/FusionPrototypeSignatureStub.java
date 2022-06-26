@@ -40,7 +40,7 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
         this.isDefinition = isDefinition;
     }
 
-    protected static FusionStubElementType TYPE = new FusionStubElementType<FusionPrototypeSignatureStub , FusionPrototypeSignature>("FUSION_PROTOTYPE_SIGNATURE") {
+    protected static FusionStubElementType<FusionPrototypeSignatureStub, FusionPrototypeSignature> TYPE = new FusionStubElementType<>("FUSION_PROTOTYPE_SIGNATURE") {
 
         @Override
         public FusionPrototypeSignature createPsi(@NotNull FusionPrototypeSignatureStub stub) {
@@ -52,11 +52,7 @@ public class FusionPrototypeSignatureStub extends StubBase<FusionPrototypeSignat
         public FusionPrototypeSignatureStub createStub(@NotNull FusionPrototypeSignature psi, StubElement parentStub) {
             String name = "";
             String namespace = "";
-            boolean isDefinition = false;
-
-            if (psi.isDefinition()) {
-                isDefinition = true;
-            }
+            boolean isDefinition = psi.isDefinition();
 
             FusionType type = psi.getType();
             if (type != null) {

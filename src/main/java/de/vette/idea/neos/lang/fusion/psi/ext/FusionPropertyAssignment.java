@@ -17,21 +17,7 @@
  */
 package de.vette.idea.neos.lang.fusion.psi.ext;
 
+public interface FusionPropertyAssignment {
 
-public interface FusionPathMixin {
-
-    /**
-     * Checks if there is only a prototype signature in this path
-     *
-     * @return boolean
-     */
-    boolean isPrototypeSignature();
-
-    /**
-     * Checks if this path is a @class path of a prototype signature
-     * e.g. prototype(Foo:Bar).@class
-     *
-     * @return boolean
-     */
-    boolean isPrototypeClassProperty();
+    boolean isSimpleProperty();
 }

@@ -61,5 +61,4 @@ public abstract class FusionPathImplMixin extends FusionElementImpl implements F
 
         return this.getText();
     }
-
 }

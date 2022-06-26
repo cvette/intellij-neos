@@ -2,10 +2,15 @@ package de.vette.idea.neos.util;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import de.vette.idea.neos.lang.fusion.psi.*;
+import kotlin.collections.EmptyList;
 import org.jetbrains.yaml.YAMLFileType;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import java.util.regex.Pattern;
 
 import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
@@ -73,5 +78,47 @@ public class NeosUtil {
         }
 
         return parentDirectories;
+    }
+
+    /**
+     * Gets the name of the prototype definition and the copied prototype
+     * for a given PSI element.
+     *
+     * Returns an empty list if the element is not a direct child of the prototype definition.
+     *
+     * @param psi PsiElement
+     * @return List
+     */
+    public static List<String> getPrototypeNames(PsiElement psi) {
+        List<String> prototypes = new Vector<>();
+
+        PsiElement parent = psi.getParent();
+        while(!(parent instanceof FusionFile) && parent != null) {
+            if (parent instanceof FusionPrototypeInstance) {
+                return prototypes;
+            }
+
+            if (parent instanceof FusionPropertyCopy) {
+                FusionPropertyCopy copy = (FusionPropertyCopy) parent;
+                FusionPath path = copy.getPath();
+
+                if (path.isPrototypeSignature()) {
+                    FusionPrototypeSignature signature = path.getPrototypeSignatureList().get(0);
+
+                    if (signature.getType() != null) {
+                        prototypes.add(signature.getType().getText());
+                    }
+
+                    if (copy.getCopiedPrototypeSignature() != null && copy.getCopiedPrototypeSignature().getType() != null) {
+                        String type = copy.getCopiedPrototypeSignature().getType().getText();
+                        prototypes.add(type);
+                    }
+                }
+            }
+
+            parent = parent.getParent();
+        }
+
+        return prototypes;
     }
 }

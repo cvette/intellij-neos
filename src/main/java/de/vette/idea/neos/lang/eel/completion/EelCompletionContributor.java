@@ -24,13 +24,18 @@ import de.vette.idea.neos.lang.eel.psi.EelTypes;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
-public class EelCompletionContributor extends CompletionContributor
-{
+public class EelCompletionContributor extends CompletionContributor {
     public EelCompletionContributor() {
         extend(
                 CompletionType.BASIC,
                 psiElement(EelTypes.EEL_IDENTIFIER),
-                new EelCompletionProvider()
+                new EelContextCompletionProvider()
+        );
+
+        extend(
+                CompletionType.BASIC,
+                psiElement(EelTypes.EEL_IDENTIFIER),
+                new EelPathsCompletionProvider()
         );
     }
 }

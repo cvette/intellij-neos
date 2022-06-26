@@ -15,23 +15,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.vette.idea.neos.lang.fusion.psi.ext;
+package de.vette.idea.neos.lang.fusion.stubs.index;
 
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import de.vette.idea.neos.lang.fusion.psi.FusionPropertyAssignment;
+import org.jetbrains.annotations.NotNull;
 
-public interface FusionPathMixin {
+public class FusionPropertyAssignmentIndex extends StringStubIndexExtension<FusionPropertyAssignment> {
 
-    /**
-     * Checks if there is only a prototype signature in this path
-     *
-     * @return boolean
-     */
-    boolean isPrototypeSignature();
+    public static StubIndexKey<String, FusionPropertyAssignment> KEY = StubIndexKey.createIndexKey("de.vette.idea.neos.lang.fusion.stubs.index.FusionPropertyAssignmentIndex");
 
-    /**
-     * Checks if this path is a @class path of a prototype signature
-     * e.g. prototype(Foo:Bar).@class
-     *
-     * @return boolean
-     */
-    boolean isPrototypeClassProperty();
+    @NotNull
+    @Override
+    public StubIndexKey<String, FusionPropertyAssignment> getKey() {
+        return KEY;
+    }
 }

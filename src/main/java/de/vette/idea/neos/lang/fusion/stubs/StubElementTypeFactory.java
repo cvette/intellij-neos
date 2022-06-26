@@ -18,16 +18,23 @@
 package de.vette.idea.neos.lang.fusion.stubs;
 
 import com.intellij.psi.tree.IElementType;
+import de.vette.idea.neos.lang.fusion.psi.FusionPropertyAssignment;
 import org.jetbrains.annotations.NotNull;
 
 public class StubElementTypeFactory {
 
     @NotNull
-    public static IElementType factory(@NotNull  String name) {
+    public static IElementType factory(@NotNull String name) {
         if (name.equals("PROTOTYPE_SIGNATURE")) {
             return FusionPrototypeSignatureStub.TYPE;
-        } else if (name.equals("NAMESPACE_DECLARATION")){
+        }
+
+        if (name.equals("NAMESPACE_DECLARATION")) {
             return FusionNamespaceDeclarationStub.TYPE;
+        }
+
+        if (name.equals("PROPERTY_ASSIGNMENT")) {
+            return FusionPropertyAssignmentStub.TYPE;
         }
 
         throw new RuntimeException("Unknown element type: " + name);

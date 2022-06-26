@@ -27,11 +27,8 @@ import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionTypeImpl;
 import de.vette.idea.neos.lang.fusion.stubs.FusionPrototypeSignatureStub;
-import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public abstract class FusionPrototypeSignatureImplMixin
         extends FusionStubbedElementImpl<FusionPrototypeSignatureStub>

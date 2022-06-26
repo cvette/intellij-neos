@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+### Added
+- Autocompletion for Fusion paths in EEL
 
 ## [1.12.2]
 - Compatibility with 2022.1
