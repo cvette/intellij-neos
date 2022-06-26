@@ -5,9 +5,13 @@
 ## [Unreleased]
 ### Added
 - Autocompletion for Fusion paths in EEL
+
 ### Removed
 - Support for TYPO3.Neos namespace
 - Support for .ts2 file extension
+
+### Fixed
+- Recognize subcontext Node Type definitions 
 
 ## [1.12.2]
 - Compatibility with 2022.1

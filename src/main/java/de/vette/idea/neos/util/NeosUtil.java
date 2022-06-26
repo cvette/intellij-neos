@@ -5,7 +5,6 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import de.vette.idea.neos.lang.fusion.psi.*;
-import kotlin.collections.EmptyList;
 import org.jetbrains.yaml.YAMLFileType;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.regex.Pattern;
 import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 
 public class NeosUtil {
-    public static final Pattern NODE_TYPES_PATH_PATTERN = Pattern.compile("(^|/)(NodeTypes/|Configuration/NodeTypes\\.)");
+    public static final Pattern NODE_TYPES_PATH_PATTERN = Pattern.compile("(^|/)(NodeTypes/|Configuration/((Development|Production|Testing)/([^/]+/)*)?NodeTypes\\.)");
     public static final Pattern NODE_MIGRATION_PATH_PATTERN = Pattern.compile("(^|/)Migrations/(ContentRepository|TYPO3CR)/");
 
     /**
