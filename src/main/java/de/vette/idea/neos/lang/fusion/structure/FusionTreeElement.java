@@ -31,7 +31,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Objects;
 
 public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
 

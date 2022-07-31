@@ -37,7 +37,7 @@ public class FusionNamespaceDeclarationStub extends StubBase<FusionNamespaceDecl
         this.namespace = namespace;
     }
 
-    public static FusionStubElementType TYPE = new FusionStubElementType<FusionNamespaceDeclarationStub , FusionNamespaceDeclaration>("FUSION_NAMESPACE_DECLARATION") {
+    public static FusionStubElementType<FusionNamespaceDeclarationStub, FusionNamespaceDeclaration> TYPE = new FusionStubElementType<>("FUSION_NAMESPACE_DECLARATION") {
 
         @Override
         public FusionNamespaceDeclaration createPsi(@NotNull FusionNamespaceDeclarationStub stub) {

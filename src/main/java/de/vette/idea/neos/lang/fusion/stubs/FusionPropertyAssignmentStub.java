@@ -26,7 +26,6 @@ import de.vette.idea.neos.util.NeosUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.List;
 
 public class FusionPropertyAssignmentStub extends StubBase<FusionPropertyAssignment> {
     protected String path;
@@ -50,9 +49,8 @@ public class FusionPropertyAssignmentStub extends StubBase<FusionPropertyAssignm
         @NotNull
         @Override
         public FusionPropertyAssignmentStub createStub(@NotNull FusionPropertyAssignment psi, StubElement parentStub) {
-            List<String> prototypeNames = NeosUtil.getPrototypeNames(psi);
-            String prototype = prototypeNames.isEmpty() ? "" : prototypeNames.get(0);
-            return new FusionPropertyAssignmentStub(parentStub, this, psi.getPath().getText(), psi.isSimpleProperty(), prototype);
+            String prototypeName = NeosUtil.getDefiningPrototypeName(psi);
+            return new FusionPropertyAssignmentStub(parentStub, this, psi.getPath().getText(), psi.isSimpleProperty(), prototypeName);
         }
 
         @Override
@@ -73,11 +71,9 @@ public class FusionPropertyAssignmentStub extends StubBase<FusionPropertyAssignm
 
         @Override
         public void indexStub(@NotNull FusionPropertyAssignmentStub stub, @NotNull IndexSink sink) {
-            if (stub.path == null || !stub.isSimpleProperty || stub.containingPrototype.equals("")) {
+            if (stub.path == null || !stub.isSimpleProperty || stub.containingPrototype == null || stub.containingPrototype.equals("")) {
                 return;
             }
-
-            //TODO: Check nesting level
 
             sink.occurrence(FusionPropertyAssignmentIndex.KEY, stub.containingPrototype);
         }

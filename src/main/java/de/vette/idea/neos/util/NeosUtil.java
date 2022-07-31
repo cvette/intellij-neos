@@ -83,8 +83,6 @@ public class NeosUtil {
      * Gets the name of the prototype definition and the copied prototype
      * for a given PSI element.
      *
-     * Returns an empty list if the element is not a direct child of the prototype definition.
-     *
      * @param psi PsiElement
      * @return List
      */
@@ -94,6 +92,7 @@ public class NeosUtil {
         PsiElement parent = psi.getParent();
         while(!(parent instanceof FusionFile) && parent != null) {
             if (parent instanceof FusionPrototypeInstance) {
+                prototypes.add(((FusionPrototypeInstance) parent).getType().getText());
                 return prototypes;
             }
 
@@ -119,5 +118,29 @@ public class NeosUtil {
         }
 
         return prototypes;
+    }
+
+    public static String getDefiningPrototypeName(FusionPropertyAssignment assignment) {
+        PsiElement parentBlock = assignment.getParent();
+        if (!(parentBlock instanceof FusionBlock)) {
+            return null;
+        }
+
+        PsiElement parent = parentBlock.getParent();
+        if (parent instanceof FusionPropertyCopy) {
+            FusionPropertyCopy copy = (FusionPropertyCopy) parent;
+            if (!copy.isPrototypeInheritance()) {
+                return null;
+            }
+
+            FusionPrototypeSignature signature = copy.getPath().getPrototypeSignatureList().get(0);
+            if (signature.getType() == null) {
+                return null;
+            }
+
+            return signature.getType().getText();
+        }
+
+        return null;
     }
 }
