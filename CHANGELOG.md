@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+
+## [1.13.0]
 ### Added
 - Autocompletion for Fusion paths in EEL
 
@@ -11,9 +13,14 @@
 - Support for .ts2 file extension
 
 ### Fixed
-- Recognize subcontext Node Type definitions 
+- Recognize subcontext Node Type definitions
 
 ## [1.12.2]
+- Compatibility with 2022.1
+
+## [1.12.2]
+- Compatibility with 2022.1
+- Compatibility with 2022.1
 - Compatibility with 2022.1
 
 ## [1.12.2]
