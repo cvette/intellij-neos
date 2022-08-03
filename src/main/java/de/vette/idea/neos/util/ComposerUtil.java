@@ -17,10 +17,7 @@
  */
 package de.vette.idea.neos.util;
 
-import com.intellij.json.psi.JsonFile;
-import com.intellij.json.psi.JsonObject;
-import com.intellij.json.psi.JsonProperty;
-import com.intellij.json.psi.JsonValue;
+import com.intellij.json.psi.*;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
@@ -87,5 +84,102 @@ public class ComposerUtil {
         }
 
         return mappings;
+    }
+
+    /**
+     * As defined in Neos\Flow\Package\PackageManager::getPackageKeyFromManifest
+     */
+    @Nullable
+    public static String getPackageKey(JsonFile composerFile)
+    {
+        JsonObject object = (JsonObject) composerFile.getTopLevelValue();
+        if (object == null) {
+            return null;
+        }
+
+        // test extra.neos.package-key
+        var packageKey = getFromPath(object, "extra", "neos", "package-key");
+        if (packageKey instanceof JsonStringLiteral) {
+            if (isPackageKeyValid(((JsonStringLiteral) packageKey).getValue())) {
+                return ((JsonStringLiteral) packageKey).getValue();
+            }
+        }
+
+        // get from path
+        var packageType = getFromPath(object, "type");
+        if (packageType instanceof JsonStringLiteral && isFlowPackageType(((JsonStringLiteral) packageType).getValue())) {
+            var packageKeyFromDirectory = composerFile.getContainingDirectory().getName();
+            if (packageKeyFromDirectory.contains(".") && isPackageKeyValid(packageKeyFromDirectory)) {
+                return packageKeyFromDirectory;
+            }
+        }
+
+        // test autoload configuration
+        var namespaceMapping = getNamespaceMappings(composerFile);
+        if (!namespaceMapping.isEmpty()) {
+            var firstNamespacePath = namespaceMapping.keySet().stream().findFirst();
+            var packageKeyFromNamespace = firstNamespacePath.get()
+                .replace('\\', '.')
+                .replaceAll("\\.*$", "");
+            if (isPackageKeyValid(packageKeyFromNamespace)) {
+                return packageKeyFromNamespace;
+            }
+        }
+
+        // build from package-name
+        var packageName = getFromPath(object, "name");
+        if (packageName != null) {
+            var packageKeyFromName = ((JsonStringLiteral) packageName).getValue().replace('/', '.');
+            if (isPackageKeyValid(packageKeyFromName)) {
+                return packageKeyFromName;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * As defined in Neos\Flow\Composer\ComposerUtility::isFlowPackageType
+     */
+    public static boolean isFlowPackageType(String packageType)
+    {
+        return packageType.startsWith("typo3-flow-") || packageType.startsWith("neos-");
+    }
+
+    /**
+     * As defined in Neos\Flow\Package\PackageManager::isPackageKeyValid and
+     * Neos\Flow\Package\PackageInterface::PATTERN_MATCH_PACKAGEKEY
+     */
+    public static boolean isPackageKeyValid(String packageKey)
+    {
+        return packageKey.matches("^[a-zA-Z\\d]+\\.(?:[a-zA-Z\\d][.a-zA-Z\\d]*)+$");
+    }
+
+    /**
+     * Retrieve the nested JsonValue at the path in an object, e.g. the object
+     * {"foo": {"bar": {"baz": "string"}}}
+     * with path ["foo", "bar", "baz"] will return a JsonValue for "string".
+     * @return null if there was no object at some point in the path
+     */
+    @Nullable
+    protected static JsonValue getFromPath(JsonObject object, String ...path)
+    {
+        JsonValue pointer = object;
+        var i = 0;
+        for (var key : path) {
+            i++;
+            if (!(pointer instanceof JsonObject)) {
+                return null;
+            }
+            var property = ((JsonObject) pointer).findProperty(key);
+            if (property == null) {
+                return null;
+            }
+            pointer = property.getValue();
+            if (i == path.length) {
+                break;
+            }
+        }
+        return pointer;
     }
 }
