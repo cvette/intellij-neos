@@ -141,5 +141,8 @@
     <action id="Neos.NewFusionFile" class="de.vette.idea.neos.actions.CreateFusionFile" text="Fusion File" description="Create new Fusion file">
       <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
     </action>
+    <action id="Neos.CopyResourceUri" class="de.vette.idea.neos.actions.CopyResourceUri" text="Copy resource:// URI" description="Copies the flow resource:// URI of the current file">
+      <add-to-group group-id="CopyFileReference"/>
+    </action>
   </actions>
 </idea-plugin>

@@ -1,0 +1,9 @@
+{
+    "name": "acme/example",
+    "type": "neos-package",
+    "extra": {
+        "neos": {
+            "package-key": "Acme.PackageKey"
+        }
+    }
+}
