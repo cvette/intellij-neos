@@ -78,10 +78,6 @@ public class FusionBreadcrumbsInfoProvider implements BreadcrumbsProvider {
 
     @Override
     public @Nullable Icon getElementIcon(@NotNull PsiElement e) {
-        if (e instanceof FusionSinglePath) {
-            return FusionIcons.PATH;
-        }
-
         if (e instanceof FusionMetaProperty) {
             return FusionIcons.META;
         }
