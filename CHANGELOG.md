@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+### Added
+- Improved breadcrumbs for Fusion
 
 ## [1.13.0]
 ### Added
