@@ -45,13 +45,15 @@ resource ::= RESOURCE_KEYWORD RESOURCE_PATH {pin=1}
 private property ::= path (property_block|property_deletion|property_copy|property_assignment)
 left property_block ::= block
 left property_deletion ::= UNSET_OPERATOR
-left property_assignment ::= ASSIGNMENT_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_dsl|value_string_line|expression|prototype_instance) {
+left property_assignment ::= ASSIGNMENT_OPERATOR assignmentValue {
     pin=1
     implements = [ "de.vette.idea.neos.lang.fusion.psi.FusionNamedElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPropertyAssignment" ]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPropertyAssignmentImplMixin"
     stubClass = "de.vette.idea.neos.lang.fusion.stubs.FusionPropertyAssignmentStub"
     elementTypeFactory = "de.vette.idea.neos.lang.fusion.stubs.StubElementTypeFactory.factory"
 }
+
+assignmentValue ::= (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_dsl|value_string_line|expression|prototype_instance)
 
 left property_copy ::= COPY_OPERATOR (VALUE_BOOLEAN|VALUE_NULL|VALUE_NUMBER|value_string_line|prototype_instance|(copied_prototype_signature [block])) {
     pin=1
@@ -71,11 +73,13 @@ prototype_instance ::= type [block] {
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPrototypeInstanceImplMixin"
 }
 
-path ::= [PATH_SEPARATOR] (PATH_PART|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (PATH_PART|prototype_signature|meta_property))* {
+path ::= [PATH_SEPARATOR] (single_path|meta_property|prototype_signature|value_string_single_line) (PATH_SEPARATOR (single_path|prototype_signature|meta_property))* {
     pin=2
     implements = ["de.vette.idea.neos.lang.fusion.psi.FusionElement"; "de.vette.idea.neos.lang.fusion.psi.ext.FusionPathMixin"]
     mixin = "de.vette.idea.neos.lang.fusion.psi.impl.ext.FusionPathImplMixin"
 }
+
+single_path ::= PATH_PART
 
 meta_property ::= META_PROPERTY_KEYWORD META_PROPERTY_NAME {pin=1}
 

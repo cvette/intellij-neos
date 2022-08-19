@@ -19,13 +19,22 @@
 package de.vette.idea.neos.lang.fusion.editor;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
+import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.psi.FusionBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FusionBreadcrumbsInfoProvider implements BreadcrumbsProvider {
     @Override
@@ -35,44 +44,108 @@ public class FusionBreadcrumbsInfoProvider implements BreadcrumbsProvider {
 
     @Override
     public boolean acceptElement(@NotNull PsiElement e) {
-        return e instanceof de.vette.idea.neos.lang.fusion.psi.FusionBlock;
+        return e instanceof FusionSinglePath || e instanceof FusionMetaProperty || e instanceof FusionPrototypeSignature;
+    }
+
+    @Override
+    public @Nullable PsiElement getParent(@NotNull PsiElement e) {
+        if (e instanceof FusionBlock && e.getParent() instanceof FusionPropertyBlock) {
+            FusionPath path = ((FusionPropertyBlock) e.getParent()).getPath();
+            return path.getLastChild();
+        }
+
+        if (e instanceof FusionBlock && e.getParent() instanceof FusionPropertyCopy) {
+            FusionPath path = ((FusionPropertyCopy) e.getParent()).getPath();
+            return path.getLastChild();
+        }
+
+        if (e instanceof FusionAssignmentValue) {
+            FusionPath path = ((FusionPropertyAssignment) e.getParent()).getPath();
+            return path.getLastChild();
+        }
+
+        if (e instanceof FusionSinglePath || e instanceof FusionMetaProperty || e instanceof FusionPrototypeSignature) {
+            if (e.getPrevSibling() != null
+                    && (e.getPrevSibling().getPrevSibling() instanceof FusionSinglePath
+                    || e.getPrevSibling().getPrevSibling() instanceof FusionMetaProperty
+                    || e.getPrevSibling().getPrevSibling() instanceof FusionPrototypeSignature)) {
+                return e.getPrevSibling().getPrevSibling();
+            }
+        }
+
+        return e.getParent();
+    }
+
+    @Override
+    public @Nullable Icon getElementIcon(@NotNull PsiElement e) {
+        if (e instanceof FusionMetaProperty) {
+            return FusionIcons.META;
+        }
+
+        if (e instanceof FusionPrototypeSignature) {
+            return FusionIcons.PROTOTYPE;
+        }
+
+        return null;
     }
 
     @NotNull
     @Override
     public String getElementInfo(@NotNull PsiElement e) {
-        String elementInfo = "";
-        if (e instanceof FusionBlock) {
-            PsiElement currentElement = e;
-            do {
-                if (currentElement.getPrevSibling() == null) {
-                    currentElement = currentElement.getParent();
-                } else {
-                    currentElement = currentElement.getPrevSibling();
-                }
-            } while (currentElement != null && !(currentElement instanceof FusionPath));
+        return getElementName(e, true);
+    }
 
-            if (currentElement != null) {
-                elementInfo = currentElement.getText();
+    @NotNull
+    @Override
+    public String getElementTooltip(@NotNull PsiElement e) {
+        return getElementName(e, false);
+    }
 
-                if (currentElement.getFirstChild() instanceof FusionPrototypeSignature) {
-                    FusionType type = ((FusionPrototypeSignature) currentElement.getFirstChild()).getType();
-                    if (type != null) {
-                        elementInfo = type.getText();
-                    }
+    private String getElementName(@NotNull PsiElement e, boolean truncate) {
+        String elementInfo = e.getText();
+
+        if (e instanceof FusionPrototypeSignature) {
+            if (truncate) {
+                FusionType type = ((FusionPrototypeSignature) e).getType();
+                if (type != null) {
+                    elementInfo = type.getText();
                 }
             }
         }
 
-        if (elementInfo.length() > 30) {
-            elementInfo = "..." + elementInfo.substring(elementInfo.length() - 27, elementInfo.length());
+        if (truncate && elementInfo.length() > 30) {
+            elementInfo = "..." + elementInfo.substring(elementInfo.length() - 27);
         }
+
         return elementInfo;
     }
 
-    @Nullable
     @Override
-    public String getElementTooltip(@NotNull PsiElement e) {
-        return "";
+    public @NotNull List<? extends Action> getContextActions(@NotNull PsiElement element) {
+        List<String> parts = new ArrayList<>();
+        var current = element;
+        do {
+            if (!acceptElement(current)) {
+                current = getParent(current);
+                continue;
+            }
+
+            var part = getElementName(current, false);
+            if (!part.isEmpty()) {
+                parts.add(part);
+            }
+
+            current = getParent(current);
+        } while (current != null);
+
+        Collections.reverse(parts);
+        String path = String.join(".", parts);
+
+        return Collections.singletonList(new AbstractAction("Copy Fusion path") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CopyPasteManager.getInstance().setContents(new StringSelection(path));
+            }
+        });
     }
 }
