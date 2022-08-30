@@ -3,6 +3,8 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+
+## [1.14.0]
 ### Added
 - Improved breadcrumbs for Fusion
 
@@ -18,6 +20,16 @@
 - Recognize subcontext Node Type definitions
 
 ## [1.12.2]
+- Compatibility with 2022.1
+
+## [1.12.2]
+- Compatibility with 2022.1
+- Compatibility with 2022.1
+- Compatibility with 2022.1
+
+## [1.12.2]
+- Compatibility with 2022.1
+- Compatibility with 2022.1
 - Compatibility with 2022.1
 
 ## [1.12.2]
