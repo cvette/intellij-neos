@@ -36,7 +36,7 @@ idea {
 }
 
 dependencies {
-    implementation("io.sentry:sentry:6.9.0")
+    implementation("io.sentry:sentry:6.9.1")
 }
 
 sourceSets {
