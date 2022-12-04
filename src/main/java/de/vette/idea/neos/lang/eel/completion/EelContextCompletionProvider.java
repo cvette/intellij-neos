@@ -40,7 +40,7 @@ public class EelContextCompletionProvider extends CompletionProvider<CompletionP
                             }
 
                             String completionText = eelHelper + "." + method.getName() + "()";
-                            result.addElement(LookupElementBuilder.create(completionText).withIcon(PhpIcons.METHOD_ICON));
+                            result.addElement(LookupElementBuilder.create(completionText).withIcon(PhpIcons.METHOD));
                         }
                     }
                 }
