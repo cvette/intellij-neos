@@ -12,6 +12,9 @@ jobs:
   release:
     name: Publish Plugin
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
 
       # Check out current repository
