@@ -21,8 +21,8 @@ plugins {
     id("org.jetbrains.qodana") version "0.1.13"
 }
 
-group = properties("pluginGroup")
-version = properties("pluginVersion")
+group = properties("pluginGroup").get()
+version = properties("pluginVersion").get()
 
 
 // Configure project's dependencies
