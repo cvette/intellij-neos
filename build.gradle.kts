@@ -3,7 +3,8 @@ import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
-fun properties(key: String) = project.findProperty(key).toString()
+fun properties(key: String) = providers.gradleProperty(key)
+fun environment(key: String) = providers.environmentVariable(key)
 
 plugins {
     id("idea")
@@ -11,11 +12,11 @@ plugins {
     id("java")
     id("java-library")
     // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-    id("org.jetbrains.intellij") version "1.12.0"
+    id("org.jetbrains.intellij") version "1.13.2"
     // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
     id("org.jetbrains.changelog") version "2.0.0"
     // gradle-grammar-kit-plugin - read more: https://github.com/JetBrains/gradle-grammar-kit-plugin
-    id("org.jetbrains.grammarkit") version "2021.2.2"
+    id("org.jetbrains.grammarkit") version "2022.3.1"
     // Gradle Qodana Plugin
     id("org.jetbrains.qodana") version "0.1.13"
 }
@@ -51,24 +52,21 @@ intellij {
     pluginName.set(properties("pluginName"))
     version.set(properties("platformVersion"))
     type.set(properties("platformType"))
-    downloadSources.set(properties("platformDownloadSources").toBoolean())
-    updateSinceUntilBuild.set(true)
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
+    plugins.set(properties("platformPlugins").map { it.split(',').map(String::trim).filter(String::isNotEmpty) })
 }
 
-// Configure gradle-changelog-plugin plugin.
-// Read more: https://github.com/JetBrains/gradle-changelog-plugin
+// Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
-    version.set(properties("pluginVersion"))
     groups.set(emptyList())
+    repositoryUrl.set(properties("pluginRepositoryUrl"))
 }
 
 // Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
 qodana {
-    cachePath.set(projectDir.resolve(".qodana").canonicalPath)
-    reportPath.set(projectDir.resolve("build/reports/inspections").canonicalPath)
+    cachePath.set(file(".qodana").canonicalPath)
+    reportPath.set(file("build/reports/inspections").canonicalPath)
     saveReport.set(true)
     showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
 }
@@ -79,28 +77,28 @@ grammarKit {
 }
 
 val generateEelLexer = task<GenerateLexerTask>("GenerateEelLexer") {
-    source.set("src/main/grammars/EelLexer.flex")
+    sourceFile.set(file("src/main/grammars/EelLexer.flex"))
     targetDir.set("src/gen/de/vette/idea/neos/lang/eel/parser")
     targetClass.set("EelLexer")
     purgeOldFiles.set(true)
 }
 
 val generateAfxLexer = task<GenerateLexerTask>("GenerateAfxLexer") {
-    source.set("src/main/grammars/AfxLexer.flex")
+    sourceFile.set(file("src/main/grammars/AfxLexer.flex"))
     targetDir.set("src/gen/de/vette/idea/neos/lang/afx/parser")
     targetClass.set("AfxLexer")
     purgeOldFiles.set(true)
 }
 
 val generateFusionLexer = task<GenerateLexerTask>("GenerateFusionLexer") {
-    source.set("src/main/grammars/FusionLexer.flex")
+    sourceFile.set(file("src/main/grammars/FusionLexer.flex"))
     targetDir.set("src/gen/de/vette/idea/neos/lang/fusion/parser")
     targetClass.set("FusionLexer")
     purgeOldFiles.set(true)
 }
 
 val generateEelParser = task<GenerateParserTask>("GenerateEelParser") {
-    source.set("src/main/grammars/EelParser.bnf")
+    sourceFile.set(file("src/main/grammars/EelParser.bnf"))
     targetRoot.set("src/gen")
     pathToParser.set("/de/vette/idea/neos/lang/eel/parser/EelParser.java")
     pathToPsiRoot.set("/de/vette/idea/neos/lang/core/psi")
@@ -108,7 +106,7 @@ val generateEelParser = task<GenerateParserTask>("GenerateEelParser") {
 }
 
 val generateFusionParser = task<GenerateParserTask>("GenerateFusionParser") {
-    source.set("src/main/grammars/FusionParser.bnf")
+    sourceFile.set(file("src/main/grammars/FusionParser.bnf"))
     targetRoot.set("src/gen")
     pathToParser.set("/de/vette/idea/neos/lang/fusion/parser/FusionParser.java")
     pathToPsiRoot.set("/de/vette/idea/neos/lang/core/psi")
@@ -119,14 +117,14 @@ tasks {
     // Set the JVM compatibility versions
     properties("javaVersion").let {
         withType<JavaCompile> {
-            sourceCompatibility = it
-            targetCompatibility = it
+            sourceCompatibility = it.get()
+            targetCompatibility = it.get()
             dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
         }
     }
 
     wrapper {
-        gradleVersion = properties("gradleVersion")
+        gradleVersion = properties("gradleVersion").get()
     }
 
     patchPluginXml {
@@ -148,10 +146,15 @@ tasks {
         )
 
         // Get the latest available change notes from the changelog file
-        changeNotes.set(provider {
-            changelog.renderItem(changelog.run {
-                getOrNull(properties("pluginVersion")) ?: getLatest()
-            }, Changelog.OutputType.HTML)
+        changeNotes.set(properties("pluginVersion").map { pluginVersion ->
+            with(changelog) {
+                renderItem(
+                        (getOrNull(pluginVersion) ?: getUnreleased())
+                                .withHeader(false)
+                                .withEmptySections(false),
+                        Changelog.OutputType.HTML,
+                )
+            }
         })
     }
 
@@ -165,17 +168,16 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+        certificateChain.set(environment("CERTIFICATE_CHAIN"))
+        privateKey.set(environment("PRIVATE_KEY"))
+        password.set(environment("PRIVATE_KEY_PASSWORD"))
     }
 
     publishPlugin {
         dependsOn("patchChangelog")
-        token.set(System.getenv("PUBLISH_TOKEN"))
+        token.set(environment("PUBLISH_TOKEN"))
         // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://jetbrains.org/intellij/sdk/docs/tutorials/build_system/deployment.html#specifying-a-release-channel
-        channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
-    }
+        channels.set(properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) })    }
 }

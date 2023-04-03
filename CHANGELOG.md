@@ -3,6 +3,7 @@
 # IntelliJ Neos Changelog
 
 ## [Unreleased]
+- Make compatible with 231.*
 
 ## [1.14.0]
 ### Added
