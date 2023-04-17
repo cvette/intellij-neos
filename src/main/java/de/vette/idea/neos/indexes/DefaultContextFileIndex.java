@@ -26,10 +26,10 @@ import com.intellij.util.io.KeyDescriptor;
 import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.eel.util.EelHelperUtil;
 import de.vette.idea.neos.indexes.externalizer.StringDataExternalizer;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.YAMLFileType;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DefaultContextFileIndex extends FileBasedIndexExtension<String, String> {
@@ -59,7 +59,7 @@ public class DefaultContextFileIndex extends FileBasedIndexExtension<String, Str
     @Override
     public DataIndexer<String, String, FileContent> getIndexer() {
         return fileContent -> {
-            Map<String, String> map = new THashMap<>();
+            Map<String, String> map = new HashMap<>();
             PsiFile psiFile = fileContent.getPsiFile();
             if(!NeosProjectService.isEnabledForIndex(psiFile.getProject())
                     || !isValidForIndex(fileContent, psiFile)) {
