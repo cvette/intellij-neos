@@ -82,7 +82,7 @@
     <lang.refactoringSupport language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.refactoring.FusionRefactoringSupportProvider"/>
     <usageTypeProvider implementation="de.vette.idea.neos.lang.fusion.usages.UsagesTypeProvider"/>
 
-    <liveTemplateContext implementation="de.vette.idea.neos.lang.fusion.livetemplates.FusionContext"/>
+    <liveTemplateContext contextId="NEOSFUSION" implementation="de.vette.idea.neos.lang.fusion.livetemplates.FusionContext"/>
 
     <fileType name="Neos Fusion" language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionFileType" extensions="fusion" />
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>

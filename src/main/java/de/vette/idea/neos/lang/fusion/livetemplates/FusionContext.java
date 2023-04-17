@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 public class FusionContext extends TemplateContextType {
 
     public FusionContext() {
-        super("NEOSFUSION", "Neos Fusion");
+        super("Neos Fusion");
     }
 
     @Override
