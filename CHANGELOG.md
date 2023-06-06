@@ -3,6 +3,7 @@
 # IntelliJ Neos Changelog
 
 ## Unreleased
+- Allow quotes in AFX attribute names
 
 ## 1.16.0 - 2023-04-03
 - Make compatible with 231.*
