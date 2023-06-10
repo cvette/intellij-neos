@@ -3,7 +3,13 @@
 # IntelliJ Neos Changelog
 
 ## Unreleased
-- Add setting for AFX attribute value completion 
+
+### Added
+- Add setting for AFX attribute value completion
+
+### Fixed
+- AFX tag completion and inspection suppression
+
 
 ## 1.17.0 - 2023-06-07
 - Allow quotes in AFX attribute names

@@ -1,7 +1,5 @@
 package de.vette.idea.neos.lang.afx.codeInsight;
 
-import com.intellij.codeInsight.completion.CompletionUtilCore;
-import com.intellij.codeInsight.completion.CompletionUtilCoreImpl;
 import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.completion.XmlTagInsertHandler;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -10,15 +8,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReferenceService;
-import com.intellij.psi.SmartPointerManager;
+import com.intellij.psi.html.HtmlTag;
 import com.intellij.psi.impl.source.xml.TagNameReference;
 import com.intellij.psi.impl.source.xml.XmlElementDescriptorProvider;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.xml.*;
-import de.vette.idea.neos.NeosProjectService;
-import de.vette.idea.neos.lang.afx.psi.AfxTag;
+import de.vette.idea.neos.lang.afx.AfxLanguage;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
@@ -58,6 +55,14 @@ public class AfxTagProvider implements XmlElementDescriptorProvider, XmlTagNameP
     @Nullable
     @Override
     public XmlElementDescriptor getDescriptor(XmlTag tag) {
+        if (!(tag instanceof HtmlTag)) {
+            return null;
+        }
+
+        if (!(tag.getContainingFile().getLanguage() instanceof AfxLanguage)) {
+            return null;
+        }
+
         String key = tag.getName();
         String[] nameParts = tag.getName().split(":");
 
@@ -74,7 +79,11 @@ public class AfxTagProvider implements XmlElementDescriptorProvider, XmlTagNameP
 
     @Override
     public void addTagNameVariants(List<LookupElement> elements, @NotNull XmlTag tag, String prefix) {
-        if (!(tag instanceof AfxTag)) {
+        if (!(tag instanceof HtmlTag)) {
+            return;
+        }
+
+        if (!(tag.getContainingFile().getLanguage() instanceof AfxLanguage)) {
             return;
         }
 

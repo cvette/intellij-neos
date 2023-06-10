@@ -3,6 +3,7 @@ package de.vette.idea.neos.lang.afx;
 import com.intellij.codeInspection.DefaultXmlSuppressionProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.html.HtmlTag;
 import com.intellij.psi.xml.XmlAttributeValue;
 import de.vette.idea.neos.lang.afx.psi.AfxFile;
 import de.vette.idea.neos.lang.afx.psi.AfxTag;
@@ -26,8 +27,7 @@ public class AfxInspectionSuppressor extends DefaultXmlSuppressionProvider {
                 return true;
             }
 
-            if (element.getParent().getParent() instanceof AfxTag) {
-                AfxTag tag = (AfxTag) element.getParent().getParent();
+            if (element.getParent().getParent() instanceof HtmlTag tag) {
                 String name = tag.getName();
                 if (Character.isUpperCase(name.charAt(0))) {
                     return true;
