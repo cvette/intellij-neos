@@ -18,4 +18,9 @@ public class AfxCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
     public @Nullable CustomCodeStyleSettings createCustomSettings(@NotNull CodeStyleSettings settings) {
         return new AfxCodeStyleSettings(settings);
     }
+
+    @Override
+    public boolean hasSettingsPage() {
+        return false;
+    }
 }
