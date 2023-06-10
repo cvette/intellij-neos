@@ -26,6 +26,10 @@
     <JsonSchema.ProviderFactory implementation="de.vette.idea.neos.config.yaml.schema.NeosYamlSchemaProviderFactory"/>
   </extensions>
 
+  <extensions defaultExtensionNs="com.intellij.html">
+    <codestyle.panel implementation="de.vette.idea.neos.lang.afx.formatter.AfxHtmlCodeStylePanelExtension"/>
+  </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="de.vette.idea.neos.Settings"/>
 
@@ -53,6 +57,7 @@
     <xml.xmlExtension implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxXmlExtension" />
     <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxTagProvider" />
     <xml.tagNameProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxTagProvider"/>
+    <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.afx.formatter.AfxCodeStyleSettingsProvider" />
 
     <!-- Fusion -->
     <internalFileTemplate name="Fusion File"/>
