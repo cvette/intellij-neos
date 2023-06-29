@@ -4,6 +4,9 @@
 
 ## Unreleased
 
+### Added
+- Compatibility with 2023.2 (eap)
+
 ## 1.18.0 - 2023-06-12
 
 ### Added
