@@ -19,7 +19,6 @@
 package de.vette.idea.neos;
 
 import com.intellij.ide.actions.ShowSettingsUtilImpl;
-import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -33,6 +32,7 @@ import javax.swing.*;
 
 public class SettingsForm implements PhpFrameworkConfigurable {
     private JCheckBox pluginEnabled;
+    private JCheckBox excludePackageSymlinks;
     private final Project project;
 
     public SettingsForm(@NotNull final Project project) {
@@ -41,7 +41,7 @@ public class SettingsForm implements PhpFrameworkConfigurable {
 
     @Override
     public boolean isBeingUsed() {
-        return this.pluginEnabled.isSelected();
+        return this.pluginEnabled.isSelected() || this.excludePackageSymlinks.isSelected();
     }
 
     @Override
@@ -65,24 +65,30 @@ public class SettingsForm implements PhpFrameworkConfigurable {
     @Override
     public JComponent createComponent() {
         pluginEnabled = new JCheckBox("Enable plugin for this project");
+        excludePackageSymlinks = new JCheckBox("Exclude symlinked packages");
 
         GridLayoutManager layout = new GridLayoutManager(2,1);
         GridConstraints c = new GridConstraints();
         c.setAnchor(GridConstraints.ANCHOR_NORTHWEST);
+        c.setRow(0);
 
         JPanel panel1 = new JPanel(layout);
         panel1.add(pluginEnabled, c);
+
+        c.setRow(1);
+        panel1.add(excludePackageSymlinks, c);
         return panel1;
     }
 
     @Override
     public boolean isModified() {
-        return !pluginEnabled.isSelected() == getSettings().pluginEnabled;
+        return !pluginEnabled.isSelected() == getSettings().pluginEnabled || !excludePackageSymlinks.isSelected() == getSettings().excludePackageSymlinks;
     }
 
     @Override
     public void apply() {
         getSettings().pluginEnabled = pluginEnabled.isSelected();
+        getSettings().excludePackageSymlinks = excludePackageSymlinks.isSelected();
     }
 
     @Override
@@ -92,6 +98,7 @@ public class SettingsForm implements PhpFrameworkConfigurable {
 
     private void updateUIFromSettings() {
         pluginEnabled.setSelected(getSettings().pluginEnabled);
+        excludePackageSymlinks.setSelected(getSettings().excludePackageSymlinks);
     }
 
     private Settings getSettings() {
@@ -101,7 +108,4 @@ public class SettingsForm implements PhpFrameworkConfigurable {
     public static void show(@NotNull Project project) {
         ShowSettingsUtilImpl.showSettingsDialog(project, "Neos.SettingsForm", null);
     }
-
-    @Override
-    public void disposeUIResources() {}
 }

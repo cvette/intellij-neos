@@ -11,6 +11,10 @@
   <depends>org.intellij.intelliLang</depends>
   <depends>org.jetbrains.plugins.yaml</depends>
 
+  <projectListeners>
+    <listener class="de.vette.idea.neos.ComposerUpdateListener" topic="com.jetbrains.php.composer.actions.update.ComposerInstalledPackagesService$ComposerUpdateListener" />
+  </projectListeners>
+
   <extensions defaultExtensionNs="com.jetbrains.php">
     <libraryRoot id="doctrine_meta" path="doctrine-phpstorm-meta/" runtime="false"/>
     <frameworkUsageProvider implementation="de.vette.idea.neos.FrameworkUsageProvider"/>

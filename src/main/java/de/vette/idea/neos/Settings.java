@@ -29,6 +29,7 @@ public class Settings implements PersistentStateComponent<Settings> {
 
     public boolean pluginEnabled = false;
     public boolean dismissEnableNotification = false;
+    public boolean excludePackageSymlinks = false;
 
     public static Settings getInstance(@NotNull Project project) {
         return project.getService(Settings.class);
