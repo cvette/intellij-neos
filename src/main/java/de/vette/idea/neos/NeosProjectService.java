@@ -18,13 +18,23 @@
 
 package de.vette.idea.neos;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.intellij.ide.plugins.newui.SearchQueryParser;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.jetbrains.php.composer.ComposerConfigUtils;
+import com.jetbrains.php.composer.ComposerDataService;
+import com.jetbrains.php.composer.ComposerUtils;
+import com.jetbrains.php.composer.InstalledPackageData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+import java.util.List;
 
 import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 
@@ -69,10 +79,24 @@ public class NeosProjectService {
     }
 
     public static boolean isNeosProject(Project project) {
-        VirtualFile projectDir = guessProjectDir(project);
-        return (VfsUtil.findRelativeFile(projectDir, "Packages") != null
-                && VfsUtil.findRelativeFile(projectDir, "Configuration") != null
-                && (VfsUtil.findRelativeFile(projectDir, "Packages", "Application", "TYPO3.Neos") != null
-                || VfsUtil.findRelativeFile(projectDir, "Packages", "Application", "Neos.Neos") != null));
+        VirtualFile configFile = ComposerDataService.getInstance(project).getCurrentConfigFile();
+        if (configFile == null) {
+            return false;
+        }
+
+        try {
+            JsonObject root = ComposerConfigUtils.parseJson(configFile).getAsJsonObject();
+
+            if (!root.has("require")) {
+                return false;
+            }
+
+            JsonObject requireObject = root.getAsJsonObject("require");
+            return requireObject.has("neos/neos") || requireObject.has("neos/flow");
+        } catch (IllegalStateException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }

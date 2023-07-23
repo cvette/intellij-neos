@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class IdeHelper {
 
     public static void notifyEnableMessage(final Project project) {
-        Notification notification = new Notification("Neos Plugin", "Neos Plugin", "This looks like a Neos CMS project.", NotificationType.INFORMATION);
+        Notification notification = new Notification("Neos Plugin", "Neos Plugin", "This looks like a Neos CMS project. You'll need to enable the plugin for this project in order to use all provided features.", NotificationType.INFORMATION);
         notification.setTitle("Neos CMS Support");
         notification.setIcon(NeosIcons.NODE_TYPE);
 
