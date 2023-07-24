@@ -25,6 +25,11 @@ public class ComposerUpdateListener implements ComposerInstalledPackagesService.
             return;
         }
 
+        addSymlinks(project);
+    }
+
+
+    public static void addSymlinks(Project project) {
         VirtualFile config = ComposerDataService.getInstance(project).getCurrentConfigFile();
 
         if (config == null) {

@@ -87,6 +87,10 @@ public class SettingsForm implements PhpFrameworkConfigurable {
 
     @Override
     public void apply() {
+        if (!getSettings().excludePackageSymlinks && excludePackageSymlinks.isSelected()) {
+            ComposerUpdateListener.addSymlinks(project);
+        }
+
         getSettings().pluginEnabled = pluginEnabled.isSelected();
         getSettings().excludePackageSymlinks = excludePackageSymlinks.isSelected();
     }
