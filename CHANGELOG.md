@@ -6,6 +6,7 @@
 
 ### Added
 - Allow to exclude symlinked packages automatically
+- Improved detection of Neos projects by using the composer.json
 - Compatibility with 2023.2 (eap)
 
 ## 1.18.0 - 2023-06-12
