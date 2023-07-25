@@ -5,6 +5,7 @@
 ## Unreleased
 
 ### Added
+- Add XLIFF file type
 - Allow to exclude symlinked packages automatically
 - Improved detection of Neos projects by using the composer.json
 - Compatibility with 2023.2 (eap)

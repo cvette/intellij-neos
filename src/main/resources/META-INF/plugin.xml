@@ -7,6 +7,7 @@
   <idea-version since-build="203.3645.34"/>
 
   <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.xml</depends>
   <depends>com.jetbrains.php</depends>
   <depends>org.intellij.intelliLang</depends>
   <depends>org.jetbrains.plugins.yaml</depends>
@@ -40,6 +41,11 @@
     <testSourcesFilter implementation="de.vette.idea.neos.NeosTestSourcesFilter" />
 
     <errorHandler implementation="de.vette.idea.neos.errorReporting.SentryErrorReporter" />
+
+    <!-- XLIFF -->
+    <fileType name="Neos XLIFF" language="XLIFF" implementationClass="de.vette.idea.neos.lang.xliff.XliffFileType" extensions="xlf;xliff" fieldName="INSTANCE"/>
+    <lang.parserDefinition implementationClass="de.vette.idea.neos.lang.xliff.XliffParserDefinition" language="XLIFF" />
+    <xml.schemaProvider implementation="de.vette.idea.neos.lang.xliff.XliffSchemaProvider"/>
 
     <!-- EEL -->
     <fileType name="Neos Eel" language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.EelFileType" extensions="eel" fieldName="INSTANCE"/>
