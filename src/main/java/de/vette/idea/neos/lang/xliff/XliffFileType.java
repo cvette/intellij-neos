@@ -33,7 +33,7 @@ public class XliffFileType extends XmlLikeFileType {
 
     @Override
     public @NlsContexts.Label @NotNull String getDescription() {
-        return "Neos XLIFF";
+        return "XML Localization Interchange File Format";
     }
 
     @Override
@@ -43,6 +43,6 @@ public class XliffFileType extends XmlLikeFileType {
 
     @Override
     public Icon getIcon() {
-        return NeosIcons.NODE_TYPE;
+        return XliffIcons.XLIFF_FILE;
     }
 }

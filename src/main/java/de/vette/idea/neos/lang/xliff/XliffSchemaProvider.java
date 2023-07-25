@@ -32,6 +32,7 @@ public class XliffSchemaProvider extends XmlSchemaProvider {
 
     @Override
     public boolean isAvailable(final @NotNull XmlFile file) {
-        return FileUtilRt.extensionEquals(file.getName(), XliffFileType.INSTANCE.getDefaultExtension());
+        return FileUtilRt.extensionEquals(file.getName(), XliffFileType.INSTANCE.getDefaultExtension())
+                || FileUtilRt.extensionEquals(file.getName(), "xliff");
     }
 }

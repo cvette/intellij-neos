@@ -46,6 +46,8 @@
     <fileType name="Neos XLIFF" language="XLIFF" implementationClass="de.vette.idea.neos.lang.xliff.XliffFileType" extensions="xlf;xliff" fieldName="INSTANCE"/>
     <lang.parserDefinition implementationClass="de.vette.idea.neos.lang.xliff.XliffParserDefinition" language="XLIFF" />
     <xml.schemaProvider implementation="de.vette.idea.neos.lang.xliff.XliffSchemaProvider"/>
+    <createFromTemplateHandler implementation="de.vette.idea.neos.actions.XliffCreateFromTemplateHandler"/>
+    <internalFileTemplate name="XLIFF File"/>
 
     <!-- EEL -->
     <fileType name="Neos Eel" language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.EelFileType" extensions="eel" fieldName="INSTANCE"/>
@@ -158,6 +160,9 @@
     </action>
     <action id="Neos.CopyResourceUri" class="de.vette.idea.neos.actions.CopyResourceUri" text="Copy resource:// URI" description="Copies the flow resource:// URI of the current file">
       <add-to-group group-id="CopyFileReference"/>
+    </action>
+    <action id="Neos.NewXliffFile" class="de.vette.idea.neos.actions.CreateXliffFile" text="XLIFF File" description="Create new XLIFF file">
+      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
     </action>
   </actions>
 </idea-plugin>
