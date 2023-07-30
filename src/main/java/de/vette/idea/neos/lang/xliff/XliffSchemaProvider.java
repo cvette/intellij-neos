@@ -7,15 +7,11 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.xml.XmlSchemaProvider;
-import org.iso_relax.dispatcher.IslandSchema;
-import org.iso_relax.dispatcher.IslandVerifier;
-import org.iso_relax.dispatcher.SchemaProvider;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
-import java.util.Iterator;
 
 public class XliffSchemaProvider extends XmlSchemaProvider {
 
