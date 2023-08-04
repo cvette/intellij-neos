@@ -1,6 +1,6 @@
 .idea
+.qodana
 .gradle
-build/
 src/gen
-classes
+build/
 out/
