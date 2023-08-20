@@ -34,18 +34,17 @@
   <extensions defaultExtensionNs="com.intellij.html">
     <codestyle.panel implementation="de.vette.idea.neos.lang.afx.formatter.AfxHtmlCodeStylePanelExtension"/>
   </extensions>
-
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="de.vette.idea.neos.Settings"/>
-
     <testSourcesFilter implementation="de.vette.idea.neos.NeosTestSourcesFilter" />
-
     <errorHandler implementation="de.vette.idea.neos.errorReporting.SentryErrorReporter" />
+    <notificationGroup id="Neos" displayType="BALLOON"/>
 
     <!-- XLIFF -->
     <fileType name="Neos XLIFF" language="XLIFF" implementationClass="de.vette.idea.neos.lang.xliff.XliffFileType" extensions="xlf;xliff" fieldName="INSTANCE"/>
     <lang.parserDefinition implementationClass="de.vette.idea.neos.lang.xliff.XliffParserDefinition" language="XLIFF" />
     <xml.schemaProvider implementation="de.vette.idea.neos.lang.xliff.XliffSchemaProvider"/>
+    <dom.fileMetaData implementation="de.vette.idea.neos.lang.xliff.XliffDomFileDescription" rootTagName="xliff"/>
     <createFromTemplateHandler implementation="de.vette.idea.neos.actions.XliffCreateFromTemplateHandler"/>
     <internalFileTemplate name="XLIFF File"/>
 
@@ -163,6 +162,10 @@
     </action>
     <action id="Neos.NewXliffFile" class="de.vette.idea.neos.actions.CreateXliffFile" text="XLIFF File" description="Create new XLIFF file">
       <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
+    </action>
+    <action icon="de.vette.idea.neos.NeosIcons.NODE_TYPE" id="Neos.TranslateNodeType" class="de.vette.idea.neos.actions.TranslateNodeTypeAction" text="Translate NodeType">
+      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
     </action>
   </actions>
 </idea-plugin>
