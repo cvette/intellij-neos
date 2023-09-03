@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+## 1.19.0 - 2023-07-31
+
 ### Added
 - Add XLIFF file type
 - Allow to exclude symlinked packages automatically
