@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+- Compatibility with 2023.3.*
+
 ## 1.19.0 - 2023-07-31
 
 ### Added
