@@ -1,0 +1,109 @@
+{
+  "gradleJvm": "#USE_PROJECT_JDK",
+  "libraries": [
+    {
+      "ideaName": "Gradle: org.jetbrains:grammar-kit:2022.3.1",
+      "gradleName": "org.jetbrains:grammar-kit:2022.3.1",
+      "unresolved": false,
+      "groupId": "org.jetbrains",
+      "artifactId": "grammar-kit",
+      "version": "2022.3.1"
+    },
+    {
+      "ideaName": "Gradle: org.jetbrains.intellij.deps.jflex:jflex:1.9.0",
+      "gradleName": "org.jetbrains.intellij.deps.jflex:jflex:1.9.0",
+      "unresolved": false,
+      "groupId": "org.jetbrains.intellij.deps.jflex",
+      "artifactId": "jflex",
+      "version": "1.9.0"
+    },
+    {
+      "ideaName": "Gradle: io.sentry:sentry:7.3.0",
+      "gradleName": "io.sentry:sentry:7.3.0",
+      "unresolved": false,
+      "groupId": "io.sentry",
+      "artifactId": "sentry",
+      "version": "7.3.0"
+    },
+    {
+      "ideaName": "Gradle: org.jetbrains:annotations:24.0.1",
+      "gradleName": "org.jetbrains:annotations:24.0.1",
+      "unresolved": false,
+      "groupId": "org.jetbrains",
+      "artifactId": "annotations",
+      "version": "24.0.1"
+    },
+    {
+      "ideaName": "Gradle: unzipped.com.jetbrains.plugins:css-impl:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "gradleName": "unzipped.com.jetbrains.plugins:css-impl:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "unresolved": false,
+      "groupId": "unzipped.com.jetbrains.plugins",
+      "artifactId": "css-impl",
+      "version": "ideaIU-IU-231.8770.65-withSources"
+    },
+    {
+      "ideaName": "Gradle: unzipped.com.jetbrains.plugins:yaml:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "gradleName": "unzipped.com.jetbrains.plugins:yaml:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "unresolved": false,
+      "groupId": "unzipped.com.jetbrains.plugins",
+      "artifactId": "yaml",
+      "version": "ideaIU-IU-231.8770.65-withSources"
+    },
+    {
+      "ideaName": "Gradle: unzipped.com.jetbrains.plugins:java-i18n:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "gradleName": "unzipped.com.jetbrains.plugins:java-i18n:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "unresolved": false,
+      "groupId": "unzipped.com.jetbrains.plugins",
+      "artifactId": "java-i18n",
+      "version": "ideaIU-IU-231.8770.65-withSources"
+    },
+    {
+      "ideaName": "Gradle: unzipped.com.jetbrains.plugins:properties:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "gradleName": "unzipped.com.jetbrains.plugins:properties:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "unresolved": false,
+      "groupId": "unzipped.com.jetbrains.plugins",
+      "artifactId": "properties",
+      "version": "ideaIU-IU-231.8770.65-withSources"
+    },
+    {
+      "ideaName": "Gradle: unzipped.com.jetbrains.plugins:com.jetbrains.php:unzipped.com.jetbrains.plugins:231.8770.68",
+      "gradleName": "unzipped.com.jetbrains.plugins:com.jetbrains.php:unzipped.com.jetbrains.plugins:231.8770.68",
+      "unresolved": false,
+      "groupId": "unzipped.com.jetbrains.plugins",
+      "artifactId": "com.jetbrains.php",
+      "version": "231.8770.68"
+    },
+    {
+      "ideaName": "Gradle: unzipped.com.jetbrains.plugins:platform-images:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "gradleName": "unzipped.com.jetbrains.plugins:platform-images:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+      "unresolved": false,
+      "groupId": "unzipped.com.jetbrains.plugins",
+      "artifactId": "platform-images",
+      "version": "ideaIU-IU-231.8770.65-withSources"
+    },
+    {
+      "ideaName": "Gradle: org.apache.ant:ant:1.10.12",
+      "gradleName": "org.apache.ant:ant:1.10.12",
+      "unresolved": false,
+      "groupId": "org.apache.ant",
+      "artifactId": "ant",
+      "version": "1.10.12"
+    },
+    {
+      "ideaName": "Gradle: com.google.code.findbugs:jsr305:3.0.2",
+      "gradleName": "com.google.code.findbugs:jsr305:3.0.2",
+      "unresolved": false,
+      "groupId": "com.google.code.findbugs",
+      "artifactId": "jsr305",
+      "version": "3.0.2"
+    },
+    {
+      "ideaName": "Gradle: org.apache.ant:ant-launcher:1.10.12",
+      "gradleName": "org.apache.ant:ant-launcher:1.10.12",
+      "unresolved": false,
+      "groupId": "org.apache.ant",
+      "artifactId": "ant-launcher",
+      "version": "1.10.12"
+    }
+  ]
+}

@@ -1,0 +1,528 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'FusionPrototypeSignature'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxTagProvider.java",
+      "language": "JAVA",
+      "line": 94,
+      "offset": 177,
+      "length": 24,
+      "code": {
+        "startLine": 92,
+        "length": 24,
+        "offset": 211,
+        "surroundingCode": "\n        for (String key : keys) {\n            Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class);\n            for (FusionPrototypeSignature signature : prototypes) {\n                if (signature.getType() != null) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "1962fd165d1bbbad88d70e5693152ed984e1e84c33525e370a4c18e70ed71624"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'parser'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelParserDefinition.java",
+      "language": "JAVA",
+      "line": 34,
+      "offset": 36,
+      "length": 6,
+      "code": {
+        "startLine": 32,
+        "length": 6,
+        "offset": 132,
+        "surroundingCode": "import de.vette.idea.neos.lang.eel.psi.EelFile;\nimport de.vette.idea.neos.lang.eel.psi.EelTypes;\nimport de.vette.idea.neos.lang.eel.parser.EelParser;\nimport de.vette.idea.neos.lang.eel.stubs.EelFileStub;\nimport org.jetbrains.annotations.NotNull;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "1aa421c95ed58c4086009d32823bbf082ef9f5b0c758071ca8bfc88a990ea767"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelMethodCall'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/codeInsight/hints/EelInlayParameterHintsProvider.java",
+      "language": "JAVA",
+      "line": 10,
+      "offset": 40,
+      "length": 13,
+      "code": {
+        "startLine": 8,
+        "length": 13,
+        "offset": 167,
+        "surroundingCode": "import de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;\nimport de.vette.idea.neos.lang.eel.psi.EelConditionalExpression;\nimport de.vette.idea.neos.lang.eel.psi.EelMethodCall;\nimport de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;\nimport org.jetbrains.annotations.NotNull;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "2d3cfc9cd7a350ca4cd34afe8950b58312f458eeb43603ba331b6e4c5fa26b4f"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol '_AfxLexer'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
+      "language": "JAVA",
+      "line": 18,
+      "offset": 25,
+      "length": 9,
+      "code": {
+        "startLine": 16,
+        "length": 9,
+        "offset": 75,
+        "surroundingCode": "\n    protected boolean isHtmlTagState(int state) {\n        return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "33005e979734cd5a1bbd327a8d7d03fde8a97ad46fa1e6630e5cf468186efead"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'FusionPrototypeSignature'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxTagProvider.java",
+      "language": "JAVA",
+      "line": 95,
+      "offset": 18,
+      "length": 24,
+      "code": {
+        "startLine": 93,
+        "length": 24,
+        "offset": 260,
+        "surroundingCode": "        for (String key : keys) {\n            Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class);\n            for (FusionPrototypeSignature signature : prototypes) {\n                if (signature.getType() != null) {\n                    elements.add(PrioritizedLookupElement.withPriority("
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "6860f46b23e84bb13e1834459881a061d11023ca448421f9f15e0df0c39d7cc4"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelConditionalExpression'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/codeInsight/hints/EelInlayParameterHintsProvider.java",
+      "language": "JAVA",
+      "line": 9,
+      "offset": 40,
+      "length": 24,
+      "code": {
+        "startLine": 7,
+        "length": 24,
+        "offset": 156,
+        "surroundingCode": "import com.jetbrains.php.lang.psi.elements.Parameter;\nimport de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;\nimport de.vette.idea.neos.lang.eel.psi.EelConditionalExpression;\nimport de.vette.idea.neos.lang.eel.psi.EelMethodCall;\nimport de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "78c2eeed2d7cf4a36bc53094c145fdb481b45c12b4b262a462f78029c29aeb6d"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelLexer'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelLexerAdapter.java",
+      "language": "JAVA",
+      "line": 26,
+      "offset": 19,
+      "length": 8,
+      "code": {
+        "startLine": 24,
+        "length": 8,
+        "offset": 100,
+        "surroundingCode": "public class EelLexerAdapter extends FlexAdapter {\n    public EelLexerAdapter() {\n        super(new EelLexer());\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "7c414b57739267167247665fccd9dd86a1e5bac03f82f8b2f6f52cca76ec28f1"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol '_AfxLexer'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
+      "language": "JAVA",
+      "line": 18,
+      "offset": 62,
+      "length": 9,
+      "code": {
+        "startLine": 16,
+        "length": 9,
+        "offset": 112,
+        "surroundingCode": "\n    protected boolean isHtmlTagState(int state) {\n        return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "82f847e7009c5172e1605b10245416d7b687b31c3f4aa199b188a06265436e96"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'parser'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelLexerAdapter.java",
+      "language": "JAVA",
+      "line": 22,
+      "offset": 36,
+      "length": 6,
+      "code": {
+        "startLine": 20,
+        "length": 6,
+        "offset": 75,
+        "surroundingCode": "\nimport com.intellij.lexer.FlexAdapter;\nimport de.vette.idea.neos.lang.eel.parser.EelLexer;\n\npublic class EelLexerAdapter extends FlexAdapter {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "886b26e1fc5e1422bc7f90c99351488c4e052486682689f393aae6a1dc6af7cb"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'FusionPrototypeSignature'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxTagProvider.java",
+      "language": "JAVA",
+      "line": 94,
+      "offset": 24,
+      "length": 24,
+      "code": {
+        "startLine": 92,
+        "length": 24,
+        "offset": 58,
+        "surroundingCode": "\n        for (String key : keys) {\n            Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class);\n            for (FusionPrototypeSignature signature : prototypes) {\n                if (signature.getType() != null) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "944a285546824b7ba8d4fea61fe68047ce8e5cdcf25c3110f302e7f8b63dc21c"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol '_AfxLexer'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/InnerAfxLexer.java",
+      "language": "JAVA",
+      "line": 13,
+      "offset": 35,
+      "length": 9,
+      "code": {
+        "startLine": 11,
+        "length": 9,
+        "offset": 64,
+        "surroundingCode": "\n    public InnerAfxLexer() {\n        super(new FlexAdapter(new _AfxLexer()), TOKENS_TO_MERGE);\n    }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "98e1fb3f36541a05102db08e265555570998d4bc50bf6d2a85f08c6d94c0d9ad"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelTypes'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelParserDefinition.java",
+      "language": "JAVA",
+      "line": 33,
+      "offset": 40,
+      "length": 8,
+      "code": {
+        "startLine": 31,
+        "length": 8,
+        "offset": 126,
+        "surroundingCode": "import com.intellij.psi.tree.TokenSet;\nimport de.vette.idea.neos.lang.eel.psi.EelFile;\nimport de.vette.idea.neos.lang.eel.psi.EelTypes;\nimport de.vette.idea.neos.lang.eel.parser.EelParser;\nimport de.vette.idea.neos.lang.eel.stubs.EelFileStub;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "9dfcc0d427585598d82025ff12d500e60bd6799d1aaa0bb18b4c95a0eae0d78f"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelMethodCall'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/codeInsight/hints/EelInlayParameterHintsProvider.java",
+      "language": "JAVA",
+      "line": 34,
+      "offset": 32,
+      "length": 13,
+      "code": {
+        "startLine": 32,
+        "length": 13,
+        "offset": 93,
+        "surroundingCode": "        ArrayList<InlayInfo> inlayInfos = new ArrayList<>();\n\n        if (element instanceof EelMethodCall) {\n            List<PsiElement> phpMethods = null;\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "b2c59cf82b87ea4526d7df9fdc27409a79d2759ebd464869a3111a437d5301e6"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'FusionPrototypeSignature'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxTagProvider.java",
+      "language": "JAVA",
+      "line": 20,
+      "offset": 43,
+      "length": 24,
+      "code": {
+        "startLine": 18,
+        "length": 24,
+        "offset": 147,
+        "surroundingCode": "import de.vette.idea.neos.lang.afx.AfxLanguage;\nimport de.vette.idea.neos.lang.fusion.icons.FusionIcons;\nimport de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;\nimport de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;\nimport de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "b6d21a6c050b2e3dafeb178268b52871fbd6bba21654cc89eb3768acf2d8f479"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelCompositeIdentifier'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/codeInsight/hints/EelInlayParameterHintsProvider.java",
+      "language": "JAVA",
+      "line": 8,
+      "offset": 40,
+      "length": 22,
+      "code": {
+        "startLine": 6,
+        "length": 22,
+        "offset": 144,
+        "surroundingCode": "import com.jetbrains.php.lang.psi.elements.Method;\nimport com.jetbrains.php.lang.psi.elements.Parameter;\nimport de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;\nimport de.vette.idea.neos.lang.eel.psi.EelConditionalExpression;\nimport de.vette.idea.neos.lang.eel.psi.EelMethodCall;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "c7135fe59253df77349beb350a237a2e34d4596e1ce3d56ffe4ebcd2a2537e31"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelParser'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelParserDefinition.java",
+      "language": "JAVA",
+      "line": 50,
+      "offset": 20,
+      "length": 9,
+      "code": {
+        "startLine": 48,
+        "length": 9,
+        "offset": 86,
+        "surroundingCode": "    @Override\n    public PsiParser createParser(Project project) {\n        return new EelParser();\n    }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "ccea9914e460f5ba3c3de934ad0f5a4678918579c135aefa511c8efee6bb931b"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EelTypes'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelParserDefinition.java",
+      "language": "JAVA",
+      "line": 40,
+      "offset": 88,
+      "length": 8,
+      "code": {
+        "startLine": 38,
+        "length": 8,
+        "offset": 151,
+        "surroundingCode": "public class EelParserDefinition implements ParserDefinition {\n\n    public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, EelTypes.CRLF);\n\n    @NotNull"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "e7505f8d4d4906ed558520abf1c1e02eff1bef76da83ad6e8bcf6fc973032c12"
+}]}

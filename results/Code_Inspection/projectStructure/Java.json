@@ -1,0 +1,16 @@
+{
+  "modules": [
+    {
+      "name": "Intellij_Neos",
+      "languageLevel": 17
+    },
+    {
+      "name": "Intellij_Neos.main",
+      "languageLevel": 17
+    },
+    {
+      "name": "Intellij_Neos.test",
+      "languageLevel": 17
+    }
+  ]
+}
