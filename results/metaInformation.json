@@ -8,12 +8,12 @@
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "e00deead1bbb84491af0defa42bbb4b41817d8bb",
-        "branch": "dependabot/github_actions/gradle/wrapper-validation-action-2.1.2"
+        "revisionId": "92ac2007103f5b14bb33221fca60168b06a254a9",
+        "branch": "dependabot/github_actions/JetBrains/qodana-action-2023.3.2"
       }
     },
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/8397204267",
-    "repoUrl": "https://github.com/cvette/intellij-neos.git"
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/8427615941",
+    "repoUrl": "https://github.com/cvette/intellij-neos"
   }
 }
