@@ -74,28 +74,25 @@ grammarKit {
 
 val generateEelLexer = task<GenerateLexerTask>("GenerateEelLexer") {
     sourceFile = file("src/main/grammars/EelLexer.flex")
-    targetDir = "src/gen/de/vette/idea/neos/lang/eel/parser"
-    targetClass = "EelLexer"
+    targetOutputDir = file("src/gen/de/vette/idea/neos/lang/eel/parser")
     purgeOldFiles = true
 }
 
 val generateAfxLexer = task<GenerateLexerTask>("GenerateAfxLexer") {
     sourceFile = file("src/main/grammars/AfxLexer.flex")
-    targetDir = "src/gen/de/vette/idea/neos/lang/afx/parser"
-    targetClass = "AfxLexer"
+    targetOutputDir = file("src/gen/de/vette/idea/neos/lang/afx/parser")
     purgeOldFiles = true
 }
 
 val generateFusionLexer = task<GenerateLexerTask>("GenerateFusionLexer") {
     sourceFile = file("src/main/grammars/FusionLexer.flex")
-    targetDir = "src/gen/de/vette/idea/neos/lang/fusion/parser"
-    targetClass = "FusionLexer"
+    targetOutputDir = file("src/gen/de/vette/idea/neos/lang/fusion/parser")
     purgeOldFiles = true
 }
 
 val generateEelParser = task<GenerateParserTask>("GenerateEelParser") {
     sourceFile = file("src/main/grammars/EelParser.bnf")
-    targetRoot = "src/gen"
+    targetRootOutputDir = file("src/gen")
     pathToParser = "/de/vette/idea/neos/lang/eel/parser/EelParser.java"
     pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
     purgeOldFiles = true
@@ -103,7 +100,7 @@ val generateEelParser = task<GenerateParserTask>("GenerateEelParser") {
 
 val generateFusionParser = task<GenerateParserTask>("GenerateFusionParser") {
     sourceFile = file("src/main/grammars/FusionParser.bnf")
-    targetRoot = "src/gen"
+    targetRootOutputDir = file("src/gen")
     pathToParser = "/de/vette/idea/neos/lang/fusion/parser/FusionParser.java"
     pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
     purgeOldFiles = true
