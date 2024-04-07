@@ -85,11 +85,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-langInjection:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-langInjection:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:css-impl:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:css-impl:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
@@ -101,31 +101,31 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:yaml:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:yaml:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:java:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:java:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:java-i18n:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:java-i18n:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:properties:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:properties:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:com.jetbrains.php:unzipped.com.jetbrains.plugins:231.8770.68",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:com.jetbrains.php:unzipped.com.jetbrains.plugins:231.9414.10",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-images:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-images:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains:ideaIU:2023.1.1",
+          "name": "Gradle: com.jetbrains:ideaIU:2023.1.6",
           "type": "Library"
         },
         {
@@ -180,11 +180,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-langInjection:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-langInjection:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:css-impl:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:css-impl:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
@@ -196,31 +196,31 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:yaml:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:yaml:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:java:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:java:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:java-i18n:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:java-i18n:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:properties:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:properties:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:com.jetbrains.php:unzipped.com.jetbrains.plugins:231.8770.68",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:com.jetbrains.php:unzipped.com.jetbrains.plugins:231.9414.10",
           "type": "Library"
         },
         {
-          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-images:unzipped.com.jetbrains.plugins:ideaIU-IU-231.8770.65-withSources",
+          "name": "Gradle: unzipped.com.jetbrains.plugins:platform-images:unzipped.com.jetbrains.plugins:ideaIU-IU-231.9414.13-withSources",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains:ideaIU:2023.1.1",
+          "name": "Gradle: com.jetbrains:ideaIU:2023.1.6",
           "type": "Library"
         }
       ]
