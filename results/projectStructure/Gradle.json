@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:7.6.0",
-      "gradleName": "io.sentry:sentry:7.6.0",
+      "ideaName": "Gradle: io.sentry:sentry:7.8.0",
+      "gradleName": "io.sentry:sentry:7.8.0",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "7.6.0"
+      "version": "7.8.0"
     },
     {
       "ideaName": "Gradle: org.jetbrains:annotations:24.0.1",
