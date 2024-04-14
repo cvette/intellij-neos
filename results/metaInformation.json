@@ -8,12 +8,12 @@
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "63e2a89faa76c95c3244aea61e9addc2aca400cb",
+        "revisionId": "0cbb6ccf15d0f42600ffb40202bfa98d51f4a9b6",
         "branch": "refs/heads/main"
       }
     },
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/8680760880",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/8680793658",
     "repoUrl": "https://github.com/cvette/intellij-neos"
   }
 }
