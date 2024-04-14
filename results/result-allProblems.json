@@ -3260,37 +3260,6 @@
   "hash": "c52691f4d0393e4ea79b00f5939b2ce9772c9f0a7d37e57432ed88e22c8121de"
 },{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Usage of API marked for removal",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "Critical",
-  "comment": "'com.intellij.lexer.HtmlHighlightingLexer' is deprecated and marked for removal",
-  "detailsInfo": "Reports usages of deprecated APIs (classes, fields, and methods) that are marked for removal with `@Deprecated(`**forRemoval**`=true)`.\n\n\nThe code that uses an API marked for removal may cause a runtime error with a future version of the API. That is why\nthe recommended severity for this inspection is *Error*.\n\n\nYou can change the severity to *Warning* if you want to use the same code highlighting as in ordinary deprecation.\n\nNew in 2017.3",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
-      "language": "JAVA",
-      "line": 3,
-      "offset": 27,
-      "length": 21,
-      "code": {
-        "startLine": 1,
-        "length": 21,
-        "offset": 71,
-        "surroundingCode": "package de.vette.idea.neos.lang.afx.parser;\n\nimport com.intellij.lexer.HtmlHighlightingLexer;\nimport com.intellij.lexer.HtmlLexer;\nimport com.intellij.lexer.LayeredLexer;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "MarkedForRemoval"
-  },
-  "hash": "33a5b40183d4709bc1942495f5e0f53d4732dbd221363006367cd132a3cb59cf"
-},{
-  "tool": "Code Inspection",
   "category": "Nullability problems",
   "type": "@NotNull/@Nullable problems",
   "tags": [
@@ -5098,37 +5067,6 @@
     "inspectionName": "UNUSED_IMPORT"
   },
   "hash": "218d6568b0a8c023ccc9bf01a28832c75803a041c70650b75b51b5adbaf83c44"
-},{
-  "tool": "Code Inspection",
-  "category": "Imports",
-  "type": "Unused import",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Unused import `import com.intellij.lexer.HtmlHighlightingLexer;`",
-  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
-      "language": "JAVA",
-      "line": 3,
-      "offset": 1,
-      "length": 48,
-      "code": {
-        "startLine": 1,
-        "length": 48,
-        "offset": 45,
-        "surroundingCode": "package de.vette.idea.neos.lang.afx.parser;\n\nimport com.intellij.lexer.HtmlHighlightingLexer;\nimport com.intellij.lexer.HtmlLexer;\nimport com.intellij.lexer.LayeredLexer;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UNUSED_IMPORT"
-  },
-  "hash": "22ab347e3443c700de8061deadb74d0e3734740d252017b5d24854a8a128e020"
 },{
   "tool": "Code Inspection",
   "category": "Imports",

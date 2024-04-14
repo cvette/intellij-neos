@@ -6,37 +6,6 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve symbol '_AfxLexer'",
-  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
-      "language": "JAVA",
-      "line": 21,
-      "offset": 62,
-      "length": 9,
-      "code": {
-        "startLine": 19,
-        "length": 9,
-        "offset": 112,
-        "surroundingCode": "\n    protected boolean isHtmlTagState(int state) {\n        return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;\n    }\n}"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaSanity"
-  },
-  "hash": "15f9072eef379ea3aa38d8bd469e5a6c557a78a78ad5d981b2bdcfbedd3e1fb0"
-},{
-  "tool": "Code Inspection",
-  "category": "Qodana",
-  "type": "Sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
   "comment": "Cannot resolve symbol 'FusionPrototypeSignature'",
   "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
   "sources": [
@@ -99,6 +68,37 @@
     "Sanity"
   ],
   "severity": "Critical",
+  "comment": "Cannot resolve symbol '_AfxLexer'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
+      "language": "JAVA",
+      "line": 20,
+      "offset": 62,
+      "length": 9,
+      "code": {
+        "startLine": 18,
+        "length": 9,
+        "offset": 112,
+        "surroundingCode": "\n    protected boolean isHtmlTagState(int state) {\n        return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "1f0a26dcfc8972535cf42d739633426d1d8271a1c357abedc0ff7c33fb11b804"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
   "comment": "Cannot resolve symbol 'EelMethodCall'",
   "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
   "sources": [
@@ -153,37 +153,6 @@
     "inspectionName": "QodanaSanity"
   },
   "hash": "6860f46b23e84bb13e1834459881a061d11023ca448421f9f15e0df0c39d7cc4"
-},{
-  "tool": "Code Inspection",
-  "category": "Qodana",
-  "type": "Sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Cannot resolve symbol '_AfxLexer'",
-  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
-      "language": "JAVA",
-      "line": 21,
-      "offset": 25,
-      "length": 9,
-      "code": {
-        "startLine": 19,
-        "length": 9,
-        "offset": 75,
-        "surroundingCode": "\n    protected boolean isHtmlTagState(int state) {\n        return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;\n    }\n}"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaSanity"
-  },
-  "hash": "770c9d0287252844258128afd980e956abecb76e6a14b63908743ea85543ae36"
 },{
   "tool": "Code Inspection",
   "category": "Qodana",
@@ -277,6 +246,37 @@
     "inspectionName": "QodanaSanity"
   },
   "hash": "886b26e1fc5e1422bc7f90c99351488c4e052486682689f393aae6a1dc6af7cb"
+},{
+  "tool": "Code Inspection",
+  "category": "Qodana",
+  "type": "Sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol '_AfxLexer'",
+  "detailsInfo": "Reports issues essential to this file like syntax errors, unresolved methods and variables, etc...",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxHighlightingLexer.java",
+      "language": "JAVA",
+      "line": 20,
+      "offset": 25,
+      "length": 9,
+      "code": {
+        "startLine": 18,
+        "length": 9,
+        "offset": 75,
+        "surroundingCode": "\n    protected boolean isHtmlTagState(int state) {\n        return state == _AfxLexer.START_TAG_NAME || state == _AfxLexer.END_TAG_NAME;\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaSanity"
+  },
+  "hash": "892ca2c3cd169bdcd8e44c4824d3581df0895ea8b5e73963a871ddfec3c7d729"
 },{
   "tool": "Code Inspection",
   "category": "Qodana",
