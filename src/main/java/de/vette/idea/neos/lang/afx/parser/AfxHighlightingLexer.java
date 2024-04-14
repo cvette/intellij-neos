@@ -1,6 +1,5 @@
 package de.vette.idea.neos.lang.afx.parser;
 
-import com.intellij.lexer.HtmlHighlightingLexer;
 import com.intellij.lexer.HtmlLexer;
 import com.intellij.lexer.LayeredLexer;
 
