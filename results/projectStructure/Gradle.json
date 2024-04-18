@@ -26,12 +26,12 @@
       "version": "7.8.0"
     },
     {
-      "ideaName": "Gradle: org.apache.commons:commons-text:1.12.0",
-      "gradleName": "org.apache.commons:commons-text:1.12.0",
+      "ideaName": "Gradle: org.apache.commons:commons-text:1.11.0",
+      "gradleName": "org.apache.commons:commons-text:1.11.0",
       "unresolved": false,
       "groupId": "org.apache.commons",
       "artifactId": "commons-text",
-      "version": "1.12.0"
+      "version": "1.11.0"
     },
     {
       "ideaName": "Gradle: org.jetbrains:annotations:24.0.1",
@@ -106,12 +106,12 @@
       "version": "3.0.2"
     },
     {
-      "ideaName": "Gradle: org.apache.commons:commons-lang3:3.14.0",
-      "gradleName": "org.apache.commons:commons-lang3:3.14.0",
+      "ideaName": "Gradle: org.apache.commons:commons-lang3:3.13.0",
+      "gradleName": "org.apache.commons:commons-lang3:3.13.0",
       "unresolved": false,
       "groupId": "org.apache.commons",
       "artifactId": "commons-lang3",
-      "version": "3.14.0"
+      "version": "3.13.0"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant-launcher:1.10.12",

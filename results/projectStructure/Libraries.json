@@ -22,9 +22,9 @@
       "properties": {}
     },
     {
-      "name": "Gradle: org.apache.commons:commons-text:1.12.0",
+      "name": "Gradle: org.apache.commons:commons-text:1.11.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.12.0/66aa90dc099701c4d3b14bd256c328f592ccf0d6/commons-text-1.12.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.11.0/2bb044b7717ec2eccaf9ea7769c1509054b50e9a/commons-text-1.11.0.jar!/"
       ],
       "properties": {}
     },
@@ -172,9 +172,9 @@
       "properties": {}
     },
     {
-      "name": "Gradle: org.apache.commons:commons-lang3:3.14.0",
+      "name": "Gradle: org.apache.commons:commons-lang3:3.13.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.14.0/1ed471194b02f2c6cb734a0cd6f6f107c673afae/commons-lang3-3.14.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.13.0/b7263237aa89c1f99b327197c41d0669707a462e/commons-lang3-3.13.0.jar!/"
       ],
       "properties": {}
     },
