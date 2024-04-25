@@ -99,37 +99,6 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionPropertyAssignmentImpl",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionPropertyAssignmentStub.java",
-      "language": "JAVA",
-      "line": 23,
-      "offset": 48,
-      "length": 28,
-      "code": {
-        "startLine": 21,
-        "length": 28,
-        "offset": 125,
-        "surroundingCode": "import com.intellij.psi.stubs.*;\nimport de.vette.idea.neos.lang.fusion.psi.*;\nimport de.vette.idea.neos.lang.fusion.psi.impl.FusionPropertyAssignmentImpl;\nimport de.vette.idea.neos.lang.fusion.stubs.index.FusionPropertyAssignmentIndex;\nimport de.vette.idea.neos.util.NeosUtil;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "24fafa36262ebf08413fade624a3abdaf3c2cba32abc67f8742275f48528efe1"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
   "comment": "Unresolved reference FusionPrototypeSignature",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
@@ -285,6 +254,37 @@
     "Sanity"
   ],
   "severity": "Critical",
+  "comment": "Unresolved reference FusionPrototypeSignatureImpl",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionPrototypeSignatureStub.java",
+      "language": "JAVA",
+      "line": 23,
+      "offset": 48,
+      "length": 28,
+      "code": {
+        "startLine": 21,
+        "length": 28,
+        "offset": 125,
+        "surroundingCode": "import com.intellij.psi.stubs.*;\nimport de.vette.idea.neos.lang.fusion.psi.*;\nimport de.vette.idea.neos.lang.fusion.psi.impl.FusionPrototypeSignatureImpl;\nimport de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;\nimport org.jetbrains.annotations.NotNull;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "57e9fff261daa709c0b0b4e56ed87d43e807e6055a947cd7e3ec812dc49ca8dd"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
   "comment": "Unresolved reference FusionPrototypeSignature",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
@@ -409,21 +409,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionPrototypeSignature",
+  "comment": "Unresolved reference FusionPropertyAssignment",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionPrototypeSignatureStub.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionPropertyAssignmentStub.java",
       "language": "JAVA",
-      "line": 52,
-      "offset": 65,
+      "line": 35,
+      "offset": 108,
       "length": 24,
       "code": {
-        "startLine": 50,
+        "startLine": 33,
         "length": 24,
-        "offset": 99,
-        "surroundingCode": "        @NotNull\n        @Override\n        public FusionPrototypeSignatureStub createStub(@NotNull FusionPrototypeSignature psi, StubElement parentStub) {\n            String name = \"\";\n            String namespace = \"\";"
+        "offset": 150,
+        "surroundingCode": "    protected String containingPrototype;\n\n    public FusionPropertyAssignmentStub(StubElement parent, IStubElementType<FusionPropertyAssignmentStub, FusionPropertyAssignment> elementType, String property, Boolean isSimpleProperty, String containingPrototype) {\n        super(parent, elementType);\n        this.path = property;"
       }
     }
   ],
@@ -431,7 +431,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "83384dc8c1fc13390f7606f1c762948e50d7dd7eb2529a1fa6c4adc7e6c8fc30"
+  "hash": "8d6de830860b440f88855edbd79b58badd6e79f3b34f7eccf904c4dfbedc3a62"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -463,6 +463,37 @@
     "inspectionName": "QodanaJavaSanity"
   },
   "hash": "8e0dd902249dda0e532bb322f20d476af4cfc915b583c49c961170925cb40e61"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionPropertyAssignmentImpl",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionPropertyAssignmentStub.java",
+      "language": "JAVA",
+      "line": 46,
+      "offset": 24,
+      "length": 28,
+      "code": {
+        "startLine": 44,
+        "length": 28,
+        "offset": 137,
+        "surroundingCode": "        @Override\n        public FusionPropertyAssignment createPsi(@NotNull FusionPropertyAssignmentStub stub) {\n            return new FusionPropertyAssignmentImpl(stub, this);\n        }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "9bfc17b7a948da6014844f01f2bd3edcdcb81f8b3a69507714921ef036b491ec"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -556,37 +587,6 @@
     "inspectionName": "QodanaJavaSanity"
   },
   "hash": "bee984ebd6ae42f2d7dcd86816e58ebd6fb9bf3b9792e15585b68d3a06a088c6"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionPropertyAssignment",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionPropertyAssignmentStub.java",
-      "language": "JAVA",
-      "line": 30,
-      "offset": 60,
-      "length": 24,
-      "code": {
-        "startLine": 28,
-        "length": 24,
-        "offset": 88,
-        "surroundingCode": "import java.io.IOException;\n\npublic class FusionPropertyAssignmentStub extends StubBase<FusionPropertyAssignment> {\n    protected String path;\n    protected boolean isSimpleProperty;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "ce9a73759f600e961b4a438823fd62e2004cd8f55d92dd7aacbd7c72494d7622"
 },{
   "tool": "Code Inspection",
   "category": "General",
