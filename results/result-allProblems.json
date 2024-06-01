@@ -254,6 +254,37 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "Condition `firstLocaleOpt.isEmpty()` is always `false`",
+  "detailsInfo": "Reports expressions and conditions that always produce the same result, like true, false, null, or zero. Such expressions could be replaced with the corresponding constant value. Very often though they signal about a bug in the code.\n\nExamples:\n\n      // always true\n      // root cause: || is used instead of &&\n      if (x > 0 || x < 10) {}\n\n      System.out.println(str.trim());\n      // always false\n      // root cause: variable was dereferenced before null-check\n      if (str == null) {}\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when constant is stored in variable** option to display warnings when variable is used, whose value is known to be a constant.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of \"Constant Conditions \\& Exceptions\" inspection. Now, it split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/actions/TranslateNodeTypeAction.java",
+      "language": "JAVA",
+      "line": 86,
+      "offset": 13,
+      "length": 24,
+      "code": {
+        "startLine": 84,
+        "length": 24,
+        "offset": 91,
+        "surroundingCode": "\n        final Optional<String> firstLocaleOpt = locales.stream().findFirst();\n        if (firstLocaleOpt.isEmpty()) {\n            return;\n        }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "ConstantValue"
+  },
+  "hash": "14a4d6f9ef5cadee2fedae51be7f5885eeff5d9ddbde1f39d53456e046297bf4"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant values",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "Result of `getParent().getParent()` is always 'null'",
   "detailsInfo": "Reports expressions and conditions that always produce the same result, like true, false, null, or zero. Such expressions could be replaced with the corresponding constant value. Very often though they signal about a bug in the code.\n\nExamples:\n\n      // always true\n      // root cause: || is used instead of &&\n      if (x > 0 || x < 10) {}\n\n      System.out.println(str.trim());\n      // always false\n      // root cause: variable was dereferenced before null-check\n      if (str == null) {}\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when constant is stored in variable** option to display warnings when variable is used, whose value is known to be a constant.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of \"Constant Conditions \\& Exceptions\" inspection. Now, it split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
   "sources": [
@@ -2398,6 +2429,37 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "String 'XML Localization Interchange File Format' is not properly capitalized. It should have sentence capitalization",
+  "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
+      "language": "JAVA",
+      "line": 27,
+      "offset": 16,
+      "length": 42,
+      "code": {
+        "startLine": 25,
+        "length": 42,
+        "offset": 94,
+        "surroundingCode": "    @Override\n    public @NlsContexts.Label @NotNull String getDescription() {\n        return \"XML Localization Interchange File Format\";\n    }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "DialogTitleCapitalization"
+  },
+  "hash": "26fc1433bc32501e4d0a414dfaee340a17090099e5361044f194302b4c74cfbf"
+},{
+  "tool": "Code Inspection",
+  "category": "Internationalization",
+  "type": "Incorrect string capitalization",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "String 'Escaped String' is not properly capitalized. It should have sentence capitalization",
   "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n",
   "sources": [
@@ -2917,37 +2979,6 @@
     "inspectionName": "DialogTitleCapitalization"
   },
   "hash": "be589105d1b6b381413f9d8f6244444223ee4f5896b1747c547b47527be6b103"
-},{
-  "tool": "Code Inspection",
-  "category": "Internationalization",
-  "type": "Incorrect string capitalization",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "String 'XML Localization Interchange File Format' is not properly capitalized. It should have sentence capitalization",
-  "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
-      "language": "JAVA",
-      "line": 36,
-      "offset": 16,
-      "length": 42,
-      "code": {
-        "startLine": 34,
-        "length": 42,
-        "offset": 94,
-        "surroundingCode": "    @Override\n    public @NlsContexts.Label @NotNull String getDescription() {\n        return \"XML Localization Interchange File Format\";\n    }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "DialogTitleCapitalization"
-  },
-  "hash": "cbfddedb1809663361204d0c95ce9b4e8d47631d48d47888886c56eef9cf8070"
 },{
   "tool": "Code Inspection",
   "category": "Internationalization",
@@ -4635,6 +4666,37 @@
   "hash": "6b73d35e0171f34a681ac776a472c3b76bf4d0c4447adeea4d4ea790b87dc545"
 },{
   "tool": "Code Inspection",
+  "category": "Declaration redundancy",
+  "type": "'protected' member in 'final' class",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Class member declared `protected` in 'final' class",
+  "detailsInfo": "Reports `protected` members in `final`classes.\n\nSince `final` classes cannot be inherited, marking the method as `protected`\nmay be confusing. It is better to declare such members as `private` or package-visible instead.\n\n**Example:**\n\n    record Bar(int a, int b) {\n      protected int sum() { \n         return a + b;\n      }\n    }\n\nAfter the quick-fix is applied:\n\n    record Bar(int a, int b) {\n      int sum() { \n         return a + b;\n      }\n    }\n\nAs shown in the example, a class can be marked as `final` explicitly or implicitly.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffBundle.java",
+      "language": "JAVA",
+      "line": 15,
+      "offset": 5,
+      "length": 9,
+      "code": {
+        "startLine": 13,
+        "length": 9,
+        "offset": 6,
+        "surroundingCode": "\n\n    protected XliffBundle() {\n        super(BUNDLE);\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "ProtectedMemberInFinalClass"
+  },
+  "hash": "13c6e08b570bdc7167fc33dbf14a4dd82c5c7eadba02b3e76229b2ace347b9e8"
+},{
+  "tool": "Code Inspection",
   "category": "Verbose or redundant code constructs",
   "type": "Redundant 'isInstance()' or 'cast()' call",
   "tags": [
@@ -4796,6 +4858,68 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "Unchecked call to 'add(T)' as a member of raw type 'com.intellij.ui.CollectionListModel'",
+  "detailsInfo": "Reports code on which an unchecked warning will be issued by the javac compiler. Every unchecked warning may potentially trigger `ClassCastException` at runtime.\n\nExample:\n\n\n      List items = Arrays.asList(\"string\", \"string\");\n      List<Integer> numbers = Collections.unmodifiableList(items); // unchecked assignment\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/SettingsForm.java",
+      "language": "JAVA",
+      "line": 183,
+      "offset": 17,
+      "length": 13,
+      "code": {
+        "startLine": 181,
+        "length": 13,
+        "offset": 35,
+        "surroundingCode": "                }\n\n                this.list.add(text);\n            }\n        }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "UNCHECKED_WARNING"
+  },
+  "hash": "01e962949c465504fb38e7bb59b601417a0d357805eff999e580d8ba10cd9526"
+},{
+  "tool": "Code Inspection",
+  "category": "Compiler issues",
+  "type": "Unchecked warning",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Unchecked assignment: 'com.intellij.ui.components.JBList' to 'javax.swing.JList'",
+  "detailsInfo": "Reports code on which an unchecked warning will be issued by the javac compiler. Every unchecked warning may potentially trigger `ClassCastException` at runtime.\n\nExample:\n\n\n      List items = Arrays.asList(\"string\", \"string\");\n      List<Integer> numbers = Collections.unmodifiableList(items); // unchecked assignment\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/SettingsForm.java",
+      "language": "JAVA",
+      "line": 85,
+      "offset": 74,
+      "length": 10,
+      "code": {
+        "startLine": 83,
+        "length": 10,
+        "offset": 117,
+        "surroundingCode": "        localeList.setModel(this.locales);\n\n        ToolbarDecorator editableList = ToolbarDecorator.createDecorator(localeList);\n        editableList.disableUpDownActions();\n        editableList.setPreferredSize(new Dimension(150, 100));"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "UNCHECKED_WARNING"
+  },
+  "hash": "10f2557cb9b3fb86039406d2e10ccf1e5f63961b8d2b12b4e3f9df2a7fe444a1"
+},{
+  "tool": "Code Inspection",
+  "category": "Compiler issues",
+  "type": "Unchecked warning",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "Unchecked generics array creation for varargs parameter",
   "detailsInfo": "Reports code on which an unchecked warning will be issued by the javac compiler. Every unchecked warning may potentially trigger `ClassCastException` at runtime.\n\nExample:\n\n\n      List items = Arrays.asList(\"string\", \"string\");\n      List<Integer> numbers = Collections.unmodifiableList(items); // unchecked assignment\n",
   "sources": [
@@ -4889,6 +5013,37 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "Unchecked call to 'setModel(ListModel)' as a member of raw type 'javax.swing.JList'",
+  "detailsInfo": "Reports code on which an unchecked warning will be issued by the javac compiler. Every unchecked warning may potentially trigger `ClassCastException` at runtime.\n\nExample:\n\n\n      List items = Arrays.asList(\"string\", \"string\");\n      List<Integer> numbers = Collections.unmodifiableList(items); // unchecked assignment\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/SettingsForm.java",
+      "language": "JAVA",
+      "line": 83,
+      "offset": 9,
+      "length": 19,
+      "code": {
+        "startLine": 81,
+        "length": 19,
+        "offset": 59,
+        "surroundingCode": "\n        JBList localeList = new JBList<String>();\n        localeList.setModel(this.locales);\n\n        ToolbarDecorator editableList = ToolbarDecorator.createDecorator(localeList);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "UNCHECKED_WARNING"
+  },
+  "hash": "e396fe2dd686f7f75557a67117d34d812f951c697eb97482bb94301050ca351c"
+},{
+  "tool": "Code Inspection",
+  "category": "Compiler issues",
+  "type": "Unchecked warning",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "Unchecked generics array creation for varargs parameter",
   "detailsInfo": "Reports code on which an unchecked warning will be issued by the javac compiler. Every unchecked warning may potentially trigger `ClassCastException` at runtime.\n\nExample:\n\n\n      List items = Arrays.asList(\"string\", \"string\");\n      List<Integer> numbers = Collections.unmodifiableList(items); // unchecked assignment\n",
   "sources": [
@@ -4951,37 +5106,6 @@
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Unused import `import de.vette.idea.neos.NeosIcons;`",
-  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
-      "language": "JAVA",
-      "line": 9,
-      "offset": 1,
-      "length": 36,
-      "code": {
-        "startLine": 7,
-        "length": 36,
-        "offset": 88,
-        "surroundingCode": "import com.intellij.openapi.util.NlsContexts;\nimport com.intellij.openapi.util.NlsSafe;\nimport de.vette.idea.neos.NeosIcons;\nimport de.vette.idea.neos.lang.eel.EelFileType;\nimport org.jetbrains.annotations.NonNls;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UNUSED_IMPORT"
-  },
-  "hash": "0cb18888008a43d93ff21ea73c4e552363d20b0bc2f6f742e52194754023ba17"
-},{
-  "tool": "Code Inspection",
-  "category": "Imports",
-  "type": "Unused import",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
   "comment": "Unused import `import de.vette.idea.neos.lang.fusion.psi.*;`",
   "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
   "sources": [
@@ -5005,37 +5129,6 @@
     "inspectionName": "UNUSED_IMPORT"
   },
   "hash": "119f244972d24dc78e6a1099db4a5c5ad1f3b995e82ba3c6a36da6e859108652"
-},{
-  "tool": "Code Inspection",
-  "category": "Imports",
-  "type": "Unused import",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Unused import `import com.intellij.openapi.fileTypes.FileType;`",
-  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
-      "language": "JAVA",
-      "line": 6,
-      "offset": 1,
-      "length": 47,
-      "code": {
-        "startLine": 4,
-        "length": 47,
-        "offset": 79,
-        "surroundingCode": "import com.intellij.lang.Language;\nimport com.intellij.lang.html.HTMLLanguage;\nimport com.intellij.openapi.fileTypes.FileType;\nimport com.intellij.openapi.util.NlsContexts;\nimport com.intellij.openapi.util.NlsSafe;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UNUSED_IMPORT"
-  },
-  "hash": "1d812f3c0dcba433aa646177b71bcb3e4681c6002e3c7db5de74afdaffd9afe4"
 },{
   "tool": "Code Inspection",
   "category": "Imports",
@@ -5261,6 +5354,37 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "Unused import `import de.vette.idea.neos.lang.fusion.FusionBundle;`",
+  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffBundle.java",
+      "language": "JAVA",
+      "line": 4,
+      "offset": 1,
+      "length": 51,
+      "code": {
+        "startLine": 2,
+        "length": 51,
+        "offset": 36,
+        "surroundingCode": "\nimport com.intellij.DynamicBundle;\nimport de.vette.idea.neos.lang.fusion.FusionBundle;\nimport org.jetbrains.annotations.Nls;\nimport org.jetbrains.annotations.NotNull;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "UNUSED_IMPORT"
+  },
+  "hash": "4f1df89676295cdf0bf56a0dc22c5197f4095112ef4a31f8d348e005c92717c8"
+},{
+  "tool": "Code Inspection",
+  "category": "Imports",
+  "type": "Unused import",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "Unused import `import java.util.Map;`",
   "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
   "sources": [
@@ -5377,37 +5501,6 @@
     "inspectionName": "UNUSED_IMPORT"
   },
   "hash": "695a1dff7374747f1b6c577a6d6b98922f2cb3915637078c06350298373433dc"
-},{
-  "tool": "Code Inspection",
-  "category": "Imports",
-  "type": "Unused import",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Unused import `import com.intellij.lang.html.HTMLLanguage;`",
-  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
-      "language": "JAVA",
-      "line": 5,
-      "offset": 1,
-      "length": 43,
-      "code": {
-        "startLine": 3,
-        "length": 43,
-        "offset": 88,
-        "surroundingCode": "import com.intellij.ide.highlighter.XmlLikeFileType;\nimport com.intellij.lang.Language;\nimport com.intellij.lang.html.HTMLLanguage;\nimport com.intellij.openapi.fileTypes.FileType;\nimport com.intellij.openapi.util.NlsContexts;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UNUSED_IMPORT"
-  },
-  "hash": "70727a742395ccda2c24f8931e9467960dec3f1b3585dd4b3e58d1eb6d99b60e"
 },{
   "tool": "Code Inspection",
   "category": "Imports",
@@ -5695,6 +5788,37 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "Unused import `import java.util.ResourceBundle;`",
+  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/LocaleDialogWrapper.java",
+      "language": "JAVA",
+      "line": 12,
+      "offset": 1,
+      "length": 32,
+      "code": {
+        "startLine": 10,
+        "length": 32,
+        "offset": 23,
+        "surroundingCode": "\nimport javax.swing.*;\nimport java.util.ResourceBundle;\nimport java.util.regex.Pattern;\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "UNUSED_IMPORT"
+  },
+  "hash": "954e0c8e73c0fb4fe3cbdd4889b7ef18043c4ee73ecda8faf86fcbc09f1f9518"
+},{
+  "tool": "Code Inspection",
+  "category": "Imports",
+  "type": "Unused import",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "Unused import `import de.vette.idea.neos.lang.fusion.psi.*;`",
   "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
   "sources": [
@@ -5749,37 +5873,6 @@
     "inspectionName": "UNUSED_IMPORT"
   },
   "hash": "9ff536e19a9442336a232332a2d2f584637dad1a5935a4f9cef21f4dd45d2098"
-},{
-  "tool": "Code Inspection",
-  "category": "Imports",
-  "type": "Unused import",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Unused import `import de.vette.idea.neos.lang.eel.EelFileType;`",
-  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
-      "language": "JAVA",
-      "line": 10,
-      "offset": 1,
-      "length": 47,
-      "code": {
-        "startLine": 8,
-        "length": 47,
-        "offset": 79,
-        "surroundingCode": "import com.intellij.openapi.util.NlsSafe;\nimport de.vette.idea.neos.NeosIcons;\nimport de.vette.idea.neos.lang.eel.EelFileType;\nimport org.jetbrains.annotations.NonNls;\nimport org.jetbrains.annotations.NotNull;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UNUSED_IMPORT"
-  },
-  "hash": "a3dd3fa0da1b3be934cbc488ced70af6eae140a1841cc3cae3bbf19c3854b25b"
 },{
   "tool": "Code Inspection",
   "category": "Imports",
@@ -6431,37 +6524,6 @@
     "inspectionName": "UnstableApiUsage"
   },
   "hash": "2796a2cf4ccae354bd491bda90c358aa9fb5ed19c561a65736e5ec74e8605b74"
-},{
-  "tool": "Code Inspection",
-  "category": "JVM languages",
-  "type": "Unstable API Usage",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "'com.intellij.openapi.util.NlsSafe' is marked unstable with @ApiStatus.Experimental",
-  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/xliff/XliffFileType.java",
-      "language": "JAVA",
-      "line": 40,
-      "offset": 13,
-      "length": 7,
-      "code": {
-        "startLine": 38,
-        "length": 7,
-        "offset": 27,
-        "surroundingCode": "\n    @Override\n    public @NlsSafe @NotNull String getDefaultExtension() {\n        return \"xlf\";\n    }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UnstableApiUsage"
-  },
-  "hash": "3ac0e804e23e29c98f4891f31c0d0105da857d54bad78b6b26c5d85526322e23"
 },{
   "tool": "Code Inspection",
   "category": "JVM languages",
