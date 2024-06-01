@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+- Add JSON schema for node type presets (needs separate settings file named `Settings.Presets.*`)
+
 ## 1.20.1 - 2024-04-07
 
 - Compatibility with 2024.1.*

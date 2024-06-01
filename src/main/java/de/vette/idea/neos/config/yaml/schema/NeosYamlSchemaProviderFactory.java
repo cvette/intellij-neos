@@ -13,7 +13,8 @@ public class NeosYamlSchemaProviderFactory implements JsonSchemaProviderFactory 
         return List.of(
                 new NodeTypeYamlSchemaProvider(project),
                 new NodeMigrationYamlSchemaProvider(project),
-                new CacheConfigYamlSchemaProvider(project)
+                new CacheConfigYamlSchemaProvider(project),
+                new NodeTypePresetYamlSchemaProvider(project)
         );
     }
 }

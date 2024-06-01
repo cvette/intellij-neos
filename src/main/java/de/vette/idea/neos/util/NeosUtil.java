@@ -17,6 +17,7 @@ import static com.intellij.openapi.project.ProjectUtil.guessProjectDir;
 public class NeosUtil {
     public static final Pattern NODE_TYPES_PATH_PATTERN = Pattern.compile("(^|/)(NodeTypes/|Configuration/((Development|Production|Testing)/([^/]+/)*)?NodeTypes\\.)");
     public static final Pattern NODE_MIGRATION_PATH_PATTERN = Pattern.compile("(^|/)Migrations/(ContentRepository|TYPO3CR)/");
+    public static final Pattern NODE_TYPE_PRESET_PATH_PATTERN = Pattern.compile("(^|/)Configuration/((Development|Production|Testing)/([^/]+/)*)?Settings\\.Presets\\.*");
 
     /**
      * Check if the given virtual file is a node type definition
@@ -40,6 +41,18 @@ public class NeosUtil {
         }
 
         return NODE_MIGRATION_PATH_PATTERN.matcher(virtualFile.getPath()).find();
+    }
+
+    /**
+     * Check if the given virtual file is a node type preset
+     */
+    public static Boolean isNodeTypePreset(VirtualFile virtualFile)
+    {
+        if (virtualFile.getFileType() != YAMLFileType.YML) {
+            return false;
+        }
+
+        return NODE_TYPE_PRESET_PATH_PATTERN.matcher(virtualFile.getPath()).find();
     }
 
     /**
