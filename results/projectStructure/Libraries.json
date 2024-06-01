@@ -15,9 +15,9 @@
       "properties": {}
     },
     {
-      "name": "Gradle: io.sentry:sentry:7.8.0",
+      "name": "Gradle: io.sentry:sentry:7.9.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/io.sentry/sentry/7.8.0/d36ac66af243ebb7cd6a9ba6ce7ebe630ce7823e/sentry-7.8.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/io.sentry/sentry/7.9.0/ae956185d361a8ee4dd05546b541ab1615eaeb54/sentry-7.9.0.jar!/"
       ],
       "properties": {}
     },
