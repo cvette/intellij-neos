@@ -4,8 +4,9 @@
 
 ## Unreleased
 
-- Compatibility with 2024.1.*
+## 1.20.1 - 2024-04-07
 
+- Compatibility with 2024.1.*
 
 ## 1.20.0 - 2023-12-07
 
