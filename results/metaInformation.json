@@ -1,19 +1,19 @@
 {
-  "total": 214,
+  "total": 215,
   "tools inspection": {
-    "Code Inspection": 214
+    "Code Inspection": 215
   },
   "linter": "QDJVMC",
   "attributes": {
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "f9e451bb7fc02d27415c45fbae5fcb64c58473a3",
+        "revisionId": "e8283d2bf2ba4095929bb4d3051ebe2398cb3c77",
         "branch": "main"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git",
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/9332330112"
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/9332479862"
   }
 }

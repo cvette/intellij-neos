@@ -197,37 +197,6 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/search/FusionPrototypeDeclarationContributor.java",
-      "language": "JAVA",
-      "line": 42,
-      "offset": 185,
-      "length": 24,
-      "code": {
-        "startLine": 40,
-        "length": 24,
-        "offset": 295,
-        "surroundingCode": "        var nameParts = name.split(\":\");\n        var indexedName = nameParts.length > 1 ? nameParts[1] : name;\n        Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, indexedName, parameters.getProject(), parameters.getSearchScope(), FusionPrototypeSignature.class);\n        prototypes.forEach(prototypeSignature -> {\n            if (prototypeSignature.getType() != null) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "3d3cbdcd78e8ed15f06eb7e3bd038393ef42034a009730b86a2025a11b0a2df6"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionPrototypeSignature",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
       "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionPrototypeDeclarationIndex.java",
       "language": "JAVA",
       "line": 27,
@@ -525,6 +494,37 @@
     "inspectionName": "QodanaJavaSanity"
   },
   "hash": "bb7ccede970932c7747997f00fc97d3f5286baddced823e4f0b768ddb750a445"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionPropertyAssignment",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/StubElementTypeFactory.java",
+      "language": "JAVA",
+      "line": 21,
+      "offset": 43,
+      "length": 24,
+      "code": {
+        "startLine": 19,
+        "length": 24,
+        "offset": 86,
+        "surroundingCode": "\nimport com.intellij.psi.tree.IElementType;\nimport de.vette.idea.neos.lang.fusion.psi.FusionPropertyAssignment;\nimport org.jetbrains.annotations.NotNull;\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "bee984ebd6ae42f2d7dcd86816e58ebd6fb9bf3b9792e15585b68d3a06a088c6"
 },{
   "tool": "Code Inspection",
   "category": "General",
