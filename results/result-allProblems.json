@@ -254,37 +254,6 @@
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Condition `firstLocaleOpt.isEmpty()` is always `false`",
-  "detailsInfo": "Reports expressions and conditions that always produce the same result, like true, false, null, or zero. Such expressions could be replaced with the corresponding constant value. Very often though they signal about a bug in the code.\n\nExamples:\n\n      // always true\n      // root cause: || is used instead of &&\n      if (x > 0 || x < 10) {}\n\n      System.out.println(str.trim());\n      // always false\n      // root cause: variable was dereferenced before null-check\n      if (str == null) {}\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when constant is stored in variable** option to display warnings when variable is used, whose value is known to be a constant.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of \"Constant Conditions \\& Exceptions\" inspection. Now, it split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/actions/TranslateNodeTypeAction.java",
-      "language": "JAVA",
-      "line": 86,
-      "offset": 13,
-      "length": 24,
-      "code": {
-        "startLine": 84,
-        "length": 24,
-        "offset": 91,
-        "surroundingCode": "\n        final Optional<String> firstLocaleOpt = locales.stream().findFirst();\n        if (firstLocaleOpt.isEmpty()) {\n            return;\n        }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "ConstantValue"
-  },
-  "hash": "14a4d6f9ef5cadee2fedae51be7f5885eeff5d9ddbde1f39d53456e046297bf4"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Constant values",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
   "comment": "Result of `getParent().getParent()` is always 'null'",
   "detailsInfo": "Reports expressions and conditions that always produce the same result, like true, false, null, or zero. Such expressions could be replaced with the corresponding constant value. Very often though they signal about a bug in the code.\n\nExamples:\n\n      // always true\n      // root cause: || is used instead of &&\n      if (x > 0 || x < 10) {}\n\n      System.out.println(str.trim());\n      // always false\n      // root cause: variable was dereferenced before null-check\n      if (str == null) {}\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when constant is stored in variable** option to display warnings when variable is used, whose value is known to be a constant.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of \"Constant Conditions \\& Exceptions\" inspection. Now, it split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
   "sources": [
@@ -339,6 +308,37 @@
     "inspectionName": "ConstantValue"
   },
   "hash": "5a020432a770e90086d8ab8340214b9d9d82a2dd5e7e1d4c44d5476ed5486cf1"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant values",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Condition `firstLocaleOpt.isEmpty()` is always `false`",
+  "detailsInfo": "Reports expressions and conditions that always produce the same result, like true, false, null, or zero. Such expressions could be replaced with the corresponding constant value. Very often though they signal about a bug in the code.\n\nExamples:\n\n      // always true\n      // root cause: || is used instead of &&\n      if (x > 0 || x < 10) {}\n\n      System.out.println(str.trim());\n      // always false\n      // root cause: variable was dereferenced before null-check\n      if (str == null) {}\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when constant is stored in variable** option to display warnings when variable is used, whose value is known to be a constant.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of \"Constant Conditions \\& Exceptions\" inspection. Now, it split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/actions/TranslateNodeTypeAction.java",
+      "language": "JAVA",
+      "line": 87,
+      "offset": 13,
+      "length": 24,
+      "code": {
+        "startLine": 85,
+        "length": 24,
+        "offset": 91,
+        "surroundingCode": "\n        final Optional<String> firstLocaleOpt = locales.stream().findFirst();\n        if (firstLocaleOpt.isEmpty()) {\n            return;\n        }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "ConstantValue"
+  },
+  "hash": "5a1ab90df3f46781bdafa7804f75c4e9dbab4f8024f5742fda9f9c55194f1e8d"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
