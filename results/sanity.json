@@ -68,6 +68,37 @@
     "Sanity"
   ],
   "severity": "Critical",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionNamespaceDeclarationStub.java",
+      "language": "JAVA",
+      "line": 49,
+      "offset": 67,
+      "length": 26,
+      "code": {
+        "startLine": 47,
+        "length": 26,
+        "offset": 101,
+        "surroundingCode": "        @NotNull\n        @Override\n        public FusionNamespaceDeclarationStub createStub(@NotNull FusionNamespaceDeclaration psi, StubElement parentStub) {\n            String alias = psi.getAlias() != null ? psi.getAlias().getText() : \"\";\n            String namespace = psi.getNamespace() != null ? psi.getNamespace().getText() : \"\";"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "2f2ac3cee83b24724b6c63224a82db62dab6db9a7bdf737e5e5b9a340a42b06d"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
   "comment": "Unresolved reference _AfxLexer",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
@@ -432,37 +463,6 @@
     "inspectionName": "QodanaJavaSanity"
   },
   "hash": "ad4de3c6cb48d8f8f060c5c40a469fec9490f8214ea8dac6d4f375c8fe66f9a5"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionNamespaceDeclarationImpl",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionNamespaceDeclarationStub.java",
-      "language": "JAVA",
-      "line": 44,
-      "offset": 24,
-      "length": 30,
-      "code": {
-        "startLine": 42,
-        "length": 30,
-        "offset": 141,
-        "surroundingCode": "        @Override\n        public FusionNamespaceDeclaration createPsi(@NotNull FusionNamespaceDeclarationStub stub) {\n            return new FusionNamespaceDeclarationImpl(stub, this);\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "bd344c9f95d2eae8fa7431d35bbacc2eeefdbef50ce8f275f9b99baa6fc0eb07"
 },{
   "tool": "Code Inspection",
   "category": "General",
