@@ -24,12 +24,17 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @State(name = "NeosPluginSettings")
 public class Settings implements PersistentStateComponent<Settings> {
 
     public boolean pluginEnabled = false;
     public boolean dismissEnableNotification = false;
     public boolean excludePackageSymlinks = false;
+
+    public List<String> locales = new LinkedList<>();
 
     public static Settings getInstance(@NotNull Project project) {
         return project.getService(Settings.class);

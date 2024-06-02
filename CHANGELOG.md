@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- Action to create and update translations for a node type
+
 ## 1.21.0 - 2024-06-01
 
 - Add JSON schema for node type presets (needs separate settings file named `Settings.Presets.*`)
