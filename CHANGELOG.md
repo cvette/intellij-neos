@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+## 1.22.0-eap.1 - 2024-06-03
+
 ### Added
 
 - Action to create and update translations for a node type
