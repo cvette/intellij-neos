@@ -135,14 +135,6 @@ public class TranslateNodeTypeAction extends AnAction {
             String nodeType
     ) {
         String fileName = getFileName(nodeType);
-        String[] nodeTypeParts = nodeType.split("\\.");
-        for (String nodeTypePart : nodeTypeParts) {
-            if (nodeTypePart.equals(fileName)) {
-                continue;
-            }
-
-            dir = createSubdirectory(dir, nodeTypePart);
-        }
 
         properties.setProperty("TARGET_LANGUAGE", "");
         if (!locale.equals(sourceLocale)) {
