@@ -124,7 +124,7 @@ public class TranslateNodeTypeAction extends AnAction {
                 .addAction(new NotificationAction("Configure locales") {
                     @Override
                     public void actionPerformed(@NotNull AnActionEvent e, @NotNull Notification notification) {
-                        ShowSettingsUtil.getInstance().showSettingsDialog(project, "Neos");
+                        ShowSettingsUtil.getInstance().showSettingsDialog(project, "Frameworks");
 
                     }
                 }).notify(project);
