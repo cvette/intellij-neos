@@ -69,8 +69,17 @@ public class TranslateNodeTypeAction extends AnAction {
             return;
         }
 
+        Collection<String> locales = Settings.getInstance(project).locales;
+
+        if (locales.isEmpty()) {
+            showNotification(project);
+            return;
+        }
+
         List<YAMLKeyValue> pairs = getTranslateablePaths(virtualFile, project);
-        String nodeType = extractNodeType(pairs);
+        if (pairs.isEmpty()) {
+            return;
+        }
 
         PsiDirectory psiDirectory = PsiManager.getInstance(project).findDirectory(virtualFile.getParent());
         JsonFile composerManifest = ComposerUtil.getComposerManifest(psiDirectory);
@@ -81,12 +90,6 @@ public class TranslateNodeTypeAction extends AnAction {
 
         String packageName = ComposerUtil.getPackageKey(composerManifest);
         packageDirectory = composerManifest.getContainingDirectory();
-        Collection<String> locales = Settings.getInstance(project).locales;
-
-        if (locales.isEmpty()) {
-            showNotification(project);
-            return;
-        }
 
         final Optional<String> firstLocaleOpt = locales.stream().findFirst();
         if (firstLocaleOpt.isEmpty()) {
@@ -99,20 +102,25 @@ public class TranslateNodeTypeAction extends AnAction {
         properties.setProperty("NEOS_PACKAGE_NAME", packageName);
         properties.setProperty("SOURCE_LANGUAGE", sourceLocale);
 
-        HashMap<String, YAMLKeyValue> yamlPairsByTransId = extractNodeTypeTranslationIds(pairs);
+        HashMap<String, PairsByTransId> yamlPairsByTransId = extractNodeTypeTranslationIds(pairs);
 
         WriteCommandAction.runWriteCommandAction(project, "Translate NodeType", "", () -> {
-            for (String locale : locales) {
-                PsiDirectory translationDir = createTranslationDirectories(packageDirectory, locale, nodeType);
-                processTranslationFile(project, translationDir, locale, sourceLocale, yamlPairsByTransId, properties, nodeType);
-            }
+            yamlPairsByTransId.forEach((nodeType, pairsByTransId) -> {
+                String[] nodeTypeParts = nodeType.split(":");
+                String nodeTypeWithoutNamespace = (nodeTypeParts.length == 2) ? nodeTypeParts[1] : nodeType;
 
-            // replace text values in node type defintion by "i18n"
-            yamlPairsByTransId.forEach((transId, yamlKeyValue) -> {
-                if (!yamlKeyValue.getValueText().equals("i18n")) {
-                    YAMLKeyValue newKeyValue = YAMLElementGenerator.getInstance(project).createYamlKeyValue(yamlKeyValue.getKeyText(), "i18n");
-                    yamlKeyValue.replace(newKeyValue);
+                for (String locale : locales) {
+                    PsiDirectory translationDir = createTranslationDirectories(packageDirectory, locale, nodeTypeWithoutNamespace);
+                    processTranslationFile(project, translationDir, locale, sourceLocale, pairsByTransId, properties, nodeTypeWithoutNamespace);
                 }
+
+                // replace text values in node type definition by "i18n"
+                pairsByTransId.forEach((transId, yamlKeyValue) -> {
+                    if (!yamlKeyValue.getValueText().equals("i18n")) {
+                        YAMLKeyValue newKeyValue = YAMLElementGenerator.getInstance(project).createYamlKeyValue(yamlKeyValue.getKeyText(), "i18n");
+                        yamlKeyValue.replace(newKeyValue);
+                    }
+                });
             });
         });
     }
@@ -162,12 +170,6 @@ public class TranslateNodeTypeAction extends AnAction {
         return nodeTypeParts[nodeTypeParts.length - 1];
     }
 
-    private String extractNodeType(List<YAMLKeyValue> pairs) {
-        String nodeType = getTranslationKeyParts(pairs.get(0)).get(0);
-        String[] nodeTypeParts = nodeType.split(":");
-        return (nodeTypeParts.length == 2) ? nodeTypeParts[1] : nodeType;
-    }
-
     private PsiDirectory createTranslationDirectories(PsiDirectory baseDir, String locale, String nodeType) throws IncorrectOperationException {
         PsiDirectory dir = createSubdirectory(baseDir, "Resources");
         dir = createSubdirectory(dir, "Private");
@@ -206,14 +208,25 @@ public class TranslateNodeTypeAction extends AnAction {
         return getExistingIds(bodyTag);
     }
 
-    private LinkedHashMap<String, YAMLKeyValue> extractNodeTypeTranslationIds(List<YAMLKeyValue> pairs) {
-        LinkedHashMap<String, YAMLKeyValue> nodeTypeIds = new LinkedHashMap<>();
+    class PairsByTransId extends LinkedHashMap<String,YAMLKeyValue> {}
+
+    private LinkedHashMap<String, PairsByTransId> extractNodeTypeTranslationIds(List<YAMLKeyValue> pairs) {
+        LinkedHashMap<String, PairsByTransId> nodeTypeIds = new LinkedHashMap<>();
+
         for (YAMLKeyValue pair : pairs) {
             List<String> path = getTranslationKeyParts(pair);
+            String nodeType = path.get(0);
+
             path = path.subList(1, path.size()); // removes the node type name
+
+            if (!nodeTypeIds.containsKey(nodeType)) {
+                nodeTypeIds.put(nodeType, new PairsByTransId());
+            }
+
             String id = String.join(".", path);
-            nodeTypeIds.put(id, pair);
+            nodeTypeIds.get(nodeType).put(id, pair);
         }
+
         return nodeTypeIds;
     }
 
