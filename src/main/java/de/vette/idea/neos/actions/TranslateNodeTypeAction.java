@@ -6,6 +6,7 @@ import com.intellij.json.psi.JsonFile;
 import com.intellij.notification.*;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.FileTypeRegistry;
 import com.intellij.openapi.options.ShowSettingsUtil;
@@ -76,6 +77,11 @@ public class TranslateNodeTypeAction extends AnAction {
             return;
         }
 
+        if (FileTypeRegistry.getInstance().getFileTypeByExtension("xlf") != XliffFileType.INSTANCE) {
+            showFileTypeNotification(project);
+            return;
+        }
+
         List<YAMLKeyValue> pairs = getTranslateablePaths(virtualFile, project);
         if (pairs.isEmpty()) {
             return;
@@ -133,6 +139,19 @@ public class TranslateNodeTypeAction extends AnAction {
                     @Override
                     public void actionPerformed(@NotNull AnActionEvent e, @NotNull Notification notification) {
                         ShowSettingsUtil.getInstance().showSettingsDialog(project, "Frameworks");
+
+                    }
+                }).notify(project);
+    }
+
+    private static void showFileTypeNotification(@NotNull Project project) {
+        NotificationGroupManager.getInstance()
+                .getNotificationGroup("Neos")
+                .createNotification("Please make sure that the file type \"XML Localization Interchange File Format\" is associated with the file name pattern \".xlf\".", NotificationType.ERROR)
+                .addAction(new NotificationAction("Configure file types") {
+                    @Override
+                    public void actionPerformed(@NotNull AnActionEvent e, @NotNull Notification notification) {
+                        ShowSettingsUtil.getInstance().showSettingsDialog(project, "File types");
 
                     }
                 }).notify(project);
