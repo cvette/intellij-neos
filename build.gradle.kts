@@ -33,7 +33,7 @@ idea {
 }
 
 dependencies {
-    implementation("io.sentry:sentry:7.10.0")
+    implementation("io.sentry:sentry:7.13.0")
     implementation("org.apache.commons:commons-text:1.12.0")
 }
 
