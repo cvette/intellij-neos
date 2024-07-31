@@ -347,37 +347,6 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionNamespaceDeclaration",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionNamespaceDeclarationStub.java",
-      "language": "JAVA",
-      "line": 43,
-      "offset": 16,
-      "length": 26,
-      "code": {
-        "startLine": 41,
-        "length": 26,
-        "offset": 34,
-        "surroundingCode": "\n        @Override\n        public FusionNamespaceDeclaration createPsi(@NotNull FusionNamespaceDeclarationStub stub) {\n            return new FusionNamespaceDeclarationImpl(stub, this);\n        }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "90a814194cd17dec520de9407bcabf20aad986c2cfa4c7ace7b75b6922709cd8"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "Sanity"
-  ],
-  "severity": "Critical",
   "comment": "Unresolved reference FusionType",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
@@ -587,6 +556,37 @@
     "inspectionName": "QodanaJavaSanity"
   },
   "hash": "dfb17773c53ec0e26a4c6879295215d10b9aa9c45c6f93eb1e8a61045a77a8ec"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/FusionNamespaceDeclarationStub.java",
+      "language": "JAVA",
+      "line": 40,
+      "offset": 73,
+      "length": 26,
+      "code": {
+        "startLine": 38,
+        "length": 26,
+        "offset": 79,
+        "surroundingCode": "    }\n\n    public static FusionStubElementType<FusionNamespaceDeclarationStub, FusionNamespaceDeclaration> TYPE = new FusionStubElementType<>(\"FUSION_NAMESPACE_DECLARATION\") {\n\n        @Override"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "eb855ddb3f03cef5149ab03074b75dc3af8092956701d41f154f3090fcb98938"
 },{
   "tool": "Code Inspection",
   "category": "General",
