@@ -36,13 +36,6 @@ jobs:
       pluginVerifierHomeDir: ${{ steps.properties.outputs.pluginVerifierHomeDir }}
     steps:
 
-      # Free GitHub Actions Environment Disk Space
-      - name: Maximize Build Space
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: false
-          large-packages: false
-
       # Check out current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
@@ -51,7 +44,7 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v4
 
-      # Setup Java 17 environment for the next steps
+      # Setup Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -80,8 +73,6 @@ jobs:
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-          ./gradlew listProductsReleases # prepare list of IDEs for Plugin Verifier
-
       # Build plugin
       - name: Build plugin
         run: ./gradlew buildPlugin
@@ -94,7 +85,7 @@ jobs:
           cd ${{ github.workspace }}/build/distributions
           FILENAME=`ls *.zip`
           unzip "$FILENAME" -d content
-      
+
           echo "filename=${FILENAME:0:-4}" >> $GITHUB_OUTPUT
 
       # Store already-built plugin as an artifact for downloading
@@ -187,6 +178,13 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+
+      # Free GitHub Actions Environment Disk Space
+      - name: Maximize Build Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          large-packages: false
 
       # Check out current repository
       - name: Fetch Sources

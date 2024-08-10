@@ -1,20 +1,22 @@
 [versions]
 # libraries
 annotations = "24.1.0"
+junit = "4.13.2"
 
 # plugins
-changelog = "2.2.0"
-gradleIntelliJPlugin = "1.17.3"
-gradleGrammarkitPlugin = "2022.3.2.2"
-qodana = "0.1.13"
+changelog = "2.2.1"
+intelliJPlatform = "2.0.1"
+gradleGrammarkit = "2022.3.2.2"
+qodana = "2024.1.5"
 kover = "0.8.3"
 
 [libraries]
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
-gradleIntelliJPlugin = { id = "org.jetbrains.intellij", version.ref = "gradleIntelliJPlugin" }
-gradleGrammarkitPlugin = { id = "org.jetbrains.grammarkit", version.ref = "gradleGrammarkitPlugin" }
+intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
+gradleGrammarkitPlugin = { id = "org.jetbrains.grammarkit", version.ref = "gradleGrammarkit" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
