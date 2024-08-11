@@ -54,8 +54,6 @@ jobs:
       # Setup Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          cache-cleanup: always
 
       # Set environment variables
       - name: Export Properties
@@ -116,8 +114,6 @@ jobs:
       # Setup Gradle
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
-        with:
-          cache-cleanup: always
 
       # Run tests
       - name: Run Tests
@@ -200,8 +196,6 @@ jobs:
       # Setup Gradle
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
-        with:
-          cache-cleanup: always
 
       # Cache Plugin Verifier IDEs
       - name: Setup Plugin Verifier IDEs Cache
