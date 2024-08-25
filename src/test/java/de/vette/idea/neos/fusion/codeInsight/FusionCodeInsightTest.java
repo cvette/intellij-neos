@@ -1,12 +1,12 @@
 package de.vette.idea.neos.fusion.codeInsight;
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.usages.Usage;
 import util.FusionTestUtils;
 
 import java.util.Collection;
 
-public class FusionCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
+public class FusionCodeInsightTest extends BasePlatformTestCase {
 
     @Override
     protected String getTestDataPath() {
