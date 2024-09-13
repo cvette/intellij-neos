@@ -109,15 +109,15 @@ public class MovePrototypeToFile extends BaseRefactoringAction implements Refact
         dialog.show();
     }
 
-    private List<FusionPrototypeSignature> findAllPrototypeSignatures(PsiFile psiFile) {
+    public static List<FusionPrototypeSignature> findAllPrototypeSignatures(PsiFile psiFile) {
         List<FusionPrototypeSignature> signatures = new ArrayList<>(PsiTreeUtil.findChildrenOfType(psiFile, FusionPrototypeSignature.class));
-        return signatures.stream().filter(this::isTopLevelPrototype).collect(Collectors.toList());
+        return signatures.stream().filter(MovePrototypeToFile::isTopLevelPrototype).collect(Collectors.toList());
     }
 
     /**
      * Determines whether the prototype definition is an override on some path or not.
      */
-    private boolean isTopLevelPrototype(@Nullable PsiElement prototypeSignature) {
+    private static boolean isTopLevelPrototype(@Nullable PsiElement prototypeSignature) {
         if (!(prototypeSignature instanceof FusionPrototypeSignature)) {
             return false;
         }

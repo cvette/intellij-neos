@@ -35,21 +35,37 @@ import java.util.List;
 public class MovePrototypeProcessor extends BaseRefactoringProcessor {
 
     private final String myTitle;
-    private final String myTargetFilePath;
+    private final @Nullable PsiFile myTargetFile;
     private final PsiElement[] myAffectedElements;
     private final boolean myOpenInEditor;
+    private @Nullable String myTargetFilePath = null;
 
-    protected MovePrototypeProcessor(
+    public MovePrototypeProcessor(
             @NotNull Project project,
             String title,
-            String targetFilePath,
-            PsiElement[] affectedElements,
+            @NotNull PsiFile targetFile,
+            Iterable<FusionPrototypeSignature> signaturesToMove,
             boolean openInEditor
     ) {
         super(project);
         this.myTitle = title;
+        this.myTargetFile = targetFile;
+        this.myAffectedElements = MovePrototypeProcessor.collectAffectedElements(signaturesToMove, project);
+        this.myOpenInEditor = openInEditor;
+    }
+
+    public MovePrototypeProcessor(
+            @NotNull Project project,
+            String title,
+            @NotNull String targetFilePath,
+            Iterable<FusionPrototypeSignature> signaturesToMove,
+            boolean openInEditor
+    ) {
+        super(project);
+        this.myTitle = title;
+        this.myTargetFile = getOrCreateFileFromPath(targetFilePath);
         this.myTargetFilePath = targetFilePath;
-        this.myAffectedElements = affectedElements;
+        this.myAffectedElements = MovePrototypeProcessor.collectAffectedElements(signaturesToMove, project);
         this.myOpenInEditor = openInEditor;
     }
 
@@ -57,8 +73,8 @@ public class MovePrototypeProcessor extends BaseRefactoringProcessor {
         return element instanceof PsiComment && element.getText().startsWith("/*");
     }
 
-    private @Nullable FusionFile getTargetFile() {
-        String path = FileUtil.toSystemIndependentName(myTargetFilePath);
+    private @Nullable FusionFile getOrCreateFileFromPath(String targetFilePath) {
+        String path = FileUtil.toSystemIndependentName(targetFilePath);
         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(path);
         if (file != null) {
             PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
@@ -143,12 +159,18 @@ public class MovePrototypeProcessor extends BaseRefactoringProcessor {
 
     @Override
     protected void performRefactoring(UsageInfo @NotNull [] usages) {
-        FusionFile targetFile = getTargetFile();
+        PsiFile targetFile = myTargetFile != null
+                ? myTargetFile
+                : myTargetFilePath != null ? getOrCreateFileFromPath(myTargetFilePath) : null;
         if (targetFile == null) {
             // there could be other errors as well, but we assume, they have been validated before
-            CommonRefactoringUtil.showErrorMessage(myTitle, FusionBundle.message("refactoring.move.prototype.error.creating.file", myTargetFilePath), null, myProject);
+            if (myTargetFilePath != null) {
+                CommonRefactoringUtil.showErrorMessage(myTitle, FusionBundle.message("refactoring.move.prototype.error.creating.file", myTargetFilePath), null, myProject);
+                return;
+            }
             return;
         }
+        // we assume that everything is from the same file. we could alternatively go over everything by signature
         PsiFile originalFile = myAffectedElements[0].getContainingFile();
         FileModificationService.getInstance().preparePsiElementsForWrite(originalFile, targetFile);
 
@@ -198,6 +220,7 @@ public class MovePrototypeProcessor extends BaseRefactoringProcessor {
 
     @Override
     protected @NotNull @NlsContexts.Command String getCommandName() {
-        return FusionBundle.message("refactoring.move.prototype.move.to", myTargetFilePath);
+        String path = myTargetFile != null ? myTargetFile.getVirtualFile().getPath() : myTargetFilePath;
+        return FusionBundle.message("refactoring.move.prototype.move.to", path);
     }
 }

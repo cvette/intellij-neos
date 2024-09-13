@@ -15,6 +15,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.refactoring.classMembers.AbstractMemberInfoModel;
@@ -34,6 +35,7 @@ import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.psi.FusionFile;
 import de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;
+import de.vette.idea.neos.lang.fusion.psi.FusionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,6 +51,7 @@ import java.util.stream.Collectors;
 public class MovePrototypeDialog extends RefactoringDialog {
     private final List<PrototypeInfo> myPrototypeInfos;
     private final VirtualFile myContextFile;
+    private final List<FusionPrototypeSignature> mySelectedPrototypes;
     private final TextFieldWithHistoryWithBrowseButton myTargetFileField;
     private final Pattern PRIVATE_RESOURCE_PATH_PATTERN = Pattern.compile("(\\w+(\\.\\w+)+)/Resources/Private");
 
@@ -62,6 +65,7 @@ public class MovePrototypeDialog extends RefactoringDialog {
         super(project, true, true);
         this.myContextFile = allSignatures.get(0).getContainingFile().getVirtualFile();
         this.setTitle(FusionBundle.message("refactoring.move.prototype.title"));
+        this.mySelectedPrototypes = preselectedSignatures;
         this.myTargetFileField = createTargetFileField();
 
         List<PrototypeInfo> prototypeInfos = new ArrayList<>();
@@ -91,12 +95,11 @@ public class MovePrototypeDialog extends RefactoringDialog {
         if (selectedPrototypes.isEmpty()) {
             return;
         }
-        var affectedElements = MovePrototypeProcessor.collectAffectedElements(getSelectedPrototypes(), myProject);
         invokeRefactoring(new MovePrototypeProcessor(
                 myProject,
                 getTitle(),
                 getTargetFilePath(),
-                affectedElements,
+                getSelectedPrototypes(),
                 isOpenInEditor()
         ));
     }
@@ -227,6 +230,41 @@ public class MovePrototypeDialog extends RefactoringDialog {
         return panel;
     }
 
+    /**
+     * Returns a suggested file name for the move operation based on the selected prototypes.
+     * This will use the last name part of a prototype (e.g. Vendor.Package:Prototype.Name -> Name.fusion).
+     * The name will be derived from the first given prototype not matching the source file name.
+     *
+     * @param sourceFilePath Path to the current file to use as base path and fallback
+     * @param signatures List of prototypes to consider for suggestions
+     * @return A file path to a fusion file
+     */
+    public static String getSuggestedTargetFileName(String sourceFilePath, List<FusionPrototypeSignature> signatures) {
+        String sourceFileName = PathUtil.getFileName(sourceFilePath);
+        String sourceExtension = PathUtil.getFileExtension(sourceFilePath);
+        for (FusionPrototypeSignature signature : signatures) {
+            Optional<String> prototypeName = Optional.of(signature)
+                    .map(FusionPrototypeSignature::getType)
+                    .map(FusionType::getUnqualifiedType)
+                    .map(PsiElement::getText);
+
+            if (prototypeName.isEmpty()) {
+                continue;
+            }
+
+            String[] prototypeNameParts = prototypeName.get().split("\\.");
+            String lastPrototypeNamePart = prototypeNameParts[prototypeNameParts.length - 1];
+            String fileName = PathUtil.makeFileName(lastPrototypeNamePart, sourceExtension);
+
+            if (fileName.equals(sourceFileName)) {
+                continue;
+            }
+
+            return PathUtil.getParentPath(sourceFilePath) + File.separator + fileName;
+        }
+        return sourceFilePath;
+    }
+
     private TextFieldWithHistoryWithBrowseButton createTargetFileField() {
         TextFieldWithHistoryWithBrowseButton field = new TextFieldWithHistoryWithBrowseButton();
         Set<String> items = new LinkedHashSet<>();
@@ -240,9 +278,10 @@ public class MovePrototypeDialog extends RefactoringDialog {
                 .withTitle(title);
         field.addBrowseFolderListener(title, null, myProject, descriptor, TextComponentAccessors.TEXT_FIELD_WITH_HISTORY_WHOLE_TEXT);
         String initialPath = myContextFile.getPresentableUrl();
-        int lastSlash = initialPath.lastIndexOf(File.separatorChar);
-        field.setText(initialPath);
-        field.getChildComponent().getTextEditor().select(lastSlash + 1, initialPath.length());
+        String suggestedTargetFileName = getSuggestedTargetFileName(initialPath, mySelectedPrototypes);
+        int lastSlash = suggestedTargetFileName.lastIndexOf(File.separatorChar);
+        field.setText(suggestedTargetFileName);
+        field.getChildComponent().getTextEditor().select(lastSlash + 1, suggestedTargetFileName.length());
         return field;
     }
 
