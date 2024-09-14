@@ -130,6 +130,11 @@
       <className>de.vette.idea.neos.lang.fusion.codeInsight.intention.MergeFusionPathUp</className>
       <category>Neos Fusion</category>
     </intentionAction>
+    <intentionAction>
+      <language>NeosFusion</language>
+      <className>de.vette.idea.neos.lang.fusion.codeInsight.intention.GroupFusionPaths</className>
+      <category>Neos Fusion</category>
+    </intentionAction>
 
     <!-- Line Marker Providers -->
     <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>

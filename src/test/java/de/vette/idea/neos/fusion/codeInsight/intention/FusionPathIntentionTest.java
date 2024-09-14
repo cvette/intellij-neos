@@ -26,6 +26,10 @@ public class FusionPathIntentionTest extends BasePlatformTestCase {
         doTest("mergeSingleFusionPathUp", "Merge fusion path up");
     }
 
+    public void testGroupFusionPaths() {
+        doTest("groupPaths", "Group paths of \"renderer.@process\"");
+    }
+
     private void doTest(String testName, String hint) {
         myFixture.configureByFile(testName + ".before.fusion");
         final IntentionAction action = myFixture.findSingleIntention(hint);
