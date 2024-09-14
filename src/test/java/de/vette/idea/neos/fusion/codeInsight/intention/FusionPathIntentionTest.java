@@ -18,6 +18,14 @@ public class FusionPathIntentionTest extends BasePlatformTestCase {
         doTest("splitFusionPath", "Split fusion path");
     }
 
+    public void testMergeOnlyFusionPathUp() {
+        doTest("mergeOnlyFusionPathUp", "Merge fusion path up");
+    }
+
+    public void testMergeSingleFusionPathUp() {
+        doTest("mergeSingleFusionPathUp", "Merge fusion path up");
+    }
+
     private void doTest(String testName, String hint) {
         myFixture.configureByFile(testName + ".before.fusion");
         final IntentionAction action = myFixture.findSingleIntention(hint);
