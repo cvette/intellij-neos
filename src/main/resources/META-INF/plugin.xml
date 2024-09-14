@@ -120,6 +120,12 @@
     <gotoSymbolContributor implementation="de.vette.idea.neos.search.NodeTypeContributor"/>
     <gotoSymbolContributor implementation="de.vette.idea.neos.search.FusionPrototypeDeclarationContributor"/>
 
+    <intentionAction>
+      <language>NeosFusion</language>
+      <className>de.vette.idea.neos.lang.fusion.codeInsight.intention.SplitFusionPath</className>
+      <category>Refactoring</category>
+    </intentionAction>
+
     <!-- Line Marker Providers -->
     <codeInsight.lineMarkerProvider language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.annotators.NodeTypeLineMarkerProvider"/>
     <codeInsight.lineMarkerProvider language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.annotators.PrototypeLineMarkerProvider"/>
