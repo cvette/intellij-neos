@@ -1,0 +1,4 @@
+foo {
+    baz = ${value2}
+}
+foo.bar = ${value}

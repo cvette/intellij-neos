@@ -1,0 +1,4 @@
+foo {
+    b<caret>ar = ${value}
+    baz = ${value2}
+}
