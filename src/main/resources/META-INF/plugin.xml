@@ -167,5 +167,10 @@
       <add-to-group group-id="EditorPopupMenu" anchor="first"/>
       <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
     </action>
+    <action id="de.vette.idea.neos.lang.eel.refactoring.ExtractStatement"
+            use-shortcut-of="IntroduceVariable"
+            class="de.vette.idea.neos.lang.eel.refactoring.ExtractStatement" text="Extract Statement">
+      <add-to-group group-id="RefactoringMenu" anchor="first"/>
+    </action>
   </actions>
 </idea-plugin>
