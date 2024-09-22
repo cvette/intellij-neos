@@ -21,6 +21,9 @@ package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.XmlElementFactory;
+import de.vette.idea.neos.lang.afx.AfxLanguage;
+import de.vette.idea.neos.lang.afx.refactoring.AfxExtractor;
 import de.vette.idea.neos.lang.fusion.injection.FusionDslTextEscaper;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueDslContent;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
@@ -39,7 +42,18 @@ public class FusionValueDslContentImplMixin extends FusionElementImpl implements
 
     @Override
     public PsiLanguageInjectionHost updateText(@NotNull String text) {
-        return null;
+        var dummyTag = XmlElementFactory.getInstance(this.getProject())
+                .createTagFromText("<dummy>" + text + "\n</dummy>", AfxLanguage.INSTANCE);
+        var newContent = AfxExtractor.getChildren(dummyTag);
+        var newHost = this.copy();
+        while (newHost.getFirstChild() != null) {
+            newHost.getFirstChild().delete();
+        }
+
+        for (var child : newContent) {
+            newHost.add(child);
+        }
+        return (PsiLanguageInjectionHost) newHost;
     }
 
     @NotNull
