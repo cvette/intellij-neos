@@ -82,6 +82,8 @@
     <internalFileTemplate name="Neos Mixin Node Type"/>
     <internalFileTemplate name="Neos Constraint Node Type"/>
 
+    <internalFileTemplate name="Afx Extract Component Template"/>
+
     <defaultTemplatePropertiesProvider implementation="de.vette.idea.neos.actions.FusionTemplatePropertiesProvider"/>
     <createFromTemplateHandler implementation="de.vette.idea.neos.actions.FusionCreateFromTemplateHandler"/>
     <createFromTemplateHandler implementation="de.vette.idea.neos.actions.NodeTypeCreateFromTemplateHandler"/>
@@ -166,6 +168,9 @@
     <action icon="de.vette.idea.neos.NeosIcons.NODE_TYPE" id="Neos.TranslateNodeType" class="de.vette.idea.neos.actions.TranslateNodeTypeAction" text="Translate NodeType">
       <add-to-group group-id="EditorPopupMenu" anchor="first"/>
       <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+    </action>
+    <action id="de.vette.idea.neos.afx.refactoring.ExtractAfxComponent" class="de.vette.idea.neos.lang.afx.refactoring.ExtractAfxComponent" text="Extract Afx Component" use-shortcut-of="IntroduceVariable">
+      <add-to-group group-id="RefactoringMenu"/>
     </action>
   </actions>
 </idea-plugin>
