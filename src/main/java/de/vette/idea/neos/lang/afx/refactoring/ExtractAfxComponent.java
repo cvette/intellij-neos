@@ -1,12 +1,9 @@
 package de.vette.idea.neos.lang.afx.refactoring;
 
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.lang.Language;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -14,8 +11,6 @@ import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.SmartPointerManager;
-import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -36,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -171,10 +165,8 @@ public class ExtractAfxComponent extends IntroduceActionBase implements Refactor
     }
 
     protected static class PromptDialog extends RefactoringDialog {
-        private static final String BASE_PROTOTYPE_NAME = "Neos.Fusion:Component";
         private final Pattern PROTOTYPE_NAME_PATTERN = Pattern.compile("(\\w+(\\.\\w+)+):(\\w+(\\.\\w+)*)");
 
-        private final PsiFile myTargetFile;
         private final PsiLanguageInjectionHost mySourceElement;
         private final String myNewName;
         private final PsiElement myElementToExtract;
@@ -183,7 +175,6 @@ public class ExtractAfxComponent extends IntroduceActionBase implements Refactor
 
         public PromptDialog(@NotNull Project project, String defaultValue, PsiElement elementToExtract, PsiLanguageInjectionHost sourceElement) {
             super(project, true);
-            this.myTargetFile = sourceElement.getContainingFile();
             this.mySourceElement = sourceElement;
             this.myNewName = defaultValue;
             this.myElementToExtract = elementToExtract;
@@ -207,50 +198,13 @@ public class ExtractAfxComponent extends IntroduceActionBase implements Refactor
                 return;
             }
 
-            var usageCode = "<" + newName + "/>";
-            var componentCode = generateComponentCode(newName, myElementToExtract.getText());
-            var newPrototype = formatFusionCode(componentCode);
-
-            WriteCommandAction.runWriteCommandAction(myProject, () -> {
-                var relativeSelectionStart = myElementToExtract.getTextOffset();
-                var relativeSelectionEnd = myElementToExtract.getTextOffset() + myElementToExtract.getTextLength();
-                var currentContent = mySourceElement.getText();
-                var newContent = currentContent.substring(0, relativeSelectionStart) + usageCode + currentContent.substring(relativeSelectionEnd);
-                var updatedHost = mySourceElement.updateText(newContent);
-                mySourceElement.replace(updatedHost);
-
-                var anchor = SmartPointerManager.createPointer(myTargetFile.getFirstChild());
-                for (PsiElement newChild : newPrototype.getChildren()) {
-                    myTargetFile.addBefore(newChild, anchor.getElement());
-                }
-            });
-
+            var processor = new ExtractAfxComponentProcessor(myProject, mySourceElement, myElementToExtract, newName);
+            processor.run();
             close(DialogWrapper.OK_EXIT_CODE);
         }
 
         private boolean isValidPrototypeName(String newName) {
             return !PROTOTYPE_NAME_PATTERN.matcher(newName).matches();
-        }
-
-        protected FusionFile formatFusionCode(String fusionCode) {
-            var fusionFile = FusionElementFactory.createFusionFile(myProject, fusionCode);
-            return (FusionFile) CodeStyleManager.getInstance(myProject).reformat(fusionFile);
-        }
-
-        protected String generateComponentCode(String componentName, String afxCode) {
-            FileTemplate template = FileTemplateManager.getInstance(myProject).getInternalTemplate("Afx Extract Component Template");
-
-            Properties properties = new Properties();
-            properties.setProperty("FUSION_PROTOTYPE_NAME", componentName);
-            properties.setProperty("FUSION_BASE_PROTOTYPE_NAME", BASE_PROTOTYPE_NAME);
-            properties.setProperty("FUSION_AFX_CONTENT", afxCode.isBlank() ? "" : afxCode);
-            properties.setProperty("FUSION_PROPERTIES", "");
-
-            try {
-                return template.getText(properties);
-            } catch (IOException e) {
-                return "";
-            }
         }
 
         protected String getNewName() {
