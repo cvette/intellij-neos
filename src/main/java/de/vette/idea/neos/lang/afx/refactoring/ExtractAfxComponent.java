@@ -25,23 +25,15 @@ import de.vette.idea.neos.lang.afx.psi.AfxFile;
 import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;
-import de.vette.idea.neos.util.ComposerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.*;
 import java.util.regex.Pattern;
 
 public class ExtractAfxComponent extends IntroduceActionBase implements RefactoringActionHandler {
-    @Nullable
-    private static String getNamespaceFromFilePath(@NotNull PsiFile psiFile) {
-        var composerFile = ComposerUtil.getComposerManifest(psiFile.getContainingDirectory());
-
-        return composerFile == null ? null : ComposerUtil.getPackageKey(composerFile);
-    }
 
     protected static Set<String> getRegisteredPrototypes(Project project) {
         // TODO this might in part even be migrated to the index class?
@@ -87,51 +79,6 @@ public class ExtractAfxComponent extends IntroduceActionBase implements Refactor
     }
 
     /**
-     * Retrieve a default value for the refactoring prompt.
-     * Tries to find a name based on the surrounding prototype declaration, the package name or a fallback value otherwise.
-     */
-    @NotNull
-    private String getSuggestedName(@Nullable PsiElement element) {
-        var closestPrototypeSignature = element != null ? getClosestPrototypeSignatureName(element) : null;
-        if (closestPrototypeSignature != null) {
-            return closestPrototypeSignature + ".Extracted";
-        }
-
-        var namespace = element != null ? getNamespaceFromFilePath(element.getContainingFile()) : null;
-        if (namespace != null) {
-            return namespace + ":Extracted";
-        }
-
-        return "Vendor.Package:Extracted";
-    }
-
-    @Nullable
-    private String getClosestPrototypeSignatureName(@NotNull PsiElement element) {
-        List<FusionPrototypeSignature> signatures = new ArrayList<>();
-        var current = element;
-        while (!(current instanceof FusionFile)) {
-            FusionPath path = null;
-            if (current instanceof FusionPropertyCopy copy) {
-                path = copy.getPath();
-            } else if (current instanceof FusionPropertyBlock block) {
-                path = block.getPath();
-            } else if (current instanceof FusionPropertyAssignment assignment) {
-                path = assignment.getPath();
-            }
-            if (path != null) {
-                List<FusionPrototypeSignature> subList = path.getPrototypeSignatureList().subList(0, path.getPrototypeSignatureList().size());
-                if (!subList.isEmpty()) {
-                    Collections.reverse(subList);
-                    signatures.addAll(subList);
-                }
-            }
-            current = current.getParent();
-        }
-
-        return signatures.isEmpty() ? null : signatures.get(0).getName();
-    }
-
-    /**
      * We use the AFX tag element as basis for the refactoring at the caret position.
      * This currently does not require selection to avoid trouble with including surrounding content, especially splitting text.
      */
@@ -149,7 +96,7 @@ public class ExtractAfxComponent extends IntroduceActionBase implements Refactor
             return;
         }
 
-        var dialog = new PromptDialog(project, getSuggestedName(injectionHost), afxTag, injectionHost);
+        var dialog = new PromptDialog(project, ExtractAfxComponentProcessor.getSuggestedComponentName(injectionHost), afxTag, injectionHost);
         dialog.setKnownPrototypes(getRegisteredPrototypes(project));
         dialog.show();
     }

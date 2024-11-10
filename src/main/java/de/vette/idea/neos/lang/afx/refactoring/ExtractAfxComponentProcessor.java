@@ -14,14 +14,18 @@ import com.intellij.usageView.BaseUsageViewDescriptor;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.usageView.UsageViewDescriptor;
 import de.vette.idea.neos.lang.afx.AfxBundle;
-import de.vette.idea.neos.lang.fusion.psi.FusionElementFactory;
-import de.vette.idea.neos.lang.fusion.psi.FusionFile;
+import de.vette.idea.neos.lang.fusion.psi.*;
+import de.vette.idea.neos.util.ComposerUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
-class ExtractAfxComponentProcessor extends BaseRefactoringProcessor {
+public class ExtractAfxComponentProcessor extends BaseRefactoringProcessor {
     private static final String BASE_PROTOTYPE_NAME = "Neos.Fusion:Component";
 
     private final PsiLanguageInjectionHost mySourceElement;
@@ -35,6 +39,59 @@ class ExtractAfxComponentProcessor extends BaseRefactoringProcessor {
         this.myTargetFile = sourceElement.getContainingFile();
         this.myElementToExtract = elementToExtract;
         this.myNewName = newName;
+    }
+
+    /**
+     * Retrieve a default value for the refactoring prompt.
+     * Tries to find a name based on the surrounding prototype declaration, the package name or a fallback value otherwise.
+     * @param element The element in the source fusion file containing the AFX
+     */
+    @NotNull
+    public static String getSuggestedComponentName(@Nullable PsiElement element) {
+        var closestPrototypeSignature = element != null ? getClosestPrototypeSignatureName(element) : null;
+        if (closestPrototypeSignature != null) {
+            return closestPrototypeSignature + ".Extracted";
+        }
+
+        var namespace = element != null ? getNamespaceFromFilePath(element.getContainingFile()) : null;
+        if (namespace != null) {
+            return namespace + ":Extracted";
+        }
+
+        return "Vendor.Package:Extracted";
+    }
+
+    @Nullable
+    private static String getNamespaceFromFilePath(@NotNull PsiFile psiFile) {
+        var composerFile = ComposerUtil.getComposerManifest(psiFile.getContainingDirectory());
+
+        return composerFile == null ? null : ComposerUtil.getPackageKey(composerFile);
+    }
+
+    @Nullable
+    private static String getClosestPrototypeSignatureName(@NotNull PsiElement element) {
+        List<FusionPrototypeSignature> signatures = new ArrayList<>();
+        var current = element;
+        while (current != null && !(current instanceof FusionFile)) {
+            FusionPath path = null;
+            if (current instanceof FusionPropertyCopy copy) {
+                path = copy.getPath();
+            } else if (current instanceof FusionPropertyBlock block) {
+                path = block.getPath();
+            } else if (current instanceof FusionPropertyAssignment assignment) {
+                path = assignment.getPath();
+            }
+            if (path != null) {
+                List<FusionPrototypeSignature> subList = path.getPrototypeSignatureList().subList(0, path.getPrototypeSignatureList().size());
+                if (!subList.isEmpty()) {
+                    Collections.reverse(subList);
+                    signatures.addAll(subList);
+                }
+            }
+            current = current.getParent();
+        }
+
+        return signatures.isEmpty() ? null : signatures.get(0).getName();
     }
 
     @Override
