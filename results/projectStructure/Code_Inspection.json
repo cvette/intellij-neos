@@ -82,7 +82,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:7.17.0",
+          "name": "Gradle: io.sentry:sentry:7.14.0",
           "type": "Library"
         },
         {
@@ -201,7 +201,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:7.17.0",
+          "name": "Gradle: io.sentry:sentry:7.14.0",
           "type": "Library"
         },
         {

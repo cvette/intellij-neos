@@ -7,21 +7,53 @@
     "Sanity"
   ],
   "severity": "Critical",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionNamespaceDeclarationIndex.java",
+      "language": "JAVA",
+      "line": 22,
+      "offset": 43,
+      "length": 26,
+      "code": {
+        "startLine": 20,
+        "length": 26,
+        "offset": 142,
+        "surroundingCode": "import com.intellij.psi.stubs.StringStubIndexExtension;\nimport com.intellij.psi.stubs.StubIndexKey;\nimport de.vette.idea.neos.lang.fusion.psi.FusionNamespaceDeclaration;\nimport org.jetbrains.annotations.NotNull;\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "02d88b0115b93ffe0889cde7a129462c3f3c63eab47b89687f6c832ff13c5404"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
   "comment": "Unresolved reference FusionPrototypeSignature",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/completion/PrototypeProvider.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/resolve/ResolveEngine.java",
       "language": "JAVA",
-      "line": 44,
-      "offset": 24,
+      "line": 103,
+      "offset": 20,
       "length": 24,
       "code": {
-        "startLine": 42,
+        "startLine": 101,
         "length": 24,
-        "offset": 58,
-        "surroundingCode": "\n        for (String key : keys) {\n            Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class );\n            for (FusionPrototypeSignature signature : prototypes) {\n                if (signature.getType() != null) {"
+        "offset": 139,
+        "surroundingCode": "        // find all prototypes that have the name of this instance\n        List<PsiElement> result = new ArrayList<>();\n        Collection<FusionPrototypeSignature> possiblePrototypes = StubIndex.getElements(\n                FusionPrototypeDeclarationIndex.KEY,\n                name,"
       }
     }
   ],
@@ -29,7 +61,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "019fbe3d95c97f753ddde4967f69568f929ccf3935b6b0a6abb0228d1ce5da88"
+  "hash": "05b64ceb5705118d3b6c49f34920eb64f602741ee992795949737d4d6177d27e"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -39,21 +71,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionValueDsl",
+  "comment": "Unresolved reference FusionPropertyCopy",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/patterns/FusionPatterns.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionCopiedPrototypeSignatureImplMixin.java",
       "language": "JAVA",
-      "line": 24,
-      "offset": 43,
-      "length": 14,
+      "line": 36,
+      "offset": 55,
+      "length": 18,
       "code": {
-        "startLine": 22,
-        "length": 14,
-        "offset": 133,
-        "surroundingCode": "import com.intellij.patterns.PlatformPatterns;\nimport com.intellij.util.ProcessingContext;\nimport de.vette.idea.neos.lang.fusion.psi.FusionValueDsl;\nimport de.vette.idea.neos.lang.fusion.patterns.FusionElementPattern.Capture;\nimport de.vette.idea.neos.lang.fusion.psi.FusionValueDslContent;"
+        "startLine": 34,
+        "length": 18,
+        "offset": 183,
+        "surroundingCode": "                || (isSingleElementInPathAtFileRoot()\n                && (getParent().getParent() instanceof FusionPropertyBlock\n                || getParent().getParent() instanceof FusionPropertyCopy));\n    }\n"
       }
     }
   ],
@@ -61,7 +93,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "2d95e110a47f821c585eb4e076d9264cd61a4537acf7f106059deeafc04f09c9"
+  "hash": "0aa5f763e631214da01bff14ae75e9194d2d7da19a5882d468f03b30e6c22115"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -71,21 +103,373 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference EelLexer",
+  "comment": "Unresolved reference FusionPropertyBlock",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelLexerAdapter.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionCopiedPrototypeSignatureImplMixin.java",
+      "language": "JAVA",
+      "line": 35,
+      "offset": 56,
+      "length": 19,
+      "code": {
+        "startLine": 33,
+        "length": 19,
+        "offset": 149,
+        "surroundingCode": "        return isSingleLineDefinition()\n                || (isSingleElementInPathAtFileRoot()\n                && (getParent().getParent() instanceof FusionPropertyBlock\n                || getParent().getParent() instanceof FusionPropertyCopy));\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "0b125e80e997e80c2a9182beef551d030f17af37c2d6a5662479af0faefee06c"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionType",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/resolve/ResolveEngine.java",
+      "language": "JAVA",
+      "line": 85,
+      "offset": 82,
+      "length": 10,
+      "code": {
+        "startLine": 83,
+        "length": 10,
+        "offset": 95,
+        "surroundingCode": "\n    @NotNull\n    public static Collection<PsiElement> getNodeTypeDefinitions(Project project, FusionType type) {\n        String instanceName = type.getUnqualifiedType().getText();\n        String instanceNs = null;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "14e44f9335d15ffbcdfe919a16bc1bc96b708d16d9335ce82d6ac4cc2fb03ed8"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference EelCompositeIdentifier",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/psi/impl/ext/EelCompositeIdentifierImplMixin.java",
+      "language": "JAVA",
+      "line": 10,
+      "offset": 89,
+      "length": 22,
+      "code": {
+        "startLine": 8,
+        "length": 22,
+        "offset": 131,
+        "surroundingCode": "import org.jetbrains.annotations.NotNull;\n\npublic abstract class EelCompositeIdentifierImplMixin extends EelElementImpl implements EelCompositeIdentifier {\n\n    public EelCompositeIdentifierImplMixin(@NotNull ASTNode astNode) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "20de25dd4efe5f24c2c2113151974b8044ff9fd74b890df3e977d7c0330510d1"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference EelCompositeIdentifier",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/eel/psi/impl/ext/EelCompositeIdentifierImplMixin.java",
+      "language": "JAVA",
+      "line": 4,
+      "offset": 40,
+      "length": 22,
+      "code": {
+        "startLine": 2,
+        "length": 22,
+        "offset": 74,
+        "surroundingCode": "\nimport com.intellij.lang.ASTNode;\nimport de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;\nimport de.vette.idea.neos.lang.eel.psi.impl.EelElementImpl;\nimport de.vette.idea.neos.lang.eel.resolve.ref.EelCompositeIdentifierReference;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "39a0e63fea001007d1dc0ca175fa721849a85e1bd116ede0813cee677abc3b59"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionNamespaceDeclarationImplMixin.java",
+      "language": "JAVA",
+      "line": 32,
+      "offset": 135,
+      "length": 26,
+      "code": {
+        "startLine": 30,
+        "length": 26,
+        "offset": 178,
+        "surroundingCode": "import org.jetbrains.annotations.Nullable;\n\npublic abstract class FusionNamespaceDeclarationImplMixin extends FusionStubbedElementImpl<FusionNamespaceDeclarationStub> implements FusionNamespaceDeclaration {\n\n    public FusionNamespaceDeclarationImplMixin(@NotNull ASTNode node) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "3b0075bf8b2b61677afbeeccc999483e0cd8175e4be8cf0b89a884271ef841b1"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionPrototypeSignature",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionPathImplMixin.java",
+      "language": "JAVA",
+      "line": 55,
+      "offset": 40,
+      "length": 24,
+      "code": {
+        "startLine": 53,
+        "length": 24,
+        "offset": 83,
+        "surroundingCode": "    @Override\n    public String getName() {\n        if (getFirstChild() instanceof FusionPrototypeSignature) {\n            FusionPrototypeSignature signature = ((FusionPrototypeSignature) getFirstChild());\n            if (signature.getType() != null) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "4a476e8ef83d6174293bcd03365d8fbdc1e976b70d346ab84ca4f1d99facb06b"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionNamespaceDeclarationImplMixin.java",
+      "language": "JAVA",
+      "line": 25,
+      "offset": 43,
+      "length": 26,
+      "code": {
+        "startLine": 23,
+        "length": 26,
+        "offset": 144,
+        "surroundingCode": "import com.intellij.psi.stubs.IStubElementType;\nimport com.intellij.util.IncorrectOperationException;\nimport de.vette.idea.neos.lang.fusion.psi.FusionNamespaceDeclaration;\nimport de.vette.idea.neos.lang.fusion.psi.impl.FusionStubbedElementImpl;\nimport de.vette.idea.neos.lang.fusion.stubs.FusionNamespaceDeclarationStub;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "4cf9da5f6a76e537fcaf385de21c09ad9c5d77ff94e511c58f1caafacdaa5d2a"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionPrototypeSignature",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionPrototypeDeclarationIndex.java",
+      "language": "JAVA",
+      "line": 27,
+      "offset": 40,
+      "length": 24,
+      "code": {
+        "startLine": 25,
+        "length": 24,
+        "offset": 146,
+        "surroundingCode": "public class FusionPrototypeDeclarationIndex extends StringStubIndexExtension<FusionPrototypeSignature> {\n\n    public static StubIndexKey<String, FusionPrototypeSignature> KEY = StubIndexKey.createIndexKey(\"de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex\");\n\n    @NotNull"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "52baaab06628bff6ea036741b725842295ac68aa696192a9ca1316accc613db5"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionPrototypeSignature",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/resolve/ResolveEngine.java",
+      "language": "JAVA",
+      "line": 111,
+      "offset": 14,
+      "length": 24,
+      "code": {
+        "startLine": 109,
+        "length": 24,
+        "offset": 96,
+        "surroundingCode": "\n        // check for each prototype if the namespace matches by resolving aliases\n        for (FusionPrototypeSignature possiblePrototype : possiblePrototypes) {\n            FusionType prototypeType = possiblePrototype.getType();\n            if (prototypeType != null) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "544fff6333809ca039a551af51ee858c41127dc9fea08cb8448c7a8e8dbbbddb"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionPrototypeSignature",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionPrototypeDeclarationIndex.java",
+      "language": "JAVA",
+      "line": 31,
+      "offset": 33,
+      "length": 24,
+      "code": {
+        "startLine": 29,
+        "length": 24,
+        "offset": 59,
+        "surroundingCode": "    @NotNull\n    @Override\n    public StubIndexKey<String, FusionPrototypeSignature> getKey() {\n        return KEY;\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "62e2190126f26aec854c930dd4eb84f90a099cc04314ced540ca32f726312b4f"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionNamespaceDeclarationIndex.java",
+      "language": "JAVA",
+      "line": 27,
+      "offset": 40,
+      "length": 26,
+      "code": {
+        "startLine": 25,
+        "length": 26,
+        "offset": 148,
+        "surroundingCode": "public class FusionNamespaceDeclarationIndex extends StringStubIndexExtension<FusionNamespaceDeclaration> {\n\n    public static StubIndexKey<String, FusionNamespaceDeclaration> KEY = StubIndexKey.createIndexKey(\"de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex\");\n\n    @NotNull"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "QodanaJavaSanity"
+  },
+  "hash": "70ebe22558611094effb81cefc7c3c68dfe4f4edf8a93d031a0ff056ffb6e284"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java sanity",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unresolved reference FusionCopiedPrototypeSignature",
+  "detailsInfo": "Reports unresolved references in Java code.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionCopiedPrototypeSignatureImplMixin.java",
       "language": "JAVA",
       "line": 26,
-      "offset": 19,
-      "length": 8,
+      "offset": 100,
+      "length": 30,
       "code": {
         "startLine": 24,
-        "length": 8,
-        "offset": 100,
-        "surroundingCode": "public class EelLexerAdapter extends FlexAdapter {\n    public EelLexerAdapter() {\n        super(new EelLexer());\n    }\n}"
+        "length": 30,
+        "offset": 142,
+        "surroundingCode": "import org.jetbrains.annotations.NotNull;\n\npublic abstract class FusionCopiedPrototypeSignatureImplMixin extends FusionElementImpl implements FusionCopiedPrototypeSignature {\n\n    public FusionCopiedPrototypeSignatureImplMixin(@NotNull ASTNode astNode) {"
       }
     }
   ],
@@ -93,7 +477,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "2e466fe7f89038fd5e2def1237ac0ce575caed6df8838aae47990d401c02d7d2"
+  "hash": "78d605767b3288568130f39b0cd460d24d5558e3617db91794ef403f286ead54"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -103,21 +487,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference EelLexer",
+  "comment": "Unresolved reference FusionPrototypeSignature",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelLexerAdapter.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionPrototypeDeclarationIndex.java",
       "language": "JAVA",
       "line": 22,
       "offset": 43,
-      "length": 8,
+      "length": 24,
       "code": {
         "startLine": 20,
-        "length": 8,
-        "offset": 82,
-        "surroundingCode": "\nimport com.intellij.lexer.FlexAdapter;\nimport de.vette.idea.neos.lang.eel.parser.EelLexer;\n\npublic class EelLexerAdapter extends FlexAdapter {"
+        "length": 24,
+        "offset": 142,
+        "surroundingCode": "import com.intellij.psi.stubs.StringStubIndexExtension;\nimport com.intellij.psi.stubs.StubIndexKey;\nimport de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;\nimport org.jetbrains.annotations.NotNull;\n"
       }
     }
   ],
@@ -125,7 +509,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "2e5ad5bb1cfbbee69e0f403e6a976c18a7fa4de5227f8fb77d721bb8b2d79ce3"
+  "hash": "7c827a3df7e4805a39d768cfb4ce1fe14fa467410b638f1821a22ff4a65b3790"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -135,21 +519,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference parser",
+  "comment": "Unresolved reference FusionPrototypeSignature",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelLexerAdapter.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionPathImplMixin.java",
       "language": "JAVA",
-      "line": 22,
-      "offset": 36,
-      "length": 6,
+      "line": 56,
+      "offset": 13,
+      "length": 24,
       "code": {
-        "startLine": 20,
-        "length": 6,
-        "offset": 75,
-        "surroundingCode": "\nimport com.intellij.lexer.FlexAdapter;\nimport de.vette.idea.neos.lang.eel.parser.EelLexer;\n\npublic class EelLexerAdapter extends FlexAdapter {"
+        "startLine": 54,
+        "length": 24,
+        "offset": 109,
+        "surroundingCode": "    public String getName() {\n        if (getFirstChild() instanceof FusionPrototypeSignature) {\n            FusionPrototypeSignature signature = ((FusionPrototypeSignature) getFirstChild());\n            if (signature.getType() != null) {\n                return signature.getType().getText();"
       }
     }
   ],
@@ -157,7 +541,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "30cfdd26e4380e1b05e2a64d400c0317b31b545e2b3a6b113600c786ab36fba8"
+  "hash": "8e6b7d89c16737af996387f521a77e6902098b58a3b69cfba32b8fdd726af3b4"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -167,21 +551,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference parser",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelParserDefinition.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionNamespaceDeclarationIndex.java",
       "language": "JAVA",
-      "line": 34,
-      "offset": 36,
-      "length": 6,
+      "line": 25,
+      "offset": 79,
+      "length": 26,
       "code": {
-        "startLine": 32,
-        "length": 6,
-        "offset": 132,
-        "surroundingCode": "import de.vette.idea.neos.lang.eel.psi.EelFile;\nimport de.vette.idea.neos.lang.eel.psi.EelTypes;\nimport de.vette.idea.neos.lang.eel.parser.EelParser;\nimport de.vette.idea.neos.lang.eel.stubs.EelFileStub;\nimport org.jetbrains.annotations.NotNull;"
+        "startLine": 23,
+        "length": 26,
+        "offset": 121,
+        "surroundingCode": "import org.jetbrains.annotations.NotNull;\n\npublic class FusionNamespaceDeclarationIndex extends StringStubIndexExtension<FusionNamespaceDeclaration> {\n\n    public static StubIndexKey<String, FusionNamespaceDeclaration> KEY = StubIndexKey.createIndexKey(\"de.vette.idea.neos.lang.fusion.stubs.index.FusionNamespaceDeclarationIndex\");"
       }
     }
   ],
@@ -189,7 +573,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "30f7985586efe4f307518ca45b4ff96aa7c77462c0b31c67fc7eb5796efdf3eb"
+  "hash": "907956e6fa363e2a7e61e8de11752b048ef0cf229a3e6e48c2ed90cc8b0dee77"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -199,21 +583,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionValueDslContent",
+  "comment": "Unresolved reference FusionPath",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/patterns/FusionPatterns.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/psi/impl/ext/FusionCopiedPrototypeSignatureImplMixin.java",
       "language": "JAVA",
-      "line": 26,
-      "offset": 43,
-      "length": 21,
+      "line": 47,
+      "offset": 39,
+      "length": 10,
       "code": {
-        "startLine": 24,
-        "length": 21,
-        "offset": 177,
-        "surroundingCode": "import de.vette.idea.neos.lang.fusion.psi.FusionValueDsl;\nimport de.vette.idea.neos.lang.fusion.patterns.FusionElementPattern.Capture;\nimport de.vette.idea.neos.lang.fusion.psi.FusionValueDslContent;\nimport org.jetbrains.annotations.Nullable;\n"
+        "startLine": 45,
+        "length": 10,
+        "offset": 97,
+        "surroundingCode": "\n    protected boolean isSingleElementInPathAtFileRoot() {\n        return getParent() instanceof FusionPath\n                && ((FusionPath) getParent()).isPrototypeSignature()\n                && getParent().getParent().getParent() instanceof FusionFile;"
       }
     }
   ],
@@ -221,7 +605,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "535a9fcf0dd6f9274f267446259d7a2f7bd55b5854809fb792a9ff8d9ad31b84"
+  "hash": "c8fbed9d30a8afccb0d56c6a9d6cb67c83a9e37adbbd15ee919590e33f0e5665"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -231,21 +615,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionPrototypeInstance",
+  "comment": "Unresolved reference FusionPrototypeSignature",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/util/NeosUtil.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/resolve/ResolveEngine.java",
       "language": "JAVA",
       "line": 108,
-      "offset": 34,
-      "length": 23,
+      "offset": 17,
+      "length": 24,
       "code": {
         "startLine": 106,
-        "length": 23,
-        "offset": 161,
-        "surroundingCode": "        while(!(parent instanceof FusionFile) && parent != null) {\n            if (parent instanceof FusionPrototypeInstance) {\n                prototypes.add(((FusionPrototypeInstance) parent).getType().getText());\n                return prototypes;\n            }"
+        "length": 24,
+        "offset": 98,
+        "surroundingCode": "                project,\n                GlobalSearchScope.projectScope(project),\n                FusionPrototypeSignature.class);\n\n        // check for each prototype if the namespace matches by resolving aliases"
       }
     }
   ],
@@ -253,71 +637,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "5a87d82f776c9119edceb5c21b1cc490f943f6074023913fe3ed0dd60aa48dd6"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionValueDslContent",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/patterns/FusionPatterns.java",
-      "language": "JAVA",
-      "line": 32,
-      "offset": 56,
-      "length": 21,
-      "code": {
-        "startLine": 30,
-        "length": 21,
-        "offset": 137,
-        "surroundingCode": "\n    public static FusionElementPattern fusionValueDsl(final String identifier) {\n        return new Capture(new InitialPatternCondition<FusionValueDslContent>(FusionValueDslContent.class) {\n            public boolean accepts(@Nullable Object o, ProcessingContext context) {\n                if (o instanceof FusionValueDslContent) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "6b5229e24ee6ffb039590b81336dd52ed13f65c91d89bb4fc81ddc5e20201497"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionTypes",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/completion/FusionCompletionContributor.java",
-      "language": "JAVA",
-      "line": 23,
-      "offset": 43,
-      "length": 11,
-      "code": {
-        "startLine": 21,
-        "length": 11,
-        "offset": 167,
-        "surroundingCode": "import com.intellij.codeInsight.completion.CompletionContributor;\nimport com.intellij.codeInsight.completion.CompletionType;\nimport de.vette.idea.neos.lang.fusion.psi.FusionTypes;\n\nimport static com.intellij.patterns.PlatformPatterns.psiElement;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "780fdd5aca66407b3c9d00b0a35dedc89ab670ee30ff10404960c28558bfbbc9"
+  "hash": "cefa7a47e391fa34338146b9f1d07604921a81d2f6b210796a634aefbd88d489"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -332,144 +652,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/completion/PrototypeProvider.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionPrototypeDeclarationIndex.java",
       "language": "JAVA",
-      "line": 30,
-      "offset": 43,
-      "length": 24,
-      "code": {
-        "startLine": 28,
-        "length": 24,
-        "offset": 143,
-        "surroundingCode": "import com.intellij.util.ProcessingContext;\nimport de.vette.idea.neos.lang.fusion.icons.FusionIcons;\nimport de.vette.idea.neos.lang.fusion.psi.FusionPrototypeSignature;\nimport de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex;\nimport org.jetbrains.annotations.NotNull;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "83d0ab608ea1c7b3d43079f19a0718e0034fecfac0307d2926d7a4356b462f9e"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionValueDslContent",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/patterns/FusionPatterns.java",
-      "language": "JAVA",
-      "line": 32,
+      "line": 25,
       "offset": 79,
-      "length": 21,
-      "code": {
-        "startLine": 30,
-        "length": 21,
-        "offset": 160,
-        "surroundingCode": "\n    public static FusionElementPattern fusionValueDsl(final String identifier) {\n        return new Capture(new InitialPatternCondition<FusionValueDslContent>(FusionValueDslContent.class) {\n            public boolean accepts(@Nullable Object o, ProcessingContext context) {\n                if (o instanceof FusionValueDslContent) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "89519a27eab0b0f5ed8afd58aef1d590d29008e125a8714c374acb0f47357de3"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionTypes",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/FusionParserDefinition.java",
-      "language": "JAVA",
-      "line": 34,
-      "offset": 43,
-      "length": 11,
-      "code": {
-        "startLine": 32,
-        "length": 11,
-        "offset": 155,
-        "surroundingCode": "import de.vette.idea.neos.lang.fusion.parser.FusionParser;\nimport de.vette.idea.neos.lang.fusion.psi.FusionFile;\nimport de.vette.idea.neos.lang.fusion.psi.FusionTypes;\nimport de.vette.idea.neos.lang.fusion.stubs.FusionFileStub;\nimport org.jetbrains.annotations.NotNull;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "ab93044eaf083a0aa8adf7aee8afc0ff0bd273a6f798801d21de46c97eecd259"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference EelTypes",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/eel/EelParserDefinition.java",
-      "language": "JAVA",
-      "line": 33,
-      "offset": 40,
-      "length": 8,
-      "code": {
-        "startLine": 31,
-        "length": 8,
-        "offset": 126,
-        "surroundingCode": "import com.intellij.psi.tree.TokenSet;\nimport de.vette.idea.neos.lang.eel.psi.EelFile;\nimport de.vette.idea.neos.lang.eel.psi.EelTypes;\nimport de.vette.idea.neos.lang.eel.parser.EelParser;\nimport de.vette.idea.neos.lang.eel.stubs.EelFileStub;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "afb6c6fe9a8d9dfb4d69a059710fe3163344d7bcc6776caddfe925bdac590d97"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionPrototypeSignature",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/completion/PrototypeProvider.java",
-      "language": "JAVA",
-      "line": 44,
-      "offset": 177,
       "length": 24,
       "code": {
-        "startLine": 42,
+        "startLine": 23,
         "length": 24,
-        "offset": 211,
-        "surroundingCode": "\n        for (String key : keys) {\n            Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class );\n            for (FusionPrototypeSignature signature : prototypes) {\n                if (signature.getType() != null) {"
+        "offset": 121,
+        "surroundingCode": "import org.jetbrains.annotations.NotNull;\n\npublic class FusionPrototypeDeclarationIndex extends StringStubIndexExtension<FusionPrototypeSignature> {\n\n    public static StubIndexKey<String, FusionPrototypeSignature> KEY = StubIndexKey.createIndexKey(\"de.vette.idea.neos.lang.fusion.stubs.index.FusionPrototypeDeclarationIndex\");"
       }
     }
   ],
@@ -477,7 +669,7 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "bb005f9521077477c1e9542b93d300eddec4e919837136e8b23afa2abda34ff0"
+  "hash": "f1471814889eefc6755570db4cf3d657aa347170e2bb0c9b7386b1c7cf9e8956"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -487,21 +679,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unresolved reference FusionPrototypeInstance",
+  "comment": "Unresolved reference FusionNamespaceDeclaration",
   "detailsInfo": "Reports unresolved references in Java code.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/util/NeosUtil.java",
+      "path": "src/main/java/de/vette/idea/neos/lang/fusion/stubs/index/FusionNamespaceDeclarationIndex.java",
       "language": "JAVA",
-      "line": 107,
-      "offset": 35,
-      "length": 23,
+      "line": 31,
+      "offset": 33,
+      "length": 26,
       "code": {
-        "startLine": 105,
-        "length": 23,
-        "offset": 146,
-        "surroundingCode": "        PsiElement parent = psi.getParent();\n        while(!(parent instanceof FusionFile) && parent != null) {\n            if (parent instanceof FusionPrototypeInstance) {\n                prototypes.add(((FusionPrototypeInstance) parent).getType().getText());\n                return prototypes;"
+        "startLine": 29,
+        "length": 26,
+        "offset": 59,
+        "surroundingCode": "    @NotNull\n    @Override\n    public StubIndexKey<String, FusionNamespaceDeclaration> getKey() {\n        return KEY;\n    }"
       }
     }
   ],
@@ -509,197 +701,5 @@
     "module": "Intellij_Neos.main",
     "inspectionName": "QodanaJavaSanity"
   },
-  "hash": "bfe3f74a00d4e1bd98f560359662253c75c8e8de42a84227e42ce80fe3f74c39"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionParser",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/FusionParserDefinition.java",
-      "language": "JAVA",
-      "line": 32,
-      "offset": 46,
-      "length": 12,
-      "code": {
-        "startLine": 30,
-        "length": 12,
-        "offset": 131,
-        "surroundingCode": "import com.intellij.psi.tree.IFileElementType;\nimport com.intellij.psi.tree.TokenSet;\nimport de.vette.idea.neos.lang.fusion.parser.FusionParser;\nimport de.vette.idea.neos.lang.fusion.psi.FusionFile;\nimport de.vette.idea.neos.lang.fusion.psi.FusionTypes;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "c3c27507afd9a9e0865e432c07b8f553801d163d8cd10d7cbf5a8f3c6bc78d23"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionPropertyCopy",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/util/NeosUtil.java",
-      "language": "JAVA",
-      "line": 112,
-      "offset": 35,
-      "length": 18,
-      "code": {
-        "startLine": 110,
-        "length": 18,
-        "offset": 49,
-        "surroundingCode": "            }\n\n            if (parent instanceof FusionPropertyCopy) {\n                FusionPropertyCopy copy = (FusionPropertyCopy) parent;\n                FusionPath path = copy.getPath();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "cb81dd70503104d5a3174507dc6f9fcfbe57b2c6620019bae30e660163be0d1d"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference EelTypes",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/eel/highlighting/EelSyntaxHighlighter.java",
-      "language": "JAVA",
-      "line": 26,
-      "offset": 40,
-      "length": 8,
-      "code": {
-        "startLine": 24,
-        "length": 8,
-        "offset": 134,
-        "surroundingCode": "import com.intellij.psi.tree.IElementType;\nimport de.vette.idea.neos.lang.eel.EelLexerAdapter;\nimport de.vette.idea.neos.lang.eel.psi.EelTypes;\nimport de.vette.idea.neos.lang.fusion.highlighting.FusionHighlightingColors;\nimport org.jetbrains.annotations.NotNull;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "d7b812ac2d61a01a74212c2a5d315784b8d6610ea605d4b5e01b5f76a4f1e143"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionPrototypeSignature",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/completion/PrototypeProvider.java",
-      "language": "JAVA",
-      "line": 45,
-      "offset": 18,
-      "length": 24,
-      "code": {
-        "startLine": 43,
-        "length": 24,
-        "offset": 261,
-        "surroundingCode": "        for (String key : keys) {\n            Collection<FusionPrototypeSignature> prototypes = StubIndex.getElements(FusionPrototypeDeclarationIndex.KEY, key, project, GlobalSearchScope.projectScope(project), FusionPrototypeSignature.class );\n            for (FusionPrototypeSignature signature : prototypes) {\n                if (signature.getType() != null) {\n                    result.addElement(LookupElementBuilder.create(signature.getType().getText()).withIcon(FusionIcons.PROTOTYPE));"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "ec95842579d9b1bdfa85ffba0df174a4e9ed7721b3975c9b0f480d0f9dd39a0d"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionPropertyCopy",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/util/NeosUtil.java",
-      "language": "JAVA",
-      "line": 113,
-      "offset": 17,
-      "length": 18,
-      "code": {
-        "startLine": 111,
-        "length": 18,
-        "offset": 73,
-        "surroundingCode": "\n            if (parent instanceof FusionPropertyCopy) {\n                FusionPropertyCopy copy = (FusionPropertyCopy) parent;\n                FusionPath path = copy.getPath();\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "f1562135ae41368b60faae3b774883aea299f439399ca545540510f682330925"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java sanity",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Unresolved reference FusionParser",
-  "detailsInfo": "Reports unresolved references in Java code.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/fusion/FusionParserDefinition.java",
-      "language": "JAVA",
-      "line": 50,
-      "offset": 20,
-      "length": 12,
-      "code": {
-        "startLine": 48,
-        "length": 12,
-        "offset": 86,
-        "surroundingCode": "    @Override\n    public PsiParser createParser(Project project) {\n        return new FusionParser();\n    }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "QodanaJavaSanity"
-  },
-  "hash": "f64a92c171b82ebfcedaf12ee000ca59adc49cffea6c3933db2dfc19f6319a7f"
+  "hash": "f93078f647c14374f25495b5ee9d6fc9b6de8271daf6f440ec69c1fef90f0629"
 }]}
