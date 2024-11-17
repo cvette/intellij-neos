@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:7.14.0",
-      "gradleName": "io.sentry:sentry:7.14.0",
+      "ideaName": "Gradle: io.sentry:sentry:7.17.0",
+      "gradleName": "io.sentry:sentry:7.17.0",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "7.14.0"
+      "version": "7.17.0"
     },
     {
       "ideaName": "Gradle: org.apache.commons:commons-text:1.12.0",
@@ -34,36 +34,36 @@
       "version": "1.12.0"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.css:2023.3.7+68",
-      "gradleName": "bundledPlugin:com.intellij.css:2023.3.7+68",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.css:2023.3.7+486",
+      "gradleName": "bundledPlugin:com.intellij.css:2023.3.7+486",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.css",
-      "version": "2023.3.7+68"
+      "version": "2023.3.7+486"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.7+561",
-      "gradleName": "bundledPlugin:org.jetbrains.plugins.yaml:2023.3.7+561",
+      "ideaName": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.7+433",
+      "gradleName": "bundledPlugin:org.jetbrains.plugins.yaml:2023.3.7+433",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "org.jetbrains.plugins.yaml",
-      "version": "2023.3.7+561"
+      "version": "2023.3.7+433"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.7+895",
-      "gradleName": "bundledPlugin:com.intellij.java-i18n:2023.3.7+895",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.7+193",
+      "gradleName": "bundledPlugin:com.intellij.java-i18n:2023.3.7+193",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.java-i18n",
-      "version": "2023.3.7+895"
+      "version": "2023.3.7+193"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.properties:2023.3.7+699",
-      "gradleName": "bundledPlugin:com.intellij.properties:2023.3.7+699",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.properties:2023.3.7+611",
+      "gradleName": "bundledPlugin:com.intellij.properties:2023.3.7+611",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.properties",
-      "version": "2023.3.7+699"
+      "version": "2023.3.7+611"
     },
     {
       "ideaName": "Gradle: com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
@@ -98,44 +98,44 @@
       "version": "3.14.0"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:XPathView:233.15325.26+555",
-      "gradleName": "bundledPlugin:XPathView:233.15325.26+555",
+      "ideaName": "Gradle: bundledPlugin:XPathView:233.15325.26+963",
+      "gradleName": "bundledPlugin:XPathView:233.15325.26+963",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "XPathView",
-      "version": "233.15325.26+555"
+      "version": "233.15325.26+963"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.platform.images:233.15325.26+792",
-      "gradleName": "bundledPlugin:com.intellij.platform.images:233.15325.26+792",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.platform.images:233.15325.26+874",
+      "gradleName": "bundledPlugin:com.intellij.platform.images:233.15325.26+874",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.platform.images",
-      "version": "233.15325.26+792"
+      "version": "233.15325.26+874"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.copyright:233.15325.26+667",
-      "gradleName": "bundledPlugin:com.intellij.copyright:233.15325.26+667",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.copyright:233.15325.26+369",
+      "gradleName": "bundledPlugin:com.intellij.copyright:233.15325.26+369",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.copyright",
-      "version": "233.15325.26+667"
+      "version": "233.15325.26+369"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:training:233.15325.26+730",
-      "gradleName": "bundledPlugin:training:233.15325.26+730",
+      "ideaName": "Gradle: bundledPlugin:training:233.15325.26+936",
+      "gradleName": "bundledPlugin:training:233.15325.26+936",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "training",
-      "version": "233.15325.26+730"
+      "version": "233.15325.26+936"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15325.26+278",
-      "gradleName": "bundledPlugin:com.jetbrains.performancePlugin:233.15325.26+278",
+      "ideaName": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15325.26+888",
+      "gradleName": "bundledPlugin:com.jetbrains.performancePlugin:233.15325.26+888",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.jetbrains.performancePlugin",
-      "version": "233.15325.26+278"
+      "version": "233.15325.26+888"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant-launcher:1.10.12",
