@@ -4,3 +4,4 @@
 src/gen
 build/
 out/
+.intellijPlatform
