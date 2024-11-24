@@ -82,7 +82,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:7.18.0",
+          "name": "Gradle: io.sentry:sentry:7.17.0",
           "type": "Library"
         },
         {
@@ -90,31 +90,31 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.7+481",
+          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+832",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.7+486",
+          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.7+433",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+80",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.7+30",
+          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+483",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.7+193",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+784",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.7+611",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+844",
           "type": "Library"
         },
         {
-          "name": "Gradle: idea:ideaIU:2023.3.7",
+          "name": "Gradle: idea:ideaIU:2023.3.8",
           "type": "Library"
         },
         {
@@ -142,23 +142,23 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:XPathView:233.15325.26+963",
+          "name": "Gradle: bundledPlugin:XPathView:233.15619.7+684",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15325.26+874",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+769",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15325.26+369",
+          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+778",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:training:233.15325.26+936",
+          "name": "Gradle: bundledPlugin:training:233.15619.7+831",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15325.26+888",
+          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+873",
           "type": "Library"
         },
         {
@@ -166,7 +166,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:Git4Idea:233.15325.26+531",
+          "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+938",
           "type": "Library"
         }
       ]
@@ -201,7 +201,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:7.18.0",
+          "name": "Gradle: io.sentry:sentry:7.17.0",
           "type": "Library"
         },
         {
@@ -209,31 +209,31 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.7+481",
+          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+832",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.7+486",
+          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.7+433",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+80",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.7+30",
+          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+483",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.7+193",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+784",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.7+611",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+844",
           "type": "Library"
         },
         {
-          "name": "Gradle: idea:ideaIU:2023.3.7",
+          "name": "Gradle: idea:ideaIU:2023.3.8",
           "type": "Library"
         },
         {
@@ -249,7 +249,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework:233.15325.26",
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework:233.15619.7",
           "type": "Library"
         },
         {
@@ -261,31 +261,31 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:XPathView:233.15325.26+963",
+          "name": "Gradle: bundledPlugin:XPathView:233.15619.7+684",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15325.26+874",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+769",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15325.26+369",
+          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+778",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:training:233.15325.26+936",
+          "name": "Gradle: bundledPlugin:training:233.15619.7+831",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15325.26+888",
+          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+873",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:233.15325.26",
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:233.15619.7",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:233.15325.26",
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:233.15619.7",
           "type": "Library"
         },
         {
@@ -293,11 +293,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:Git4Idea:233.15325.26+531",
+          "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+938",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.tools:tests-bootstrap:233.15325.26",
+          "name": "Gradle: com.jetbrains.intellij.tools:tests-bootstrap:233.15619.7",
           "type": "Library"
         },
         {
