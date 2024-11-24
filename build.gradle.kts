@@ -10,7 +10,7 @@ plugins {
     id("java-library")
 
     alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
-    alias(libs.plugins.gradleGrammarkitPlugin) // Gradle Grammar-Kit Plugin
+    alias(libs.plugins.grammarKit) // Gradle Grammar-Kit Plugin
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
@@ -32,6 +32,12 @@ repositories {
 idea {
     module {
         generatedSourceDirs.add(file("src/gen"))
+    }
+}
+
+sourceSets {
+    main {
+        java.srcDirs("src/gen")
     }
 }
 
@@ -57,13 +63,6 @@ dependencies {
         testFramework(TestFrameworkType.Platform)
     }
 }
-
-sourceSets {
-    main {
-        java.srcDirs("src/gen")
-    }
-}
-
 
 // Configure IntelliJ Platform Gradle Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html
 intellijPlatform {
@@ -185,21 +184,33 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
+
+    initializeIntellijPlatformPlugin {
+        dependsOn(generateEelLexer)
+        dependsOn(generateAfxLexer)
+        dependsOn(generateFusionLexer)
+        dependsOn(generateEelParser)
+        dependsOn(generateFusionParser)
+    }
 }
 
-val runIdeForUiTests by intellijPlatformTesting.runIde.registering {
-    task {
-        jvmArgumentProviders += CommandLineArgumentProvider {
-            listOf(
-                "-Drobot-server.port=8082",
-                "-Dide.mac.message.dialogs.as.sheets=false",
-                "-Djb.privacy.policy.text=<!--999.999-->",
-                "-Djb.consents.confirmation.enabled=false",
-            )
-        }
-    }
+intellijPlatformTesting {
+    runIde {
+        register("runIdeForUiTests") {
+            task {
+                jvmArgumentProviders += CommandLineArgumentProvider {
+                    listOf(
+                        "-Drobot-server.port=8082",
+                        "-Dide.mac.message.dialogs.as.sheets=false",
+                        "-Djb.privacy.policy.text=<!--999.999-->",
+                        "-Djb.consents.confirmation.enabled=false",
+                    )
+                }
+            }
 
-    plugins {
-        robotServerPlugin()
+            plugins {
+                robotServerPlugin()
+            }
+        }
     }
 }
