@@ -1,0 +1,22 @@
+prototype(My.Package:TestComponent) < prototype(Neos.Fusion:Component) {
+
+    renderer = afx`
+        <span>Hello World</span>
+    `
+}
+
+some.path = afx`<div><span>Hello World</span></div>`
+
+prototype(Vendor.Package:Name1) {
+    
+    some.path = afx`<div><span>Hello World</span></div>`
+
+    prototype(Vendor.Package:Name2) {
+        some.path = afx`
+            <div>
+                <My.Package:TestComponent/>
+            </div>
+
+        `
+    }
+}

@@ -1,0 +1,15 @@
+<caret>
+some.path = afx`<div><<caret>span>Hello World</span></div>`
+
+prototype(Vendor.Package:Name1) {
+    <caret>
+    some.path = afx`<div><<caret>span>Hello World</span></div>`
+
+    prototype(Vendor.Package:Name2) {
+        some.path = afx`
+            <div>
+                <s<caret>pan>Hello World</span>
+            </div>
+        `
+    }
+}

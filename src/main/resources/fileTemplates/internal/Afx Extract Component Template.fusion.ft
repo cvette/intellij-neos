@@ -1,0 +1,6 @@
+prototype(${FUSION_PROTOTYPE_NAME}) < prototype(${FUSION_BASE_PROTOTYPE_NAME}) {
+    ${FUSION_PROPERTIES}
+    renderer = afx`
+        ${FUSION_AFX_CONTENT}
+    `
+}
