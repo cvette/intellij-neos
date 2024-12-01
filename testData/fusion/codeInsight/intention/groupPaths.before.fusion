@@ -1,0 +1,5 @@
+renderer.@process.processor1 = Vendor.Package:StringProcessor
+renderer.@process<caret>.processor2 = ${props.prefix + value}
+renderer.@process {
+    processor3 = ${value + props.suffix}
+}

@@ -1,0 +1,8 @@
+foo {
+    bar = ${value}
+}
+
+foo {
+    bar = ${value1}
+    baz = ${value2}
+}

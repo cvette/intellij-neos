@@ -1,0 +1,2 @@
+renderer.@process.processor1 = Vendor.Package:StringProcessor
+renderer.@process.processor2 = ${props.prefix + value}
