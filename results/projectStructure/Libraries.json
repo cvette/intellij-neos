@@ -29,117 +29,117 @@
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+832",
+      "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+991",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/platform-langInjection/lib/IntelliLang.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/platform-langInjection/lib/java-langInjection-jps.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/platform-langInjection/lib/platform-langInjection.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/platform-langInjection/lib/IntelliLang.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/platform-langInjection/lib/java-langInjection-jps.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/platform-langInjection/lib/platform-langInjection.jar!/"
       ]
     },
     {
-      "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+277",
+      "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+750",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/css-impl/lib/css-impl.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/css-impl/lib/css-impl.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+80",
+      "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+191",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/yaml/lib/yaml.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/yaml/lib/yaml.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+483",
+      "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+594",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/aether-dependency-resolver.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/debugger-memory-agent.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/java-frontback.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/java-impl.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/javac2.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jb-jdi.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jgoodies-common.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-builders.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-builders-6.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-javac-extension.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-launcher.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jshell-frontend.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/jshell-protocol.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/maven-resolver-connector-basic.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/maven-resolver-transport-file.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/maven-resolver-transport-http.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java/lib/sa-jdwp.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/aether-dependency-resolver.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/debugger-memory-agent.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/java-frontback.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/java-impl.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/javac2.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jb-jdi.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jgoodies-common.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-builders.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-builders-6.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-javac-extension.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jps-launcher.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jshell-frontend.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/jshell-protocol.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/maven-resolver-connector-basic.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/maven-resolver-transport-file.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/maven-resolver-transport-http.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java/lib/sa-jdwp.jar!/"
       ]
     },
     {
-      "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+784",
+      "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+991",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/java-i18n/lib/java-i18n.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/java-i18n/lib/java-i18n.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+844",
+      "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+245",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/properties/lib/properties.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/properties/lib/properties.jar!/"
       ],
       "properties": {}
     },
     {
       "name": "Gradle: idea:ideaIU:2023.3.8",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/annotations.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/ant/lib/ant.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/app.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/app-client.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/async-profiler.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/bouncy-castle.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/byte-buddy-agent.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/error-prone-annotations.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/external-system-rt.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/externalProcess-rt.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/forms_rt.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/groovy.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/grpc.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/idea_rt.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/intellij-coverage-agent-1.0.738.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/intellij-test-discovery.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/jps-model.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/jsch-agent.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/lib.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/lib-client.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/modules.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/nio-fs.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/platform-loader.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/product.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/product-client.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/protobuf.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/rd.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/stats.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/util.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/util-8.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/lib/util_rt.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/annotations.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/ant/lib/ant.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/app.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/app-client.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/async-profiler.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/bouncy-castle.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/byte-buddy-agent.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/error-prone-annotations.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/external-system-rt.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/externalProcess-rt.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/forms_rt.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/groovy.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/grpc.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/idea_rt.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/intellij-coverage-agent-1.0.738.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/intellij-test-discovery.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/jps-model.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/jsch-agent.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/lib.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/lib-client.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/modules.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/nio-fs.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/platform-loader.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/product.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/product-client.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/protobuf.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/rd.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/stats.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/util.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/util-8.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/lib/util_rt.jar!/"
       ]
     },
     {
       "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.25",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/d027f1cda8b75906ff9c48a542241474/transformed/com.jetbrains.hackathon.indices.viewer-1.25/iv/lib/instrumented-iv-1.25.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/d027f1cda8b75906ff9c48a542241474/transformed/com.jetbrains.hackathon.indices.viewer-1.25/iv/lib/searchableOptions-1.25.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/5574333e48679833f3a9c515f77464c9/transformed/com.jetbrains.hackathon.indices.viewer-1.25/iv/lib/instrumented-iv-1.25.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/5574333e48679833f3a9c515f77464c9/transformed/com.jetbrains.hackathon.indices.viewer-1.25/iv/lib/searchableOptions-1.25.jar!/"
       ]
     },
     {
       "name": "Gradle: com.jetbrains.plugins:PsiViewer:233.2",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/d9352d5465cfff48ec4afe865a49586f/transformed/PsiViewer-233.2/PsiViewer/lib/instrumented-psiviewer-233.2.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/d9352d5465cfff48ec4afe865a49586f/transformed/PsiViewer-233.2/PsiViewer/lib/searchableOptions-233.2.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/b2fe991ad34fc3e4d12b0f35b2c9c53b/transformed/PsiViewer-233.2/PsiViewer/lib/instrumented-psiviewer-233.2.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/b2fe991ad34fc3e4d12b0f35b2c9c53b/transformed/PsiViewer-233.2/PsiViewer/lib/searchableOptions-233.2.jar!/"
       ]
     },
     {
       "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e6d35bf4e080b670a914d5a88431547d/transformed/com.jetbrains.php-233.11799.300/php-impl/lib/php.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/f4f3606c4db75b298d64d99819c198bf/transformed/com.jetbrains.php-233.11799.300/php-impl/lib/php.jar!/"
       ],
       "properties": {}
     },
@@ -165,37 +165,37 @@
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:XPathView:233.15619.7+684",
+      "name": "Gradle: bundledPlugin:XPathView:233.15619.7+829",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/xpath/lib/xpath.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/xpath/lib/xpath.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+769",
+      "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+274",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/platform-images/lib/platform-images.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/platform-images/lib/platform-images.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+778",
+      "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+743",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/copyright/lib/copyright.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/copyright/lib/copyright.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:training:233.15619.7+831",
+      "name": "Gradle: bundledPlugin:training:233.15619.7+336",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/featuresTrainer/lib/featuresTrainer.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/featuresTrainer/lib/featuresTrainer.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+873",
+      "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+80",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/performanceTesting/lib/performanceTesting.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/performanceTesting/lib/performanceTesting.jar!/"
       ],
       "properties": {}
     },
@@ -207,10 +207,10 @@
       "properties": {}
     },
     {
-      "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+938",
+      "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+941",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/vcs-git/lib/git4idea-rt.jar!/",
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/48c2d08a2117c8e6e9f59020f62e104d/transformed/ideaIU-2023.3.8/plugins/vcs-git/lib/vcs-git.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/vcs-git/lib/git4idea-rt.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/e83f5b97270c74e6ad0b795f854a4dda/transformed/ideaIU-2023.3.8/plugins/vcs-git/lib/vcs-git.jar!/"
       ]
     },
     {

@@ -41,6 +41,12 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
+        },
+        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -56,12 +62,6 @@
               "packagePrefix": ""
             }
           ]
-        },
-        {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -90,27 +90,27 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+832",
+          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+991",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+277",
+          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+750",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+80",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+191",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+483",
+          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+594",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+784",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+991",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+844",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+245",
           "type": "Library"
         },
         {
@@ -142,23 +142,23 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:XPathView:233.15619.7+684",
+          "name": "Gradle: bundledPlugin:XPathView:233.15619.7+829",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+769",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+274",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+778",
+          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+743",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:training:233.15619.7+831",
+          "name": "Gradle: bundledPlugin:training:233.15619.7+336",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+873",
+          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+80",
           "type": "Library"
         },
         {
@@ -166,7 +166,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+938",
+          "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+941",
           "type": "Library"
         }
       ]
@@ -209,27 +209,27 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+832",
+          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:2023.3.8+991",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+277",
+          "name": "Gradle: bundledPlugin:com.intellij.css:2023.3.8+750",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+80",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:2023.3.8+191",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+483",
+          "name": "Gradle: bundledPlugin:com.intellij.java:2023.3.8+594",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+784",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:2023.3.8+991",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+844",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:2023.3.8+245",
           "type": "Library"
         },
         {
@@ -261,23 +261,23 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:XPathView:233.15619.7+684",
+          "name": "Gradle: bundledPlugin:XPathView:233.15619.7+829",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+769",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:233.15619.7+274",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+778",
+          "name": "Gradle: bundledPlugin:com.intellij.copyright:233.15619.7+743",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:training:233.15619.7+831",
+          "name": "Gradle: bundledPlugin:training:233.15619.7+336",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+873",
+          "name": "Gradle: bundledPlugin:com.jetbrains.performancePlugin:233.15619.7+80",
           "type": "Library"
         },
         {
@@ -293,7 +293,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+938",
+          "name": "Gradle: bundledPlugin:Git4Idea:233.15619.7+941",
           "type": "Library"
         },
         {
