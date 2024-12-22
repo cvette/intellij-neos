@@ -1,0 +1,24 @@
+Namespace.Controller.Action = Vendor.Package:Prototype.At.Path {
+    prototype(Vendor.Package:Prototype.OverrideInPath) {
+    }
+}
+
+# Some global comment
+# with multiple lines
+
+# A comment for Prototype.CopiedFrom
+# that can span multiple lines
+prototype(Vendor.Package:Prototype.CopiedFrom) < prototype(Vendor.Package:Example1) {
+}
+
+/**
+ * Comment block for Prototype.WithImplementation
+ */
+prototype(Vendor.Package:Prototype.WithImplementation) {
+    @class = 'Vendor\\Package\\Fusion\\WithImplementationImplementation'
+}
+
+prototype(Vendor.Package:Prototype.Example2) {
+    prototype(Vendor.Package:OverrideInPrototype) {
+    }
+}

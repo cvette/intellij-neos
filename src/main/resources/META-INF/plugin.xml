@@ -168,5 +168,8 @@
       <add-to-group group-id="EditorPopupMenu" anchor="first"/>
       <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
     </action>
+    <action id="de.vette.idea.neos.fusion.refactoring.MovePrototypeToFile" class="de.vette.idea.neos.lang.fusion.refactoring.MovePrototypeToFile" text="Move Prototype">
+      <add-to-group group-id="RefactoringMenu"/>
+    </action>
   </actions>
 </idea-plugin>

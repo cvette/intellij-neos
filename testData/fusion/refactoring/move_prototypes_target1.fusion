@@ -1,0 +1,10 @@
+# A comment for Prototype.CopiedFrom
+# that can span multiple lines
+prototype(Vendor.Package:Prototype.CopiedFrom) < prototype(Vendor.Package:Example1) {
+}
+/**
+ * Comment block for Prototype.WithImplementation
+ */
+prototype(Vendor.Package:Prototype.WithImplementation) {
+    @class = 'Vendor\\Package\\Fusion\\WithImplementationImplementation'
+}

@@ -1,0 +1,14 @@
+Namespace.Controller.Action = Vendor.Package:Prototype.At.Path {
+    prototype(Vendor.Package:Prototype.OverrideInPath) {
+    }
+}
+
+# Some global comment
+# with multiple lines
+
+
+
+prototype(Vendor.Package:Prototype.Example2) {
+    prototype(Vendor.Package:OverrideInPrototype) {
+    }
+}
