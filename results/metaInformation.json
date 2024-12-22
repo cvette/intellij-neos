@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 0,
+  "total": 235,
   "tools inspection": {
-    "Code Inspection": 0
+    "Code Inspection": 235
   },
   "linter": "QDJVMC",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/12382250233",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/12455836027",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "701f17ad8825233dd9a0eb41317b77ff1ff97783",
-        "branch": "dependabot/gradle/org.jetbrains.qodana-2024.3.3"
+        "revisionId": "8e855f7787c8bb2e65ba8b3ed62ba4af89c400c2",
+        "branch": "main"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
