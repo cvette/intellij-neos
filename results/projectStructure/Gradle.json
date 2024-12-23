@@ -1,5 +1,5 @@
 {
-  "gradleJvm": "#USE_PROJECT_JDK",
+  "gradleJvm": "17",
   "libraries": [
     {
       "ideaName": "Gradle: org.jetbrains:grammar-kit:2022.3.2",
