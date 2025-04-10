@@ -82,11 +82,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.7.0",
+          "name": "Gradle: io.sentry:sentry:8.2.0",
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-text:1.12.0",
+          "name": "Gradle: org.apache.commons:commons-text:1.13.1",
           "type": "Library"
         },
         {
@@ -138,7 +138,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-lang3:3.14.0",
+          "name": "Gradle: org.apache.commons:commons-lang3:3.17.0",
           "type": "Library"
         },
         {
@@ -201,11 +201,11 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.7.0",
+          "name": "Gradle: io.sentry:sentry:8.2.0",
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-text:1.12.0",
+          "name": "Gradle: org.apache.commons:commons-text:1.13.1",
           "type": "Library"
         },
         {
@@ -257,7 +257,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-lang3:3.14.0",
+          "name": "Gradle: org.apache.commons:commons-lang3:3.17.0",
           "type": "Library"
         },
         {
