@@ -1,5 +1,5 @@
 {
-  "gradleJvm": "#USE_PROJECT_JDK",
+  "gradleJvm": "17",
   "libraries": [
     {
       "ideaName": "Gradle: org.jetbrains:grammar-kit:2022.3.2",
@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:8.2.0",
-      "gradleName": "io.sentry:sentry:8.2.0",
+      "ideaName": "Gradle: io.sentry:sentry:8.9.0",
+      "gradleName": "io.sentry:sentry:8.9.0",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "8.2.0"
+      "version": "8.9.0"
     },
     {
       "ideaName": "Gradle: org.apache.commons:commons-text:1.12.0",
