@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added refactor action to move Fusion prototypes
+
 ## [1.23.0] - 2024-12-01
 
 ### Added
