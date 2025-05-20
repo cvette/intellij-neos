@@ -11,7 +11,7 @@
   <depends>com.intellij.modules.json</depends>
   <depends>com.jetbrains.php</depends>
   <depends>org.intellij.intelliLang</depends>
-  <depends>org.jetbrains.yaml</depends>
+  <depends>org.jetbrains.plugins.yaml</depends>
   <depends>com.intellij.modules.json</depends>
 
   <projectListeners>
