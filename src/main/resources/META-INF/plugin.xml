@@ -11,8 +11,7 @@
   <depends>com.intellij.modules.json</depends>
   <depends>com.jetbrains.php</depends>
   <depends>org.intellij.intelliLang</depends>
-  <depends>org.jetbrains.yaml</depends>
-  <depends>com.intellij.modules.json</depends>
+  <depends>org.jetbrains.plugins.yaml</depends>
 
   <projectListeners>
     <listener class="de.vette.idea.neos.ComposerUpdateListener" topic="com.jetbrains.php.composer.actions.update.ComposerInstalledPackagesService$ComposerUpdateListener" />
