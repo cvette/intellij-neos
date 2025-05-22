@@ -7,11 +7,11 @@
   "linter": "QDJVMC",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/15184392138",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/15184979907",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "050e77f1b4acc5e1ff62300c4e21ee82947d3933",
+        "revisionId": "c4ea5f75a42e94c5378b483ae358227dfa7c7c7d",
         "branch": "main"
       }
     },
