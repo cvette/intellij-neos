@@ -41,12 +41,6 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
-        },
-        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -62,6 +56,12 @@
               "packagePrefix": ""
             }
           ]
+        },
+        {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -130,7 +130,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:251.23774.466",
           "type": "Library"
         },
         {
@@ -233,7 +233,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:251.23774.466",
           "type": "Library"
         },
         {

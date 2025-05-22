@@ -1,5 +1,5 @@
 {
-  "gradleJvm": "17",
+  "gradleJvm": "#USE_PROJECT_JDK",
   "libraries": [
     {
       "ideaName": "Gradle: org.jetbrains:grammar-kit:2022.3.2",
@@ -48,14 +48,6 @@
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.java-i18n",
       "version": "IU-251.23774.435"
-    },
-    {
-      "ideaName": "Gradle: com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
-      "gradleName": "com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
-      "unresolved": false,
-      "groupId": "com.jetbrains.plugins",
-      "artifactId": "com.jetbrains.php",
-      "version": "233.11799.300"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant:1.10.12",

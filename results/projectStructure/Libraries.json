@@ -148,11 +148,11 @@
       ]
     },
     {
-      "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:233.11799.300",
+      "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:251.23774.466",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/c9ed88e7ec78b86f65b40373785d12a4/transformed/com.jetbrains.php-233.11799.300/php-impl/lib/php.jar!/"
-      ],
-      "properties": {}
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/043d4b2dd850262e1e52d5e0d926863d/transformed/com.jetbrains.php-251.23774.466/php-impl/lib/php.jar!/",
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/8.10.2/transforms/043d4b2dd850262e1e52d5e0d926863d/transformed/com.jetbrains.php-251.23774.466/php-impl/lib/php-frontback.jar!/"
+      ]
     },
     {
       "name": "Gradle: org.apache.ant:ant:1.10.12",
