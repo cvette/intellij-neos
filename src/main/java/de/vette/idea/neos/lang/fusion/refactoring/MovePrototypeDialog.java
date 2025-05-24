@@ -271,12 +271,12 @@ public class MovePrototypeDialog extends RefactoringDialog {
         appendPossibleTargetFiles(items);
         field.getChildComponent().setModel(new DefaultComboBoxModel<String>(items.toArray(String[]::new)));
         String title = FusionBundle.message("refactoring.move.prototype.target.file");
-        FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleLocalFileDescriptor()
+        FileChooserDescriptor descriptor = FileChooserDescriptorFactory.singleFileOrDir()
                 .withFileFilter((file) -> file.getFileType() instanceof LanguageFileType && ((LanguageFileType) file.getFileType()).getLanguage().isKindOf(FusionLanguage.INSTANCE))
                 .withRoots(ProjectRootManager.getInstance(myProject).getContentRoots())
                 .withTreeRootVisible(true)
                 .withTitle(title);
-        field.addBrowseFolderListener(title, null, myProject, descriptor, TextComponentAccessors.TEXT_FIELD_WITH_HISTORY_WHOLE_TEXT);
+        field.addBrowseFolderListener(myProject, descriptor, TextComponentAccessors.TEXT_FIELD_WITH_HISTORY_WHOLE_TEXT);
         String initialPath = myContextFile.getPresentableUrl();
         String suggestedTargetFileName = getSuggestedTargetFileName(initialPath, mySelectedPrototypes);
         int lastSlash = suggestedTargetFileName.lastIndexOf(File.separatorChar);
