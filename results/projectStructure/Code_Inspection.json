@@ -122,11 +122,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.25",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.30",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:PsiViewer:233.2",
+          "name": "Gradle: com.jetbrains.plugins:PsiViewer:251.175",
           "type": "Library"
         },
         {
@@ -225,11 +225,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.25",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.30",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:PsiViewer:233.2",
+          "name": "Gradle: com.jetbrains.plugins:PsiViewer:251.175",
           "type": "Library"
         },
         {
@@ -262,66 +262,6 @@
         },
         {
           "name": "Gradle: org.hamcrest:hamcrest-core:1.3",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.jetbrains.intellij.tools:tests-bootstrap:251.23774.435",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.assertj:assertj-core:3.26.3",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.jetbrains:jbr-api:1.2.0",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.jetbrains:annotations:24.0.0",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.opentest4j:opentest4j:1.3.0",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.fasterxml.jackson.core:jackson-databind:2.17.2",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.fasterxml.jackson.core:jackson-core:2.17.2",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.apache.httpcomponents:httpmime:4.5.14",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.8",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-team-city:251.23774.435",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: net.bytebuddy:byte-buddy:1.14.18",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.fasterxml.jackson.core:jackson-annotations:2.17.2",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.apache.httpcomponents:httpclient:4.5.14",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
           "type": "Library"
         }
       ]

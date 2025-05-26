@@ -7034,6 +7034,37 @@
     "JAVA"
   ],
   "severity": "High",
+  "comment": "Unused import `import com.intellij.xml.psi.XmlPsiBundle;`",
+  "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxParsing.java",
+      "language": "JAVA",
+      "line": 9,
+      "offset": 1,
+      "length": 41,
+      "code": {
+        "startLine": 7,
+        "length": 41,
+        "offset": 91,
+        "surroundingCode": "import com.intellij.psi.xml.XmlTokenType;\nimport com.intellij.xml.parsing.XmlParserBundle;\nimport com.intellij.xml.psi.XmlPsiBundle;\nimport de.vette.idea.neos.lang.afx.psi.AfxElementTypes;\nimport de.vette.idea.neos.lang.afx.psi.AfxLazyElementTypes;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Intellij_Neos.main",
+    "inspectionName": "UNUSED_IMPORT"
+  },
+  "hash": "fbd2027a3ec90fb3a50201c096cf8b414b9e63dc87ff84e796f7a2e82759f0c9"
+},{
+  "tool": "Code Inspection",
+  "category": "Imports",
+  "type": "Unused import",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
   "comment": "Unused import `import de.vette.idea.neos.lang.afx.psi.AfxTag;`",
   "detailsInfo": "Reports redundant `import` statements.\n\nRegular `import` statements are unnecessary when not using imported classes and packages in the source file.\nThe same applies to imported `static` fields and methods that aren't used in the source file.\n\n**Example:**\n\n\n      import java.util.ArrayList;\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n\nAfter the quick fix is applied:\n\n\n      public class Example {\n        public static void main(String[] args) {\n          System.out.println(\"Hello World!\");\n        }\n      }\n",
   "sources": [
@@ -7150,68 +7181,6 @@
     "inspectionName": "UnnecessaryStringEscape"
   },
   "hash": "adda7f2b812aefc06d5ab316d17d1a6c8e36643a0b3fb2371ee813923428075d"
-},{
-  "tool": "Code Inspection",
-  "category": "Properties files",
-  "type": "Invalid property key",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "Critical",
-  "comment": "'xml.parsing.unescaped.ampersand.or.nonterminated.character.entity.reference' doesn't appear to be a valid property key",
-  "detailsInfo": "Reports invalid arguments that are passed to methods with parameters annotated as `@PropertyKey`.\n\nThese arguments should be valid property keys in corresponding properties files.\nAlso, the inspection verifies that the `resourceBundle`\nargument of the `@PropertyKey` annotation is an existing resource bundle.\n\n\nUse the quick-fix to create a new property or to select an existing one.\n\nExample:\n\n\n      @PropertyKey(resourceBundle = \"myBundle\") String value = \"invalid.key\";\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxParsing.java",
-      "language": "JAVA",
-      "line": 97,
-      "offset": 54,
-      "length": 77,
-      "code": {
-        "startLine": 95,
-        "length": 77,
-        "offset": 144,
-        "surroundingCode": "                    final PsiBuilder.Marker error = mark();\n                    advance();\n                    error.error(XmlPsiBundle.message(\"xml.parsing.unescaped.ampersand.or.nonterminated.character.entity.reference\"));\n                } else if (tt == XmlTokenType.XML_ENTITY_REF_TOKEN) {\n                    parseReference();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UnresolvedPropertyKey"
-  },
-  "hash": "849e26ca915bb572291e837001e5ebcda61e4d8059e5de69957360cfc0fb763d"
-},{
-  "tool": "Code Inspection",
-  "category": "Properties files",
-  "type": "Invalid property key",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "Critical",
-  "comment": "'xml.parsing.unclosed.attribute.value' doesn't appear to be a valid property key",
-  "detailsInfo": "Reports invalid arguments that are passed to methods with parameters annotated as `@PropertyKey`.\n\nThese arguments should be valid property keys in corresponding properties files.\nAlso, the inspection verifies that the `resourceBundle`\nargument of the `@PropertyKey` annotation is an existing resource bundle.\n\n\nUse the quick-fix to create a new property or to select an existing one.\n\nExample:\n\n\n      @PropertyKey(resourceBundle = \"myBundle\") String value = \"invalid.key\";\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/de/vette/idea/neos/lang/afx/parser/AfxParsing.java",
-      "language": "JAVA",
-      "line": 108,
-      "offset": 44,
-      "length": 38,
-      "code": {
-        "startLine": 106,
-        "length": 38,
-        "offset": 91,
-        "surroundingCode": "                advance();\n            } else {\n                error(XmlPsiBundle.message(\"xml.parsing.unclosed.attribute.value\"));\n            }\n        } else {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "Intellij_Neos.main",
-    "inspectionName": "UnresolvedPropertyKey"
-  },
-  "hash": "a014f5d8406c2dd61a29e7adb1cfecd776ae56777efd01d0dbb6b65fb13443c9"
 },{
   "tool": "Code Inspection",
   "category": "JVM languages",
