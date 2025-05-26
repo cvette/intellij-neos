@@ -5,6 +5,7 @@ import com.intellij.lang.html.HtmlParsing;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlElementType;
 import com.intellij.psi.xml.XmlTokenType;
+import com.intellij.xml.parsing.XmlParserBundle;
 import com.intellij.xml.psi.XmlPsiBundle;
 import de.vette.idea.neos.lang.afx.psi.AfxElementTypes;
 import de.vette.idea.neos.lang.afx.psi.AfxLazyElementTypes;
@@ -94,7 +95,7 @@ public class AfxParsing extends HtmlParsing {
                 if (tt == XmlTokenType.XML_BAD_CHARACTER) {
                     final PsiBuilder.Marker error = mark();
                     advance();
-                    error.error(XmlPsiBundle.message("xml.parsing.unescaped.ampersand.or.nonterminated.character.entity.reference"));
+                    error.error(XmlParserBundle.message("xml.parsing.unescaped.ampersand.or.nonterminated.character.entity.reference"));
                 } else if (tt == XmlTokenType.XML_ENTITY_REF_TOKEN) {
                     parseReference();
                 } else {
@@ -105,7 +106,7 @@ public class AfxParsing extends HtmlParsing {
             if (token() == XmlTokenType.XML_ATTRIBUTE_VALUE_END_DELIMITER) {
                 advance();
             } else {
-                error(XmlPsiBundle.message("xml.parsing.unclosed.attribute.value"));
+                error(XmlParserBundle.message("xml.parsing.unclosed.attribute.value"));
             }
         } else {
             while(token() == XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN || token() == AfxElementTypes.AFX_EEL_START_DELIMITER) {
