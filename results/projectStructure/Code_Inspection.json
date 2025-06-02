@@ -41,6 +41,12 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
+        },
+        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -56,12 +62,6 @@
               "packagePrefix": ""
             }
           ]
-        },
-        {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -86,7 +86,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-text:1.12.0",
+          "name": "Gradle: org.apache.commons:commons-text:1.13.1",
           "type": "Library"
         },
         {
@@ -142,7 +142,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-lang3:3.14.0",
+          "name": "Gradle: org.apache.commons:commons-lang3:3.17.0",
           "type": "Library"
         },
         {
@@ -189,7 +189,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-text:1.12.0",
+          "name": "Gradle: org.apache.commons:commons-text:1.13.1",
           "type": "Library"
         },
         {
@@ -245,7 +245,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.commons:commons-lang3:3.14.0",
+          "name": "Gradle: org.apache.commons:commons-lang3:3.17.0",
           "type": "Library"
         },
         {
