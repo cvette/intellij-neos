@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 245,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 245
+    "Code Inspection": 0
   },
   "linter": "QDJVMC",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/16499917751",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/16508444384",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "de99294192639a080518b8b80a6b73e463750953",
-        "branch": "main"
+        "revisionId": "dad73378766ccc937a3eb0b03ebb136f0e4afa8f",
+        "branch": "dependabot/gradle/org.jetbrains.kotlinx.kover-0.9.1"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
