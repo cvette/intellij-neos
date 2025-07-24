@@ -26,12 +26,12 @@
       "version": "8.17.0"
     },
     {
-      "ideaName": "Gradle: org.apache.commons:commons-text:1.13.1",
-      "gradleName": "org.apache.commons:commons-text:1.13.1",
+      "ideaName": "Gradle: org.apache.commons:commons-text:1.14.0",
+      "gradleName": "org.apache.commons:commons-text:1.14.0",
       "unresolved": false,
       "groupId": "org.apache.commons",
       "artifactId": "commons-text",
-      "version": "1.13.1"
+      "version": "1.14.0"
     },
     {
       "ideaName": "Gradle: bundledPlugin:com.intellij.css:IU-251.23774.435",
@@ -66,12 +66,12 @@
       "version": "3.0.2"
     },
     {
-      "ideaName": "Gradle: org.apache.commons:commons-lang3:3.17.0",
-      "gradleName": "org.apache.commons:commons-lang3:3.17.0",
+      "ideaName": "Gradle: org.apache.commons:commons-lang3:3.18.0",
+      "gradleName": "org.apache.commons:commons-lang3:3.18.0",
       "unresolved": false,
       "groupId": "org.apache.commons",
       "artifactId": "commons-lang3",
-      "version": "3.17.0"
+      "version": "3.18.0"
     },
     {
       "ideaName": "Gradle: bundledPlugin:com.intellij.platform.images:IU-251.23774.435",
