@@ -41,6 +41,12 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
+        },
+        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -56,12 +62,6 @@
               "packagePrefix": ""
             }
           ]
-        },
-        {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
         }
       ],
       "orderEntries": [
