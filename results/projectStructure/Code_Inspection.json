@@ -82,7 +82,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.18.0",
+          "name": "Gradle: io.sentry:sentry:8.19.1",
           "type": "Library"
         },
         {
@@ -90,35 +90,35 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.css:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.java:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: idea:ideaIU:2025.1",
+          "name": "Gradle: idea:ideaIU:2025.2",
           "type": "Library"
         },
         {
@@ -146,11 +146,47 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-252.23892.409",
           "type": "Library"
         },
         {
           "name": "Gradle: org.apache.ant:ant-launcher:1.10.12",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.ai.grazie.spell.gec.engine.local:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-252.23892.409",
           "type": "Library"
         }
       ]
@@ -185,7 +221,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.18.0",
+          "name": "Gradle: io.sentry:sentry:8.19.1",
           "type": "Library"
         },
         {
@@ -193,35 +229,35 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:org.intellij.intelliLang:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.css:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.java:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: idea:ideaIU:2025.1",
+          "name": "Gradle: idea:ideaIU:2025.2",
           "type": "Library"
         },
         {
@@ -237,7 +273,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework:251.23774.435",
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework:252.23892.409",
           "type": "Library"
         },
         {
@@ -249,19 +285,55 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:251.23774.435",
+          "name": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-252.23892.409",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:251.23774.435",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:252.23892.409",
           "type": "Library"
         },
         {
           "name": "Gradle: org.hamcrest:hamcrest-core:1.3",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.ai.grazie.spell.gec.engine.local:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-252.23892.409",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-252.23892.409",
           "type": "Library"
         }
       ]

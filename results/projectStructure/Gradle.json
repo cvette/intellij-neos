@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:8.18.0",
-      "gradleName": "io.sentry:sentry:8.18.0",
+      "ideaName": "Gradle: io.sentry:sentry:8.19.1",
+      "gradleName": "io.sentry:sentry:8.19.1",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "8.18.0"
+      "version": "8.19.1"
     },
     {
       "ideaName": "Gradle: org.apache.commons:commons-text:1.14.0",
@@ -34,20 +34,20 @@
       "version": "1.14.0"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.css:IU-251.23774.435",
-      "gradleName": "bundledPlugin:com.intellij.css:IU-251.23774.435",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.css:IU-252.23892.409",
+      "gradleName": "bundledPlugin:com.intellij.css:IU-252.23892.409",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.css",
-      "version": "IU-251.23774.435"
+      "version": "IU-252.23892.409"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-251.23774.435",
-      "gradleName": "bundledPlugin:com.intellij.java-i18n:IU-251.23774.435",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-252.23892.409",
+      "gradleName": "bundledPlugin:com.intellij.java-i18n:IU-252.23892.409",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.java-i18n",
-      "version": "IU-251.23774.435"
+      "version": "IU-252.23892.409"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant:1.10.12",
@@ -74,12 +74,36 @@
       "version": "3.18.0"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.platform.images:IU-251.23774.435",
-      "gradleName": "bundledPlugin:com.intellij.platform.images:IU-251.23774.435",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.platform.images:IU-252.23892.409",
+      "gradleName": "bundledPlugin:com.intellij.platform.images:IU-252.23892.409",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.platform.images",
-      "version": "IU-251.23774.435"
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-252.23892.409",
+      "gradleName": "bundledPlugin:com.intellij.modules.ultimate:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledPlugin",
+      "artifactId": "com.intellij.modules.ultimate",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl.lang:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.impl.lang",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.spellchecker:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.spellchecker:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.spellchecker",
+      "version": "IU-252.23892.409"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant-launcher:1.10.12",
@@ -90,12 +114,60 @@
       "version": "1.10.12"
     },
     {
-      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework:251.23774.435",
-      "gradleName": "com.jetbrains.intellij.platform:test-framework:251.23774.435",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.impl",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.backend:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.platform.backend:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.backend",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.ai.grazie.spell.gec.engine.local:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.libraries.ai.grazie.spell.gec.engine.local:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.ai.grazie.spell.gec.engine.local",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.libraries.lucene.common:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.lucene.common",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.microba:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.libraries.microba:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.microba",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-252.23892.409",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl.shared:IU-252.23892.409",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.impl.shared",
+      "version": "IU-252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework:252.23892.409",
+      "gradleName": "com.jetbrains.intellij.platform:test-framework:252.23892.409",
       "unresolved": false,
       "groupId": "com.jetbrains.intellij.platform",
       "artifactId": "test-framework",
-      "version": "251.23774.435"
+      "version": "252.23892.409"
     },
     {
       "ideaName": "Gradle: junit:junit:4.13.2",
@@ -106,20 +178,20 @@
       "version": "4.13.2"
     },
     {
-      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-core:251.23774.435",
-      "gradleName": "com.jetbrains.intellij.platform:test-framework-core:251.23774.435",
-      "unresolved": false,
-      "groupId": "com.jetbrains.intellij.platform",
-      "artifactId": "test-framework-core",
-      "version": "251.23774.435"
-    },
-    {
-      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-common:251.23774.435",
-      "gradleName": "com.jetbrains.intellij.platform:test-framework-common:251.23774.435",
+      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-common:252.23892.409",
+      "gradleName": "com.jetbrains.intellij.platform:test-framework-common:252.23892.409",
       "unresolved": false,
       "groupId": "com.jetbrains.intellij.platform",
       "artifactId": "test-framework-common",
-      "version": "251.23774.435"
+      "version": "252.23892.409"
+    },
+    {
+      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-core:252.23892.409",
+      "gradleName": "com.jetbrains.intellij.platform:test-framework-core:252.23892.409",
+      "unresolved": false,
+      "groupId": "com.jetbrains.intellij.platform",
+      "artifactId": "test-framework-core",
+      "version": "252.23892.409"
     },
     {
       "ideaName": "Gradle: org.hamcrest:hamcrest-core:1.3",
