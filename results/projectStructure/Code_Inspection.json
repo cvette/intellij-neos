@@ -41,12 +41,6 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
-        },
-        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -62,6 +56,12 @@
               "packagePrefix": ""
             }
           ]
+        },
+        {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -122,15 +122,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.30",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.31",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:PsiViewer:251.175",
+          "name": "Gradle: com.jetbrains.plugins:PsiViewer:252.23892.248",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:251.23774.466",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:252.25557.23",
           "type": "Library"
         },
         {
@@ -261,15 +261,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.30",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.31",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:PsiViewer:251.175",
+          "name": "Gradle: com.jetbrains.plugins:PsiViewer:252.23892.248",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:251.23774.466",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:252.25557.23",
           "type": "Library"
         },
         {
