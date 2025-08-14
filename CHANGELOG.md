@@ -4,7 +4,11 @@
 
 ## [Unreleased]
 
-- Compatibility with 2025.2.*
+## [1.24.1] - 2025-08-14
+
+### Added
+
+- Added refactor action to move Fusion prototypes
 
 ## [1.24.0] - 2025-05-26
 
@@ -178,7 +182,9 @@
 - Completion for inline editor options in node type definitions
 - Live template context for Fusion file type
 
-[Unreleased]: https://github.com/cvette/intellij-neos/compare/v1.23.0...HEAD
+[Unreleased]: https://github.com/cvette/intellij-neos/compare/v1.24.1...HEAD
+[1.24.1]: https://github.com/cvette/intellij-neos/compare/v1.24.0...v1.24.1
+[1.24.0]: https://github.com/cvette/intellij-neos/compare/v1.23.0...v1.24.0
 [1.23.0]: https://github.com/cvette/intellij-neos/compare/v1.21.0...v1.23.0
 [1.21.0]: https://github.com/cvette/intellij-neos/compare/v1.20.1...v1.21.0
 [1.20.1]: https://github.com/cvette/intellij-neos/compare/v1.20.0...v1.20.1
