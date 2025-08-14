@@ -14,7 +14,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.IStubFileElementType;
-import com.intellij.psi.xml.HtmlFileElementType;
+import com.intellij.xml.HtmlLanguageStubVersionUtil;
 import de.vette.idea.neos.lang.afx.AfxLanguage;
 import de.vette.idea.neos.lang.afx.psi.AfxFile;
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +64,7 @@ public class AfxParserDefinition extends HTMLParserDefinition {
 
         @Override
         public int getStubVersion() {
-            return HtmlFileElementType.getHtmlStubVersion();
+            return HtmlLanguageStubVersionUtil.getHtmlStubVersion();
         }
     }
 }
