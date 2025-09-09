@@ -7,12 +7,12 @@
   "linter": "QDJVMC",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/17565310645",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/17596824800",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "7831baf32c24f5cdb2641808979f73d34f1501df",
-        "branch": "dependabot/gradle/io.sentry-sentry-8.21.0"
+        "revisionId": "489fd3cd9b4f32663b9f3945344c9c44a38b17ba",
+        "branch": "dependabot/gradle/io.sentry-sentry-8.21.1"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
