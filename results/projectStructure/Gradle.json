@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:8.26.0",
-      "gradleName": "io.sentry:sentry:8.26.0",
+      "ideaName": "Gradle: io.sentry:sentry:8.21.1",
+      "gradleName": "io.sentry:sentry:8.21.1",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "8.26.0"
+      "version": "8.21.1"
     },
     {
       "ideaName": "Gradle: org.apache.commons:commons-text:1.14.0",
