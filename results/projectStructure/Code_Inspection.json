@@ -53,6 +53,10 @@
           "type": "Library"
         },
         {
+          "name": "core-jvmcommon-0.91.3.jar",
+          "type": "Library"
+        },
+        {
           "name": "coverage-report-1.0.25.jar",
           "type": "Library"
         },
@@ -189,7 +193,7 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.10.4.jar",
+          "name": "intellij-platform-gradle-plugin-2.10.5.jar",
           "type": "Library"
         },
         {
@@ -253,7 +257,7 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/1e67896797642ae29b51398270493645/classes",
+          "name": "kotlin-dsl/accessors/37f097e72e80ab24fa86442507c127cf/classes",
           "type": "Library"
         },
         {
@@ -273,11 +277,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-core-jvm-1.6.3.jar",
+          "name": "kotlinx-serialization-core-jvm-1.9.0.jar",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-json-jvm-1.6.3.jar",
+          "name": "kotlinx-serialization-json-jvm-1.9.0.jar",
           "type": "Library"
         },
         {
@@ -305,7 +309,7 @@
           "type": "Library"
         },
         {
-          "name": "plugin-2025.2.4.jar",
+          "name": "plugin-2025.2.1.jar",
           "type": "Library"
         },
         {
@@ -314,6 +318,10 @@
         },
         {
           "name": "retrofit-2.11.0.jar",
+          "type": "Library"
+        },
+        {
+          "name": "serialization-jvm-0.91.3.jar",
           "type": "Library"
         },
         {
@@ -357,15 +365,15 @@
           "type": "Library"
         },
         {
-          "name": "structure-base-3.319.jar",
+          "name": "structure-base-3.320.jar",
           "type": "Library"
         },
         {
-          "name": "structure-ide-3.319.jar",
+          "name": "structure-ide-3.320.jar",
           "type": "Library"
         },
         {
-          "name": "structure-intellij-3.319.jar",
+          "name": "structure-intellij-3.320.jar",
           "type": "Library"
         },
         {
@@ -386,14 +394,6 @@
         },
         {
           "name": "woodstox-core-7.1.0.jar",
-          "type": "Library"
-        },
-        {
-          "name": "xmlutil-jvm-0.86.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "xmlutil-serialization-jvm-0.86.3.jar",
           "type": "Library"
         },
         {
