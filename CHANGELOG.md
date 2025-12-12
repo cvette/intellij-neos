@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [1.25.0] - 2025-12-11
+
+### Added
+
+- Compatibility with 2025.3
+
 ## [1.24.1] - 2025-08-14
 
 ### Added
