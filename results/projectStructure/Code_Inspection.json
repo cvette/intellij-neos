@@ -89,7 +89,7 @@
           "type": "Library"
         },
         {
-          "name": "gradle-changelog-plugin-2.4.0.jar",
+          "name": "gradle-changelog-plugin-2.5.0.jar",
           "type": "Library"
         },
         {
@@ -253,7 +253,7 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/236ac625f358307c5575a7deb545461e/classes",
+          "name": "kotlin-dsl/accessors/116220daa454786635f50835d75a4371/classes",
           "type": "Library"
         },
         {
@@ -281,15 +281,15 @@
           "type": "Library"
         },
         {
-          "name": "kover-features-jvm-0.9.4.jar",
+          "name": "kover-features-jvm-0.9.2.jar",
           "type": "Library"
         },
         {
-          "name": "kover-gradle-plugin-0.9.4.jar",
+          "name": "kover-gradle-plugin-0.9.2.jar",
           "type": "Library"
         },
         {
-          "name": "kover-jvm-agent-0.9.4.jar",
+          "name": "kover-jvm-agent-0.9.2.jar",
           "type": "Library"
         },
         {
