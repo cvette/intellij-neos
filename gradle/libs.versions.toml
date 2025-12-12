@@ -4,7 +4,7 @@ annotations = "26.0.2-1"
 junit = "4.13.2"
 
 # plugins
-changelog = "2.4.0"
+changelog = "2.5.0"
 intelliJPlatform = "2.10.4"
 grammarKit = "2023.3.0.1"
 qodana = "2025.2.1"
