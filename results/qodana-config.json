@@ -1,0 +1,6 @@
+{
+  "local": {
+    "filename": "qodana.yaml",
+    "content": "# Qodana configuration:\n# https://www.jetbrains.com/help/qodana/qodana-yaml.html\n\nversion: 1.0\nlinter: jetbrains/qodana-jvm-community:2025.2\nprojectJDK: \"21\"\nprofile:\n  name: qodana.recommended\nexclude:\n  - name: All\n    paths:\n      - .qodana\n"
+  }
+}

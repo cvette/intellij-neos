@@ -1,16 +1,24 @@
 {
   "modules": [
     {
+      "name": "kotlin.scripts.KotlinBuildScript.build.gradle.kts",
+      "languageLevel": 21
+    },
+    {
+      "name": "kotlin.scripts.KotlinSettingsScript.settings.gradle.kts",
+      "languageLevel": 21
+    },
+    {
       "name": "Intellij_Neos",
-      "languageLevel": 17
+      "languageLevel": 21
     },
     {
       "name": "Intellij_Neos.main",
-      "languageLevel": 17
+      "languageLevel": 21
     },
     {
       "name": "Intellij_Neos.test",
-      "languageLevel": 17
+      "languageLevel": 21
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "gradleJvm": "17",
+  "gradleJvm": "#USE_PROJECT_JDK",
   "libraries": [
     {
       "ideaName": "Gradle: org.jetbrains:grammar-kit:2022.3.2",
@@ -34,20 +34,20 @@
       "version": "1.14.0"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.css:IU-252.23892.409",
-      "gradleName": "bundledPlugin:com.intellij.css:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.langInjection:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.langInjection:IU-253.28294.334",
       "unresolved": false,
-      "groupId": "bundledPlugin",
-      "artifactId": "com.intellij.css",
-      "version": "IU-252.23892.409"
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.langInjection",
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-252.23892.409",
-      "gradleName": "bundledPlugin:com.intellij.java-i18n:IU-252.23892.409",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-253.28294.334",
+      "gradleName": "bundledPlugin:com.intellij.java-i18n:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.java-i18n",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant:1.10.12",
@@ -74,36 +74,28 @@
       "version": "3.18.0"
     },
     {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.platform.images:IU-252.23892.409",
-      "gradleName": "bundledPlugin:com.intellij.platform.images:IU-252.23892.409",
-      "unresolved": false,
-      "groupId": "bundledPlugin",
-      "artifactId": "com.intellij.platform.images",
-      "version": "IU-252.23892.409"
-    },
-    {
-      "ideaName": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-252.23892.409",
-      "gradleName": "bundledPlugin:com.intellij.modules.ultimate:IU-252.23892.409",
+      "ideaName": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-253.28294.334",
+      "gradleName": "bundledPlugin:com.intellij.modules.ultimate:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledPlugin",
       "artifactId": "com.intellij.modules.ultimate",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.platform.vcs.impl.lang:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl.lang:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.platform.vcs.impl.lang",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.spellchecker:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.spellchecker:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.spellchecker:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.spellchecker:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.spellchecker",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
       "ideaName": "Gradle: org.apache.ant:ant-launcher:1.10.12",
@@ -114,60 +106,92 @@
       "version": "1.10.12"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.platform.vcs.impl:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.platform.vcs.impl",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.backend:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.platform.backend:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.backend:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.backend:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.platform.backend",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.libraries.ai.grazie.spell.gec.engine.local:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.libraries.ai.grazie.spell.gec.engine.local:IU-252.23892.409",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.libraries.ai.grazie.spell.gec.engine.local",
-      "version": "IU-252.23892.409"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.libraries.lucene.common:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.libraries.lucene.common:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.libraries.lucene.common",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.libraries.microba:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.libraries.microba:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.log:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.vcs.log:IU-253.28294.334",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.log",
+      "version": "IU-253.28294.334"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.kernel.backend:IU-253.28294.334",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.kernel.backend",
+      "version": "IU-253.28294.334"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.microba:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.libraries.microba:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.libraries.microba",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-252.23892.409",
-      "gradleName": "bundledModule:intellij.platform.vcs.impl.shared:IU-252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl.shared:IU-253.28294.334",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.platform.vcs.impl.shared",
-      "version": "IU-252.23892.409"
+      "version": "IU-253.28294.334"
     },
     {
-      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework:252.23892.409",
-      "gradleName": "com.jetbrains.intellij.platform:test-framework:252.23892.409",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.vcs.log.graph:IU-253.28294.334",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.log.graph",
+      "version": "IU-253.28294.334"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.rpc.backend:IU-253.28294.334",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.rpc.backend",
+      "version": "IU-253.28294.334"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.kernel.impl:IU-253.28294.334",
+      "gradleName": "bundledModule:intellij.platform.kernel.impl:IU-253.28294.334",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.kernel.impl",
+      "version": "IU-253.28294.334"
+    },
+    {
+      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework:253.28294.334",
+      "gradleName": "com.jetbrains.intellij.platform:test-framework:253.28294.334",
       "unresolved": false,
       "groupId": "com.jetbrains.intellij.platform",
       "artifactId": "test-framework",
-      "version": "252.23892.409"
+      "version": "253.28294.334"
     },
     {
       "ideaName": "Gradle: junit:junit:4.13.2",
@@ -178,20 +202,20 @@
       "version": "4.13.2"
     },
     {
-      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-common:252.23892.409",
-      "gradleName": "com.jetbrains.intellij.platform:test-framework-common:252.23892.409",
+      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-common:253.28294.334",
+      "gradleName": "com.jetbrains.intellij.platform:test-framework-common:253.28294.334",
       "unresolved": false,
       "groupId": "com.jetbrains.intellij.platform",
       "artifactId": "test-framework-common",
-      "version": "252.23892.409"
+      "version": "253.28294.334"
     },
     {
-      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-core:252.23892.409",
-      "gradleName": "com.jetbrains.intellij.platform:test-framework-core:252.23892.409",
+      "ideaName": "Gradle: com.jetbrains.intellij.platform:test-framework-core:253.28294.334",
+      "gradleName": "com.jetbrains.intellij.platform:test-framework-core:253.28294.334",
       "unresolved": false,
       "groupId": "com.jetbrains.intellij.platform",
       "artifactId": "test-framework-core",
-      "version": "252.23892.409"
+      "version": "253.28294.334"
     },
     {
       "ideaName": "Gradle: org.hamcrest:hamcrest-core:1.3",
@@ -200,6 +224,78 @@
       "groupId": "org.hamcrest",
       "artifactId": "hamcrest-core",
       "version": "1.3"
+    },
+    {
+      "ideaName": "Gradle: org.jetbrains.runtime:jbr-api:1.9.0",
+      "gradleName": "org.jetbrains.runtime:jbr-api:1.9.0",
+      "unresolved": false,
+      "groupId": "org.jetbrains.runtime",
+      "artifactId": "jbr-api",
+      "version": "1.9.0"
+    },
+    {
+      "ideaName": "Gradle: com.fasterxml.jackson.core:jackson-databind:2.19.0",
+      "gradleName": "com.fasterxml.jackson.core:jackson-databind:2.19.0",
+      "unresolved": false,
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-databind",
+      "version": "2.19.0"
+    },
+    {
+      "ideaName": "Gradle: com.fasterxml.jackson.core:jackson-core:2.19.0",
+      "gradleName": "com.fasterxml.jackson.core:jackson-core:2.19.0",
+      "unresolved": false,
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-core",
+      "version": "2.19.0"
+    },
+    {
+      "ideaName": "Gradle: com.fasterxml.jackson.module:jackson-module-kotlin:2.19.0",
+      "gradleName": "com.fasterxml.jackson.module:jackson-module-kotlin:2.19.0",
+      "unresolved": false,
+      "groupId": "com.fasterxml.jackson.module",
+      "artifactId": "jackson-module-kotlin",
+      "version": "2.19.0"
+    },
+    {
+      "ideaName": "Gradle: org.apache.httpcomponents:httpmime:4.5.14",
+      "gradleName": "org.apache.httpcomponents:httpmime:4.5.14",
+      "unresolved": false,
+      "groupId": "org.apache.httpcomponents",
+      "artifactId": "httpmime",
+      "version": "4.5.14"
+    },
+    {
+      "ideaName": "Gradle: org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.4.0",
+      "gradleName": "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.4.0",
+      "unresolved": false,
+      "groupId": "org.jetbrains.kotlinx",
+      "artifactId": "kotlinx-collections-immutable-jvm",
+      "version": "0.4.0"
+    },
+    {
+      "ideaName": "Gradle: com.fasterxml.jackson.core:jackson-annotations:2.19.0",
+      "gradleName": "com.fasterxml.jackson.core:jackson-annotations:2.19.0",
+      "unresolved": false,
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-annotations",
+      "version": "2.19.0"
+    },
+    {
+      "ideaName": "Gradle: org.apache.httpcomponents:httpclient:4.5.14",
+      "gradleName": "org.apache.httpcomponents:httpclient:4.5.14",
+      "unresolved": false,
+      "groupId": "org.apache.httpcomponents",
+      "artifactId": "httpclient",
+      "version": "4.5.14"
+    },
+    {
+      "ideaName": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
+      "gradleName": "org.apache.httpcomponents:httpcore:4.4.16",
+      "unresolved": false,
+      "groupId": "org.apache.httpcomponents",
+      "artifactId": "httpcore",
+      "version": "4.4.16"
     }
   ]
 }
