@@ -53,6 +53,10 @@
           "type": "Library"
         },
         {
+          "name": "core-jvmcommon-0.91.3.jar",
+          "type": "Library"
+        },
+        {
           "name": "coverage-report-1.0.25.jar",
           "type": "Library"
         },
@@ -69,7 +73,15 @@
           "type": "Library"
         },
         {
+          "name": "foojay-resolver-1.0.0.jar",
+          "type": "Library"
+        },
+        {
           "name": "freemarker-2.3.32.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-api-8.14.3.jar",
           "type": "Library"
         },
         {
@@ -81,7 +93,7 @@
           "type": "Library"
         },
         {
-          "name": "gradle-changelog-plugin-2.4.0.jar",
+          "name": "gradle-changelog-plugin-2.5.0.jar",
           "type": "Library"
         },
         {
@@ -101,6 +113,78 @@
           "type": "Library"
         },
         {
+          "name": "gradle-installation-beacon-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-extensions-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-shared-runtime-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-tooling-models-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-ant-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-astbuilder-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-console-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-datetime-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-dateutil-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-groovydoc-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-json-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-nio-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-sql-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-templates-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-test-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-xml-3.0.24.jar",
+          "type": "Library"
+        },
+        {
           "name": "intellij-coverage-agent-1.0.765.jar",
           "type": "Library"
         },
@@ -109,7 +193,7 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.10.4.jar",
+          "name": "intellij-platform-gradle-plugin-2.10.5.jar",
           "type": "Library"
         },
         {
@@ -130,6 +214,10 @@
         },
         {
           "name": "jackson-module-kotlin-2.17.2.jar",
+          "type": "Library"
+        },
+        {
+          "name": "javaparser-core-3.17.0.jar",
           "type": "Library"
         },
         {
@@ -169,10 +257,6 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/561071e4d227f8c085e6636d525899a2/classes",
-          "type": "Library"
-        },
-        {
           "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-PS/classes",
           "type": "Library"
         },
@@ -181,15 +265,23 @@
           "type": "Library"
         },
         {
+          "name": "kotlin-dsl/accessors/f2604109041b51821c4b19faedd58c04/classes",
+          "type": "Library"
+        },
+        {
+          "name": "kotlin-reflect-2.0.21.jar",
+          "type": "Library"
+        },
+        {
           "name": "kotlin-stdlib dependencies",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-core-jvm-1.6.3.jar",
+          "name": "kotlinx-serialization-core-jvm-1.9.0.jar",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-json-jvm-1.6.3.jar",
+          "name": "kotlinx-serialization-json-jvm-1.9.0.jar",
           "type": "Library"
         },
         {
@@ -226,6 +318,10 @@
         },
         {
           "name": "retrofit-2.11.0.jar",
+          "type": "Library"
+        },
+        {
+          "name": "serialization-jvm-0.91.3.jar",
           "type": "Library"
         },
         {
@@ -269,15 +365,15 @@
           "type": "Library"
         },
         {
-          "name": "structure-base-3.319.jar",
+          "name": "structure-base-3.320.jar",
           "type": "Library"
         },
         {
-          "name": "structure-ide-3.319.jar",
+          "name": "structure-ide-3.320.jar",
           "type": "Library"
         },
         {
-          "name": "structure-intellij-3.319.jar",
+          "name": "structure-intellij-3.320.jar",
           "type": "Library"
         },
         {
@@ -298,14 +394,6 @@
         },
         {
           "name": "woodstox-core-7.1.0.jar",
-          "type": "Library"
-        },
-        {
-          "name": "xmlutil-jvm-0.86.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "xmlutil-serialization-jvm-0.86.3.jar",
           "type": "Library"
         },
         {
@@ -331,6 +419,14 @@
           "type": "SDK"
         },
         {
+          "name": "foojay-resolver-1.0.0.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-api-8.14.3.jar",
+          "type": "Library"
+        },
+        {
           "name": "gradle-base-services-8.14.3.jar",
           "type": "Library"
         },
@@ -351,7 +447,87 @@
           "type": "Library"
         },
         {
+          "name": "gradle-installation-beacon-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-extensions-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-shared-runtime-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-tooling-models-8.14.3.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-ant-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-astbuilder-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-console-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-datetime-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-dateutil-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-groovydoc-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-json-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-nio-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-sql-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-templates-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-test-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-xml-3.0.24.jar",
+          "type": "Library"
+        },
+        {
+          "name": "javaparser-core-3.17.0.jar",
+          "type": "Library"
+        },
+        {
           "name": "kotlin-dsl/accessors/b1a8d491ac9238596e56b17a251144a5/classes",
+          "type": "Library"
+        },
+        {
+          "name": "kotlin-reflect-2.0.21.jar",
           "type": "Library"
         },
         {
@@ -401,6 +577,12 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
+        },
+        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -416,12 +598,6 @@
               "packagePrefix": ""
             }
           ]
-        },
-        {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
         }
       ],
       "orderEntries": [
