@@ -7,7 +7,7 @@ junit = "4.13.2"
 changelog = "2.5.0"
 intelliJPlatform = "2.10.5"
 grammarKit = "2023.3.0.1"
-qodana = "2025.2.1"
+qodana = "2025.2.4"
 kover = "0.9.4"
 
 [libraries]
