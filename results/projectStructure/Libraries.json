@@ -15,16 +15,16 @@
       "properties": {}
     },
     {
-      "name": "Gradle: io.sentry:sentry:8.28.0",
+      "name": "Gradle: io.sentry:sentry:8.29.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/io.sentry/sentry/8.28.0/f82f241b2d9df1cbcb303174c3c683e252d19bd0/sentry-8.28.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/io.sentry/sentry/8.29.0/6f68ee3df60e297439efe87023148ef1325e1e4d/sentry-8.29.0.jar!/"
       ],
       "properties": {}
     },
     {
-      "name": "Gradle: org.apache.commons:commons-text:1.15.0",
+      "name": "Gradle: org.apache.commons:commons-text:1.14.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.15.0/9899093aa40f0199d6c39b131b8f087cdb37e399/commons-text-1.15.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.14.0/adcb0d4c67eabc79682604b47eb852aaff21138a/commons-text-1.14.0.jar!/"
       ],
       "properties": {}
     },
@@ -316,9 +316,9 @@
       "properties": {}
     },
     {
-      "name": "Gradle: org.apache.commons:commons-lang3:3.20.0",
+      "name": "Gradle: org.apache.commons:commons-lang3:3.18.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.20.0/65897b3e5731220962e659e001904af3c3cbeba9/commons-lang3-3.20.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.18.0/fb14946f0e39748a6571de0635acbe44e7885491/commons-lang3-3.18.0.jar!/"
       ],
       "properties": {}
     },

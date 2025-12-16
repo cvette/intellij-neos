@@ -18,20 +18,20 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:8.28.0",
-      "gradleName": "io.sentry:sentry:8.28.0",
+      "ideaName": "Gradle: io.sentry:sentry:8.29.0",
+      "gradleName": "io.sentry:sentry:8.29.0",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "8.28.0"
+      "version": "8.29.0"
     },
     {
-      "ideaName": "Gradle: org.apache.commons:commons-text:1.15.0",
-      "gradleName": "org.apache.commons:commons-text:1.15.0",
+      "ideaName": "Gradle: org.apache.commons:commons-text:1.14.0",
+      "gradleName": "org.apache.commons:commons-text:1.14.0",
       "unresolved": false,
       "groupId": "org.apache.commons",
       "artifactId": "commons-text",
-      "version": "1.15.0"
+      "version": "1.14.0"
     },
     {
       "ideaName": "Gradle: bundledModule:intellij.platform.langInjection:IU-253.28294.334",
@@ -66,12 +66,12 @@
       "version": "3.0.2"
     },
     {
-      "ideaName": "Gradle: org.apache.commons:commons-lang3:3.20.0",
-      "gradleName": "org.apache.commons:commons-lang3:3.20.0",
+      "ideaName": "Gradle: org.apache.commons:commons-lang3:3.18.0",
+      "gradleName": "org.apache.commons:commons-lang3:3.18.0",
       "unresolved": false,
       "groupId": "org.apache.commons",
       "artifactId": "commons-lang3",
-      "version": "3.20.0"
+      "version": "3.18.0"
     },
     {
       "ideaName": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-253.28294.334",
