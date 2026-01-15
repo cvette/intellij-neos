@@ -257,15 +257,15 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/5e1fb61c5aa1e620463db3bdc417c77d/classes",
-          "type": "Library"
-        },
-        {
           "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-PS/classes",
           "type": "Library"
         },
         {
           "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-VC/classes",
+          "type": "Library"
+        },
+        {
+          "name": "kotlin-dsl/accessors/85c8607baf512719763353ef76d72a57/classes",
           "type": "Library"
         },
         {
@@ -309,7 +309,7 @@
           "type": "Library"
         },
         {
-          "name": "plugin-2025.3.1.jar",
+          "name": "plugin-2025.2.4.jar",
           "type": "Library"
         },
         {
@@ -618,7 +618,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.28.0",
+          "name": "Gradle: io.sentry:sentry:8.30.0",
           "type": "Library"
         },
         {
@@ -773,7 +773,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.28.0",
+          "name": "Gradle: io.sentry:sentry:8.30.0",
           "type": "Library"
         },
         {
