@@ -1,7 +1,7 @@
 {
   "modules": [
     {
-      "name": "kotlin.scripts.KotlinBuildScript.build.gradle.kts",
+      "name": "kotlin.scripts.KotlinProjectScriptTemplate.build.gradle.kts",
       "contentEntries": [],
       "orderEntries": [
         {
@@ -81,15 +81,15 @@
           "type": "Library"
         },
         {
-          "name": "gradle-api-8.14.3.jar",
+          "name": "gradle-api-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-8.14.3.jar",
+          "name": "gradle-base-services-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-8.14.3.jar",
+          "name": "gradle-base-services-groovy-9.3.0.jar",
           "type": "Library"
         },
         {
@@ -97,15 +97,19 @@
           "type": "Library"
         },
         {
-          "name": "gradle-core-8.14.3.jar",
+          "name": "gradle-core-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-8.14.3.jar",
+          "name": "gradle-core-api-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-8.14.3.jar",
+          "name": "gradle-core-flow-services-api-9.3.0.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-core-kotlin-extensions-9.3.0.jar",
           "type": "Library"
         },
         {
@@ -113,75 +117,63 @@
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-8.14.3.jar",
+          "name": "gradle-installation-beacon-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-extensions-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-extensions-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-shared-runtime-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-shared-runtime-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-tooling-models-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-tooling-models-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-3.0.24.jar",
+          "name": "groovy-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-ant-3.0.24.jar",
+          "name": "groovy-ant-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-astbuilder-3.0.24.jar",
+          "name": "groovy-astbuilder-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-console-3.0.24.jar",
+          "name": "groovy-datetime-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-datetime-3.0.24.jar",
+          "name": "groovy-dateutil-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-dateutil-3.0.24.jar",
+          "name": "groovy-groovydoc-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-groovydoc-3.0.24.jar",
+          "name": "groovy-json-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-json-3.0.24.jar",
+          "name": "groovy-nio-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-nio-3.0.24.jar",
+          "name": "groovy-templates-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-sql-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-templates-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-test-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-xml-3.0.24.jar",
+          "name": "groovy-xml-4.0.29.jar",
           "type": "Library"
         },
         {
@@ -217,7 +209,7 @@
           "type": "Library"
         },
         {
-          "name": "javaparser-core-3.17.0.jar",
+          "name": "javaparser-core-3.27.1.jar",
           "type": "Library"
         },
         {
@@ -257,19 +249,19 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-PS/classes",
+          "name": "kotlin-dsl/accessors/3d79bb4620475dec5421bc29e97c44d5-PS/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-VC/classes",
+          "name": "kotlin-dsl/accessors/3d79bb4620475dec5421bc29e97c44d5-VC/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/85c8607baf512719763353ef76d72a57/classes",
+          "name": "kotlin-dsl/accessors/e49889acc741a5800fb72f5d69962f71/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-reflect-2.0.21.jar",
+          "name": "kotlin-reflect-2.2.21.jar",
           "type": "Library"
         },
         {
@@ -411,7 +403,7 @@
       ]
     },
     {
-      "name": "kotlin.scripts.KotlinSettingsScript.settings.gradle.kts",
+      "name": "kotlin.scripts.KotlinSettingsScriptTemplate.settings.gradle.kts",
       "contentEntries": [],
       "orderEntries": [
         {
@@ -423,111 +415,103 @@
           "type": "Library"
         },
         {
-          "name": "gradle-api-8.14.3.jar",
+          "name": "gradle-api-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-8.14.3.jar",
+          "name": "gradle-base-services-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-8.14.3.jar",
+          "name": "gradle-base-services-groovy-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-8.14.3.jar",
+          "name": "gradle-core-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-8.14.3.jar",
+          "name": "gradle-core-api-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-8.14.3.jar",
+          "name": "gradle-core-flow-services-api-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-8.14.3.jar",
+          "name": "gradle-core-kotlin-extensions-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-8.14.3.jar",
+          "name": "gradle-installation-beacon-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-extensions-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-shared-runtime-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-extensions-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-tooling-models-8.14.3.jar",
+          "name": "gradle-kotlin-dsl-shared-runtime-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-3.0.24.jar",
+          "name": "gradle-kotlin-dsl-tooling-models-9.3.0.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-ant-3.0.24.jar",
+          "name": "groovy-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-astbuilder-3.0.24.jar",
+          "name": "groovy-ant-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-console-3.0.24.jar",
+          "name": "groovy-astbuilder-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-datetime-3.0.24.jar",
+          "name": "groovy-datetime-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-dateutil-3.0.24.jar",
+          "name": "groovy-dateutil-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-groovydoc-3.0.24.jar",
+          "name": "groovy-groovydoc-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-json-3.0.24.jar",
+          "name": "groovy-json-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-nio-3.0.24.jar",
+          "name": "groovy-nio-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-sql-3.0.24.jar",
+          "name": "groovy-templates-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-templates-3.0.24.jar",
+          "name": "groovy-xml-4.0.29.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-test-3.0.24.jar",
+          "name": "javaparser-core-3.27.1.jar",
           "type": "Library"
         },
         {
-          "name": "groovy-xml-3.0.24.jar",
+          "name": "kotlin-dsl/accessors/a5506a8963decc5957f6f6651a7c7af7/classes",
           "type": "Library"
         },
         {
-          "name": "javaparser-core-3.17.0.jar",
-          "type": "Library"
-        },
-        {
-          "name": "kotlin-dsl/accessors/b1a8d491ac9238596e56b17a251144a5/classes",
-          "type": "Library"
-        },
-        {
-          "name": "kotlin-reflect-2.0.21.jar",
+          "name": "kotlin-reflect-2.2.21.jar",
           "type": "Library"
         },
         {
@@ -618,7 +602,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.31.0",
+          "name": "Gradle: io.sentry:sentry:8.28.0",
           "type": "Library"
         },
         {
@@ -773,7 +757,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.31.0",
+          "name": "Gradle: io.sentry:sentry:8.28.0",
           "type": "Library"
         },
         {
