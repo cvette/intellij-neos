@@ -1,11 +1,11 @@
 {
   "modules": [
     {
-      "name": "kotlin.scripts.KotlinProjectScriptTemplate.build.gradle.kts",
+      "name": "kotlin.scripts.KotlinBuildScript.build.gradle.kts",
       "languageLevel": 21
     },
     {
-      "name": "kotlin.scripts.KotlinSettingsScriptTemplate.settings.gradle.kts",
+      "name": "kotlin.scripts.KotlinSettingsScript.settings.gradle.kts",
       "languageLevel": 21
     },
     {
