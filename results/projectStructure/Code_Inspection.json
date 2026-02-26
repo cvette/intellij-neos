@@ -193,7 +193,7 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.11.0.jar",
+          "name": "intellij-platform-gradle-plugin-2.10.5.jar",
           "type": "Library"
         },
         {
@@ -265,7 +265,7 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/d125c51dc76756a64fd101423a7a1066/classes",
+          "name": "kotlin-dsl/accessors/85c8607baf512719763353ef76d72a57/classes",
           "type": "Library"
         },
         {
@@ -277,11 +277,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-core-jvm-1.10.0.jar",
+          "name": "kotlinx-serialization-core-jvm-1.9.0.jar",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-json-jvm-1.10.0.jar",
+          "name": "kotlinx-serialization-json-jvm-1.9.0.jar",
           "type": "Library"
         },
         {
@@ -313,7 +313,7 @@
           "type": "Library"
         },
         {
-          "name": "plugin-repository-rest-client-2.0.50.jar",
+          "name": "plugin-repository-rest-client-2.0.49.jar",
           "type": "Library"
         },
         {
@@ -381,7 +381,7 @@
           "type": "Library"
         },
         {
-          "name": "undertow-core-2.3.22.Final.jar",
+          "name": "undertow-core-2.3.20.Final.jar",
           "type": "Library"
         },
         {
