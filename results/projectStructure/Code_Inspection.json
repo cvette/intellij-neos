@@ -1,7 +1,7 @@
 {
   "modules": [
     {
-      "name": "kotlin.scripts.KotlinBuildScript.build.gradle.kts",
+      "name": "kotlin.scripts.KotlinProjectScriptTemplate.build.gradle.kts",
       "contentEntries": [],
       "orderEntries": [
         {
@@ -73,23 +73,15 @@
           "type": "Library"
         },
         {
-          "name": "foojay-resolver-1.0.0.jar",
-          "type": "Library"
-        },
-        {
           "name": "freemarker-2.3.32.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-api-8.14.3.jar",
+          "name": "gradle-base-services-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-base-services-groovy-8.14.3.jar",
+          "name": "gradle-base-services-groovy-9.4.1.jar",
           "type": "Library"
         },
         {
@@ -97,91 +89,23 @@
           "type": "Library"
         },
         {
-          "name": "gradle-core-8.14.3.jar",
+          "name": "gradle-core-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-8.14.3.jar",
+          "name": "gradle-core-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-8.14.3.jar",
+          "name": "gradle-core-flow-services-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-grammarkit-plugin-2023.3.0.1.jar",
+          "name": "gradle-core-kotlin-extensions-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-extensions-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-shared-runtime-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-tooling-models-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-ant-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-astbuilder-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-console-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-datetime-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-dateutil-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-groovydoc-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-json-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-nio-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-sql-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-templates-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-test-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-xml-3.0.24.jar",
+          "name": "gradle-grammarkit-plugin-2023.3.0.3.jar",
           "type": "Library"
         },
         {
@@ -193,7 +117,7 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.10.5.jar",
+          "name": "intellij-platform-gradle-plugin-2.13.1.jar",
           "type": "Library"
         },
         {
@@ -214,10 +138,6 @@
         },
         {
           "name": "jackson-module-kotlin-2.17.2.jar",
-          "type": "Library"
-        },
-        {
-          "name": "javaparser-core-3.17.0.jar",
           "type": "Library"
         },
         {
@@ -257,19 +177,15 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-PS/classes",
+          "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-PS/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/76cd0df62f65a7b1a8734ee40c1a5919-VC/classes",
+          "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-VC/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/85c8607baf512719763353ef76d72a57/classes",
-          "type": "Library"
-        },
-        {
-          "name": "kotlin-reflect-2.0.21.jar",
+          "name": "kotlin-dsl/accessors/e9d57055ab4c891e4ef0e1189f506e8e/classes",
           "type": "Library"
         },
         {
@@ -277,11 +193,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-core-jvm-1.9.0.jar",
+          "name": "kotlinx-serialization-core-jvm-1.10.0.jar",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-json-jvm-1.9.0.jar",
+          "name": "kotlinx-serialization-json-jvm-1.10.0.jar",
           "type": "Library"
         },
         {
@@ -313,7 +229,7 @@
           "type": "Library"
         },
         {
-          "name": "plugin-repository-rest-client-2.0.49.jar",
+          "name": "plugin-repository-rest-client-2.0.50.jar",
           "type": "Library"
         },
         {
@@ -333,7 +249,7 @@
           "type": "Library"
         },
         {
-          "name": "smallrye-common-cpu-2.6.0.jar",
+          "name": "smallrye-common-cpu-2.10.0.jar",
           "type": "Library"
         },
         {
@@ -365,15 +281,19 @@
           "type": "Library"
         },
         {
-          "name": "structure-base-3.320.jar",
+          "name": "structure-base-3.321.jar",
           "type": "Library"
         },
         {
-          "name": "structure-ide-3.320.jar",
+          "name": "structure-ide-3.321.jar",
           "type": "Library"
         },
         {
-          "name": "structure-intellij-3.320.jar",
+          "name": "structure-intellij-3.321.jar",
+          "type": "Library"
+        },
+        {
+          "name": "trove4j-1.0.20200330.jar",
           "type": "Library"
         },
         {
@@ -381,7 +301,7 @@
           "type": "Library"
         },
         {
-          "name": "undertow-core-2.3.20.Final.jar",
+          "name": "undertow-core-2.3.23.Final.jar",
           "type": "Library"
         },
         {
@@ -411,7 +331,7 @@
       ]
     },
     {
-      "name": "kotlin.scripts.KotlinSettingsScript.settings.gradle.kts",
+      "name": "kotlin.scripts.KotlinSettingsScriptTemplate.settings.gradle.kts",
       "contentEntries": [],
       "orderEntries": [
         {
@@ -419,115 +339,31 @@
           "type": "SDK"
         },
         {
-          "name": "foojay-resolver-1.0.0.jar",
+          "name": "gradle-base-services-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-api-8.14.3.jar",
+          "name": "gradle-base-services-groovy-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-8.14.3.jar",
+          "name": "gradle-core-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-8.14.3.jar",
+          "name": "gradle-core-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-8.14.3.jar",
+          "name": "gradle-core-flow-services-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-8.14.3.jar",
+          "name": "gradle-core-kotlin-extensions-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-installation-beacon-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-extensions-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-shared-runtime-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "gradle-kotlin-dsl-tooling-models-8.14.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-ant-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-astbuilder-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-console-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-datetime-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-dateutil-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-groovydoc-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-json-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-nio-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-sql-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-templates-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-test-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "groovy-xml-3.0.24.jar",
-          "type": "Library"
-        },
-        {
-          "name": "javaparser-core-3.17.0.jar",
-          "type": "Library"
-        },
-        {
-          "name": "kotlin-dsl/accessors/b1a8d491ac9238596e56b17a251144a5/classes",
-          "type": "Library"
-        },
-        {
-          "name": "kotlin-reflect-2.0.21.jar",
+          "name": "kotlin-dsl/accessors/02132b2a77286d19069ead54a641b49e/classes",
           "type": "Library"
         },
         {
@@ -577,12 +413,6 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
-        },
-        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -598,6 +428,12 @@
               "packagePrefix": ""
             }
           ]
+        },
+        {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -626,39 +462,39 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.langInjection:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.langInjection:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.css:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.java:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: idea:idea:2025.3",
+          "name": "Gradle: idea:idea:2026.1",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.31",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.32",
           "type": "Library"
         },
         {
@@ -666,7 +502,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:253.28294.325",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:261.22158.208",
           "type": "Library"
         },
         {
@@ -682,19 +518,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-253.28294.334",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-253.28294.334",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.spellchecker:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -702,43 +530,71 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.backend:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.kernel.impl:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
           "type": "Library"
         }
       ]
@@ -781,39 +637,39 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.langInjection:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.langInjection:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.css:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.css:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:org.jetbrains.plugins.yaml:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.modules.json:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.java:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.properties:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: idea:idea:2025.3",
+          "name": "Gradle: idea:idea:2026.1",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.31",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.hackathon.indices.viewer:1.32",
           "type": "Library"
         },
         {
@@ -821,11 +677,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:253.28294.325",
+          "name": "Gradle: com.jetbrains.plugins:com.jetbrains.php:261.22158.208",
           "type": "Library"
         },
         {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework:253.28294.334",
+          "name": "Gradle: bundledModule:com.intellij.modules.ultimate:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework:261.22158.277",
           "type": "Library"
         },
         {
@@ -837,27 +697,19 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-253.28294.334",
+          "name": "Gradle: bundledPlugin:com.intellij.platform.images:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.modules.ultimate:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-253.28294.334",
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.spellchecker:IU-253.28294.334",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:253.28294.334",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:253.28294.334",
+          "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:261.22158.277",
           "type": "Library"
         },
         {
@@ -865,15 +717,27 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.backend:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -901,19 +765,27 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -925,19 +797,27 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.kernel.impl:IU-253.28294.334",
+          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
           "type": "Library"
         },
         {
           "name": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
           "type": "Library"
         }
       ]
