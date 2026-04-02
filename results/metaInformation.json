@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 167,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 167
+    "Code Inspection": 0
   },
   "linter": "QDJVMC",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/23876986688",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/23924759137",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "b5ae37298b62c2b1636101553566e8b9040631a1",
-        "branch": "main"
+        "revisionId": "0c32c0ef77896654c1328aa2a396b97e6a5e0a9b",
+        "branch": "dependabot/github_actions/jtalk/url-health-check-action-5"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
