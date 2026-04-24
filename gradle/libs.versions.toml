@@ -5,7 +5,7 @@ junit = "4.13.2"
 
 # plugins
 changelog = "2.5.0"
-intelliJPlatform = "2.14.0"
+intelliJPlatform = "2.15.0"
 grammarKit = "2023.3.0.3"
 qodana = "2025.3.2"
 kover = "0.9.8"
