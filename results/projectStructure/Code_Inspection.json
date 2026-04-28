@@ -81,15 +81,15 @@
           "type": "Library"
         },
         {
-          "name": "gradle-api-9.4.1.jar",
+          "name": "gradle-api-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-9.4.1.jar",
+          "name": "gradle-base-services-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-9.4.1.jar",
+          "name": "gradle-base-services-groovy-9.5.0.jar",
           "type": "Library"
         },
         {
@@ -97,19 +97,19 @@
           "type": "Library"
         },
         {
-          "name": "gradle-core-9.4.1.jar",
+          "name": "gradle-core-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-9.4.1.jar",
+          "name": "gradle-core-api-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-flow-services-api-9.4.1.jar",
+          "name": "gradle-core-flow-services-api-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-9.4.1.jar",
+          "name": "gradle-core-kotlin-extensions-9.5.0.jar",
           "type": "Library"
         },
         {
@@ -117,23 +117,23 @@
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-9.4.1.jar",
+          "name": "gradle-installation-beacon-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-extensions-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-extensions-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-shared-runtime-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-shared-runtime-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-tooling-models-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-tooling-models-9.5.0.jar",
           "type": "Library"
         },
         {
@@ -249,19 +249,19 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/36d9e10298535bfce881d4accae1245e/classes",
+          "name": "kotlin-dsl/accessors/90c869a97f920cb82cf7b4523ee4bf74-PS/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-PS/classes",
+          "name": "kotlin-dsl/accessors/90c869a97f920cb82cf7b4523ee4bf74-VC/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-VC/classes",
+          "name": "kotlin-dsl/accessors/c7ffc5a78a87e49bc1b3b8cf563baaf6/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-reflect-2.3.0.jar",
+          "name": "kotlin-reflect-2.3.20.jar",
           "type": "Library"
         },
         {
@@ -301,7 +301,7 @@
           "type": "Library"
         },
         {
-          "name": "plugin-2026.1.0.jar",
+          "name": "plugin-2025.3.2.jar",
           "type": "Library"
         },
         {
@@ -419,51 +419,51 @@
           "type": "Library"
         },
         {
-          "name": "gradle-api-9.4.1.jar",
+          "name": "gradle-api-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-9.4.1.jar",
+          "name": "gradle-base-services-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-9.4.1.jar",
+          "name": "gradle-base-services-groovy-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-9.4.1.jar",
+          "name": "gradle-core-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-9.4.1.jar",
+          "name": "gradle-core-api-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-flow-services-api-9.4.1.jar",
+          "name": "gradle-core-flow-services-api-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-9.4.1.jar",
+          "name": "gradle-core-kotlin-extensions-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-9.4.1.jar",
+          "name": "gradle-installation-beacon-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-extensions-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-extensions-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-shared-runtime-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-shared-runtime-9.5.0.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-tooling-models-9.4.1.jar",
+          "name": "gradle-kotlin-dsl-tooling-models-9.5.0.jar",
           "type": "Library"
         },
         {
@@ -511,11 +511,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/02132b2a77286d19069ead54a641b49e/classes",
+          "name": "kotlin-dsl/accessors/0a7ebe038b447def97745b0d0772eaab/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-reflect-2.3.0.jar",
+          "name": "kotlin-reflect-2.3.20.jar",
           "type": "Library"
         },
         {
