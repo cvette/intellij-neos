@@ -45,11 +45,11 @@
           "type": "Library"
         },
         {
-          "name": "converter-jackson-2.11.0.jar",
+          "name": "converter-jackson-3.0.0.jar",
           "type": "Library"
         },
         {
-          "name": "converter-jaxb-2.11.0.jar",
+          "name": "converter-jaxb-3.0.0.jar",
           "type": "Library"
         },
         {
@@ -81,15 +81,15 @@
           "type": "Library"
         },
         {
-          "name": "gradle-api-9.5.0.jar",
+          "name": "gradle-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-9.5.0.jar",
+          "name": "gradle-base-services-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-9.5.0.jar",
+          "name": "gradle-base-services-groovy-9.4.1.jar",
           "type": "Library"
         },
         {
@@ -97,19 +97,19 @@
           "type": "Library"
         },
         {
-          "name": "gradle-core-9.5.0.jar",
+          "name": "gradle-core-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-9.5.0.jar",
+          "name": "gradle-core-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-flow-services-api-9.5.0.jar",
+          "name": "gradle-core-flow-services-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-9.5.0.jar",
+          "name": "gradle-core-kotlin-extensions-9.4.1.jar",
           "type": "Library"
         },
         {
@@ -117,23 +117,23 @@
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-9.5.0.jar",
+          "name": "gradle-installation-beacon-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-extensions-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-extensions-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-shared-runtime-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-shared-runtime-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-tooling-models-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-tooling-models-9.4.1.jar",
           "type": "Library"
         },
         {
@@ -185,7 +185,7 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.14.0.jar",
+          "name": "intellij-platform-gradle-plugin-2.16.0.jar",
           "type": "Library"
         },
         {
@@ -221,7 +221,7 @@
           "type": "Library"
         },
         {
-          "name": "jaxb-core-2.3.0.jar",
+          "name": "jaxb-core-2.3.0.1.jar",
           "type": "Library"
         },
         {
@@ -249,19 +249,19 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/90c869a97f920cb82cf7b4523ee4bf74-PS/classes",
+          "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-PS/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/90c869a97f920cb82cf7b4523ee4bf74-VC/classes",
+          "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-VC/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/c7ffc5a78a87e49bc1b3b8cf563baaf6/classes",
+          "name": "kotlin-dsl/accessors/bdf7277d91d29cc554f9d8959741070c/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-reflect-2.3.20.jar",
+          "name": "kotlin-reflect-2.3.0.jar",
           "type": "Library"
         },
         {
@@ -269,11 +269,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-core-jvm-1.10.0.jar",
+          "name": "kotlinx-serialization-core-jvm-1.11.0.jar",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-json-jvm-1.10.0.jar",
+          "name": "kotlinx-serialization-json-jvm-1.11.0.jar",
           "type": "Library"
         },
         {
@@ -305,11 +305,11 @@
           "type": "Library"
         },
         {
-          "name": "plugin-repository-rest-client-2.0.50.jar",
+          "name": "plugin-repository-rest-client-2.0.51.jar",
           "type": "Library"
         },
         {
-          "name": "retrofit-2.11.0.jar",
+          "name": "retrofit-3.0.0.jar",
           "type": "Library"
         },
         {
@@ -357,15 +357,15 @@
           "type": "Library"
         },
         {
-          "name": "structure-base-3.324.jar",
+          "name": "structure-base-3.326.jar",
           "type": "Library"
         },
         {
-          "name": "structure-ide-3.324.jar",
+          "name": "structure-ide-3.326.jar",
           "type": "Library"
         },
         {
-          "name": "structure-intellij-3.324.jar",
+          "name": "structure-intellij-3.326.jar",
           "type": "Library"
         },
         {
@@ -419,51 +419,51 @@
           "type": "Library"
         },
         {
-          "name": "gradle-api-9.5.0.jar",
+          "name": "gradle-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-9.5.0.jar",
+          "name": "gradle-base-services-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-base-services-groovy-9.5.0.jar",
+          "name": "gradle-base-services-groovy-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-9.5.0.jar",
+          "name": "gradle-core-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-api-9.5.0.jar",
+          "name": "gradle-core-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-flow-services-api-9.5.0.jar",
+          "name": "gradle-core-flow-services-api-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-core-kotlin-extensions-9.5.0.jar",
+          "name": "gradle-core-kotlin-extensions-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-installation-beacon-9.5.0.jar",
+          "name": "gradle-installation-beacon-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-extensions-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-extensions-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-shared-runtime-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-shared-runtime-9.4.1.jar",
           "type": "Library"
         },
         {
-          "name": "gradle-kotlin-dsl-tooling-models-9.5.0.jar",
+          "name": "gradle-kotlin-dsl-tooling-models-9.4.1.jar",
           "type": "Library"
         },
         {
@@ -511,11 +511,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/0a7ebe038b447def97745b0d0772eaab/classes",
+          "name": "kotlin-dsl/accessors/02132b2a77286d19069ead54a641b49e/classes",
           "type": "Library"
         },
         {
-          "name": "kotlin-reflect-2.3.20.jar",
+          "name": "kotlin-reflect-2.3.0.jar",
           "type": "Library"
         },
         {
@@ -674,11 +674,79 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij:IU-261.22158.277",
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
           "name": "Gradle: org.apache.ant:ant-launcher:1.10.12",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
           "type": "Library"
         }
       ]
@@ -785,7 +853,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij:IU-261.22158.277",
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -798,6 +866,30 @@
         },
         {
           "name": "Gradle: org.hamcrest:hamcrest-core:1.3",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -825,6 +917,30 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: com.fasterxml.jackson.core:jackson-annotations:2.19.0",
           "type": "Library"
         },
@@ -833,7 +949,27 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
           "type": "Library"
         }
       ]
