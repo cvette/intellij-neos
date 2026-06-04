@@ -73,7 +73,15 @@
           "type": "Library"
         },
         {
+          "name": "foojay-resolver-1.0.0.jar",
+          "type": "Library"
+        },
+        {
           "name": "freemarker-2.3.32.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-api-9.4.1.jar",
           "type": "Library"
         },
         {
@@ -109,6 +117,66 @@
           "type": "Library"
         },
         {
+          "name": "gradle-installation-beacon-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-extensions-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-shared-runtime-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-tooling-models-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-ant-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-astbuilder-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-datetime-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-dateutil-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-groovydoc-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-json-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-nio-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-templates-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-xml-4.0.29.jar",
+          "type": "Library"
+        },
+        {
           "name": "intellij-coverage-agent-1.0.765.jar",
           "type": "Library"
         },
@@ -138,6 +206,10 @@
         },
         {
           "name": "jackson-module-kotlin-2.20.2.jar",
+          "type": "Library"
+        },
+        {
+          "name": "javaparser-core-3.27.1.jar",
           "type": "Library"
         },
         {
@@ -186,6 +258,10 @@
         },
         {
           "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-VC/classes",
+          "type": "Library"
+        },
+        {
+          "name": "kotlin-reflect-2.3.0.jar",
           "type": "Library"
         },
         {
@@ -339,6 +415,14 @@
           "type": "SDK"
         },
         {
+          "name": "foojay-resolver-1.0.0.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-api-9.4.1.jar",
+          "type": "Library"
+        },
+        {
           "name": "gradle-base-services-9.4.1.jar",
           "type": "Library"
         },
@@ -363,7 +447,75 @@
           "type": "Library"
         },
         {
+          "name": "gradle-installation-beacon-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-extensions-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-shared-runtime-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "gradle-kotlin-dsl-tooling-models-9.4.1.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-ant-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-astbuilder-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-datetime-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-dateutil-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-groovydoc-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-json-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-nio-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-templates-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "groovy-xml-4.0.29.jar",
+          "type": "Library"
+        },
+        {
+          "name": "javaparser-core-3.27.1.jar",
+          "type": "Library"
+        },
+        {
           "name": "kotlin-dsl/accessors/02132b2a77286d19069ead54a641b49e/classes",
+          "type": "Library"
+        },
+        {
+          "name": "kotlin-reflect-2.3.0.jar",
           "type": "Library"
         },
         {
@@ -413,6 +565,12 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
+        },
+        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -428,12 +586,6 @@
               "packagePrefix": ""
             }
           ]
-        },
-        {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -454,7 +606,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.38.0",
+          "name": "Gradle: io.sentry:sentry:8.43.1",
           "type": "Library"
         },
         {
@@ -561,7 +713,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.38.0",
+          "name": "Gradle: io.sentry:sentry:8.43.1",
           "type": "Library"
         },
         {
