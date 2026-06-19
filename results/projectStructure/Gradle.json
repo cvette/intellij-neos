@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:8.44.1",
-      "gradleName": "io.sentry:sentry:8.44.1",
+      "ideaName": "Gradle: io.sentry:sentry:8.38.0",
+      "gradleName": "io.sentry:sentry:8.38.0",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "8.44.1"
+      "version": "8.38.0"
     },
     {
       "ideaName": "Gradle: org.apache.commons:commons-text:1.15.0",
@@ -138,19 +138,19 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: com.fasterxml.jackson.core:jackson-databind:2.19.0",
-      "gradleName": "com.fasterxml.jackson.core:jackson-databind:2.19.0",
-      "unresolved": false,
-      "groupId": "com.fasterxml.jackson.core",
-      "artifactId": "jackson-databind",
-      "version": "2.19.0"
-    },
-    {
       "ideaName": "Gradle: com.fasterxml.jackson.core:jackson-core:2.19.0",
       "gradleName": "com.fasterxml.jackson.core:jackson-core:2.19.0",
       "unresolved": false,
       "groupId": "com.fasterxml.jackson.core",
       "artifactId": "jackson-core",
+      "version": "2.19.0"
+    },
+    {
+      "ideaName": "Gradle: com.fasterxml.jackson.core:jackson-databind:2.19.0",
+      "gradleName": "com.fasterxml.jackson.core:jackson-databind:2.19.0",
+      "unresolved": false,
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-databind",
       "version": "2.19.0"
     },
     {
