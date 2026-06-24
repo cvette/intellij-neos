@@ -15,9 +15,9 @@
       "properties": {}
     },
     {
-      "name": "Gradle: io.sentry:sentry:8.38.0",
+      "name": "Gradle: io.sentry:sentry:8.45.0",
       "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/io.sentry/sentry/8.38.0/6b5269da1699b7eb5af86c99dc2ed7dd29c838dc/sentry-8.38.0.jar!/"
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/io.sentry/sentry/8.45.0/9848b96c1a6ca2f67c134d60662eb75d30175527/sentry-8.45.0.jar!/"
       ],
       "properties": {}
     },
@@ -627,15 +627,108 @@
     },
     {
       "name": "Gradle: bundledModule:com.intellij.modules.ultimate:IU-261.22158.277",
-      "roots": []
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/9.4.1/transforms/395b3e547e5fe59b886c6bff64d6fbaa/transformed/idea-2026.1/plugins/ultimate-plugin/lib/ultimate-plugin.jar!/"
+      ],
+      "properties": {}
     },
     {
-      "name": "Gradle: com.jetbrains.intellij.platform:test-framework:[261, 261.22158.277]",
-      "roots": []
+      "name": "Gradle: com.jetbrains.intellij.platform:test-framework:261.22158.277",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.platform/test-framework/261.22158.277/64e816e7ffdbacc20e668521cc556578029e0a8c/test-framework-261.22158.277.jar!/"
+      ],
+      "properties": {}
     },
     {
       "name": "Gradle: junit:junit:4.13.2",
-      "roots": []
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/junit/junit/4.13.2/8ac9e16d933b6fb43bc7f576336b8f4d7eb5ba12/junit-4.13.2.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: com.jetbrains.intellij.platform:test-framework-common:261.22158.277",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.platform/test-framework-common/261.22158.277/995bf8141e305d01ff44f60092cfcb8294f4872e/test-framework-common-261.22158.277.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: com.jetbrains.intellij.platform:test-framework-core:261.22158.277",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.platform/test-framework-core/261.22158.277/9a00651fc908fa6aa7cf67e7a92432b7bc0eef09/test-framework-core-261.22158.277.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: org.hamcrest:hamcrest-core:1.3",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: org.jetbrains.runtime:jbr-api:1.9.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.jetbrains.runtime/jbr-api/1.9.0/2bc161f5472b5fd5610740e4d6ebe896c811cb0e/jbr-api-1.9.0.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: com.fasterxml.jackson.core:jackson-databind:2.19.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.19.0/b3f7506f6414fb04760561eec11a0880165c2a4a/jackson-databind-2.19.0.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: com.fasterxml.jackson.core:jackson-core:2.19.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.19.0/a90640e59ea42632a8e331ff1d6b706cf306050a/jackson-core-2.19.0.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: com.fasterxml.jackson.module:jackson-module-kotlin:2.19.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-kotlin/2.19.0/b26bbc89112d7b71e3ef4d523671f430e95426fe/jackson-module-kotlin-2.19.0.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: org.apache.httpcomponents:httpmime:4.5.14",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.5.14/6662758a1f1cb1149cf916bdac28332e0902ec44/httpmime-4.5.14.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.4.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-collections-immutable-jvm/0.4.0/82499bf608b0fc3ae6737a5eac1a1f1325279bbf/kotlinx-collections-immutable-jvm-0.4.0.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: com.fasterxml.jackson.core:jackson-annotations:2.19.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.19.0/fd1e7c56de1e5b658563c8c66d5074cceb4e3a0b/jackson-annotations-2.19.0.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: org.apache.httpcomponents:httpclient:4.5.14",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.14/1194890e6f56ec29177673f2f12d0b8e627dec98/httpclient-4.5.14.jar!/"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.16/51cf043c87253c9f58b539c9f7e44c8894223850/httpcore-4.4.16.jar!/"
+      ],
+      "properties": {}
     },
     {
       "name": "foojay-resolver-1.0.0.jar",
