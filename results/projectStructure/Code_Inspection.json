@@ -9,7 +9,7 @@
           "type": "SDK"
         },
         {
-          "name": "angus-activation-2.0.0.jar",
+          "name": "FastInfoset-1.2.15.jar",
           "type": "Library"
         },
         {
@@ -45,11 +45,11 @@
           "type": "Library"
         },
         {
-          "name": "converter-jackson-3.0.0.jar",
+          "name": "converter-jackson-2.11.0.jar",
           "type": "Library"
         },
         {
-          "name": "converter-jaxb-3.0.0.jar",
+          "name": "converter-jaxb-2.11.0.jar",
           "type": "Library"
         },
         {
@@ -185,11 +185,11 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.17.0.jar",
+          "name": "intellij-platform-gradle-plugin-2.14.0.jar",
           "type": "Library"
         },
         {
-          "name": "istack-commons-runtime-4.1.1.jar",
+          "name": "istack-commons-runtime-3.0.7.jar",
           "type": "Library"
         },
         {
@@ -209,14 +209,6 @@
           "type": "Library"
         },
         {
-          "name": "jakarta.activation-api-2.1.3.jar",
-          "type": "Library"
-        },
-        {
-          "name": "jakarta.xml.bind-api-4.0.2.jar",
-          "type": "Library"
-        },
-        {
           "name": "javaparser-core-3.27.1.jar",
           "type": "Library"
         },
@@ -229,11 +221,7 @@
           "type": "Library"
         },
         {
-          "name": "jaxb-core-2.3.0.1.jar",
-          "type": "Library"
-        },
-        {
-          "name": "jaxb-core-4.0.2.jar",
+          "name": "jaxb-core-2.3.0.jar",
           "type": "Library"
         },
         {
@@ -241,15 +229,15 @@
           "type": "Library"
         },
         {
-          "name": "jaxb-runtime-4.0.2.jar",
+          "name": "jaxb-runtime-2.3.1.jar",
           "type": "Library"
         },
         {
-          "name": "jboss-logging-3.6.2.Final.jar",
+          "name": "jboss-logging-3.6.1.Final.jar",
           "type": "Library"
         },
         {
-          "name": "jboss-threads-3.9.2.jar",
+          "name": "jboss-threads-3.7.0.Final.jar",
           "type": "Library"
         },
         {
@@ -261,15 +249,15 @@
           "type": "Library"
         },
         {
+          "name": "kotlin-dsl/accessors/36d9e10298535bfce881d4accae1245e/classes",
+          "type": "Library"
+        },
+        {
           "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-PS/classes",
           "type": "Library"
         },
         {
           "name": "kotlin-dsl/accessors/570964e8312846b1cc495b3cd88057b0-VC/classes",
-          "type": "Library"
-        },
-        {
-          "name": "kotlin-dsl/accessors/8118280780705b75c4e5c0ab1f5c2171/classes",
           "type": "Library"
         },
         {
@@ -281,11 +269,11 @@
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-core-jvm-1.11.0.jar",
+          "name": "kotlinx-serialization-core-jvm-1.10.0.jar",
           "type": "Library"
         },
         {
-          "name": "kotlinx-serialization-json-jvm-1.11.0.jar",
+          "name": "kotlinx-serialization-json-jvm-1.10.0.jar",
           "type": "Library"
         },
         {
@@ -317,11 +305,11 @@
           "type": "Library"
         },
         {
-          "name": "plugin-repository-rest-client-2.0.51.jar",
+          "name": "plugin-repository-rest-client-2.0.50.jar",
           "type": "Library"
         },
         {
-          "name": "retrofit-3.0.0.jar",
+          "name": "retrofit-2.11.0.jar",
           "type": "Library"
         },
         {
@@ -329,15 +317,15 @@
           "type": "Library"
         },
         {
-          "name": "smallrye-common-annotation-2.14.0.jar",
+          "name": "smallrye-common-annotation-2.6.0.jar",
           "type": "Library"
         },
         {
-          "name": "smallrye-common-constraint-2.14.0.jar",
+          "name": "smallrye-common-constraint-2.6.0.jar",
           "type": "Library"
         },
         {
-          "name": "smallrye-common-cpu-2.14.0.jar",
+          "name": "smallrye-common-cpu-2.10.0.jar",
           "type": "Library"
         },
         {
@@ -345,7 +333,7 @@
           "type": "Library"
         },
         {
-          "name": "smallrye-common-function-2.14.0.jar",
+          "name": "smallrye-common-function-2.6.0.jar",
           "type": "Library"
         },
         {
@@ -361,19 +349,23 @@
           "type": "Library"
         },
         {
+          "name": "stax-ex-1.8.jar",
+          "type": "Library"
+        },
+        {
           "name": "stax2-api-4.2.2.jar",
           "type": "Library"
         },
         {
-          "name": "structure-base-3.330.jar",
+          "name": "structure-base-3.324.jar",
           "type": "Library"
         },
         {
-          "name": "structure-ide-3.330.jar",
+          "name": "structure-ide-3.324.jar",
           "type": "Library"
         },
         {
-          "name": "structure-intellij-3.330.jar",
+          "name": "structure-intellij-3.324.jar",
           "type": "Library"
         },
         {
@@ -381,11 +373,11 @@
           "type": "Library"
         },
         {
-          "name": "txw2-4.0.2.jar",
+          "name": "txw2-2.3.1.jar",
           "type": "Library"
         },
         {
-          "name": "undertow-core-2.4.1.Final.jar",
+          "name": "undertow-core-2.3.24.Final.jar",
           "type": "Library"
         },
         {
@@ -393,7 +385,7 @@
           "type": "Library"
         },
         {
-          "name": "wildfly-common-2.0.1.jar",
+          "name": "wildfly-common-2.0.0.jar",
           "type": "Library"
         },
         {
@@ -614,7 +606,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.38.0",
+          "name": "Gradle: io.sentry:sentry:8.47.0",
           "type": "Library"
         },
         {
@@ -682,79 +674,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
+          "name": "Gradle: bundledPlugin:com.intellij:IU-261.22158.277",
           "type": "Library"
         },
         {
           "name": "Gradle: org.apache.ant:ant-launcher:1.10.12",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
           "type": "Library"
         }
       ]
@@ -789,7 +713,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.38.0",
+          "name": "Gradle: io.sentry:sentry:8.47.0",
           "type": "Library"
         },
         {
@@ -861,7 +785,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
+          "name": "Gradle: bundledPlugin:com.intellij:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -874,30 +798,6 @@
         },
         {
           "name": "Gradle: org.hamcrest:hamcrest-core:1.3",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
           "type": "Library"
         },
         {
@@ -925,30 +825,6 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: com.fasterxml.jackson.core:jackson-annotations:2.19.0",
           "type": "Library"
         },
@@ -957,27 +833,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
           "type": "Library"
         }
       ]
