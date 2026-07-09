@@ -18,12 +18,12 @@
       "version": "1.9.0"
     },
     {
-      "ideaName": "Gradle: io.sentry:sentry:8.48.0",
-      "gradleName": "io.sentry:sentry:8.48.0",
+      "ideaName": "Gradle: io.sentry:sentry:8.38.0",
+      "gradleName": "io.sentry:sentry:8.38.0",
       "unresolved": false,
       "groupId": "io.sentry",
       "artifactId": "sentry",
-      "version": "8.48.0"
+      "version": "8.38.0"
     },
     {
       "ideaName": "Gradle: org.apache.commons:commons-text:1.15.0",
@@ -74,12 +74,156 @@
       "version": "3.20.0"
     },
     {
+      "ideaName": "Gradle: bundledModule:intellij.platform.backend:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.backend:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.backend",
+      "version": "IU-261.22158.277"
+    },
+    {
       "ideaName": "Gradle: org.apache.ant:ant-launcher:1.10.12",
       "gradleName": "org.apache.ant:ant-launcher:1.10.12",
       "unresolved": false,
       "groupId": "org.apache.ant",
       "artifactId": "ant-launcher",
       "version": "1.10.12"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.spellchecker:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.spellchecker:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.spellchecker",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl.lang:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.impl.lang",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.bookmarks.backend:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.bookmarks.backend",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.todo.backend:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.todo.backend",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.kernel.backend:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.kernel.backend",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.structuralSearch:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.structuralSearch",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.rpc.backend:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.rpc.backend",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.impl",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.java.aetherDependencyResolver:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.java.aetherDependencyResolver",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.libraries.maven.resolver.provider:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.maven.resolver.provider",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.libraries.lucene.common:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.lucene.common",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.todo:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.todo:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.todo",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.vcs.log:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.log",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.vcs.impl.shared:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.impl.shared",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.microba:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.libraries.microba:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.microba",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.libraries.plexus.utils:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.plexus.utils",
+      "version": "IU-261.22158.277"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
+      "gradleName": "bundledModule:intellij.platform.vcs.log.graph:IU-261.22158.277",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.log.graph",
+      "version": "IU-261.22158.277"
     },
     {
       "ideaName": "Gradle: bundledModule:com.intellij.modules.ultimate:IU-261.22158.277",
