@@ -53,7 +53,7 @@
           "type": "Library"
         },
         {
-          "name": "core-jvm-1.0.0.jar",
+          "name": "core-jvm-1.0.1.jar",
           "type": "Library"
         },
         {
@@ -185,7 +185,7 @@
           "type": "Library"
         },
         {
-          "name": "intellij-platform-gradle-plugin-2.18.0.jar",
+          "name": "intellij-platform-gradle-plugin-2.18.1.jar",
           "type": "Library"
         },
         {
@@ -269,7 +269,7 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/86c7143f2a3c211b2a841d2c71f92168/classes",
+          "name": "kotlin-dsl/accessors/c815822250374fa02fd6807744ec38b8/classes",
           "type": "Library"
         },
         {
@@ -325,7 +325,7 @@
           "type": "Library"
         },
         {
-          "name": "serialization-jvm-1.0.0.jar",
+          "name": "serialization-jvm-1.0.1.jar",
           "type": "Library"
         },
         {
