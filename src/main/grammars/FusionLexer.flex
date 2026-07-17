@@ -5,7 +5,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import de.vette.idea.neos.lang.fusion.psi.FusionTypes;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueDsl;
-import groovyjarjarantlr.Token;
 
 %%
 

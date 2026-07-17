@@ -1,8 +1,5 @@
 package de.vette.idea.neos.errorReporting;
 
-import com.intellij.diagnostic.*;
-import com.intellij.ide.plugins.PluginManagerCore;
-import com.intellij.ide.plugins.PluginUtil;
 import com.intellij.idea.IdeaLogger;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.application.ApplicationManager;
@@ -10,7 +7,6 @@ import com.intellij.openapi.diagnostic.ErrorReportSubmitter;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
 import com.intellij.openapi.diagnostic.SubmittedReportInfo;
 import com.intellij.openapi.extensions.PluginDescriptor;
-import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.NlsActions;
 import com.intellij.openapi.util.NlsContexts;
@@ -32,27 +28,25 @@ public class SentryErrorReporter extends ErrorReportSubmitter {
     }
 
     @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
-    private static boolean doSubmit(final IdeaLoggingEvent[] events,
-                                    final Component parentComponent,
-                                    final Consumer<? super SubmittedReportInfo> consumer,
-                                    final String description) {
+    private boolean doSubmit(final IdeaLoggingEvent[] events,
+                             final Component parentComponent,
+                             final Consumer<? super SubmittedReportInfo> consumer,
+                             final String description) {
         Sentry.init(options -> {
             options.setDsn("https://078a292636084b9581b1bb73fbd3e488@o577996.ingest.sentry.io/5733915");
         });
 
         ArrayList<String> eventIds = new ArrayList<>();
         for (IdeaLoggingEvent ideaEvent : events) {
-            if (ideaEvent instanceof IdeaReportingEvent && ideaEvent.getData() instanceof AbstractMessage) {
-                Throwable ex = ((AbstractMessage) ideaEvent.getData()).getThrowable();
-
+            Throwable ex = ideaEvent.getThrowable();
+            if (ex != null) {
                 SentryEvent sentryEvent = new SentryEvent();
 
                 if (sentryEvent.getEventId() != null) {
                     eventIds.add(sentryEvent.getEventId().toString());
                 }
 
-                PluginId pluginId = PluginUtil.getInstance().findPluginId(ex);
-                PluginDescriptor plugin = PluginManagerCore.getPlugin(pluginId);
+                PluginDescriptor plugin = getPluginDescriptor();
                 if (plugin != null) {
                     sentryEvent.setRelease(plugin.getVersion());
                 }

@@ -19,9 +19,13 @@
 package de.vette.idea.neos.lang.fusion.structure;
 
 import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.pom.Navigatable;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.SmartPointerManager;
+import com.intellij.psi.SmartPsiElementPointer;
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -32,10 +36,48 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
+public class FusionTreeElement implements StructureViewTreeElement, ItemPresentation {
+
+    private final SmartPsiElementPointer<PsiElement> myElementPointer;
 
     FusionTreeElement(PsiElement element) {
-        super(element);
+        myElementPointer = SmartPointerManager.getInstance(element.getProject()).createSmartPsiElementPointer(element);
+    }
+
+    @Nullable
+    public PsiElement getElement() {
+        return myElementPointer.getElement();
+    }
+
+    @Override
+    public PsiElement getValue() {
+        return getElement();
+    }
+
+    @NotNull
+    @Override
+    public ItemPresentation getPresentation() {
+        return this;
+    }
+
+    @Override
+    public TreeElement @NotNull [] getChildren() {
+        Collection<StructureViewTreeElement> children = getChildrenBase();
+        return children.toArray(StructureViewTreeElement.EMPTY_ARRAY);
+    }
+
+    @Override
+    public void navigate(boolean requestFocus) {
+        PsiElement element = getElement();
+        if (element instanceof Navigatable) {
+            ((Navigatable) element).navigate(requestFocus);
+        }
+    }
+
+    @Override
+    public boolean canNavigateToSource() {
+        PsiElement element = getElement();
+        return element instanceof Navigatable && ((Navigatable) element).canNavigateToSource();
     }
 
     @Override
@@ -53,7 +95,6 @@ public class FusionTreeElement extends PsiTreeElementBase<PsiElement> {
     }
 
     @NotNull
-    @Override
     public Collection<StructureViewTreeElement> getChildrenBase() {
         Collection<StructureViewTreeElement> result = new ArrayList<>();
 
