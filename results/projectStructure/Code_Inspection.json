@@ -249,7 +249,7 @@
           "type": "Library"
         },
         {
-          "name": "kotlin-dsl/accessors/4ef542d45f918c7fdebd6478fb71fa8e/classes",
+          "name": "kotlin-dsl/accessors/36d9e10298535bfce881d4accae1245e/classes",
           "type": "Library"
         },
         {
@@ -277,15 +277,15 @@
           "type": "Library"
         },
         {
-          "name": "kover-features-jvm-0.9.9.jar",
+          "name": "kover-features-jvm-0.9.8.jar",
           "type": "Library"
         },
         {
-          "name": "kover-gradle-plugin-0.9.9.jar",
+          "name": "kover-gradle-plugin-0.9.8.jar",
           "type": "Library"
         },
         {
-          "name": "kover-jvm-agent-0.9.9.jar",
+          "name": "kover-jvm-agent-0.9.8.jar",
           "type": "Library"
         },
         {

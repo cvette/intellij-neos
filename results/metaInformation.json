@@ -7,12 +7,12 @@
   "linter": "QDJVMC",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/29617694245",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/30495892640",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "26be4182d61eb03bddc19f1ec2db622154641922",
-        "branch": "dependabot/gradle/org.jetbrains.kotlinx.kover-0.9.9"
+        "revisionId": "438ecda35db8af42bb5c42eb1f0fe2f518ccab6d",
+        "branch": "dependabot/github_actions/JetBrains/qodana-action-2026.2"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
