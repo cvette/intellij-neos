@@ -20,14 +20,22 @@ package de.vette.idea.neos.lang.fusion.formatter;
 
 import com.intellij.application.options.CodeStyleAbstractConfigurable;
 import com.intellij.application.options.CodeStyleAbstractPanel;
+import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleConfigurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
+import de.vette.idea.neos.lang.fusion.FusionLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FusionCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
+
+    @Nullable
+    @Override
+    public Language getLanguage() {
+        return FusionLanguage.INSTANCE;
+    }
 
     @Nullable
     @Override
