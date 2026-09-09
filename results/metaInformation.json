@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 167,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 167
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/30771282502",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/34319887898",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "ee448e71e67ace9cc5a99a8954c0f094995f8a36",
-        "branch": "main"
+        "revisionId": "e7b64903025e8b1dc99fbf89b6ea7113b97d87eb",
+        "branch": "dependabot/github_actions/actions/setup-java-5.6.0"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
