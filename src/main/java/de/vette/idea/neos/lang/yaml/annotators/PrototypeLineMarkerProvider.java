@@ -69,11 +69,13 @@ public class PrototypeLineMarkerProvider implements LineMarkerProvider {
 
                 List<PsiElement> targets = ResolveEngine.getPrototypeDefinitions(el.getProject(), nodeTypeSplit[1], nodeTypeSplit[0]);
                 if (!targets.isEmpty()) {
+                    PsiElement keyLeaf = ((YAMLKeyValue) el).getKey();
+                    if (keyLeaf == null) continue;
                     RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
                             .create(FusionIcons.PROTOTYPE)
                             .setTargets(targets)
                             .setTooltipText("Go to Fusion prototype")
-                            .createLineMarkerInfo(el);
+                            .createLineMarkerInfo(keyLeaf);
                     result.add(info);
                 }
             }
