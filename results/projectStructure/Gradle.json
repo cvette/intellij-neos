@@ -1,5 +1,5 @@
 {
-  "gradleJvm": "#USE_PROJECT_JDK",
+  "gradleJvm": "25",
   "libraries": [
     {
       "ideaName": "Gradle: org.jetbrains:grammar-kit:2022.3.2",
@@ -82,19 +82,19 @@
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.backend:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.backend:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.backend",
-      "version": "IU-263.7307.200"
-    },
-    {
       "ideaName": "Gradle: bundledModule:intellij.libraries.joni:IU-263.7307.200",
       "gradleName": "bundledModule:intellij.libraries.joni:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.libraries.joni",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.backend:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.backend:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.backend",
       "version": "IU-263.7307.200"
     },
     {
@@ -104,70 +104,6 @@
       "groupId": "org.apache.ant",
       "artifactId": "ant-launcher",
       "version": "1.10.12"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.structureView:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.structureView:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.structureView",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.spellchecker:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.spellchecker:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.spellchecker",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.duplicates.analysis",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.externalSystem",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.polySymbols.web",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.polySymbols",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.regexp:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.regexp:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.regexp",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.structureView.impl",
-      "version": "IU-263.7307.200"
     },
     {
       "ideaName": "Gradle: bundledModule:intellij.libraries.jackson:IU-263.7307.200",
@@ -183,6 +119,22 @@
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.libraries.jackson.jr.objects",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.structureView:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.structureView:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.structureView",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.structureView.impl",
       "version": "IU-263.7307.200"
     },
     {
@@ -202,43 +154,35 @@
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.kernel.backend:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.rpc.topics",
+      "artifactId": "intellij.platform.kernel.backend",
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.rpc:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.rpc:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.rpc",
+      "artifactId": "intellij.platform.externalSystem",
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.libraries.lucene.common",
+      "artifactId": "intellij.platform.duplicates.analysis",
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.buildView:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.buildView:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.spellchecker:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.spellchecker:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.buildView",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.smRunner:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.smRunner:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.smRunner",
+      "artifactId": "intellij.spellchecker",
       "version": "IU-263.7307.200"
     },
     {
@@ -250,11 +194,51 @@
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.builtInServer.impl:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.builtInServer.impl:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.debugger.impl",
+      "artifactId": "intellij.platform.builtInServer.impl",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.ide.favoritesTreeView:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.ide.favoritesTreeView:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.ide.favoritesTreeView",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.ide.internal:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.ide.internal:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.ide.internal",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.ml:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.ml:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.ml",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.projectView:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.projectView:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.projectView",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.projectView.backend:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.projectView.backend:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.projectView.backend",
       "version": "IU-263.7307.200"
     },
     {
@@ -266,11 +250,67 @@
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.vcs:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.vcs:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.regexp:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.regexp:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.vcs",
+      "artifactId": "intellij.regexp",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.polySymbols",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.polySymbols.web",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.rpc:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.rpc:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.rpc",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.rpc.topics",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.buildView:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.buildView:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.buildView",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.debugger.impl",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.smRunner:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.smRunner:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.smRunner",
       "version": "IU-263.7307.200"
     },
     {
@@ -282,43 +322,27 @@
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.debugger:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.debugger:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.vcs:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.debugger",
+      "artifactId": "intellij.platform.vcs",
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.rpc.backend:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.libraries.teamcity.service.messages",
+      "artifactId": "intellij.platform.rpc.backend",
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.debugger.impl.ui",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.debugger.impl.shared",
-      "version": "IU-263.7307.200"
-    },
-    {
-      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
-      "unresolved": false,
-      "groupId": "bundledModule",
-      "artifactId": "intellij.platform.debugger.impl.rpc",
+      "artifactId": "intellij.libraries.lucene.common",
       "version": "IU-263.7307.200"
     },
     {
@@ -330,11 +354,59 @@
       "version": "IU-263.7307.200"
     },
     {
-      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
-      "gradleName": "bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+      "ideaName": "Gradle: bundledModule:intellij.platform.debugger:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.debugger:IU-263.7307.200",
       "unresolved": false,
       "groupId": "bundledModule",
-      "artifactId": "intellij.platform.vcs.shared",
+      "artifactId": "intellij.platform.debugger",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.feedback:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.feedback:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.feedback",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.buildScripts.downloader:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.buildScripts.downloader:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.buildScripts.downloader",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.debugger.impl.rpc",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.debugger.impl.shared",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.debugger.impl.ui",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.teamcity.service.messages",
       "version": "IU-263.7307.200"
     },
     {
@@ -343,6 +415,38 @@
       "unresolved": false,
       "groupId": "bundledModule",
       "artifactId": "intellij.platform.vcs.core",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.vcs.shared",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.wsl.impl:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.wsl.impl:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.wsl.impl",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.libraries.kotlin.metadata:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.libraries.kotlin.metadata:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.libraries.kotlin.metadata",
+      "version": "IU-263.7307.200"
+    },
+    {
+      "ideaName": "Gradle: bundledModule:intellij.platform.buildScripts.concurrency:IU-263.7307.200",
+      "gradleName": "bundledModule:intellij.platform.buildScripts.concurrency:IU-263.7307.200",
+      "unresolved": false,
+      "groupId": "bundledModule",
+      "artifactId": "intellij.platform.buildScripts.concurrency",
       "version": "IU-263.7307.200"
     },
     {
@@ -442,14 +546,6 @@
       "version": "1.3.0"
     },
     {
-      "ideaName": "Gradle: tools.jackson.core:jackson-databind:3.2.2",
-      "gradleName": "tools.jackson.core:jackson-databind:3.2.2",
-      "unresolved": false,
-      "groupId": "tools.jackson.core",
-      "artifactId": "jackson-databind",
-      "version": "3.2.2"
-    },
-    {
       "ideaName": "Gradle: tools.jackson.core:jackson-core:3.2.2",
       "gradleName": "tools.jackson.core:jackson-core:3.2.2",
       "unresolved": false,
@@ -464,6 +560,14 @@
       "groupId": "com.fasterxml.jackson.core",
       "artifactId": "jackson-annotations",
       "version": "2.22"
+    },
+    {
+      "ideaName": "Gradle: tools.jackson.core:jackson-databind:3.2.2",
+      "gradleName": "tools.jackson.core:jackson-databind:3.2.2",
+      "unresolved": false,
+      "groupId": "tools.jackson.core",
+      "artifactId": "jackson-databind",
+      "version": "3.2.2"
     },
     {
       "ideaName": "Gradle: tools.jackson.module:jackson-module-kotlin:3.2.2",

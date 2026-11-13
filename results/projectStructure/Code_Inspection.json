@@ -41,6 +41,12 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
+        },
+        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -56,12 +62,6 @@
               "packagePrefix": ""
             }
           ]
-        },
-        {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -94,10 +94,6 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledPlugin:com.intellij.xml:IU-263.7307.200",
           "type": "Library"
         },
@@ -115,6 +111,10 @@
         },
         {
           "name": "Gradle: bundledPlugin:com.intellij.java:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -154,10 +154,6 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.backend:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledModule:intellij.libraries.joni:IU-263.7307.200",
           "type": "Library"
         },
@@ -166,39 +162,11 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.apache.ant:ant-launcher:1.10.12",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.structureView:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.spellchecker:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.regexp:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -210,6 +178,14 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: bundledModule:intellij.platform.structureView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: bundledModule:intellij.platform.coverage:IU-263.7307.200",
           "type": "Library"
         },
@@ -218,23 +194,19 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.rpc:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.buildView:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.smRunner:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -242,7 +214,27 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.builtInServer.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.ide.favoritesTreeView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.ide.internal:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.ml:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.projectView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.projectView.backend:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -250,7 +242,35 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.regexp:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.rpc:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.buildView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.smRunner:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -258,23 +278,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.debugger:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.vcs:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -282,11 +294,55 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.debugger:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledPlugin:intellij.java.aetherDependencyResolver.plugin:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.feedback:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.buildScripts.downloader:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
           "type": "Library"
         },
         {
           "name": "Gradle: bundledModule:intellij.platform.vcs.core:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.wsl.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.kotlin.metadata:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.buildScripts.concurrency:IU-263.7307.200",
           "type": "Library"
         }
       ]
@@ -333,10 +389,6 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledPlugin:com.intellij.xml:IU-263.7307.200",
           "type": "Library"
         },
@@ -354,6 +406,10 @@
         },
         {
           "name": "Gradle: bundledPlugin:com.intellij.java:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledPlugin:com.intellij.java-i18n:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -397,15 +453,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.backend:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledModule:intellij.libraries.joni:IU-263.7307.200",
           "type": "Library"
         },
         {
           "name": "Gradle: bundledPlugin:Coverage:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.backend:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -433,38 +489,6 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.structureView:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.spellchecker:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.regexp:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledModule:intellij.libraries.jackson:IU-263.7307.200",
           "type": "Library"
         },
@@ -473,11 +497,79 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: bundledModule:intellij.platform.structureView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.structureView.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: bundledModule:intellij.platform.coverage:IU-263.7307.200",
           "type": "Library"
         },
         {
           "name": "Gradle: bundledModule:intellij.platform.testRunner:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.kernel.backend:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.externalSystem:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.duplicates.analysis:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.spellchecker:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.externalSystem.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.builtInServer.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.ide.favoritesTreeView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.ide.internal:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.ml:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.projectView:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.projectView.backend:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.threadDumpParser:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.regexp:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.polySymbols:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.polySymbols.web:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -493,15 +585,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: tools.jackson.core:jackson-databind:3.2.2",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: tools.jackson.core:jackson-core:3.2.2",
           "type": "Library"
         },
         {
           "name": "Gradle: com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: tools.jackson.core:jackson-databind:3.2.2",
           "type": "Library"
         },
         {
@@ -513,15 +605,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledModule:intellij.platform.rpc:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.rpc.topics:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -529,23 +617,11 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.smRunner:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.externalSystem.impl:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
           "name": "Gradle: bundledModule:intellij.platform.debugger.impl:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.threadDumpParser:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.vcs:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.smRunner:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -553,27 +629,15 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: org.apache.httpcomponents:httpclient:4.5.14",
+          "name": "Gradle: bundledModule:intellij.platform.vcs:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.debugger:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.rpc.backend:IU-263.7307.200",
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.libraries.lucene.common:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -581,7 +645,39 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+          "name": "Gradle: bundledModule:intellij.platform.debugger:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledPlugin:intellij.java.aetherDependencyResolver.plugin:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.feedback:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.apache.httpcomponents:httpclient:4.5.14",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.buildScripts.downloader:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.rpc:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.shared:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.debugger.impl.ui:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.teamcity.service.messages:IU-263.7307.200",
           "type": "Library"
         },
         {
@@ -589,7 +685,23 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: bundledModule:intellij.platform.vcs.shared:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.wsl.impl:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.libraries.kotlin.metadata:IU-263.7307.200",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.apache.httpcomponents:httpcore:4.4.16",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: bundledModule:intellij.platform.buildScripts.concurrency:IU-263.7307.200",
           "type": "Library"
         }
       ]
