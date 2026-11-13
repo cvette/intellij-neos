@@ -1,6 +1,8 @@
+.DS_Store
 .idea
 .qodana
 .gradle
+.kotlin
 src/gen
 build/
 out/

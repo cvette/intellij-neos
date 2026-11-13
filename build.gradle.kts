@@ -1,6 +1,4 @@
-import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
@@ -8,23 +6,19 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 plugins {
     id("idea")
     id("java")
-    id("java-library")
 
-    alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
-    alias(libs.plugins.grammarKit) // Gradle Grammar-Kit Plugin
-    alias(libs.plugins.changelog) // Gradle Changelog Plugin
-    alias(libs.plugins.qodana) // Gradle Qodana Plugin
-    alias(libs.plugins.kover) // Gradle Kover Plugin
+    id("org.jetbrains.intellij.platform") // IntelliJ Platform Gradle Plugin
+    id("org.jetbrains.grammarkit") // Gradle Grammar-Kit Plugin
+    id("org.jetbrains.changelog") // Gradle Changelog Plugin
+    id("org.jetbrains.qodana") // Gradle Qodana Plugin
+    id("org.jetbrains.kotlinx.kover") // Gradle Kover Plugin
 }
 
-group = providers.gradleProperty("pluginGroup").get()
-version = providers.gradleProperty("pluginVersion").get()
-
-// Configure project's dependencies
+// Project repositories take precedence over settings repositories when the IntelliJ Platform plugin
+// registers its own. Keep the recommended set here so installer and Marketplace artifacts resolve.
 repositories {
     mavenCentral()
 
-    // IntelliJ Platform Gradle Plugin Repositories Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
     intellijPlatform {
         defaultRepositories()
     }
@@ -42,34 +36,35 @@ sourceSets {
     }
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(providers.gradleProperty("javaVersion").get())
-    }
-}
-
-// Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-    testImplementation(libs.junit)
+    testImplementation("junit:junit:4.13.2")
     implementation("io.sentry:sentry:8.38.0")
     implementation("org.apache.commons:commons-text:1.15.0")
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
-        create {
-            type.set(providers.gradleProperty("platformType").map { IntelliJPlatformType.fromCode(it) })
-            version.set(providers.gradleProperty("platformVersion"))
+        // 2025.3+ publishes a unified IntelliJ IDEA distribution. Ultimate is required for the PHP plugin.
+        intellijIdeaUltimate("2026.3") {
+            useInstaller = true
         }
 
-        // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
-        bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
-        bundledModules(providers.gradleProperty("platformBundledModules").map { it.split(',') })
+        bundledPlugins(
+            "com.intellij.xml",
+            "com.intellij.css",
+            "org.jetbrains.plugins.yaml",
+            "com.intellij.modules.json",
+            "com.intellij.java",
+            "com.intellij.java-i18n",
+            "com.intellij.properties",
+        )
+        bundledModules("intellij.platform.langInjection")
 
-        // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
-        plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
+        plugins(
+            "com.jetbrains.hackathon.indices.viewer:1.32",
+            "PsiViewer:2026.3-EAP.6800.24",
+            "com.jetbrains.php:263.7307.200",
+        )
 
-        pluginVerifier()
-        zipSigner()
         testFramework(TestFrameworkType.Platform)
 
         // Add modules only accessible via IntelliJ Ultimate subscription - like the php module
@@ -80,8 +75,6 @@ dependencies {
 // Configure IntelliJ Platform Gradle Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html
 intellijPlatform {
     pluginConfiguration {
-        version = providers.gradleProperty("pluginVersion")
-
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         description = providers.fileContents(layout.projectDirectory.file("README.md")).asText.map {
             val start = "<!-- Plugin description -->"
@@ -95,55 +88,15 @@ intellijPlatform {
             }
         }
 
-        val changelog = project.changelog // local variable for configuration cache compatibility
-        // Get the latest available change notes from the changelog file
-        changeNotes = providers.gradleProperty("pluginVersion").map { pluginVersion ->
-            with(changelog) {
-                renderItem(
-                    (getOrNull(pluginVersion) ?: getUnreleased())
-                        .withHeader(false)
-                        .withEmptySections(false),
-                    Changelog.OutputType.HTML,
-                )
-            }
-        }
-
         ideaVersion {
-            sinceBuild = providers.gradleProperty("pluginSinceBuild")
-            untilBuild = providers.gradleProperty("pluginUntilBuild")
+            untilBuild = "263.*"
         }
     }
-
-    signing {
-        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
-        privateKey = providers.environmentVariable("PRIVATE_KEY")
-        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
-    }
-
-    publishing {
-        token = providers.environmentVariable("PUBLISH_TOKEN")
-        // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
-        // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
-        // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-        channels = providers.gradleProperty("pluginVersion").map { listOf(it.substringAfter('-', "").substringBefore('.').ifEmpty { "default" }) }
-    }
-
-    pluginVerification {
-        ides {
-            recommended()
-        }
-    }
-}
-
-// Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
-changelog {
-    groups.empty()
-    repositoryUrl = providers.gradleProperty("pluginRepositoryUrl")
 }
 
 grammarKit {
-    jflexRelease = providers.gradleProperty("jFlexVersion")
-    grammarKitRelease = providers.gradleProperty("grammarKitVersion")
+    jflexRelease = "1.9.0"
+    grammarKitRelease = "2022.3.2"
 }
 
 val generateEelLexer = tasks.register<GenerateLexerTask>("GenerateEelLexer") {
@@ -165,6 +118,8 @@ val generateFusionLexer = tasks.register<GenerateLexerTask>("GenerateFusionLexer
 }
 
 val generateEelParser = tasks.register<GenerateParserTask>("GenerateEelParser") {
+    // Lexer generation purges this package directory, so the parser must be written afterwards.
+    dependsOn(generateEelLexer)
     sourceFile = file("src/main/grammars/EelParser.bnf")
     targetRootOutputDir = file("src/gen")
     pathToParser = "/de/vette/idea/neos/lang/eel/parser/EelParser.java"
@@ -173,6 +128,8 @@ val generateEelParser = tasks.register<GenerateParserTask>("GenerateEelParser") 
 }
 
 val generateFusionParser = tasks.register<GenerateParserTask>("GenerateFusionParser") {
+    // Lexer generation purges this package directory, so the parser must be written afterwards.
+    dependsOn(generateFusionLexer)
     sourceFile = file("src/main/grammars/FusionParser.bnf")
     targetRootOutputDir = file("src/gen")
     pathToParser = "/de/vette/idea/neos/lang/fusion/parser/FusionParser.java"
@@ -181,21 +138,8 @@ val generateFusionParser = tasks.register<GenerateParserTask>("GenerateFusionPar
 }
 
 tasks {
-    // Set the JVM compatibility versions
-    providers.gradleProperty("javaVersion").let {
-        withType<JavaCompile> {
-            sourceCompatibility = it.get()
-            targetCompatibility = it.get()
-            dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
-        }
-    }
-
-    wrapper {
-        gradleVersion = providers.gradleProperty("gradleVersion").get()
-    }
-
-    publishPlugin {
-        dependsOn(patchChangelog)
+    withType<JavaCompile>().configureEach {
+        dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
     }
 
     initializeIntellijPlatformPlugin {
@@ -204,26 +148,5 @@ tasks {
         dependsOn(generateFusionLexer)
         dependsOn(generateEelParser)
         dependsOn(generateFusionParser)
-    }
-}
-
-intellijPlatformTesting {
-    runIde {
-        register("runIdeForUiTests") {
-            task {
-                jvmArgumentProviders += CommandLineArgumentProvider {
-                    listOf(
-                        "-Drobot-server.port=8082",
-                        "-Dide.mac.message.dialogs.as.sheets=false",
-                        "-Djb.privacy.policy.text=<!--999.999-->",
-                        "-Djb.consents.confirmation.enabled=false",
-                    )
-                }
-            }
-
-            plugins {
-                robotServerPlugin()
-            }
-        }
     }
 }
