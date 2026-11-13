@@ -57,6 +57,45 @@ public class AfxParsing extends HtmlParsing {
     }
 
     @Override
+    protected boolean hasCustomTagHeaderContent() {
+        return token() == AfxElementTypes.AFX_EEL_START_DELIMITER;
+    }
+
+    @Override
+    protected void parseCustomTagHeaderContent() {
+        parseSpread();
+    }
+
+    /**
+     * AFX spreads ({@code {...expression}}) stand in for an attribute and are transpiled to {@code @apply}.
+     */
+    private void parseSpread() {
+        PsiBuilder.Marker spread = mark();
+        advance(); // {
+
+        if (token() == AfxElementTypes.AFX_SPREAD_OPERATOR) {
+            advance(); // ...
+        } else {
+            error("Spread operator expected");
+        }
+
+        if (token() == AfxElementTypes.AFX_EEL_VALUE) {
+            getBuilder().remapCurrentToken(AfxLazyElementTypes.CONTENT_EXPRESSION);
+            advance();
+        } else {
+            error("Expression expected");
+        }
+
+        if (token() == AfxElementTypes.AFX_EEL_END_DELIMITER) {
+            advance(); // }
+        } else {
+            error("Missing }");
+        }
+
+        spread.done(AfxElementTypes.AFX_SPREAD);
+    }
+
+    @Override
     protected boolean hasCustomTagContent() {
         IElementType type = this.token();
         return type == AfxElementTypes.AFX_EEL_START_DELIMITER;
@@ -109,7 +148,7 @@ public class AfxParsing extends HtmlParsing {
                 error(XmlParserBundle.message("xml.parsing.unclosed.attribute.value"));
             }
         } else {
-            while(token() == XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN || token() == AfxElementTypes.AFX_EEL_START_DELIMITER) {
+            while (token() == XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN || isAttributeEelExpression()) {
                 if (token() == AfxElementTypes.AFX_EEL_START_DELIMITER) {
                     parseAttributeExpression();
                 } else {
@@ -119,6 +158,15 @@ public class AfxParsing extends HtmlParsing {
         }
 
         attValue.done(XmlElementType.XML_ATTRIBUTE_VALUE);
+    }
+
+    /**
+     * An attribute expression is {@code {eel}}. A spread {@code {...eel}} uses the same opening token
+     * and must be left for the tag header.
+     */
+    private boolean isAttributeEelExpression() {
+        return token() == AfxElementTypes.AFX_EEL_START_DELIMITER
+                && getBuilder().lookAhead(1) != AfxElementTypes.AFX_SPREAD_OPERATOR;
     }
 
     private void parseAttributeExpression() {

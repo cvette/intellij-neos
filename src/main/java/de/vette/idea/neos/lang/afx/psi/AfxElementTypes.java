@@ -12,6 +12,8 @@ public class AfxElementTypes {
     public static AfxElementType AFX_EEL_START_DELIMITER = new AfxElementType("AFX_EEL_START_DELIMITER");
     public static AfxElementType AFX_EEL_END_DELIMITER = new AfxElementType("AFX_EEL_END_DELIMITER");
     public static AfxElementType AFX_EEL_VALUE = new AfxElementType("AFX_EEL_VALUE");
+    public static AfxElementType AFX_SPREAD_OPERATOR = new AfxElementType("AFX_SPREAD_OPERATOR");
+    public static AfxElementType AFX_SPREAD = new AfxElementType("AFX_SPREAD");
 
     static class AfxElementType extends IElementType {
         public AfxElementType(@NotNull String debugName) {

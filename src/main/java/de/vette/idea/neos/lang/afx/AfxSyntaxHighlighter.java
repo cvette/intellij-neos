@@ -23,6 +23,7 @@ public class AfxSyntaxHighlighter extends HtmlFileHighlighter {
         ourMap1 = new HashMap<>();
         ourMap1.put(AfxElementTypes.AFX_EEL_START_DELIMITER, FusionHighlightingColors.EEL_WRAPPER);
         ourMap1.put(AfxElementTypes.AFX_EEL_END_DELIMITER, FusionHighlightingColors.EEL_WRAPPER);
+        ourMap1.put(AfxElementTypes.AFX_SPREAD_OPERATOR, FusionHighlightingColors.EEL_WRAPPER);
     }
 
     @Override

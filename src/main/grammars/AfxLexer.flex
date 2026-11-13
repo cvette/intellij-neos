@@ -54,6 +54,8 @@ import com.intellij.lexer.FlexLexer;import de.vette.idea.neos.lang.afx.psi.AfxEl
 %state ATTRIBUTE_VALUE_SQ
 %state ATTRIBUTE_VALUE_EEL
 %state EEL_IN_TAG_CONTENT
+%state SPREAD_DOTS
+%state SPREAD_EEL
 %state PROCESSING_INSTRUCTION
 %state TAG_CHARACTERS
 %state C_COMMENT_START
@@ -65,7 +67,8 @@ WHITE_SPACE_CHARS=[ \n\r\t\f\u2028\u2029\u0085]+
 
 TAG_NAME=({ALPHA}|"_"|":")({ALPHA}|{DIGIT}|"_"|":"|"."|"-")*
 /* see http://www.w3.org/TR/html5/syntax.html#syntax-attribute-name */
-ATTRIBUTE_NAME=([^ \n\r\t\f<>/=])+
+/* '{' starts an AFX spread ({...expr}) and must not be swallowed as an attribute name */
+ATTRIBUTE_NAME=[^ \n\r\t\f<>/={]([^ \n\r\t\f<>/=])*
 
 %%
 
@@ -90,6 +93,11 @@ ATTRIBUTE_NAME=([^ \n\r\t\f<>/=])+
 <BEFORE_TAG_ATTRIBUTES, TAG_ATTRIBUTES> ">" { yybegin(YYINITIAL); return XmlTokenType.XML_TAG_END; }
 <BEFORE_TAG_ATTRIBUTES, TAG_ATTRIBUTES> "/>" { yybegin(YYINITIAL); return XmlTokenType.XML_EMPTY_ELEMENT_END; }
 <BEFORE_TAG_ATTRIBUTES> {WHITE_SPACE_CHARS} { yybegin(TAG_ATTRIBUTES); return TokenType.WHITE_SPACE; }
+<BEFORE_TAG_ATTRIBUTES, TAG_ATTRIBUTES> "{" / "..." {
+  bracesNestingLevel = 0;
+  yybegin(SPREAD_DOTS);
+  return AfxElementTypes.AFX_EEL_START_DELIMITER;
+}
 <TAG_ATTRIBUTES> {ATTRIBUTE_NAME} { return XmlTokenType.XML_NAME; }
 <TAG_ATTRIBUTES> "=" { yybegin(ATTRIBUTE_VALUE_START); return XmlTokenType.XML_EQ; }
 <BEFORE_TAG_ATTRIBUTES, TAG_ATTRIBUTES, START_TAG_NAME, END_TAG_NAME> [^] { yybegin(YYINITIAL); yypushback(1); break; }
@@ -102,12 +110,14 @@ ATTRIBUTE_NAME=([^ \n\r\t\f<>/=])+
 <ATTRIBUTE_VALUE_START> "'" { yybegin(ATTRIBUTE_VALUE_SQ); return XmlTokenType.XML_ATTRIBUTE_VALUE_START_DELIMITER; }
 <ATTRIBUTE_VALUE_START> "{" { yybegin(ATTRIBUTE_VALUE_EEL); return AfxElementTypes.AFX_EEL_START_DELIMITER; }
 
-<ATTRIBUTE_VALUE_EEL, EEL_IN_TAG_CONTENT> {
+<SPREAD_DOTS> "..." { yybegin(SPREAD_EEL); return AfxElementTypes.AFX_SPREAD_OPERATOR; }
+
+<ATTRIBUTE_VALUE_EEL, EEL_IN_TAG_CONTENT, SPREAD_EEL> {
   "{" { bracesNestingLevel++; return AfxElementTypes.AFX_EEL_VALUE; }
   "}" {
           if (bracesNestingLevel > 0) { bracesNestingLevel--; return AfxElementTypes.AFX_EEL_VALUE; }
           if (yystate() == EEL_IN_TAG_CONTENT) yybegin(YYINITIAL);
-          if (yystate() == ATTRIBUTE_VALUE_EEL) yybegin(TAG_ATTRIBUTES);
+          if (yystate() == ATTRIBUTE_VALUE_EEL || yystate() == SPREAD_EEL) yybegin(TAG_ATTRIBUTES);
           return AfxElementTypes.AFX_EEL_END_DELIMITER;
       }
 
