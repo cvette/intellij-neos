@@ -68,6 +68,7 @@
     <xml.xmlSuppressionProvider implementation="de.vette.idea.neos.lang.afx.AfxInspectionSuppressor"/>
     <xml.xmlExtension implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxXmlExtension" />
     <xml.elementDescriptorProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxTagProvider" />
+    <xml.attributeDescriptorsProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxAttributeDescriptorsProvider"/>
     <xml.tagNameProvider implementation="de.vette.idea.neos.lang.afx.codeInsight.AfxTagProvider"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.afx.formatter.AfxCodeStyleSettingsProvider" />
 
