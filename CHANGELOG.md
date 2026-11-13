@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Compatibility with 2026.3
+
 ## [1.27.0] - 2026-07-31
 
 ### Added
