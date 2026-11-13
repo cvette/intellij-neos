@@ -3,45 +3,93 @@
   "listProblem": [
     {
       "tool": "Code Inspection",
-      "category": "Visibility",
+      "category": "Code maturity",
       "categoryPath": [
         {
           "id": "Java",
           "name": "Java"
         },
         {
-          "id": "Java/Visibility",
-          "name": "Visibility"
+          "id": "Java/Code maturity",
+          "name": "Code maturity"
         }
       ],
-      "type": "Class is exposed outside of its visibility scope",
+      "type": "Deprecated API usage",
       "tags": [
         "JAVA"
       ],
       "severity": "High",
-      "comment": "Class `AfxElementType` is exposed outside its defined visibility scope",
-      "detailsInfo": "Reports usages of classes in a field or method signature where the class has less visibility than the member that uses it. While legal Java, such members cannot be used outside of the visibility scope of the class type they reference.\n\n**Example:**\n\n\n      public class Parent {\n        public Child getChild() {\n          return new Child();\n        }\n\n        private class Child {}\n      }\n\n\nAdditionally, in Java 9 and higher, a module may hide some of its classes from other modules by not exporting their packages.\nHowever, if a member that is part of the exported API references a non-exported class in its signature,\nsuch a member cannot be used outside of the module.\n\nConfigure the inspection:\n\n* Use the **Report non-exported classes exposed in module API (Java 9+)** option to report module API members that expose non-exported classes.  \n  Note that the language level of the project or module needs to be 9 or higher for this option.\n* Use the **Report non-accessible classes exposed in public API** option to report on public members that expose classes with a smaller visibility scope.\n* Use the **Report private classes exposed in package-local API** option to report on package-local members that expose `private` classes.\n\nInspection ID: ClassEscapesItsScope",
+      "comment": "Overrides deprecated method in 'com.intellij.psi.meta.PsiMetaData'",
+      "detailsInfo": "Reports usages of deprecated classes, fields, and methods. A quick-fix is available to automatically convert the deprecated usage, when the necessary information can be extracted from the Javadoc of the deprecated member.\n\n**Example:**\n\n\n      class Interesting {\n\n        /**\n         * @deprecated Use {@link #newHotness()} instead\n         */\n        @Deprecated\n        public void oldAndBusted() {}\n\n        public void newHotness() {}\n      }\n      class ElseWhere {\n        void x(Interesting i) {\n          i.oldAndBusted(); // deprecated warning here\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      class Interesting {\n\n        /**\n         * @deprecated Use {@link #newHotness()} instead\n         */\n        @Deprecated\n        public void oldAndBusted() {}\n\n        public void newHotness() {}\n      }\n      class ElseWhere {\n        void x(Interesting i) {\n          i.newHotness();\n        }\n      }\n\nBy default, the inspection doesn't produce a warning if it's impossible or hard to avoid it. For example,\nthe following code won't be reported:\n\n\n      abstract class A { //library code\n         @Deprecated\n         abstract void m();\n      }\n      class B extends A { //project code\n         @Override\n         void m() {\n            //doSmth;\n         }\n      }\n\nConfigure the inspection:\n\n\nUse the options to disable this inspection inside deprecated members,\noverrides of abstract deprecated methods, non-static import statements, methods of deprecated classes, or same top-level classes.\n\nInspection ID: Deprecation",
       "sources": [
         {
           "type": "file",
-          "path": "src/main/java/de/vette/idea/neos/lang/afx/psi/AfxElementTypes.java",
+          "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxAttributeDescriptor.java",
           "language": "JAVA",
-          "line": 14,
-          "offset": 19,
+          "line": 41,
+          "offset": 21,
           "length": 14,
           "code": {
-            "startLine": 12,
+            "startLine": 39,
             "length": 14,
-            "offset": 226,
-            "surroundingCode": "    public static AfxElementType AFX_EEL_START_DELIMITER = new AfxElementType(\"AFX_EEL_START_DELIMITER\");\n    public static AfxElementType AFX_EEL_END_DELIMITER = new AfxElementType(\"AFX_EEL_END_DELIMITER\");\n    public static AfxElementType AFX_EEL_VALUE = new AfxElementType(\"AFX_EEL_VALUE\");\n    public static AfxElementType AFX_SPREAD_OPERATOR = new AfxElementType(\"AFX_SPREAD_OPERATOR\");\n    public static AfxElementType AFX_SPREAD = new AfxElementType(\"AFX_SPREAD\");"
+            "offset": 35,
+            "surroundingCode": "\n    @Override\n    public Object[] getDependences() {\n        return ArrayUtil.EMPTY_OBJECT_ARRAY;\n    }"
           }
         }
       ],
       "attributes": {
         "module": "Intellij_Neos.main",
-        "inspectionName": "ClassEscapesItsScope"
+        "inspectionName": "Deprecation"
       },
-      "hash": "dec1bc757562211def4e6fab4f462b19246b8beb7fec115e3b4732075e8944b8",
+      "hash": "3b60222ea4eef3b277072ee2dbfc29420277c8976c26fcb5b3b4873b78c03041",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "Nullability problems",
+      "categoryPath": [
+        {
+          "id": "Java",
+          "name": "Java"
+        },
+        {
+          "id": "Java/Probable bugs",
+          "name": "Probable bugs"
+        },
+        {
+          "id": "Java/Probable bugs/Nullability problems",
+          "name": "Nullability problems"
+        }
+      ],
+      "type": "@NotNull/@Nullable problems",
+      "tags": [
+        "JAVA",
+        "CWE Top 25"
+      ],
+      "severity": "High",
+      "comment": "Not annotated method overrides method annotated with @NotNull",
+      "detailsInfo": "Reports problems related to nullability annotations.\n\n**Examples:**\n\n* Overriding methods are not annotated:\n\n\n      abstract class A {\n        @NotNull abstract String m();\n      }\n      class B extends A {\n          String m() { return \"empty string\"; }\n      }\n          \n* Annotated primitive types: `@NotNull int myFoo;`\n* Both `@Nullable` and `@NotNull` are present on the same member: `@Nullable @NotNull String myFooString;`\n* Collection of nullable elements is assigned into a collection of non-null elements:\n\n\n      void testList(List<@Nullable String> nullableList) {\n         List<@NotNull String> list2 = nullableList;\n      }\n          \nUse the **Configure Annotations** button to specify nullability annotations and the checkboxes to fine-tune where the inspection should provide warnings.\n\nThis inspection only reports if the language level of the project or module is 5 or higher,\nand nullability annotations are available on the classpath.\n\nInspection ID: NullableProblems",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxAttributeDescriptor.java",
+          "language": "JAVA",
+          "line": 41,
+          "offset": 21,
+          "length": 14,
+          "code": {
+            "startLine": 39,
+            "length": 14,
+            "offset": 35,
+            "surroundingCode": "\n    @Override\n    public Object[] getDependences() {\n        return ArrayUtil.EMPTY_OBJECT_ARRAY;\n    }"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "NullableProblems"
+      },
+      "hash": "b9ebb35f82624d918de3492b507db454959a1d88aa0d2cdde1a6907df4508652",
       "problemType": "REGULAR"
     }
   ]

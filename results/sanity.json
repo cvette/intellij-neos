@@ -1,4 +1,165 @@
 {
   "version": "3",
-  "listProblem": []
+  "listProblem": [
+    {
+      "tool": "Code Inspection",
+      "category": "General",
+      "categoryPath": [
+        {
+          "id": "General",
+          "name": "General"
+        }
+      ],
+      "type": "Java sanity",
+      "tags": [
+        "JAVA",
+        "Sanity"
+      ],
+      "severity": "Critical",
+      "comment": "Unresolved reference FusionPropertyAssignment",
+      "detailsInfo": "Reports unresolved references in Java code.\n\nInspection ID: QodanaJavaSanity",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxAttributes.java",
+          "language": "JAVA",
+          "line": 157,
+          "offset": 17,
+          "length": 24,
+          "code": {
+            "startLine": 155,
+            "length": 24,
+            "offset": 98,
+            "surroundingCode": "                project,\n                GlobalSearchScope.projectScope(project),\n                FusionPropertyAssignment.class\n        );\n        for (FusionPropertyAssignment assignment : assignments) {"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "QodanaJavaSanity"
+      },
+      "hash": "4bc4c94043591669e56fa900f23f39bc54270de92de760bf6d173592bb6a991d",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "General",
+      "categoryPath": [
+        {
+          "id": "General",
+          "name": "General"
+        }
+      ],
+      "type": "Java sanity",
+      "tags": [
+        "JAVA",
+        "Sanity"
+      ],
+      "severity": "Critical",
+      "comment": "Unresolved reference FusionPropertyAssignment",
+      "detailsInfo": "Reports unresolved references in Java code.\n\nInspection ID: QodanaJavaSanity",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxAttributes.java",
+          "language": "JAVA",
+          "line": 152,
+          "offset": 20,
+          "length": 24,
+          "code": {
+            "startLine": 150,
+            "length": 24,
+            "offset": 30,
+            "surroundingCode": "        }\n\n        Collection<FusionPropertyAssignment> assignments = StubIndex.getElements(\n                FusionPropertyAssignmentIndex.KEY,\n                prototypeName,"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "QodanaJavaSanity"
+      },
+      "hash": "8ecb625d9729d2754f968afb421bddea9a43730a737a4518536af44284465f3e",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "General",
+      "categoryPath": [
+        {
+          "id": "General",
+          "name": "General"
+        }
+      ],
+      "type": "Java sanity",
+      "tags": [
+        "JAVA",
+        "Sanity"
+      ],
+      "severity": "Critical",
+      "comment": "Unresolved reference FusionPropertyAssignment",
+      "detailsInfo": "Reports unresolved references in Java code.\n\nInspection ID: QodanaJavaSanity",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxAttributes.java",
+          "language": "JAVA",
+          "line": 159,
+          "offset": 14,
+          "length": 24,
+          "code": {
+            "startLine": 157,
+            "length": 24,
+            "offset": 71,
+            "surroundingCode": "                FusionPropertyAssignment.class\n        );\n        for (FusionPropertyAssignment assignment : assignments) {\n            String attributeName = assignment.getName();\n            if (!isPassableProperty(attributeName) || properties.containsKey(attributeName)) {"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "QodanaJavaSanity"
+      },
+      "hash": "9d647549c2564e3d4180f50a263432a91734fa98d73af8678889835a20539dae",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "General",
+      "categoryPath": [
+        {
+          "id": "General",
+          "name": "General"
+        }
+      ],
+      "type": "Java sanity",
+      "tags": [
+        "JAVA",
+        "Sanity"
+      ],
+      "severity": "Critical",
+      "comment": "Unresolved reference FusionType",
+      "detailsInfo": "Reports unresolved references in Java code.\n\nInspection ID: QodanaJavaSanity",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/afx/codeInsight/AfxAttributes.java",
+          "language": "JAVA",
+          "line": 132,
+          "offset": 20,
+          "length": 10,
+          "code": {
+            "startLine": 130,
+            "length": 10,
+            "offset": 41,
+            "surroundingCode": "     */\n    @Nullable\n    private static FusionType parentPrototype(FusionPrototypeSignature signature) {\n        if (!signature.isInheritanceDefinition()) {\n            return null;"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "QodanaJavaSanity"
+      },
+      "hash": "ae9e11592f47ea2161f6a685bef3b9a5dd8caeb0b2a35c3e71e8f7736eaed78c",
+      "problemType": "REGULAR"
+    }
+  ]
 }
