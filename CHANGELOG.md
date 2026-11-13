@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.28.0] - 2026-11-13
+
 ### Added
 
 - Compatibility with 2026.3
@@ -204,7 +206,8 @@
 - Completion for inline editor options in node type definitions
 - Live template context for Fusion file type
 
-[Unreleased]: https://github.com/cvette/intellij-neos/compare/v1.27.0...HEAD
+[Unreleased]: https://github.com/cvette/intellij-neos/compare/v1.28.0...HEAD
+[1.28.0]: https://github.com/cvette/intellij-neos/compare/v1.27.0...v1.28.0
 [1.27.0]: https://github.com/cvette/intellij-neos/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/cvette/intellij-neos/compare/v1.25.0...v1.26.0
 [1.25.0]: https://github.com/cvette/intellij-neos/compare/v1.24.1...v1.25.0
