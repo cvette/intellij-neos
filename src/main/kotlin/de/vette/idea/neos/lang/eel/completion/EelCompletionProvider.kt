@@ -46,6 +46,7 @@ import de.vette.idea.neos.lang.eel.psi.EelObjectPath
 import de.vette.idea.neos.lang.eel.psi.EelTypes
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons
 import de.vette.idea.neos.lang.fusion.psi.FusionBlock
+import de.vette.idea.neos.lang.fusion.psi.FusionFile
 import de.vette.idea.neos.lang.fusion.psi.FusionPath
 import de.vette.idea.neos.lang.fusion.resolve.FusionPrototypeProperties
 import de.vette.idea.neos.util.NeosUtil
@@ -253,8 +254,16 @@ class EelCompletionProvider : CompletionProvider<CompletionParameters>() {
      * and the ones that are defined with "@context" around the expression
      */
     private fun contextVariables(element: PsiElement): List<LookupElement> {
+        val host = fusionElement(element)
+        if (host.containingFile !is FusionFile) {
+            // Eel in YAML, e.g. the label of a node type: there is no Fusion context
+            return YAML_CONTEXT_VARIABLES.map {
+                LookupElementBuilder.create(it).withIcon(AllIcons.Nodes.Variable).withTypeText("context", true)
+            }
+        }
+
         val names = LinkedHashSet<String>()
-        var block = PsiTreeUtil.getParentOfType(fusionElement(element), FusionBlock::class.java)
+        var block = PsiTreeUtil.getParentOfType(host, FusionBlock::class.java)
         while (block != null) {
             collectContextVariables(block, names)
             block = PsiTreeUtil.getParentOfType(block, FusionBlock::class.java)
@@ -321,6 +330,7 @@ class EelCompletionProvider : CompletionProvider<CompletionParameters>() {
 
         private val PROTOTYPE_SCOPES = listOf("props", "this")
         private val NEOS_CONTEXT_VARIABLES = listOf("node", "documentNode", "site", "request")
+        private val YAML_CONTEXT_VARIABLES = listOf("node")
         private val HIDDEN_HELPER_METHODS = setOf("allowsCallOfMethod", "injectSettings", "initializeObject")
     }
 }

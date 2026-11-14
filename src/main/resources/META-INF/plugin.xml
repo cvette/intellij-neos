@@ -58,6 +58,7 @@
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.eel.formatter.EelCodeStyleSettingsProvider" />
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.eel.formatter.EelLanguageCodeStyleSettingsProvider"/>
     <completion.contributor language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.completion.EelCompletionContributor"/>
+    <multiHostInjector implementation="de.vette.idea.neos.lang.yaml.injection.EelYamlInjector"/>
 
     <!-- AFX -->
     <fileType name="Neos Afx" language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.AfxFileType" extensions="afx" fieldName="INSTANCE"/>
