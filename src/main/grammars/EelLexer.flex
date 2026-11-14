@@ -49,12 +49,12 @@ RIGHT_PAREN = ")"
 EEL_IDENTIFIER = [a-zA-Z_] [a-zA-Z0-9_\-]*
 BACKSLASH = "\\"
 
-BOOLEAN_AND = "||" | "or" | "OR"
-BOOLEAN_OR = "&&" | "and" | "AND"
+BOOLEAN_OR = "||" | "or" | "OR"
+BOOLEAN_AND = "&&" | "and" | "AND"
 
 ADDITION_OPERATOR = "+"
 SUBTRACTION_OPERATOR = "-"
-MODULO_OPERATOR = "%" | "/"
+MODULO_OPERATOR = "%"
 DIVISION_OPERATOR = "/"
 MULTIPLICATION_OPERATOR = "*"
 COMPARISION_OPERATOR = "==" | "!=" | "<=" | ">=" | "<" | ">"

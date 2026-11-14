@@ -1,0 +1,3 @@
+logic = ${a || b && c}
+keywords = ${a or b and c}
+modulo = ${a % 2 / 3}
