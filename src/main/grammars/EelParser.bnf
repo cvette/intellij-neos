@@ -15,6 +15,7 @@
     elementTypeHolderClass="de.vette.idea.neos.lang.eel.psi.EelTypes"
     elementTypeClass="de.vette.idea.neos.lang.eel.psi.EelElementType"
     tokenTypeClass="de.vette.idea.neos.lang.eel.psi.EelTokenType"
+    tokenTypeFactory="de.vette.idea.neos.lang.eel.psi.EelTokenTypeFactory.getTokenType"
 }
 
 // Error recovery:
@@ -26,7 +27,7 @@
 EelExpression ::= conditional_expression
 
 offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET {pin=1}
-method_call ::= method_name EEL_LEFT_PAREN [list_item] list_item_tail* EEL_RIGHT_PAREN {pin=2}
+method_call ::= method_name EEL_LEFT_PAREN [argument] argument_tail* EEL_RIGHT_PAREN {pin=2}
 
 object_path ::= (composite_identifier|method_call) (object_path_member | offset_access) *
 private object_path_member ::= EEL_DOT (method_call|composite_identifier) {pin=1}
@@ -43,7 +44,8 @@ method_name ::= EEL_FUNCTION {
 
 value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_QUOTE {pin=1}
 
-value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)*
+value_string_line_content ::= string_part*
+private string_part ::= VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE {name="string content"}
 
 term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | EEL_SUBTRACTION_OPERATOR? VALUE_NUMBER | object_path | value_string_line
 
@@ -56,33 +58,44 @@ wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN {pi
 not_expression ::= EEL_NEGATION_OPERATOR simple_expression {pin=1}
 
 conditional_expression ::= disjunction [conditional_branches]
-private conditional_branches ::= IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression {pin=1}
+private conditional_branches ::= IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression {pin=1 name="operator"}
 
 disjunction ::= conjunction disjunction_tail *
-private disjunction_tail ::= EEL_BOOLEAN_OR conjunction {pin=1}
+private disjunction_tail ::= EEL_BOOLEAN_OR conjunction {pin=1 name="operator"}
 
 conjunction ::= comparison conjunction_tail *
-private conjunction_tail ::= EEL_BOOLEAN_AND comparison {pin=1}
+private conjunction_tail ::= EEL_BOOLEAN_AND comparison {pin=1 name="operator"}
 
 comparison ::= sum_calculation [comparison_tail]
-private comparison_tail ::= EEL_COMPARISON_OPERATOR sum_calculation {pin=1}
+private comparison_tail ::= EEL_COMPARISON_OPERATOR sum_calculation {pin=1 name="operator"}
 
 sum_calculation ::= prod_calculation sum_calculation_tail *
-private sum_calculation_tail ::= (EEL_ADDITION_OPERATOR|EEL_SUBTRACTION_OPERATOR) prod_calculation {pin=1}
+private sum_calculation_tail ::= (EEL_ADDITION_OPERATOR|EEL_SUBTRACTION_OPERATOR) prod_calculation {pin=1 name="operator"}
 
 prod_calculation ::= simple_expression prod_calculation_tail *
-private prod_calculation_tail ::= (EEL_DIVISION_OPERATOR|EEL_MODULO_OPERATOR|EEL_MULTIPLICATION_OPERATOR) simple_expression {pin=1}
+private prod_calculation_tail ::= (EEL_DIVISION_OPERATOR|EEL_MODULO_OPERATOR|EEL_MULTIPLICATION_OPERATOR) simple_expression {pin=1 name="operator"}
 
-array_literal ::= EEL_LEFT_BRACKET [list_item] list_item_tail* EEL_RIGHT_BRACKET {pin=1}
+array_literal ::= EEL_LEFT_BRACKET [array_item] array_item_tail* EEL_RIGHT_BRACKET {pin=1}
 
-object_literal_property ::= (value_string_line|EEL_IDENTIFIER) ':' conditional_expression {
+object_literal_property ::= (value_string_line|EEL_IDENTIFIER) IF_SEPARATOR conditional_expression {
     pin=1
     recoverWhile=list_item_recover
 }
 object_literal ::= EEL_OBJECT_LEFT_BRACE [object_literal_property] object_literal_property_tail* EEL_OBJECT_RIGHT_BRACE {pin=1}
 private object_literal_property_tail ::= VALUE_SEPARATOR object_literal_property {pin=1}
 
-// Items of argument lists and array literals
-private list_item ::= conditional_expression {recoverWhile=list_item_recover}
-private list_item_tail ::= VALUE_SEPARATOR list_item {pin=1}
+// Items of argument lists and array literals. The lookahead after the expression adds the separator and the
+// closing token to the error message, e.g. "')', ',' or <operator> expected" for "foo(1 2)".
+private argument ::= conditional_expression &(VALUE_SEPARATOR | EEL_RIGHT_PAREN) {
+    pin=1
+    recoverWhile=list_item_recover
+}
+private argument_tail ::= VALUE_SEPARATOR argument {pin=1}
+
+private array_item ::= conditional_expression &(VALUE_SEPARATOR | EEL_RIGHT_BRACKET) {
+    pin=1
+    recoverWhile=list_item_recover
+}
+private array_item_tail ::= VALUE_SEPARATOR array_item {pin=1}
+
 private list_item_recover ::= !(VALUE_SEPARATOR | EEL_RIGHT_PAREN | EEL_RIGHT_BRACKET | EEL_OBJECT_RIGHT_BRACE)

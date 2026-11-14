@@ -11,10 +11,10 @@ FILE
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
                   EelValueStringLineImpl(VALUE_STRING_LINE)
-                    PsiElement(VALUE_STRING_QUOTE)(''')
+                    PsiElement(quote)(''')
                     EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
-                      PsiElement(VALUE_STRING)('foo')
-                    PsiElement(VALUE_STRING_QUOTE)(''')
+                      PsiElement(string content)('foo')
+                    PsiElement(quote)(''')
 
 # double quoted string
 "foo"
@@ -29,10 +29,10 @@ FILE
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
                   EelValueStringLineImpl(VALUE_STRING_LINE)
-                    PsiElement(VALUE_STRING_QUOTE)('"')
+                    PsiElement(quote)('"')
                     EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
-                      PsiElement(VALUE_STRING)('foo')
-                    PsiElement(VALUE_STRING_QUOTE)('"')
+                      PsiElement(string content)('foo')
+                    PsiElement(quote)('"')
 
 # string with escaped quote
 'it\'s'
@@ -47,12 +47,12 @@ FILE
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
                   EelValueStringLineImpl(VALUE_STRING_LINE)
-                    PsiElement(VALUE_STRING_QUOTE)(''')
+                    PsiElement(quote)(''')
                     EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
-                      PsiElement(VALUE_STRING)('it')
-                      PsiElement(VALUE_STRING_ESCAPED_QUOTE)('\'')
-                      PsiElement(VALUE_STRING)('s')
-                    PsiElement(VALUE_STRING_QUOTE)(''')
+                      PsiElement(string content)('it')
+                      PsiElement(escaped quote)('\'')
+                      PsiElement(string content)('s')
+                    PsiElement(quote)(''')
 
 # string with braces
 '{}'
@@ -67,10 +67,10 @@ FILE
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
                   EelValueStringLineImpl(VALUE_STRING_LINE)
-                    PsiElement(VALUE_STRING_QUOTE)(''')
+                    PsiElement(quote)(''')
                     EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
-                      PsiElement(VALUE_STRING)('{}')
-                    PsiElement(VALUE_STRING_QUOTE)(''')
+                      PsiElement(string content)('{}')
+                    PsiElement(quote)(''')
 
 # integer
 42
@@ -84,7 +84,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
-                  PsiElement(VALUE_NUMBER)('42')
+                  PsiElement(number)('42')
 
 # float
 2.5
@@ -98,7 +98,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
-                  PsiElement(VALUE_NUMBER)('2.5')
+                  PsiElement(number)('2.5')
 
 # negative number
 -2.5
@@ -112,8 +112,8 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
-                  PsiElement(EEL_SUBTRACTION_OPERATOR)('-')
-                  PsiElement(VALUE_NUMBER)('2.5')
+                  PsiElement(-)('-')
+                  PsiElement(number)('2.5')
 
 # boolean true
 true
@@ -127,7 +127,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
-                  PsiElement(VALUE_BOOLEAN)('true')
+                  PsiElement(boolean)('true')
 
 # boolean false
 FALSE
@@ -141,7 +141,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelTermImpl(TERM)
-                  PsiElement(VALUE_BOOLEAN)('FALSE')
+                  PsiElement(boolean)('FALSE')
 
 # identifier starting with a boolean
 trueValue
@@ -158,4 +158,4 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('trueValue')
+                        PsiElement(identifier)('trueValue')
