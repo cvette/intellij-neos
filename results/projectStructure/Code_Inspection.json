@@ -41,12 +41,6 @@
       "name": "Intellij_Neos.main",
       "contentEntries": [
         {
-          "path": "file://$PROJECT_DIR$/src/gen",
-          "excludePatterns": [],
-          "excludeFolders": [],
-          "sourceFolders": []
-        },
-        {
           "path": "file://$PROJECT_DIR$/src/main",
           "excludePatterns": [],
           "excludeFolders": [],
@@ -57,11 +51,22 @@
               "packagePrefix": ""
             },
             {
+              "path": "file://$PROJECT_DIR$/src/main/kotlin",
+              "type": "Source",
+              "packagePrefix": ""
+            },
+            {
               "path": "file://$PROJECT_DIR$/src/main/resources",
               "type": "Resource",
               "packagePrefix": ""
             }
           ]
+        },
+        {
+          "path": "file://$PROJECT_DIR$/src/gen",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
         }
       ],
       "orderEntries": [
@@ -82,7 +87,7 @@
           "type": "Library"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.38.0",
+          "name": "Gradle: io.sentry:sentry:8.49.0",
           "type": "Library"
         },
         {
@@ -377,7 +382,7 @@
           "type": "Module"
         },
         {
-          "name": "Gradle: io.sentry:sentry:8.38.0",
+          "name": "Gradle: io.sentry:sentry:8.49.0",
           "type": "Library"
         },
         {
