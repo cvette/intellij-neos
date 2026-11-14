@@ -21,6 +21,7 @@
 - Braces in Eel string literals ended the expression in Fusion and AFX
 - Fusion comments on the last line of a file and directly after an opening brace
 - A backslash before the closing backtick kept a Fusion DSL value open
+- Typing `${` inserts the closing brace of the Eel expression everywhere, not only at the end of a file
 - Incomplete Eel expressions are parsed as far as possible instead of being marked as an error as a whole
 - Readable error messages for syntax errors in Eel expressions
 
