@@ -91,6 +91,7 @@
     <lang.parserDefinition language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.FusionParserDefinition"/>
     <lang.syntaxHighlighterFactory language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.highlighting.FusionSyntaxHighlighterFactory"/>
     <lang.braceMatcher language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionBraceMatcher"/>
+    <typedHandler implementation="de.vette.idea.neos.lang.fusion.editor.EelBraceTypedHandler"/>
     <lang.formatter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.formatter.FusionFormattingModelBuilder"/>
     <lang.commenter language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionCommenter" />
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.editor.FusionFoldingBuilder"/>
