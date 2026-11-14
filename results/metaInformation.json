@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 163,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 163
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43646494926",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43648969467",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "64b37eab2ca7191c9b2f649423528f5c88e50ba6",
-        "branch": "main"
+        "revisionId": "c13cbeb3fcea4ee07e114f3e772cf17d6efe202a",
+        "branch": "feat/fusion-property-completion"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
