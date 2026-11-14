@@ -1,0 +1,43 @@
+# addition
+'foo' + this.bar
+
+# arithmetic with parentheses
+1 * (2 + 2 - 1) / 1 - -2.5
+
+# modulo
+a % 2
+
+# negation
+!this.bar
+
+# negation keyword
+not this.bar
+
+# and binds stronger than or
+a || b && c
+
+# keyword operators
+a or b and c
+
+# parentheses override precedence
+(a || b) && c
+
+# nested negation
+foo && !(bar || !baz)
+
+# comparison
+a >= 1
+
+# comparison in logic
+a == 1 && b != 'x'
+
+# ternary
+a ? 'yes' : 'no'
+
+# nested ternary
+a ? b ? 1 : 2 : 3
+
+# multiple lines
+a
+    && b
+    && c

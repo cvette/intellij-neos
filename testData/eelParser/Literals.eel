@@ -1,0 +1,29 @@
+# single quoted string
+'foo'
+
+# double quoted string
+"foo"
+
+# string with escaped quote
+'it\'s'
+
+# string with braces
+'{}'
+
+# integer
+42
+
+# float
+2.5
+
+# negative number
+-2.5
+
+# boolean true
+true
+
+# boolean false
+FALSE
+
+# identifier starting with a boolean
+trueValue

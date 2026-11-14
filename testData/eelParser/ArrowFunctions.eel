@@ -1,0 +1,17 @@
+# argument with parentheses
+map(foo, (bar) => bar * bar)
+
+# argument without parentheses
+Array.map(items, item => item.title)
+
+# multiple arguments
+Array.reduce(items, (carry, item) => carry + item, 0)
+
+# no arguments
+Array.map(items, () => 1)
+
+# returning an object
+Array.map(items, item => {title: item.title})
+
+# wrapped expression is not an arrow function
+(a) + 1
