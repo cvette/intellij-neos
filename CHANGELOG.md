@@ -15,6 +15,7 @@
 - Quoted PHP class names in YAML files were not resolved
 - Template lookup for controller actions containing "Action" or "Controller" in their name
 - "Go to template" line marker was active in projects without enabled Neos support
+- Performance warning caused by line markers for Fusion prototypes and controller templates not being registered on leaf elements
 
 ### Removed
 

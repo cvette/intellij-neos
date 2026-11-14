@@ -68,12 +68,14 @@ public class PrototypeLineMarkerProvider implements LineMarkerProvider {
                 }
 
                 List<PsiElement> targets = ResolveEngine.getPrototypeDefinitions(el.getProject(), nodeTypeSplit[1], nodeTypeSplit[0]);
-                if (!targets.isEmpty()) {
+                // line markers have to be registered for leaf elements, so use the key instead of the key value pair
+                PsiElement key = ((YAMLKeyValue) el).getKey();
+                if (key != null && !targets.isEmpty()) {
                     RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
                             .create(FusionIcons.PROTOTYPE)
                             .setTargets(targets)
                             .setTooltipText("Go to Fusion prototype")
-                            .createLineMarkerInfo(el);
+                            .createLineMarkerInfo(key);
                     result.add(info);
                 }
             }
