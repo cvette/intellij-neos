@@ -16,21 +16,21 @@
         "Sanity"
       ],
       "severity": "Critical",
-      "comment": "Unresolved reference FusionPrototypeSignature",
+      "comment": "Unresolved reference FusionType",
       "detailsInfo": "Reports unresolved references in Java code.\n\nInspection ID: QodanaJavaSanity",
       "sources": [
         {
           "type": "file",
           "path": "src/main/java/de/vette/idea/neos/lang/fusion/resolve/ResolveEngine.java",
           "language": "JAVA",
-          "line": 103,
-          "offset": 20,
-          "length": 24,
+          "line": 85,
+          "offset": 82,
+          "length": 10,
           "code": {
-            "startLine": 101,
-            "length": 24,
-            "offset": 139,
-            "surroundingCode": "        // find all prototypes that have the name of this instance\n        List<PsiElement> result = new ArrayList<>();\n        Collection<FusionPrototypeSignature> possiblePrototypes = StubIndex.getElements(\n                FusionPrototypeDeclarationIndex.KEY,\n                name,"
+            "startLine": 83,
+            "length": 10,
+            "offset": 95,
+            "surroundingCode": "\n    @NotNull\n    public static Collection<PsiElement> getNodeTypeDefinitions(Project project, FusionType type) {\n        String instanceName = type.getUnqualifiedType().getText();\n        String instanceNs = null;"
           }
         }
       ],
@@ -38,7 +38,7 @@
         "module": "Intellij_Neos.main",
         "inspectionName": "QodanaJavaSanity"
       },
-      "hash": "05b64ceb5705118d3b6c49f34920eb64f602741ee992795949737d4d6177d27e",
+      "hash": "14e44f9335d15ffbcdfe919a16bc1bc96b708d16d9335ce82d6ac4cc2fb03ed8",
       "problemType": "REGULAR"
     },
     {

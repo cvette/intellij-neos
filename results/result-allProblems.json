@@ -1,48 +1,4 @@
 {
   "version": "3",
-  "listProblem": [
-    {
-      "tool": "Code Inspection",
-      "category": "Javadoc",
-      "categoryPath": [
-        {
-          "id": "Java",
-          "name": "Java"
-        },
-        {
-          "id": "Java/Javadoc",
-          "name": "Javadoc"
-        }
-      ],
-      "type": "Dangling Javadoc comment",
-      "tags": [
-        "JAVA"
-      ],
-      "severity": "High",
-      "comment": "Dangling Javadoc comment",
-      "detailsInfo": "Reports Javadoc comments that don't belong to any class, method or field. The Javadoc tool ignores dangling Javadoc comments and doesn't include them in the HTML documentation it generates.\n\n**Example:**\n\n\n      class A {\n        /**\n         * Dangling comment\n         */\n        /**\n         * Method javadoc\n         */\n         public void m(){}\n      }\n\nA quick-fix is available to delete such comments completely or convert them into a block comment. After the quick-fix is applied:\n\n\n      class A {\n        /*\n          Dangling comment\n        */\n        /**\n         * Method javadoc\n         */\n        public void m(){}\n      }\n\nUse the **Ignore file header comment in JavaDoc format** option to ignore comments at the beginning of Java files.\nThese are usually copyright messages.\n\nInspection ID: DanglingJavadoc",
-      "sources": [
-        {
-          "type": "file",
-          "path": "src/main/java/de/vette/idea/neos/lang/yaml/references/nodeType/NodeTypeReferenceContributor.java",
-          "language": "JAVA",
-          "line": 40,
-          "offset": 9,
-          "length": 3,
-          "code": {
-            "startLine": 38,
-            "length": 3,
-            "offset": 108,
-            "surroundingCode": "    private static abstract class AbstractNodeTypeReferenceProvider extends PsiReferenceProvider {\n\n        /**\n         * Helper functions to walk the yaml tree\n         */"
-          }
-        }
-      ],
-      "attributes": {
-        "module": "Intellij_Neos.main",
-        "inspectionName": "DanglingJavadoc"
-      },
-      "hash": "04dfa4fe2f71a827f5cc4147a562d666ebdd7a456543ff4ceb6291d2081f4032",
-      "problemType": "REGULAR"
-    }
-  ]
+  "listProblem": []
 }
