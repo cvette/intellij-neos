@@ -143,6 +143,11 @@ tasks {
         dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
     }
 
+    // Kotlin is compiled before Java and reads the generated lexers and parsers in src/gen as well
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
+    }
+
     initializeIntellijPlatformPlugin {
         dependsOn(generateEelLexer)
         dependsOn(generateAfxLexer)
