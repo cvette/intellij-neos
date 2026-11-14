@@ -6,6 +6,7 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 plugins {
     id("idea")
     id("java")
+    id("org.jetbrains.kotlin.jvm") // Kotlin support
 
     id("org.jetbrains.intellij.platform") // IntelliJ Platform Gradle Plugin
     id("org.jetbrains.grammarkit") // Gradle Grammar-Kit Plugin
@@ -139,6 +140,11 @@ val generateFusionParser = tasks.register<GenerateParserTask>("GenerateFusionPar
 
 tasks {
     withType<JavaCompile>().configureEach {
+        dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
+    }
+
+    // Kotlin is compiled before Java and reads the generated lexers and parsers in src/gen as well
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         dependsOn(generateEelLexer, generateAfxLexer, generateFusionLexer, generateEelParser, generateFusionParser)
     }
 

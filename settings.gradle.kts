@@ -4,6 +4,7 @@ rootProject.name = "Intellij Neos"
 
 pluginManagement {
     plugins {
+        id("org.jetbrains.kotlin.jvm") version "2.4.21"
         id("org.jetbrains.changelog") version "2.5.0"
         id("org.jetbrains.grammarkit") version "2023.3.0.3"
         id("org.jetbrains.qodana") version "2026.1.0"
