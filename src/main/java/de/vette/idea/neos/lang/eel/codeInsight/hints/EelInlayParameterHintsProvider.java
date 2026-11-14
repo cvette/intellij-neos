@@ -6,7 +6,7 @@ import com.intellij.psi.PsiElement;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.Parameter;
 import de.vette.idea.neos.lang.eel.psi.EelCompositeIdentifier;
-import de.vette.idea.neos.lang.eel.psi.EelConditionalExpression;
+import de.vette.idea.neos.lang.eel.psi.EelExpression;
 import de.vette.idea.neos.lang.eel.psi.EelMethodCall;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ public class EelInlayParameterHintsProvider implements InlayParameterHintsProvid
             List<PsiElement> phpMethods = null;
 
             EelMethodCall methodCall = (EelMethodCall) element;
-            List<EelConditionalExpression> list = methodCall.getConditionalExpressionList();
+            List<EelExpression> list = methodCall.getExpressionList();
             if (methodCall.getPrevSibling() != null && methodCall.getPrevSibling().getPrevSibling() != null) {
                 PsiElement compositeElement = methodCall.getPrevSibling().getPrevSibling();
                 if (compositeElement instanceof EelCompositeIdentifier) {
@@ -47,7 +47,7 @@ public class EelInlayParameterHintsProvider implements InlayParameterHintsProvid
                 Method method = (Method) phpMethods.get(0);
 
                 int i = 0;
-                for (EelConditionalExpression eelConditionalExpression : list) {
+                for (EelExpression eelConditionalExpression : list) {
                     Parameter parameter = method.getParameter(i);
                     if (parameter != null) {
                         inlayInfos.add(new InlayInfo(parameter.getName(), eelConditionalExpression.getTextOffset()));
