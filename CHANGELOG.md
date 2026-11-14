@@ -21,6 +21,7 @@
 - Fusion comments on the last line of a file and directly after an opening brace
 - A backslash before the closing backtick kept a Fusion DSL value open
 - Incomplete Eel expressions are parsed as far as possible instead of being marked as an error as a whole
+- Readable error messages for syntax errors in Eel expressions
 
 ### Removed
 
