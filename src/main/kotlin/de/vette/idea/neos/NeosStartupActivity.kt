@@ -16,23 +16,26 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vette.idea.neos;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.startup.StartupActivity;
-import de.vette.idea.neos.util.IdeHelper;
-import org.jetbrains.annotations.NotNull;
+package de.vette.idea.neos
 
-public class NeosStartupActivity implements StartupActivity.DumbAware {
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.startup.ProjectActivity
+import de.vette.idea.neos.util.IdeHelper
 
-    @Override
-    public void runActivity(@NotNull Project project) {
-        NeosProjectService projectService = NeosProjectService.getInstance(project);
+/**
+ * Suggests enabling the plugin when a Neos or Flow project is opened for the first time.
+ */
+class NeosStartupActivity : ProjectActivity {
 
-        if (!projectService.isEnabled() && !Settings.getInstance(project).dismissEnableNotification) {
-            if (projectService.isNeosProject()) {
-                IdeHelper.notifyEnableMessage(project);
-            }
+    override suspend fun execute(project: Project) {
+        val settings = Settings.getInstance(project)
+        if (settings.pluginEnabled || settings.dismissEnableNotification) {
+            return
+        }
+
+        if (NeosProjectService.isNeosProject(project)) {
+            IdeHelper.notifyEnableMessage(project)
         }
     }
 }
