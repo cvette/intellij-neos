@@ -24,28 +24,35 @@ import com.intellij.psi.*;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.yaml.psi.YAMLValue;
+import org.jetbrains.yaml.psi.YAMLScalar;
 
 import java.util.List;
 
-public class ValueReference extends PsiPolyVariantReferenceBase<YAMLValue> {
-    private final YAMLValue yamlElement;
+public class ValueReference extends PsiPolyVariantReferenceBase<YAMLScalar> {
+    private final YAMLScalar yamlElement;
 
 
-    public ValueReference(YAMLValue yamlElement) {
+    public ValueReference(YAMLScalar yamlElement) {
         // the "textRange" is used for highlighting the source element
         super(yamlElement, new TextRange(0, yamlElement.getTextLength()));
         this.yamlElement = yamlElement;
     }
 
+    public static boolean isResourceUri(String value) {
+        return value.startsWith("resource://");
+    }
+
+    public static boolean isClassName(String value) {
+        return value.contains("\\");
+    }
+
     @NotNull
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
-        String value;
-        value = yamlElement.getText().replaceAll("^\"|\"$", "");
-        value = value.replaceAll("^\'|\'$", "");
+        // the text value has quotes and escape sequences already removed
+        String value = yamlElement.getTextValue();
 
-        if (value.startsWith("resource://")) {
+        if (isResourceUri(value)) {
             VirtualFile resourceFile = ResolveEngine.findResource(yamlElement.getContainingFile(), value);
             if (resourceFile != null && !resourceFile.isDirectory()) {
                 PsiFile resourcePsiFile = PsiManager.getInstance(getElement().getProject()).findFile(resourceFile);
@@ -57,8 +64,8 @@ public class ValueReference extends PsiPolyVariantReferenceBase<YAMLValue> {
             }
         }
 
-        if (value.contains("\\")) {
-            List<PsiElement> phpClassDefinitions = PhpElementsUtil.getClassInterfaceElements(yamlElement.getProject(), yamlElement.getText());
+        if (isClassName(value)) {
+            List<PsiElement> phpClassDefinitions = PhpElementsUtil.getClassInterfaceElements(yamlElement.getProject(), value);
             return phpClassDefinitions
                     .stream()
                     .map(classDefinition -> new PsiElementResolveResult(classDefinition, true))
