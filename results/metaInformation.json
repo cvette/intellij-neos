@@ -7,12 +7,12 @@
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43648969467",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43650736552",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "c13cbeb3fcea4ee07e114f3e772cf17d6efe202a",
-        "branch": "feat/fusion-property-completion"
+        "revisionId": "215436f377e09cfc394802e17234382c0bcd369c",
+        "branch": "fix/eel-brace-completion"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
