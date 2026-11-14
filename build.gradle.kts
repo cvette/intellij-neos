@@ -6,6 +6,7 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 plugins {
     id("idea")
     id("java")
+    id("org.jetbrains.kotlin.jvm") // Kotlin support
 
     id("org.jetbrains.intellij.platform") // IntelliJ Platform Gradle Plugin
     id("org.jetbrains.grammarkit") // Gradle Grammar-Kit Plugin
