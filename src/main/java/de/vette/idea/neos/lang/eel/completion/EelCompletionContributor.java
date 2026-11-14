@@ -29,13 +29,7 @@ public class EelCompletionContributor extends CompletionContributor {
         extend(
                 CompletionType.BASIC,
                 psiElement(EelTypes.EEL_IDENTIFIER),
-                new EelContextCompletionProvider()
-        );
-
-        extend(
-                CompletionType.BASIC,
-                psiElement(EelTypes.EEL_IDENTIFIER),
-                new EelPathsCompletionProvider()
+                new EelCompletionProvider()
         );
     }
 }

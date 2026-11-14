@@ -124,7 +124,7 @@ val generateEelParser = tasks.register<GenerateParserTask>("GenerateEelParser") 
     sourceFile = file("src/main/grammars/EelParser.bnf")
     targetRootOutputDir = file("src/gen")
     pathToParser = "/de/vette/idea/neos/lang/eel/parser/EelParser.java"
-    pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
+    pathToPsiRoot = "/de/vette/idea/neos/lang/eel/psi"
     purgeOldFiles = true
 }
 
@@ -134,7 +134,7 @@ val generateFusionParser = tasks.register<GenerateParserTask>("GenerateFusionPar
     sourceFile = file("src/main/grammars/FusionParser.bnf")
     targetRootOutputDir = file("src/gen")
     pathToParser = "/de/vette/idea/neos/lang/fusion/parser/FusionParser.java"
-    pathToPsiRoot = "/de/vette/idea/neos/lang/core/psi"
+    pathToPsiRoot = "/de/vette/idea/neos/lang/fusion/psi"
     purgeOldFiles = true
 }
 
