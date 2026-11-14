@@ -3,51 +3,64 @@ package de.vette.idea.neos.lang.php.inspections.suppression;
 import com.intellij.codeInspection.InspectionSuppressor;
 import com.intellij.codeInspection.SuppressQuickFix;
 import com.intellij.psi.PsiElement;
-import com.jetbrains.php.lang.psi.elements.ClassReference;
 import com.jetbrains.php.lang.psi.elements.Method;
+import com.jetbrains.php.lang.psi.elements.PhpClass;
 import de.vette.idea.neos.NeosProjectService;
-import de.vette.idea.neos.util.NeosUtil;
+import de.vette.idea.neos.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
+import java.util.Set;
 
 public class FlowUnusedMethodSuppressor implements InspectionSuppressor {
 
-    final String ACTION_CONTROLLER_FQN = "\\Neos\\Flow\\Mvc\\Controller\\ActionController";
-    final String COMMAND_CONTROLLER_FQN = "\\Neos\\Flow\\Cli\\CommandController";
+    private static final String ACTION_CONTROLLER_FQN = "\\Neos\\Flow\\Mvc\\Controller\\ActionController";
+    private static final String COMMAND_CONTROLLER_FQN = "\\Neos\\Flow\\Cli\\CommandController";
 
-    final String[] MAGIC_METHODS = new String[]{"initializeObject", "shutdownObject", "injectSettings"};
+    /**
+     * Lifecycle methods called by the Flow object management
+     */
+    private static final Set<String> LIFECYCLE_METHODS = Set.of("initializeObject", "shutdownObject");
+
+    private static final String INJECT_PREFIX = "inject";
 
     @Override
     public boolean isSuppressedFor(@NotNull PsiElement element, @NotNull String toolId) {
+        if (!toolId.equals("PhpUnused") || !(element instanceof Method)) {
+            return false;
+        }
+
         if (!NeosProjectService.isEnabled(element.getProject())) {
             return false;
         }
 
-        if (toolId.equals("PhpUnused")) {
-            if (element instanceof Method && ((Method) element).getAccess().isPublic()) {
-                Method method = (Method) element;
-                if (method.getContainingClass() != null) {
-                    for (ClassReference ref : method.getContainingClass().getExtendsList().getReferenceElements()) {
-                        if (Arrays.asList(MAGIC_METHODS).contains(method.getName())) {
-                            return true;
-                        }
-
-                        if (ref.getFQN() == null) {
-                            continue;
-                        }
-
-                        if (method.getName().endsWith("Action") && ref.getFQN().equals(ACTION_CONTROLLER_FQN)
-                                || method.getName().endsWith("Command") && ref.getFQN().equals(COMMAND_CONTROLLER_FQN)) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        Method method = (Method) element;
+        if (!method.getAccess().isPublic()) {
+            return false;
         }
 
-        return false;
+        String name = method.getName();
+        if (LIFECYCLE_METHODS.contains(name) || isInjectMethod(name)) {
+            return true;
+        }
+
+        PhpClass containingClass = method.getContainingClass();
+        if (containingClass == null) {
+            return false;
+        }
+
+        // checks the whole inheritance chain, not only the direct parent class
+        return name.endsWith("Action") && PhpElementsUtil.isInstanceOf(containingClass, ACTION_CONTROLLER_FQN)
+                || name.endsWith("Command") && PhpElementsUtil.isInstanceOf(containingClass, COMMAND_CONTROLLER_FQN);
+    }
+
+    /**
+     * Flow autowires all methods named "inject" followed by an upper case property name
+     */
+    private static boolean isInjectMethod(String name) {
+        return name.length() > INJECT_PREFIX.length()
+                && name.startsWith(INJECT_PREFIX)
+                && Character.isUpperCase(name.charAt(INJECT_PREFIX.length()));
     }
 
     @Override
