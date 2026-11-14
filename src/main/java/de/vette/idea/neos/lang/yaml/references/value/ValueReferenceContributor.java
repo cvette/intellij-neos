@@ -23,7 +23,7 @@ import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import de.vette.idea.neos.NeosProjectService;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.yaml.psi.YAMLValue;
+import org.jetbrains.yaml.psi.YAMLScalar;
 
 /**
  * Entry point for "go to definition" "cmd-click" on a php class name in yaml files to jump to its declaration.
@@ -33,7 +33,7 @@ public class ValueReferenceContributor extends PsiReferenceContributor {
     @Override
     public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
         registrar.registerReferenceProvider(
-                PlatformPatterns.psiElement(YAMLValue.class),
+                PlatformPatterns.psiElement(YAMLScalar.class),
                 new ValueReferenceProvider()
         );
     }
@@ -42,14 +42,20 @@ public class ValueReferenceContributor extends PsiReferenceContributor {
         @NotNull
         @Override
         public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
-            if(!NeosProjectService.isEnabled(element)) {
-                return new PsiReference[0];
+            if (!NeosProjectService.isEnabled(element)) {
+                return PsiReference.EMPTY_ARRAY;
             }
 
-            YAMLValue yamlElement = (YAMLValue) element;
-                return new PsiReference[] {
-                    new ValueReference(yamlElement)
-                };
+            // Only scalars that can point to a resource or a PHP class get a reference
+            YAMLScalar yamlElement = (YAMLScalar) element;
+            String value = yamlElement.getTextValue();
+            if (!ValueReference.isResourceUri(value) && !ValueReference.isClassName(value)) {
+                return PsiReference.EMPTY_ARRAY;
+            }
+
+            return new PsiReference[] {
+                new ValueReference(yamlElement)
+            };
         }
     }
 }

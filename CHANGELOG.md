@@ -4,6 +4,22 @@
 
 ## [Unreleased]
 
+### Added
+
+- JSON schema for `Routes.*.yaml` files
+- Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
+
+### Fixed
+
+- Node type references were added to root level keys of all YAML files
+- Quoted PHP class names in YAML files were not resolved
+- Template lookup for controller actions containing "Action" or "Controller" in their name
+- "Go to template" line marker was active in projects without enabled Neos support
+
+### Removed
+
+- Keyboard shortcut for the internal error reporting test action
+
 ## [1.28.0] - 2026-11-13
 
 ### Added

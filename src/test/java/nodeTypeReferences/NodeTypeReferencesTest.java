@@ -113,6 +113,17 @@ public class NodeTypeReferencesTest extends BasePlatformTestCase {
         }
     }
 
+    public void testOtherYamlFilesHaveNoNodeTypeReferences() {
+        myFixture.configureByText("docker-compose.yaml", "ser<caret>vices:\n  web:\n    image: nginx\n");
+        PsiElement key = myFixture.getFile().findElementAt(myFixture.getCaretOffset()).getParent();
+
+        assertInstanceOf(key, YAMLKeyValue.class);
+        assertFalse(
+                "Root level keys outside of node type definitions must not be node type references",
+                Arrays.stream(key.getReferences()).anyMatch(r -> r instanceof NodeTypeReference)
+        );
+    }
+
     /**
      * Helper actually running the testcase
      */

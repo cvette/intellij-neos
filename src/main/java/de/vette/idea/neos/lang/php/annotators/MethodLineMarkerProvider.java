@@ -27,6 +27,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.jetbrains.php.lang.psi.elements.Method;
 import de.vette.idea.neos.NeosIcons;
+import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.lang.fusion.resolve.ResolveEngine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +45,10 @@ public class MethodLineMarkerProvider implements LineMarkerProvider {
 
     @Override
     public void collectSlowLineMarkers(@NotNull List<? extends PsiElement> elements, @NotNull Collection<? super LineMarkerInfo<?>> result) {
+        if (elements.isEmpty() || !NeosProjectService.isEnabled(elements.get(0))) {
+            return;
+        }
+
         for (PsiElement el : elements) {
             if (el instanceof Method && ((Method) el).getAccess().isPublic()) {
                 VirtualFile template = ResolveEngine.findTemplate((Method) el);

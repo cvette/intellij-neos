@@ -1,7 +1,9 @@
 package de.vette.idea.neos.lang.yaml.references.nodeType;
 
 import com.intellij.patterns.PlatformPatterns;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceContributor;
 import com.intellij.psi.PsiReferenceProvider;
@@ -9,6 +11,7 @@ import com.intellij.psi.PsiReferenceRegistrar;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 
+import de.vette.idea.neos.util.NeosUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YAMLPsiElement;
@@ -34,9 +37,23 @@ public class NodeTypeReferenceContributor extends PsiReferenceContributor {
 
     private static abstract class AbstractNodeTypeReferenceProvider extends PsiReferenceProvider {
 
+        // Helper functions to walk the yaml tree
+
         /**
-         * Helper functions to walk the yaml tree
+         * Node type references only make sense in node type definitions and node type presets.
+         * Without this check every root level key of any YAML file would get a reference.
          */
+        protected static boolean isInNodeTypeConfiguration(PsiElement element) {
+            PsiFile file = element.getContainingFile();
+            if (file == null) {
+                return false;
+            }
+
+            VirtualFile virtualFile = file.getOriginalFile().getVirtualFile();
+            return virtualFile != null
+                    && (NeosUtil.isNodeTypeDefinition(virtualFile) || NeosUtil.isNodeTypePreset(virtualFile));
+        }
+
         protected static boolean parentKeyIs(YAMLKeyValue yamlKeyValue, String parentKey) {
             YAMLKeyValue key = getParentKey(yamlKeyValue);
             return (key != null && parentKey.equals(key.getKeyText()));
@@ -72,6 +89,10 @@ public class NodeTypeReferenceContributor extends PsiReferenceContributor {
         @NotNull
         @Override
         public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+            if (!isInNodeTypeConfiguration(element)) {
+                return PsiReference.EMPTY_ARRAY;
+            }
+
             YAMLKeyValue yamlElement = (YAMLKeyValue) element;
 
             // we support the following cases:
@@ -105,6 +126,10 @@ public class NodeTypeReferenceContributor extends PsiReferenceContributor {
         @NotNull
         @Override
         public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+            if (!isInNodeTypeConfiguration(element)) {
+                return PsiReference.EMPTY_ARRAY;
+            }
+
             YAMLSequenceItem yamlItem = getParent((YAMLPsiElement) element, YAMLSequenceItem.class);
             YAMLKeyValue yamlElement = getParentKey(yamlItem);
 
