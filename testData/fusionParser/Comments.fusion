@@ -1,0 +1,8 @@
+foo {
+    bar = 1
+}
+baz { // comment after brace
+    # hash comment
+    qux = 'x'
+}
+// comment at end of file

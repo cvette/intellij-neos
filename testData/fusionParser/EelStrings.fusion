@@ -1,0 +1,3 @@
+replace = ${String.replace(value, '}', '{')}
+escaped = ${"}" + 'it\'s }'}
+after = 1

@@ -23,7 +23,8 @@ import de.vette.idea.neos.lang.fusion.psi.FusionValueDsl;
 %type IElementType
 %unicode
 
-SINGLE_LINE_COMMENT = (\/\/|#).*(\n | \r | \r\n)
+// The line break is not part of the comment, so a comment on the last line of a file is recognized as well
+SINGLE_LINE_COMMENT = (\/\/|#).*
 
 C_STYLE_COMMENT=("/*"[^"*"]{COMMENT_TAIL})|"/*"
 DOC_COMMENT="/*""*"+("/"|([^"/""*"]{COMMENT_TAIL}))?
@@ -54,8 +55,12 @@ ESCAPED_DOUBLE_QUOTE =                  "\\\\"* "\\\""
 VALUE_STRING_IN_DOUBLE_QUOTE =          [^\n\r\"\\]+
 
 BACKTICK = "`"
-ESCAPED_BACKTICK = "\\\\"* "\\\`"
-VALUE_STRING_IN_BACKTICKS = [^\n\r\`\\]+
+// DSL content is everything up to the next backtick, there is no way to escape a backtick
+VALUE_STRING_IN_BACKTICKS = [^\`]+
+
+// String literals inside of Eel expressions, they may contain braces that must not be counted
+EEL_STRING_SINGLE_QUOTE = \' ([^\'\\] | \\[^])* \'
+EEL_STRING_DOUBLE_QUOTE = \" ([^\"\\] | \\[^])* \"
 
 LEFT_BRACE = "{"
 RIGHT_BRACE = "}"
@@ -218,6 +223,7 @@ DECLARATION_SEPARATOR_LOOKAHEAD = [ \t\f]*:
 
 <CRLF_OR_BLOCK_EXPECTED> {
     {RIGHT_BRACE}                           { yybegin(YYINITIAL); return FusionTypes.RIGHT_BRACE; }
+    {SINGLE_LINE_COMMENT}                   { return FusionTypes.SINGLE_LINE_COMMENT; }
 }
 
 <INCLUDE_FOUND> {
@@ -274,9 +280,6 @@ DECLARATION_SEPARATOR_LOOKAHEAD = [ \t\f]*:
 }
 
 <VALUE_STRING_EXPECTED_IN_BACKTICKS> {
-    {CRLF}                                  { return FusionTypes.DSL_VALUE; }
-    {ESCAPED_BACKTICK}+                     { return FusionTypes.DSL_VALUE; }
-    {BACKSLASH}+                            { return FusionTypes.DSL_VALUE; }
     {VALUE_STRING_IN_BACKTICKS}             { return FusionTypes.DSL_VALUE; }
     {BACKTICK}                              { yybegin(CRLF_EXPECTED); return FusionTypes.BACKTICK; }
 }
@@ -301,6 +304,8 @@ DECLARATION_SEPARATOR_LOOKAHEAD = [ \t\f]*:
           return FusionTypes.EEL_END_DELIMITER;
     }
 
+    {EEL_STRING_SINGLE_QUOTE}               { return FusionTypes.EEL_VALUE; }
+    {EEL_STRING_DOUBLE_QUOTE}               { return FusionTypes.EEL_VALUE; }
     {WHITE_SPACE}                           { return FusionTypes.EEL_VALUE; }
     \\\$                                    { return FusionTypes.EEL_VALUE; }
     [^]                                     { return FusionTypes.EEL_VALUE; }

@@ -52,6 +52,34 @@ public class FusionParserTest extends ParsingTestCase {
         doTest(true);
     }
 
+    /**
+     * Comments directly after an opening brace and on the last line without a line break
+     */
+    public void testComments() {
+        doTest(true);
+    }
+
+    /**
+     * Braces in Eel string literals must not end the expression
+     */
+    public void testEelStrings() {
+        doTest(true);
+    }
+
+    /**
+     * "&&" binds stronger than "||"
+     */
+    public void testEelPrecedence() {
+        doTest(true);
+    }
+
+    /**
+     * A backslash does not escape the closing backtick of a DSL value
+     */
+    public void testDslBackslash() {
+        doTest(true);
+    }
+
     @Override
     protected String getTestDataPath() {
         return "testData/fusionParser";

@@ -73,6 +73,25 @@ public class MovePrototypeProcessor extends BaseRefactoringProcessor {
         return element instanceof PsiComment && element.getText().startsWith("/*");
     }
 
+    private static boolean isSingleLineComment(@Nullable PsiElement element) {
+        return element instanceof PsiComment && !isMultilineComment(element);
+    }
+
+    private static boolean isSingleLineBreak(@NotNull PsiElement whiteSpace) {
+        String text = whiteSpace.getText();
+        return text.equals("\n") || text.equals("\r\n") || text.equals("\r");
+    }
+
+    /**
+     * The line break after a single line comment belongs to that comment and is removed together with it.
+     */
+    private static boolean isLineBreakOfMovedComment(PsiElement[] elements, int index) {
+        return index > 0
+                && elements[index] instanceof PsiWhiteSpace
+                && elements[index].getParent() != null
+                && isSingleLineComment(elements[index - 1]);
+    }
+
     private @Nullable FusionFile getOrCreateFileFromPath(String targetFilePath) {
         String path = FileUtil.toSystemIndependentName(targetFilePath);
         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(path);
@@ -121,9 +140,16 @@ public class MovePrototypeProcessor extends BaseRefactoringProcessor {
         do {
             PsiElement prevSibling = firstElement.getPrevSibling();
             if (prevSibling instanceof PsiWhiteSpace) {
+                PsiElement beforeWhiteSpace = prevSibling.getPrevSibling();
                 // between multiline-comments and a prototype seems to be a whitespace
-                if (isMultilineComment(prevSibling.getPrevSibling())) {
-                    firstElement = prevSibling.getPrevSibling();
+                if (isMultilineComment(beforeWhiteSpace)) {
+                    firstElement = beforeWhiteSpace;
+                    break;
+                }
+                // single line comments are separated by exactly one line break, a blank line ends the comment block
+                if (isSingleLineBreak(prevSibling) && isSingleLineComment(beforeWhiteSpace)) {
+                    firstElement = beforeWhiteSpace;
+                    continue;
                 }
                 break;
             } else if (prevSibling instanceof PsiComment) {
@@ -192,9 +218,16 @@ public class MovePrototypeProcessor extends BaseRefactoringProcessor {
         }
 
         // deleting the elements when moving creates an error, as parent elements for subsequent elements may be deleted
+        List<PsiElement> commentLineBreaks = new ArrayList<>();
+        for (int i = 0; i < myAffectedElements.length; i++) {
+            if (isLineBreakOfMovedComment(myAffectedElements, i)) {
+                commentLineBreaks.add(myAffectedElements[i]);
+            }
+        }
+
         for (PsiElement element : myAffectedElements) {
             // there were a lot of issues with deleting elements, so we try to go over them kind of gracefully
-            if (element instanceof PsiWhiteSpace) {
+            if (element instanceof PsiWhiteSpace && !commentLineBreaks.contains(element)) {
                 continue;
             }
             if (element instanceof LeafPsiElement && ((LeafPsiElement) element).getTreeParent() == null) {
