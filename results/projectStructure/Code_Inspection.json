@@ -60,11 +60,6 @@
               "path": "file://$PROJECT_DIR$/src/main/resources",
               "type": "Resource",
               "packagePrefix": ""
-            },
-            {
-              "path": "file://$PROJECT_DIR$/src/main/kotlin",
-              "type": "Source",
-              "packagePrefix": ""
             }
           ]
         }

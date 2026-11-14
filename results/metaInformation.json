@@ -7,12 +7,12 @@
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43631679654",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43632428218",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "935c497f3a0f704f83ced5b573cc5131c86dade8",
-        "branch": "feat/kotlin"
+        "revisionId": "c8cd98e14a2b68594b38181e2de1c04127272e53",
+        "branch": "cursor/afx-attribute-completion"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
