@@ -71,19 +71,28 @@ public class AfxTagDescriptor implements XmlElementDescriptor {
 
     @Override
     public XmlAttributeDescriptor[] getAttributesDescriptors(@Nullable XmlTag context) {
-        return new XmlAttributeDescriptor[0];
+        if (context == null) {
+            return new XmlAttributeDescriptor[0];
+        }
+        return AfxAttributes.forTag(context);
     }
 
     @Nullable
     @Override
     public XmlAttributeDescriptor getAttributeDescriptor(String attributeName, @Nullable XmlTag context) {
-        return null;
+        if (context == null || attributeName == null) {
+            return null;
+        }
+        return AfxAttributes.find(context, attributeName);
     }
 
     @Nullable
     @Override
     public XmlAttributeDescriptor getAttributeDescriptor(XmlAttribute attribute) {
-        return null;
+        if (!(attribute.getParent() instanceof XmlTag tag)) {
+            return null;
+        }
+        return getAttributeDescriptor(attribute.getName(), tag);
     }
 
     @Nullable
