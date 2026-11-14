@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 162,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 162
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43634050094",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43636408180",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "98c65bfcd61513c18a4ced8f606a319df592996d",
-        "branch": "main"
+        "revisionId": "28c8feee684fb3a94e741e4497021459c4a3d9d7",
+        "branch": "fix/line-marker-leaf-elements"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
