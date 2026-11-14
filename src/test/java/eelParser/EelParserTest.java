@@ -45,6 +45,10 @@ public class EelParserTest extends ParsingTestCase {
         doTestValid();
     }
 
+    public void testRecovery() throws IOException {
+        doTestInvalid();
+    }
+
     /**
      * All cases have to be parsed without errors
      */

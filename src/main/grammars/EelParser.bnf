@@ -17,12 +17,19 @@
     tokenTypeClass="de.vette.idea.neos.lang.eel.psi.EelTokenType"
 }
 
+// Error recovery:
+// - "pin" marks the token after which a rule is considered matched, so an incomplete expression like "a +"
+//   still produces the surrounding PSI elements and a precise error instead of failing as a whole.
+// - "recoverWhile" skips unexpected tokens in list items up to the next separator or closing token.
+// Rules that are tried speculatively (arrow function arguments, identifiers) must not be pinned on their first token.
+
 EelExpression ::= conditional_expression
 
 offset_access ::= EEL_LEFT_BRACKET conditional_expression EEL_RIGHT_BRACKET {pin=1}
-method_call ::= method_name EEL_LEFT_PAREN [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_PAREN {pin=2}
+method_call ::= method_name EEL_LEFT_PAREN [list_item] list_item_tail* EEL_RIGHT_PAREN {pin=2}
 
-object_path ::= (composite_identifier|method_call) (EEL_DOT (method_call|composite_identifier) | offset_access) *
+object_path ::= (composite_identifier|method_call) (object_path_member | offset_access) *
+private object_path_member ::= EEL_DOT (method_call|composite_identifier) {pin=1}
 composite_identifier ::= identifier (EEL_DOT (identifier)) * {
     implements = [ "de.vette.idea.neos.lang.eel.psi.EelReferenceElement" ]
     mixin = "de.vette.idea.neos.lang.eel.psi.impl.ext.EelCompositeIdentifierImplMixin"
@@ -34,25 +41,48 @@ method_name ::= EEL_FUNCTION {
     mixin = "de.vette.idea.neos.lang.eel.psi.impl.ext.EelMethodNameImplMixin"
 }
 
-value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_QUOTE
+value_string_line ::= VALUE_STRING_QUOTE value_string_line_content VALUE_STRING_QUOTE {pin=1}
 
 value_string_line_content ::= (VALUE_STRING | CRLF | VALUE_STRING_ESCAPED_QUOTE)*
 
 term ::= VALUE_BOOLEAN !EEL_IDENTIFIER | EEL_SUBTRACTION_OPERATOR? VALUE_NUMBER | object_path | value_string_line
 
-simple_expression ::= arrow_function | wrapped_expression | array_literal | object_literal | term | not_expression
-arrow_function ::= method_arguments EEL_ARROW conditional_expression
+simple_expression ::= arrow_function | wrapped_expression | array_literal | object_literal | term | not_expression {name="expression"}
+arrow_function ::= method_arguments EEL_ARROW conditional_expression {pin=2}
 method_arguments ::= method_arguments_with_parens | method_arguments_without_parens
 method_arguments_with_parens ::= EEL_LEFT_PAREN EEL_IDENTIFIER? (VALUE_SEPARATOR EEL_IDENTIFIER)* EEL_RIGHT_PAREN
 method_arguments_without_parens ::= EEL_IDENTIFIER
-wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN
-not_expression ::= EEL_NEGATION_OPERATOR simple_expression
-conditional_expression ::= disjunction [IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression]
-disjunction ::= conjunction (EEL_BOOLEAN_OR conjunction) *
-conjunction ::= comparison (EEL_BOOLEAN_AND comparison) *
-comparison ::= sum_calculation [EEL_COMPARISON_OPERATOR sum_calculation]
-sum_calculation ::= prod_calculation ((EEL_ADDITION_OPERATOR|EEL_SUBTRACTION_OPERATOR) prod_calculation) *
-prod_calculation ::= simple_expression ((EEL_DIVISION_OPERATOR|EEL_MODULO_OPERATOR|EEL_MULTIPLICATION_OPERATOR) simple_expression) *
-array_literal ::= EEL_LEFT_BRACKET [conditional_expression] (VALUE_SEPARATOR conditional_expression) * EEL_RIGHT_BRACKET
-object_literal_property ::= (value_string_line|EEL_IDENTIFIER) ':' conditional_expression
-object_literal ::= EEL_OBJECT_LEFT_BRACE [object_literal_property] (VALUE_SEPARATOR object_literal_property) * EEL_OBJECT_RIGHT_BRACE
+wrapped_expression ::= EEL_LEFT_PAREN conditional_expression EEL_RIGHT_PAREN {pin=1}
+not_expression ::= EEL_NEGATION_OPERATOR simple_expression {pin=1}
+
+conditional_expression ::= disjunction [conditional_branches]
+private conditional_branches ::= IF_KEYWORD conditional_expression IF_SEPARATOR conditional_expression {pin=1}
+
+disjunction ::= conjunction disjunction_tail *
+private disjunction_tail ::= EEL_BOOLEAN_OR conjunction {pin=1}
+
+conjunction ::= comparison conjunction_tail *
+private conjunction_tail ::= EEL_BOOLEAN_AND comparison {pin=1}
+
+comparison ::= sum_calculation [comparison_tail]
+private comparison_tail ::= EEL_COMPARISON_OPERATOR sum_calculation {pin=1}
+
+sum_calculation ::= prod_calculation sum_calculation_tail *
+private sum_calculation_tail ::= (EEL_ADDITION_OPERATOR|EEL_SUBTRACTION_OPERATOR) prod_calculation {pin=1}
+
+prod_calculation ::= simple_expression prod_calculation_tail *
+private prod_calculation_tail ::= (EEL_DIVISION_OPERATOR|EEL_MODULO_OPERATOR|EEL_MULTIPLICATION_OPERATOR) simple_expression {pin=1}
+
+array_literal ::= EEL_LEFT_BRACKET [list_item] list_item_tail* EEL_RIGHT_BRACKET {pin=1}
+
+object_literal_property ::= (value_string_line|EEL_IDENTIFIER) ':' conditional_expression {
+    pin=1
+    recoverWhile=list_item_recover
+}
+object_literal ::= EEL_OBJECT_LEFT_BRACE [object_literal_property] object_literal_property_tail* EEL_OBJECT_RIGHT_BRACE {pin=1}
+private object_literal_property_tail ::= VALUE_SEPARATOR object_literal_property {pin=1}
+
+// Items of argument lists and array literals
+private list_item ::= conditional_expression {recoverWhile=list_item_recover}
+private list_item_tail ::= VALUE_SEPARATOR list_item {pin=1}
+private list_item_recover ::= !(VALUE_SEPARATOR | EEL_RIGHT_PAREN | EEL_RIGHT_BRACKET | EEL_OBJECT_RIGHT_BRACE)
