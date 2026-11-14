@@ -52,15 +52,23 @@ public class MethodLineMarkerProvider implements LineMarkerProvider {
         for (PsiElement el : elements) {
             if (el instanceof Method && ((Method) el).getAccess().isPublic()) {
                 VirtualFile template = ResolveEngine.findTemplate((Method) el);
-                if (template != null) {
-                    PsiFile target = PsiManager.getInstance(el.getProject()).findFile(template);
-                    RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
-                            .create(NeosIcons.NODE_TYPE)
-                            .setTarget(target)
-                            .setTooltipText("Go to template")
-                            .createLineMarkerInfo(el);
-                    result.add(info);
+                if (template == null) {
+                    continue;
                 }
+
+                // line markers have to be registered for leaf elements, so use the method name instead of the method
+                PsiElement nameIdentifier = ((Method) el).getNameIdentifier();
+                PsiFile target = PsiManager.getInstance(el.getProject()).findFile(template);
+                if (nameIdentifier == null || target == null) {
+                    continue;
+                }
+
+                RelatedItemLineMarkerInfo<PsiElement> info = NavigationGutterIconBuilder
+                        .create(NeosIcons.NODE_TYPE)
+                        .setTarget(target)
+                        .setTooltipText("Go to template")
+                        .createLineMarkerInfo(nameIdentifier);
+                result.add(info);
             }
         }
     }
