@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 162,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 162
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43642374414",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43642308076",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "3ce43006e18a47559c3d8c0e011cf300115c6b0c",
-        "branch": "main"
+        "revisionId": "55281a5f72b5e79ce8b16e3d538672284a2a853b",
+        "branch": "feat/eel-parser-recovery"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
