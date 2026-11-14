@@ -14,6 +14,7 @@ public class NeosYamlSchemaProviderFactory implements JsonSchemaProviderFactory 
                 new NodeTypeYamlSchemaProvider(project),
                 new NodeMigrationYamlSchemaProvider(project),
                 new CacheConfigYamlSchemaProvider(project),
+                new RoutesYamlSchemaProvider(project),
                 new NodeTypePresetYamlSchemaProvider(project)
         );
     }
