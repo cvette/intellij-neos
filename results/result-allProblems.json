@@ -1705,49 +1705,6 @@
         "JAVA"
       ],
       "severity": "High",
-      "comment": "String 'Move prototypes to file ''{0}''' is not properly capitalized. It should have title capitalization",
-      "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n\nInspection ID: DialogTitleCapitalization",
-      "sources": [
-        {
-          "type": "file",
-          "path": "src/main/java/de/vette/idea/neos/lang/fusion/refactoring/MovePrototypeProcessor.java",
-          "language": "JAVA",
-          "line": 224,
-          "offset": 16,
-          "length": 64,
-          "code": {
-            "startLine": 222,
-            "length": 64,
-            "offset": 190,
-            "surroundingCode": "    protected @NotNull @NlsContexts.Command String getCommandName() {\n        String path = myTargetFile != null ? myTargetFile.getVirtualFile().getPath() : myTargetFilePath;\n        return FusionBundle.message(\"refactoring.move.prototype.move.to\", path);\n    }\n}"
-          }
-        }
-      ],
-      "attributes": {
-        "module": "Intellij_Neos.main",
-        "inspectionName": "DialogTitleCapitalization"
-      },
-      "hash": "5529126f47a4798a0e19b435d46927783b84a19a012b6d533f83af70e4a1a6be",
-      "problemType": "REGULAR"
-    },
-    {
-      "tool": "Code Inspection",
-      "category": "Internationalization",
-      "categoryPath": [
-        {
-          "id": "Java",
-          "name": "Java"
-        },
-        {
-          "id": "Java/Internationalization",
-          "name": "Internationalization"
-        }
-      ],
-      "type": "Incorrect string capitalization",
-      "tags": [
-        "JAVA"
-      ],
-      "severity": "High",
       "comment": "String 'EEL Function' is not properly capitalized. It should have sentence capitalization",
       "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n\nInspection ID: DialogTitleCapitalization",
       "sources": [
@@ -1900,6 +1857,49 @@
         "inspectionName": "DialogTitleCapitalization"
       },
       "hash": "5c51c6146abe7307c3819464c866f1f800f3efd13073c63970358e13108a4418",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "Internationalization",
+      "categoryPath": [
+        {
+          "id": "Java",
+          "name": "Java"
+        },
+        {
+          "id": "Java/Internationalization",
+          "name": "Internationalization"
+        }
+      ],
+      "type": "Incorrect string capitalization",
+      "tags": [
+        "JAVA"
+      ],
+      "severity": "High",
+      "comment": "String 'Move prototypes to file ''{0}''' is not properly capitalized. It should have title capitalization",
+      "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n\nInspection ID: DialogTitleCapitalization",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/fusion/refactoring/MovePrototypeProcessor.java",
+          "language": "JAVA",
+          "line": 257,
+          "offset": 16,
+          "length": 64,
+          "code": {
+            "startLine": 255,
+            "length": 64,
+            "offset": 190,
+            "surroundingCode": "    protected @NotNull @NlsContexts.Command String getCommandName() {\n        String path = myTargetFile != null ? myTargetFile.getVirtualFile().getPath() : myTargetFilePath;\n        return FusionBundle.message(\"refactoring.move.prototype.move.to\", path);\n    }\n}"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "DialogTitleCapitalization"
+      },
+      "hash": "5d53ca8e1b5bf3ad7c1242e126ea90f3cb7b7fca5211dfea7c2500cb931c94ee",
       "problemType": "REGULAR"
     },
     {
@@ -2135,6 +2135,49 @@
         "JAVA"
       ],
       "severity": "High",
+      "comment": "String 'Create file ''{0}''' is not properly capitalized. It should have title capitalization",
+      "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n\nInspection ID: DialogTitleCapitalization",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/java/de/vette/idea/neos/lang/fusion/refactoring/MovePrototypeProcessor.java",
+          "language": "JAVA",
+          "line": 114,
+          "offset": 12,
+          "length": 72,
+          "code": {
+            "startLine": 112,
+            "length": 72,
+            "offset": 196,
+            "surroundingCode": "                CommonRefactoringUtil.showErrorMessage(myTitle, FusionBundle.message(\"refactoring.move.prototype.error.creating.file\", e.getMessage()),  null, myProject);\n            }\n        }, FusionBundle.message(\"refactoring.move.prototype.create.file\", fileName), \"movePrototypeRefactoring\");\n\n        if (fileRef.isNull()) {"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "DialogTitleCapitalization"
+      },
+      "hash": "867851d60bcd4c42eb36e95439747505653241893af0c0c6df630dffa7b7a654",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "Internationalization",
+      "categoryPath": [
+        {
+          "id": "Java",
+          "name": "Java"
+        },
+        {
+          "id": "Java/Internationalization",
+          "name": "Internationalization"
+        }
+      ],
+      "type": "Incorrect string capitalization",
+      "tags": [
+        "JAVA"
+      ],
+      "severity": "High",
       "comment": "String 'Object Type' is not properly capitalized. It should have sentence capitalization",
       "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n\nInspection ID: DialogTitleCapitalization",
       "sources": [
@@ -2201,49 +2244,6 @@
         "inspectionName": "DialogTitleCapitalization"
       },
       "hash": "91fbd53af77ce83692813b4cfd85499662bc65fb79253365eefbe374ef3dc79b",
-      "problemType": "REGULAR"
-    },
-    {
-      "tool": "Code Inspection",
-      "category": "Internationalization",
-      "categoryPath": [
-        {
-          "id": "Java",
-          "name": "Java"
-        },
-        {
-          "id": "Java/Internationalization",
-          "name": "Internationalization"
-        }
-      ],
-      "type": "Incorrect string capitalization",
-      "tags": [
-        "JAVA"
-      ],
-      "severity": "High",
-      "comment": "String 'Create file ''{0}''' is not properly capitalized. It should have title capitalization",
-      "detailsInfo": "Reports strings in method parameters and return values annotated with `@Nls` and having the capitalization parameter to conform to capitalization rules existing in most platform UI guidelines.\n\n**Example:**\n\n\n      void setTitle(@NlsContexts.DialogTitle String title) {}\n      setTitle(\"This is sentence capitalization but should be title\"); \n\nAfter the quick-fix is applied:\n\n\n      setTitle(\"This Is Sentence Capitalization but Should Be Title\"); \n\nInspection ID: DialogTitleCapitalization",
-      "sources": [
-        {
-          "type": "file",
-          "path": "src/main/java/de/vette/idea/neos/lang/fusion/refactoring/MovePrototypeProcessor.java",
-          "language": "JAVA",
-          "line": 95,
-          "offset": 12,
-          "length": 72,
-          "code": {
-            "startLine": 93,
-            "length": 72,
-            "offset": 196,
-            "surroundingCode": "                CommonRefactoringUtil.showErrorMessage(myTitle, FusionBundle.message(\"refactoring.move.prototype.error.creating.file\", e.getMessage()),  null, myProject);\n            }\n        }, FusionBundle.message(\"refactoring.move.prototype.create.file\", fileName), \"movePrototypeRefactoring\");\n\n        if (fileRef.isNull()) {"
-          }
-        }
-      ],
-      "attributes": {
-        "module": "Intellij_Neos.main",
-        "inspectionName": "DialogTitleCapitalization"
-      },
-      "hash": "a88856371dfb582452292c2fd38b63ce47ec16191d2b71250a39728b3b2b08db",
       "problemType": "REGULAR"
     },
     {
