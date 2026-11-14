@@ -37,9 +37,8 @@ public class NodeTypeReferenceContributor extends PsiReferenceContributor {
 
     private static abstract class AbstractNodeTypeReferenceProvider extends PsiReferenceProvider {
 
-        /**
-         * Helper functions to walk the yaml tree
-         */
+        // Helper functions to walk the yaml tree
+
         /**
          * Node type references only make sense in node type definitions and node type presets.
          * Without this check every root level key of any YAML file would get a reference.
