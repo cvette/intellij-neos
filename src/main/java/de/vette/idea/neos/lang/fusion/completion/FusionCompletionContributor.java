@@ -38,5 +38,11 @@ public class FusionCompletionContributor extends CompletionContributor
                 psiElement(FusionTypes.META_PROPERTY_NAME),
                 new MetaPathProvider()
         );
+
+        extend(
+                CompletionType.BASIC,
+                psiElement(FusionTypes.PATH_PART),
+                new FusionPropertyCompletionProvider()
+        );
     }
 }
