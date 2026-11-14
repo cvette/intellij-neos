@@ -29,7 +29,6 @@ import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.psi.stubs.StubIndex
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ProcessingContext
 import com.intellij.util.indexing.FileBasedIndex
@@ -48,8 +47,7 @@ import de.vette.idea.neos.lang.eel.psi.EelTypes
 import de.vette.idea.neos.lang.fusion.icons.FusionIcons
 import de.vette.idea.neos.lang.fusion.psi.FusionBlock
 import de.vette.idea.neos.lang.fusion.psi.FusionPath
-import de.vette.idea.neos.lang.fusion.psi.FusionPropertyAssignment
-import de.vette.idea.neos.lang.fusion.stubs.index.FusionPropertyAssignmentIndex
+import de.vette.idea.neos.lang.fusion.resolve.FusionPrototypeProperties
 import de.vette.idea.neos.util.NeosUtil
 
 /**
@@ -291,26 +289,14 @@ class EelCompletionProvider : CompletionProvider<CompletionParameters>() {
     }
 
     /**
-     * The properties of the prototype the expression is defined in
+     * The properties of the prototype the expression is defined in, including inherited ones
      */
     private fun prototypeProperties(element: PsiElement): List<LookupElement> {
         val project = element.project
         val names = LinkedHashSet<String>()
 
         for (prototype in NeosUtil.getPrototypeNames(fusionElement(element))) {
-            val assignments = StubIndex.getElements(
-                FusionPropertyAssignmentIndex.KEY,
-                prototype,
-                project,
-                GlobalSearchScope.projectScope(project),
-                FusionPropertyAssignment::class.java
-            )
-            for (assignment in assignments) {
-                val name = assignment.path.text
-                if (!name.startsWith("@") && !name.contains('.')) {
-                    names.add(name)
-                }
-            }
+            names.addAll(FusionPrototypeProperties.forPrototype(project, prototype).keys)
         }
 
         return names.map { LookupElementBuilder.create(it).withIcon(FusionIcons.PATH).withTypeText("property", true) }

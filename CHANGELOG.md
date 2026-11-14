@@ -8,6 +8,7 @@
 
 - JSON schema for `Routes.*.yaml` files
 - Context-aware completion in Eel expressions: helpers, helper methods, FlowQuery operations, context variables and prototype properties
+- Completion of prototype properties in Fusion blocks, including inherited properties
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
 ### Fixed
