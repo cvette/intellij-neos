@@ -1,0 +1,59 @@
+# missing operand after plus
+a +
+
+# missing operand inside of arguments
+foo(1 +, 2)
+
+# missing operand after and
+a &&
+
+# missing operand after comparison
+a ==
+
+# trailing dot
+foo.bar.
+
+# trailing dot inside of arguments
+foo(bar., 2)
+
+# unclosed method call
+foo(1, 2
+
+# missing argument separator
+foo(1 2, 3)
+
+# unclosed array
+[1, 2
+
+# missing array separator
+[1 2, 3]
+
+# unclosed object
+{foo: 1
+
+# object property without value
+{foo: , bar: 2}
+
+# object property without colon
+{foo 1, bar: 2}
+
+# unclosed parenthesis
+(a + b
+
+# ternary without else
+a ? b
+
+# ternary without then
+a ? : c
+
+# arrow function without body
+Array.map(items, item =>)
+
+# unclosed string
+foo('bar)
+
+# unclosed offset access
+foo[0
+
+# negation without operand
+!

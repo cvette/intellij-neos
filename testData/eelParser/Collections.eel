@@ -1,0 +1,26 @@
+# empty array
+[]
+
+# array
+['Foo', 1 + 2, true]
+
+# nested array
+[[1, 2], [3]]
+
+# empty object
+{}
+
+# object
+{foo: 'bar', 'quoted': 1}
+
+# nested object
+{foo: {bar: [1, 2]}}
+
+# array as argument
+Type.isArray(['Foo', 1 + 2])
+
+# object over multiple lines
+{
+    title: item.title,
+    label: item.label + '}'
+}

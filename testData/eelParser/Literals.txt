@@ -1,0 +1,161 @@
+# single quoted string
+'foo'
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  EelValueStringLineImpl(VALUE_STRING_LINE)
+                    PsiElement(VALUE_STRING_QUOTE)(''')
+                    EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
+                      PsiElement(VALUE_STRING)('foo')
+                    PsiElement(VALUE_STRING_QUOTE)(''')
+
+# double quoted string
+"foo"
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  EelValueStringLineImpl(VALUE_STRING_LINE)
+                    PsiElement(VALUE_STRING_QUOTE)('"')
+                    EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
+                      PsiElement(VALUE_STRING)('foo')
+                    PsiElement(VALUE_STRING_QUOTE)('"')
+
+# string with escaped quote
+'it\'s'
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  EelValueStringLineImpl(VALUE_STRING_LINE)
+                    PsiElement(VALUE_STRING_QUOTE)(''')
+                    EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
+                      PsiElement(VALUE_STRING)('it')
+                      PsiElement(VALUE_STRING_ESCAPED_QUOTE)('\'')
+                      PsiElement(VALUE_STRING)('s')
+                    PsiElement(VALUE_STRING_QUOTE)(''')
+
+# string with braces
+'{}'
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  EelValueStringLineImpl(VALUE_STRING_LINE)
+                    PsiElement(VALUE_STRING_QUOTE)(''')
+                    EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
+                      PsiElement(VALUE_STRING)('{}')
+                    PsiElement(VALUE_STRING_QUOTE)(''')
+
+# integer
+42
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  PsiElement(VALUE_NUMBER)('42')
+
+# float
+2.5
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  PsiElement(VALUE_NUMBER)('2.5')
+
+# negative number
+-2.5
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  PsiElement(EEL_SUBTRACTION_OPERATOR)('-')
+                  PsiElement(VALUE_NUMBER)('2.5')
+
+# boolean true
+true
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  PsiElement(VALUE_BOOLEAN)('true')
+
+# boolean false
+FALSE
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  PsiElement(VALUE_BOOLEAN)('FALSE')
+
+# identifier starting with a boolean
+trueValue
+----
+FILE
+  EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
+    EelDisjunctionImpl(DISJUNCTION)
+      EelConjunctionImpl(CONJUNCTION)
+        EelComparisonImpl(COMPARISON)
+          EelSumCalculationImpl(SUM_CALCULATION)
+            EelProdCalculationImpl(PROD_CALCULATION)
+              EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
+                EelTermImpl(TERM)
+                  EelObjectPathImpl(OBJECT_PATH)
+                    EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
+                      EelIdentifierImpl(IDENTIFIER)
+                        PsiElement(EEL_IDENTIFIER)('trueValue')

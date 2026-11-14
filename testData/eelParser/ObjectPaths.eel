@@ -1,0 +1,32 @@
+# property path
+this.foo.bar
+
+# method call without arguments
+foo()
+
+# helper method
+String.toUpperCase('foo')
+
+# multiple arguments
+Array.slice(items, 0, 2)
+
+# chained method calls
+q(node).children('[instanceof Neos.Neos:Content]').first().property('title')
+
+# offset access
+foo[0]
+
+# offset access with string
+bar['baz']
+
+# chained offset access
+baz[0][0]
+
+# property after offset access
+foo[0].bar
+
+# method call after offset access
+foo[0].bar()
+
+# identifier with dash
+props.foo-bar
