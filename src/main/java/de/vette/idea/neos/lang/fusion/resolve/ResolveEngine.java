@@ -269,7 +269,8 @@ public class ResolveEngine {
                 return null;
             }
 
-            actionName = actionName.replace("Action", "");
+            // only strip the suffix, the name itself may contain "Action" as well (e.g. "transactionAction")
+            actionName = actionName.substring(0, actionName.length() - "Action".length());
             if (actionName.length() < 2) {
                 return null;
             }
@@ -277,7 +278,9 @@ public class ResolveEngine {
             actionName = actionName.substring(0, 1).toUpperCase() + actionName.substring(1);
 
             String controllerName = method.getContainingClass().getName();
-            controllerName = controllerName.replace("Controller", "");
+            if (controllerName.endsWith("Controller")) {
+                controllerName = controllerName.substring(0, controllerName.length() - "Controller".length());
+            }
 
             JsonFile composerFile = ComposerUtil.getComposerManifest(file.getContainingDirectory());
             if (composerFile != null) {
