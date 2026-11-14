@@ -146,11 +146,9 @@
   </extensions>
 
   <actions>
-    <!--Action for throwing an exception just to test the reporting of errors to Sentry-->
+    <!--Action for throwing an exception just to test the reporting of errors to Sentry. Only available in internal mode.-->
     <action id="de.vette.idea.neos.errorReporting.TriggerExceptionAction"
-            class="de.vette.idea.neos.errorReporting.TriggerExceptionAction" text="FireArtificialException">
-      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt F12"/>
-    </action>
+            class="de.vette.idea.neos.errorReporting.TriggerExceptionAction" text="FireArtificialException" internal="true"/>
 
     <action id="Neos.NewNodeTypeDefinition" class="de.vette.idea.neos.actions.CreateNodeTypeDefinition" text="Node Type Definition" description="Create new node type definition">
       <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
