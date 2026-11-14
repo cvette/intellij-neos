@@ -38,6 +38,14 @@ public class AfxParserTest extends BasePlatformTestCase {
         }
     }
 
+    public void testBraceInEelStringDoesNotEndExpression() {
+        PsiFile file = myFixture.configureByText("Braces.afx", """
+                <a title={String.replace(props.title, '}', "{")}>{String.replace(props.label, '}', '')}</a>
+                """);
+
+        assertNull(PsiTreeUtil.findChildOfType(file, PsiErrorElement.class));
+    }
+
     public void testSpreadSurvivesReformat() {
         String source = "<a {...data} class={props.class}/>";
         myFixture.configureByText("Spread.afx", source);
