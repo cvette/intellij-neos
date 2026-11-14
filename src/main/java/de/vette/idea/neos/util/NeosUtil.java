@@ -154,6 +154,18 @@ public class NeosUtil {
             return signature.getType().getText();
         }
 
+        // prototype(Vendor.Site:Example) { ... } without inheritance, only on the top level:
+        // "foo.prototype(X) { ... }" overrides a prototype in a context and does not define its properties
+        if (parent instanceof FusionPropertyBlock) {
+            FusionPropertyBlock propertyBlock = (FusionPropertyBlock) parent;
+            if (!(propertyBlock.getParent() instanceof FusionFile) || !propertyBlock.getPath().isPrototypeSignature()) {
+                return null;
+            }
+
+            FusionPrototypeSignature signature = propertyBlock.getPath().getPrototypeSignatureList().get(0);
+            return signature.getType() == null ? null : signature.getType().getText();
+        }
+
         return null;
     }
 }
