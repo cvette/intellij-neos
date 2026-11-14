@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 163,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 163
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43645277716",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43645194189",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "dd6a42071cedf4c85eff10f7f16526cff9096baf",
-        "branch": "main"
+        "revisionId": "8bfd0ca232ca9f5c0b054d963f6930a2fa6eb940",
+        "branch": "feat/eel-flat-grammar"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
