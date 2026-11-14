@@ -70,6 +70,9 @@ TAG_NAME=({ALPHA}|"_"|":")({ALPHA}|{DIGIT}|"_"|":"|"."|"-")*
 /* '{' starts an AFX spread ({...expr}) and must not be swallowed as an attribute name */
 ATTRIBUTE_NAME=[^ \n\r\t\f<>/={]([^ \n\r\t\f<>/=])*
 
+EEL_STRING_SINGLE_QUOTE=\' ([^\'\\] | \\[^])* \'
+EEL_STRING_DOUBLE_QUOTE=\" ([^\"\\] | \\[^])* \"
+
 %%
 
 <YYINITIAL> {WHITE_SPACE_CHARS} { return XmlTokenType.XML_REAL_WHITE_SPACE; }
@@ -121,6 +124,9 @@ ATTRIBUTE_NAME=[^ \n\r\t\f<>/={]([^ \n\r\t\f<>/=])*
           return AfxElementTypes.AFX_EEL_END_DELIMITER;
       }
 
+  /* string literals may contain braces that must not be counted */
+  {EEL_STRING_SINGLE_QUOTE} { return AfxElementTypes.AFX_EEL_VALUE; }
+  {EEL_STRING_DOUBLE_QUOTE} { return AfxElementTypes.AFX_EEL_VALUE; }
   \\\$ { return AfxElementTypes.AFX_EEL_VALUE; }
   [^] { return AfxElementTypes.AFX_EEL_VALUE;}
 }
@@ -137,6 +143,6 @@ ATTRIBUTE_NAME=[^ \n\r\t\f<>/={]([^ \n\r\t\f<>/=])*
   [^] { return XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN;}
 }
 
-<YYINITIAL> ([^<{&\$# \n\r\t\f]|(\\\$)|(\\#))* { return XmlTokenType.XML_DATA_CHARACTERS; }
+<YYINITIAL> ([^<{&\$# \n\r\t\f]|(\\\$)|(\\#))+ { return XmlTokenType.XML_DATA_CHARACTERS; }
 <YYINITIAL> [^] { return XmlTokenType.XML_DATA_CHARACTERS; }
 [^] { return TokenType.BAD_CHARACTER; }

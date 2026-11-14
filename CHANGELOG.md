@@ -16,6 +16,10 @@
 - Template lookup for controller actions containing "Action" or "Controller" in their name
 - "Go to template" line marker was active in projects without enabled Neos support
 - Performance warning caused by line markers for Fusion prototypes and controller templates not being registered on leaf elements
+- Precedence of `&&` and `||` in Eel expressions
+- Braces in Eel string literals ended the expression in Fusion and AFX
+- Fusion comments on the last line of a file and directly after an opening brace
+- A backslash before the closing backtick kept a Fusion DSL value open
 
 ### Removed
 
