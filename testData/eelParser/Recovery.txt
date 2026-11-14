@@ -13,8 +13,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('a')
-            PsiElement(EEL_ADDITION_OPERATOR)('+')
+                        PsiElement(identifier)('a')
+            PsiElement(+)('+')
             PsiErrorElement:<expression> expected
               <empty list>
 
@@ -33,8 +33,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelMethodCallImpl(METHOD_CALL)
                       EelMethodNameImpl(METHOD_NAME)
-                        PsiElement(EEL_FUNCTION)('foo')
-                      PsiElement(EEL_LEFT_PAREN)('(')
+                        PsiElement(function name)('foo')
+                      PsiElement(()('(')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -43,11 +43,11 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('1')
-                                PsiElement(EEL_ADDITION_OPERATOR)('+')
+                                      PsiElement(number)('1')
+                                PsiElement(+)('+')
                                 PsiErrorElement:<expression> expected, got ','
                                   <empty list>
-                      PsiElement(VALUE_SEPARATOR)(',')
+                      PsiElement(,)(',')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -56,8 +56,8 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('2')
-                      PsiElement(EEL_RIGHT_PAREN)(')')
+                                      PsiElement(number)('2')
+                      PsiElement())(')')
 
 # missing operand after and
 a &&
@@ -74,8 +74,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('a')
-        PsiElement(EEL_BOOLEAN_AND)('&&')
+                        PsiElement(identifier)('a')
+        PsiElement(&&)('&&')
         PsiErrorElement:<expression> expected
           <empty list>
 
@@ -94,8 +94,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('a')
-          PsiElement(EEL_COMPARISON_OPERATOR)('==')
+                        PsiElement(identifier)('a')
+          PsiElement(comparison operator)('==')
           PsiErrorElement:<expression> expected
             <empty list>
 
@@ -114,12 +114,12 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('foo')
-                      PsiElement(EEL_DOT)('.')
+                        PsiElement(identifier)('foo')
+                      PsiElement(.)('.')
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('bar')
-                    PsiElement(EEL_DOT)('.')
-                    PsiErrorElement:EEL_FUNCTION or EEL_IDENTIFIER expected
+                        PsiElement(identifier)('bar')
+                    PsiElement(.)('.')
+                    PsiErrorElement:function name or identifier expected
                       <empty list>
 
 # trailing dot inside of arguments
@@ -137,8 +137,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelMethodCallImpl(METHOD_CALL)
                       EelMethodNameImpl(METHOD_NAME)
-                        PsiElement(EEL_FUNCTION)('foo')
-                      PsiElement(EEL_LEFT_PAREN)('(')
+                        PsiElement(function name)('foo')
+                      PsiElement(()('(')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -150,11 +150,11 @@ FILE
                                       EelObjectPathImpl(OBJECT_PATH)
                                         EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                                           EelIdentifierImpl(IDENTIFIER)
-                                            PsiElement(EEL_IDENTIFIER)('bar')
-                                        PsiElement(EEL_DOT)('.')
-                                        PsiErrorElement:EEL_FUNCTION or EEL_IDENTIFIER expected, got ','
+                                            PsiElement(identifier)('bar')
+                                        PsiElement(.)('.')
+                                        PsiErrorElement:function name or identifier expected, got ','
                                           <empty list>
-                      PsiElement(VALUE_SEPARATOR)(',')
+                      PsiElement(,)(',')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -163,8 +163,8 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('2')
-                      PsiElement(EEL_RIGHT_PAREN)(')')
+                                      PsiElement(number)('2')
+                      PsiElement())(')')
 
 # unclosed method call
 foo(1, 2
@@ -181,8 +181,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelMethodCallImpl(METHOD_CALL)
                       EelMethodNameImpl(METHOD_NAME)
-                        PsiElement(EEL_FUNCTION)('foo')
-                      PsiElement(EEL_LEFT_PAREN)('(')
+                        PsiElement(function name)('foo')
+                      PsiElement(()('(')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -191,8 +191,8 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('1')
-                      PsiElement(VALUE_SEPARATOR)(',')
+                                      PsiElement(number)('1')
+                      PsiElement(,)(',')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -201,8 +201,8 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('2')
-                      PsiErrorElement:EEL_RIGHT_PAREN or VALUE_SEPARATOR expected
+                                      PsiElement(number)('2')
+                      PsiErrorElement:')', ',' or <operator> expected
                         <empty list>
 
 # missing argument separator
@@ -220,8 +220,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelMethodCallImpl(METHOD_CALL)
                       EelMethodNameImpl(METHOD_NAME)
-                        PsiElement(EEL_FUNCTION)('foo')
-                      PsiElement(EEL_LEFT_PAREN)('(')
+                        PsiElement(function name)('foo')
+                      PsiElement(()('(')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -230,10 +230,10 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('1')
-                      PsiErrorElement:EEL_ADDITION_OPERATOR, EEL_BOOLEAN_AND, EEL_BOOLEAN_OR, EEL_COMPARISON_OPERATOR, EEL_DIVISION_OPERATOR, EEL_MODULO_OPERATOR, EEL_MULTIPLICATION_OPERATOR, EEL_SUBTRACTION_OPERATOR or IF_KEYWORD expected, got '2'
-                        PsiElement(VALUE_NUMBER)('2')
-                      PsiElement(VALUE_SEPARATOR)(',')
+                                      PsiElement(number)('1')
+                      PsiErrorElement:')', ',' or <operator> expected, got '2'
+                        PsiElement(number)('2')
+                      PsiElement(,)(',')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -242,8 +242,8 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('3')
-                      PsiElement(EEL_RIGHT_PAREN)(')')
+                                      PsiElement(number)('3')
+                      PsiElement())(')')
 
 # unclosed array
 [1, 2
@@ -257,7 +257,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelArrayLiteralImpl(ARRAY_LITERAL)
-                  PsiElement(EEL_LEFT_BRACKET)('[')
+                  PsiElement([)('[')
                   EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                     EelDisjunctionImpl(DISJUNCTION)
                       EelConjunctionImpl(CONJUNCTION)
@@ -266,8 +266,8 @@ FILE
                             EelProdCalculationImpl(PROD_CALCULATION)
                               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                 EelTermImpl(TERM)
-                                  PsiElement(VALUE_NUMBER)('1')
-                  PsiElement(VALUE_SEPARATOR)(',')
+                                  PsiElement(number)('1')
+                  PsiElement(,)(',')
                   EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                     EelDisjunctionImpl(DISJUNCTION)
                       EelConjunctionImpl(CONJUNCTION)
@@ -276,8 +276,8 @@ FILE
                             EelProdCalculationImpl(PROD_CALCULATION)
                               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                 EelTermImpl(TERM)
-                                  PsiElement(VALUE_NUMBER)('2')
-                  PsiErrorElement:EEL_RIGHT_BRACKET or VALUE_SEPARATOR expected
+                                  PsiElement(number)('2')
+                  PsiErrorElement:',', <operator> or ']' expected
                     <empty list>
 
 # missing array separator
@@ -292,7 +292,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelArrayLiteralImpl(ARRAY_LITERAL)
-                  PsiElement(EEL_LEFT_BRACKET)('[')
+                  PsiElement([)('[')
                   EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                     EelDisjunctionImpl(DISJUNCTION)
                       EelConjunctionImpl(CONJUNCTION)
@@ -301,10 +301,10 @@ FILE
                             EelProdCalculationImpl(PROD_CALCULATION)
                               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                 EelTermImpl(TERM)
-                                  PsiElement(VALUE_NUMBER)('1')
-                  PsiErrorElement:EEL_ADDITION_OPERATOR, EEL_BOOLEAN_AND, EEL_BOOLEAN_OR, EEL_COMPARISON_OPERATOR, EEL_DIVISION_OPERATOR, EEL_MODULO_OPERATOR, EEL_MULTIPLICATION_OPERATOR, EEL_SUBTRACTION_OPERATOR or IF_KEYWORD expected, got '2'
-                    PsiElement(VALUE_NUMBER)('2')
-                  PsiElement(VALUE_SEPARATOR)(',')
+                                  PsiElement(number)('1')
+                  PsiErrorElement:',', <operator> or ']' expected, got '2'
+                    PsiElement(number)('2')
+                  PsiElement(,)(',')
                   EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                     EelDisjunctionImpl(DISJUNCTION)
                       EelConjunctionImpl(CONJUNCTION)
@@ -313,8 +313,8 @@ FILE
                             EelProdCalculationImpl(PROD_CALCULATION)
                               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                 EelTermImpl(TERM)
-                                  PsiElement(VALUE_NUMBER)('3')
-                  PsiElement(EEL_RIGHT_BRACKET)(']')
+                                  PsiElement(number)('3')
+                  PsiElement(])(']')
 
 # unclosed object
 {foo: 1
@@ -328,10 +328,10 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelObjectLiteralImpl(OBJECT_LITERAL)
-                  PsiElement(EEL_OBJECT_LEFT_BRACE)('{')
+                  PsiElement({)('{')
                   EelObjectLiteralPropertyImpl(OBJECT_LITERAL_PROPERTY)
-                    PsiElement(EEL_IDENTIFIER)('foo')
-                    PsiElement(IF_SEPARATOR)(':')
+                    PsiElement(identifier)('foo')
+                    PsiElement(:)(':')
                     EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                       EelDisjunctionImpl(DISJUNCTION)
                         EelConjunctionImpl(CONJUNCTION)
@@ -340,8 +340,8 @@ FILE
                               EelProdCalculationImpl(PROD_CALCULATION)
                                 EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                   EelTermImpl(TERM)
-                                    PsiElement(VALUE_NUMBER)('1')
-                  PsiErrorElement:EEL_OBJECT_RIGHT_BRACE or VALUE_SEPARATOR expected
+                                    PsiElement(number)('1')
+                  PsiErrorElement:',' or '}' expected
                     <empty list>
 
 # object property without value
@@ -356,16 +356,16 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelObjectLiteralImpl(OBJECT_LITERAL)
-                  PsiElement(EEL_OBJECT_LEFT_BRACE)('{')
+                  PsiElement({)('{')
                   EelObjectLiteralPropertyImpl(OBJECT_LITERAL_PROPERTY)
-                    PsiElement(EEL_IDENTIFIER)('foo')
-                    PsiElement(IF_SEPARATOR)(':')
+                    PsiElement(identifier)('foo')
+                    PsiElement(:)(':')
                   PsiErrorElement:<expression> expected, got ','
                     <empty list>
-                  PsiElement(VALUE_SEPARATOR)(',')
+                  PsiElement(,)(',')
                   EelObjectLiteralPropertyImpl(OBJECT_LITERAL_PROPERTY)
-                    PsiElement(EEL_IDENTIFIER)('bar')
-                    PsiElement(IF_SEPARATOR)(':')
+                    PsiElement(identifier)('bar')
+                    PsiElement(:)(':')
                     EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                       EelDisjunctionImpl(DISJUNCTION)
                         EelConjunctionImpl(CONJUNCTION)
@@ -374,8 +374,8 @@ FILE
                               EelProdCalculationImpl(PROD_CALCULATION)
                                 EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                   EelTermImpl(TERM)
-                                    PsiElement(VALUE_NUMBER)('2')
-                  PsiElement(EEL_OBJECT_RIGHT_BRACE)('}')
+                                    PsiElement(number)('2')
+                  PsiElement(})('}')
 
 # object property without colon
 {foo 1, bar: 2}
@@ -389,9 +389,9 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelObjectLiteralImpl(OBJECT_LITERAL)
-                  PsiElement(EEL_OBJECT_LEFT_BRACE)('{')
+                  PsiElement({)('{')
                   EelObjectLiteralPropertyImpl(OBJECT_LITERAL_PROPERTY)
-                    PsiElement(EEL_IDENTIFIER)('foo')
+                    PsiElement(identifier)('foo')
                     PsiErrorElement:':' expected, got '1'
                       <empty list>
                     EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
@@ -402,11 +402,11 @@ FILE
                               EelProdCalculationImpl(PROD_CALCULATION)
                                 EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                   EelTermImpl(TERM)
-                                    PsiElement(VALUE_NUMBER)('1')
-                  PsiElement(VALUE_SEPARATOR)(',')
+                                    PsiElement(number)('1')
+                  PsiElement(,)(',')
                   EelObjectLiteralPropertyImpl(OBJECT_LITERAL_PROPERTY)
-                    PsiElement(EEL_IDENTIFIER)('bar')
-                    PsiElement(IF_SEPARATOR)(':')
+                    PsiElement(identifier)('bar')
+                    PsiElement(:)(':')
                     EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                       EelDisjunctionImpl(DISJUNCTION)
                         EelConjunctionImpl(CONJUNCTION)
@@ -415,8 +415,8 @@ FILE
                               EelProdCalculationImpl(PROD_CALCULATION)
                                 EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                   EelTermImpl(TERM)
-                                    PsiElement(VALUE_NUMBER)('2')
-                  PsiElement(EEL_OBJECT_RIGHT_BRACE)('}')
+                                    PsiElement(number)('2')
+                  PsiElement(})('}')
 
 # unclosed parenthesis
 (a + b
@@ -430,7 +430,7 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelWrappedExpressionImpl(WRAPPED_EXPRESSION)
-                  PsiElement(EEL_LEFT_PAREN)('(')
+                  PsiElement(()('(')
                   EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                     EelDisjunctionImpl(DISJUNCTION)
                       EelConjunctionImpl(CONJUNCTION)
@@ -442,16 +442,16 @@ FILE
                                   EelObjectPathImpl(OBJECT_PATH)
                                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                                       EelIdentifierImpl(IDENTIFIER)
-                                        PsiElement(EEL_IDENTIFIER)('a')
-                            PsiElement(EEL_ADDITION_OPERATOR)('+')
+                                        PsiElement(identifier)('a')
+                            PsiElement(+)('+')
                             EelProdCalculationImpl(PROD_CALCULATION)
                               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                 EelTermImpl(TERM)
                                   EelObjectPathImpl(OBJECT_PATH)
                                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                                       EelIdentifierImpl(IDENTIFIER)
-                                        PsiElement(EEL_IDENTIFIER)('b')
-                  PsiErrorElement:EEL_ADDITION_OPERATOR, EEL_ARROW, EEL_BOOLEAN_AND, EEL_BOOLEAN_OR, EEL_COMPARISON_OPERATOR, EEL_DIVISION_OPERATOR, EEL_DOT, EEL_LEFT_BRACKET, EEL_MODULO_OPERATOR, EEL_MULTIPLICATION_OPERATOR, EEL_RIGHT_PAREN, EEL_SUBTRACTION_OPERATOR or IF_KEYWORD expected
+                                        PsiElement(identifier)('b')
+                  PsiErrorElement:')', '.', <operator>, '=>' or '[' expected
                     <empty list>
 
 # ternary without else
@@ -469,8 +469,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('a')
-    PsiElement(IF_KEYWORD)('?')
+                        PsiElement(identifier)('a')
+    PsiElement(?)('?')
     EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
       EelDisjunctionImpl(DISJUNCTION)
         EelConjunctionImpl(CONJUNCTION)
@@ -482,8 +482,8 @@ FILE
                     EelObjectPathImpl(OBJECT_PATH)
                       EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                         EelIdentifierImpl(IDENTIFIER)
-                          PsiElement(EEL_IDENTIFIER)('b')
-    PsiErrorElement:EEL_ADDITION_OPERATOR, EEL_ARROW, EEL_BOOLEAN_AND, EEL_BOOLEAN_OR, EEL_COMPARISON_OPERATOR, EEL_DIVISION_OPERATOR, EEL_DOT, EEL_LEFT_BRACKET, EEL_MODULO_OPERATOR, EEL_MULTIPLICATION_OPERATOR, EEL_SUBTRACTION_OPERATOR, IF_KEYWORD or IF_SEPARATOR expected
+                          PsiElement(identifier)('b')
+    PsiErrorElement:'.', ':', <operator>, '=>' or '[' expected
       <empty list>
 
 # ternary without then
@@ -501,11 +501,11 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('a')
-    PsiElement(IF_KEYWORD)('?')
+                        PsiElement(identifier)('a')
+    PsiElement(?)('?')
     PsiErrorElement:<expression> expected, got ':'
       <empty list>
-    PsiElement(IF_SEPARATOR)(':')
+    PsiElement(:)(':')
     EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
       EelDisjunctionImpl(DISJUNCTION)
         EelConjunctionImpl(CONJUNCTION)
@@ -517,7 +517,7 @@ FILE
                     EelObjectPathImpl(OBJECT_PATH)
                       EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                         EelIdentifierImpl(IDENTIFIER)
-                          PsiElement(EEL_IDENTIFIER)('c')
+                          PsiElement(identifier)('c')
 
 # arrow function without body
 Array.map(items, item =>)
@@ -534,12 +534,12 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('Array')
-                    PsiElement(EEL_DOT)('.')
+                        PsiElement(identifier)('Array')
+                    PsiElement(.)('.')
                     EelMethodCallImpl(METHOD_CALL)
                       EelMethodNameImpl(METHOD_NAME)
-                        PsiElement(EEL_FUNCTION)('map')
-                      PsiElement(EEL_LEFT_PAREN)('(')
+                        PsiElement(function name)('map')
+                      PsiElement(()('(')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -551,8 +551,8 @@ FILE
                                       EelObjectPathImpl(OBJECT_PATH)
                                         EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                                           EelIdentifierImpl(IDENTIFIER)
-                                            PsiElement(EEL_IDENTIFIER)('items')
-                      PsiElement(VALUE_SEPARATOR)(',')
+                                            PsiElement(identifier)('items')
+                      PsiElement(,)(',')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -563,11 +563,11 @@ FILE
                                     EelArrowFunctionImpl(ARROW_FUNCTION)
                                       EelMethodArgumentsImpl(METHOD_ARGUMENTS)
                                         EelMethodArgumentsWithoutParensImpl(METHOD_ARGUMENTS_WITHOUT_PARENS)
-                                          PsiElement(EEL_IDENTIFIER)('item')
-                                      PsiElement(EEL_ARROW)('=>')
+                                          PsiElement(identifier)('item')
+                                      PsiElement(=>)('=>')
                                       PsiErrorElement:<expression> expected, got ')'
                                         <empty list>
-                      PsiElement(EEL_RIGHT_PAREN)(')')
+                      PsiElement())(')')
 
 # unclosed string
 foo('bar)
@@ -584,8 +584,8 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelMethodCallImpl(METHOD_CALL)
                       EelMethodNameImpl(METHOD_NAME)
-                        PsiElement(EEL_FUNCTION)('foo')
-                      PsiElement(EEL_LEFT_PAREN)('(')
+                        PsiElement(function name)('foo')
+                      PsiElement(()('(')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -595,10 +595,10 @@ FILE
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
                                       EelValueStringLineImpl(VALUE_STRING_LINE)
-                                        PsiElement(VALUE_STRING_QUOTE)(''')
+                                        PsiElement(quote)(''')
                                         EelValueStringLineContentImpl(VALUE_STRING_LINE_CONTENT)
-                                          PsiElement(VALUE_STRING)('bar)')
-                                        PsiErrorElement:CRLF, VALUE_STRING, VALUE_STRING_ESCAPED_QUOTE or VALUE_STRING_QUOTE expected
+                                          PsiElement(string content)('bar)')
+                                        PsiErrorElement:<string content> or quote expected
                                           <empty list>
 
 # unclosed offset access
@@ -616,9 +616,9 @@ FILE
                   EelObjectPathImpl(OBJECT_PATH)
                     EelCompositeIdentifierImpl(COMPOSITE_IDENTIFIER)
                       EelIdentifierImpl(IDENTIFIER)
-                        PsiElement(EEL_IDENTIFIER)('foo')
+                        PsiElement(identifier)('foo')
                     EelOffsetAccessImpl(OFFSET_ACCESS)
-                      PsiElement(EEL_LEFT_BRACKET)('[')
+                      PsiElement([)('[')
                       EelConditionalExpressionImpl(CONDITIONAL_EXPRESSION)
                         EelDisjunctionImpl(DISJUNCTION)
                           EelConjunctionImpl(CONJUNCTION)
@@ -627,8 +627,8 @@ FILE
                                 EelProdCalculationImpl(PROD_CALCULATION)
                                   EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                                     EelTermImpl(TERM)
-                                      PsiElement(VALUE_NUMBER)('0')
-                      PsiErrorElement:EEL_ADDITION_OPERATOR, EEL_BOOLEAN_AND, EEL_BOOLEAN_OR, EEL_COMPARISON_OPERATOR, EEL_DIVISION_OPERATOR, EEL_MODULO_OPERATOR, EEL_MULTIPLICATION_OPERATOR, EEL_RIGHT_BRACKET, EEL_SUBTRACTION_OPERATOR or IF_KEYWORD expected
+                                      PsiElement(number)('0')
+                      PsiErrorElement:<operator> or ']' expected
                         <empty list>
 
 # negation without operand
@@ -643,6 +643,6 @@ FILE
             EelProdCalculationImpl(PROD_CALCULATION)
               EelSimpleExpressionImpl(SIMPLE_EXPRESSION)
                 EelNotExpressionImpl(NOT_EXPRESSION)
-                  PsiElement(EEL_NEGATION_OPERATOR)('!')
+                  PsiElement(!)('!')
                   PsiErrorElement:<expression> expected
                     <empty list>
