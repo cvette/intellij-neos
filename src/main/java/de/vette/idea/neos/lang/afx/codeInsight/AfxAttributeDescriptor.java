@@ -2,7 +2,6 @@ package de.vette.idea.neos.lang.afx.codeInsight;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.xml.XmlElement;
-import com.intellij.util.ArrayUtil;
 import com.intellij.xml.XmlAttributeDescriptor;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,11 +34,6 @@ public class AfxAttributeDescriptor implements XmlAttributeDescriptor {
 
     @Override
     public void init(PsiElement element) {
-    }
-
-    @Override
-    public Object[] getDependences() {
-        return ArrayUtil.EMPTY_OBJECT_ARRAY;
     }
 
     @Override
