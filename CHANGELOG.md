@@ -6,6 +6,7 @@
 
 ### Added
 
+- "Extract AFX Component" refactoring: moves the selected AFX or the tag at the caret into a new component prototype and passes on the used props
 - JSON schema for `Routes.*.yaml` files
 - Eel support for `${...}` values in node type definitions and other YAML configuration files
 - Context-aware completion in Eel expressions: helpers, helper methods, FlowQuery operations, context variables and prototype properties

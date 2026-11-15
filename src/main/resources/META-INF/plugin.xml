@@ -172,5 +172,8 @@
     <action id="de.vette.idea.neos.fusion.refactoring.MovePrototypeToFile" class="de.vette.idea.neos.lang.fusion.refactoring.MovePrototypeToFile" text="Move Prototype">
       <add-to-group group-id="RefactoringMenu"/>
     </action>
+    <action id="de.vette.idea.neos.afx.refactoring.ExtractAfxComponent" class="de.vette.idea.neos.lang.afx.refactoring.ExtractAfxComponentAction" text="Extract AFX Component..." description="Extract the selected AFX into a new component prototype" use-shortcut-of="ExtractMethod">
+      <add-to-group group-id="RefactoringMenu"/>
+    </action>
   </actions>
 </idea-plugin>
