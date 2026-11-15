@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 164,
+  "total": 1,
   "tools inspection": {
-    "Code Inspection": 164
+    "Code Inspection": 1
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43654044078",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43733434162",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "c293f0d5bc6a2796cb8fd5f7c27e94cc76f2bc0d",
-        "branch": "main"
+        "revisionId": "fa4f4505316a0840c4bdda51aa75e2d5b1faae5c",
+        "branch": "feat/afx-extract-component"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
