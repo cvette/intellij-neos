@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="Acme.Site" source-language="en" target-language="de" datatype="plaintext">
+		<body>
+			<trans-unit id="headline" xml:space="preserve">
+				<source>Welcome</source>
+				<target>Willkommen</target>
+			</trans-unit>
+			<group id="items.count" restype="x-gettext-plurals">
+				<trans-unit id="items.count[0]" xml:space="preserve">
+					<source>One item</source>
+					<target>Ein Eintrag</target>
+				</trans-unit>
+				<trans-unit id="items.count[1]" xml:space="preserve">
+					<source>{0} items</source>
+					<target>{0} Einträge</target>
+				</trans-unit>
+			</group>
+		</body>
+	</file>
+</xliff>

@@ -110,6 +110,8 @@
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.NodeTypesYamlFileIndex"/>
+    <fileBasedIndex implementation="de.vette.idea.neos.translation.TranslationUnitIndex"/>
+    <fileBasedIndex implementation="de.vette.idea.neos.translation.TranslationSourceIndex"/>
     <completion.contributor language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.completion.FusionCompletionContributor"/>
 
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
