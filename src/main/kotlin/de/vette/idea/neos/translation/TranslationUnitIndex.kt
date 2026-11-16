@@ -77,7 +77,7 @@ class TranslationUnitIndex : FileBasedIndexExtension<String, TranslationUnitData
 
     override fun getValueExternalizer(): DataExternalizer<TranslationUnitData> = Externalizer
 
-    override fun getVersion(): Int = 1
+    override fun getVersion(): Int = 2
 
     private object Externalizer : DataExternalizer<TranslationUnitData> {
         override fun save(out: DataOutput, value: TranslationUnitData) {

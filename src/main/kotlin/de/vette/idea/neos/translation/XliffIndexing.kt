@@ -50,6 +50,7 @@ object XliffIndexing {
     private const val MAX_FILE_BYTE_SIZE = 5 * 1024 * 1024
     private const val SUPPORTED_VERSION = "1.2"
     private const val MAX_TEXT_LENGTH = 200
+    private const val ELLIPSIS = "…"
 
     fun accepts(file: VirtualFile): Boolean = XliffLocation.isTranslationFile(file)
 
@@ -150,5 +151,9 @@ object XliffIndexing {
 
     private fun XmlTag.attribute(name: String): String? = getAttributeValue(name)?.takeIf { it.isNotBlank() }
 
-    private fun XmlTag.text(): String = value.trimmedText.take(MAX_TEXT_LENGTH)
+    /** The text of a tag; a long text is shortened and ends with an ellipsis */
+    private fun XmlTag.text(): String {
+        val text = value.trimmedText
+        return if (text.length > MAX_TEXT_LENGTH) text.take(MAX_TEXT_LENGTH - 1) + ELLIPSIS else text
+    }
 }

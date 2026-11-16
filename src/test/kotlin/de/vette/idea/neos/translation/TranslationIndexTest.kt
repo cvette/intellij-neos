@@ -43,6 +43,29 @@ class TranslationIndexTest : BasePlatformTestCase() {
         assertTrue(resolver.hasUnit(id))
     }
 
+    fun testLongTextsAreShortenedWithAnEllipsis() {
+        val long = "word ".repeat(60).trim()
+        myFixture.addFileToProject(
+            "DistributionPackages/Acme.Site/Resources/Private/Translations/en/Long.xlf",
+            """
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file original="" product-name="Acme.Site" source-language="en" datatype="plaintext">
+                    <body>
+                        <trans-unit id="long"><source>$long</source></trans-unit>
+                        <trans-unit id="short"><source>Short</source></trans-unit>
+                    </body>
+                </file>
+            </xliff>
+            """.trimIndent()
+        )
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+
+        val text = resolver.findUnits(TranslationId("Acme.Site", "Long", "long")).single().data.sourceText
+        assertEquals(200, text.length)
+        assertEquals(long.take(199) + "…", text)
+        assertEquals("Short", resolver.findUnits(TranslationId("Acme.Site", "Long", "short")).single().data.sourceText)
+    }
+
     fun testFindsUnitsOfAllLocales() {
         val units = resolver.findUnits(TranslationId("Acme.Site", "Main", "headline"))
 
