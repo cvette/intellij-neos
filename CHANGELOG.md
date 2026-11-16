@@ -30,6 +30,7 @@
 - "Detect Locales" button in the settings that adds the locales that have XLIFF files
 - Translation support in PHP for `translateById()` and `translateByOriginalLabel()` of Flow's translator: navigation, completion, inspections, find usages and rename
 - Translation support in Fluid templates for the translate view helper, as tag and in inline notation
+- Translation support in JavaScript and TypeScript for plugins of the Neos UI, for `i18nRegistry.translate()` and the `<I18n>` component: navigation, completion, inspections, find usages and rename
 - "Translations" tab for XLIFF files that shows the labels of a source side by side in all locales and lets you edit them
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Plural labels in the "Translations" tab, with one editable row for each form, and in the inspection for units out of sync with other locales; the quick-fixes add and remove a plural label with all of its forms
