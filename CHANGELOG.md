@@ -22,6 +22,9 @@
 - Rename of a translation unit id in all locales and at its usages
 - Gutter icon on translation units that leads to the same unit in other locales
 - Translation units in "Go to Symbol", by their shorthand id
+- Inspections for labels used in Fusion, AFX and YAML: translation not found and translation missing in some locales, with quick-fixes that create the translation units and XLIFF files
+- Inspection for texts in node type definitions that are not translated (disabled by default)
+- Inspections for XLIFF files: duplicate ids, units without translation, target language that does not match the directory, units out of sync with other locales, and unused units (disabled by default)
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
