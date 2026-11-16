@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BodyDomElement extends DomElement {
     List<TransUnitDomElement> getTransUnits();
+
+    List<GroupDomElement> getGroups();
 }

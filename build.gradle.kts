@@ -156,3 +156,14 @@ tasks {
         dependsOn(generateFusionParser)
     }
 }
+
+// The coverage agent adds a synthetic field to every class it instruments. Velocity, which renders the file
+// templates, fails to initialize when it finds that field in its own classes, so tests that create a file from
+// a template would fail.
+kover {
+    currentProject {
+        instrumentation {
+            excludedClasses.add("org.apache.velocity.*")
+        }
+    }
+}

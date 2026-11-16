@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="Acme.Site" source-language="en" datatype="plaintext">
+		<body>
+			<trans-unit id="ui.label" xml:space="preserve">
+				<source>Text</source>
+			</trans-unit>
+			<trans-unit id="properties.text" xml:space="preserve">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="groups.layout" xml:space="preserve">
+				<source>Layout</source>
+			</trans-unit>
+			<trans-unit id="properties.alignment" xml:space="preserve">
+				<source>Alignment</source>
+			</trans-unit>
+			<trans-unit id="properties.alignment.selectBoxEditor.values.left" xml:space="preserve">
+				<source>Left</source>
+			</trans-unit>
+			<trans-unit id="properties.text.ui.help.message" xml:space="preserve">
+				<source>The text shown on the page</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

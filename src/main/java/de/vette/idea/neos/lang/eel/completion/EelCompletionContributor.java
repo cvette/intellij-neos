@@ -21,6 +21,8 @@ package de.vette.idea.neos.lang.eel.completion;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
 import de.vette.idea.neos.lang.eel.psi.EelTypes;
+import de.vette.idea.neos.lang.eel.psi.EelValueStringLine;
+import de.vette.idea.neos.translation.eel.EelTranslationCompletionProvider;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -30,6 +32,12 @@ public class EelCompletionContributor extends CompletionContributor {
                 CompletionType.BASIC,
                 psiElement(EelTypes.EEL_IDENTIFIER),
                 new EelCompletionProvider()
+        );
+
+        extend(
+                CompletionType.BASIC,
+                psiElement().inside(EelValueStringLine.class),
+                new EelTranslationCompletionProvider()
         );
     }
 }

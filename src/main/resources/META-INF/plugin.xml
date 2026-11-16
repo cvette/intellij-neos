@@ -59,6 +59,41 @@
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.eel.formatter.EelLanguageCodeStyleSettingsProvider"/>
     <completion.contributor language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.completion.EelCompletionContributor"/>
     <multiHostInjector implementation="de.vette.idea.neos.lang.yaml.injection.EelYamlInjector"/>
+    <lookup.charFilter implementation="de.vette.idea.neos.translation.eel.EelTranslationCompletionProvider$TranslationCharFilter"/>
+    <lang.documentationProvider language="NeosEel" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
+    <lang.elementManipulator forClass="de.vette.idea.neos.lang.eel.psi.EelValueStringLine" implementationClass="de.vette.idea.neos.translation.eel.EelStringManipulator"/>
+    <referencesSearch implementation="de.vette.idea.neos.translation.TranslationUsageSearcher"/>
+    <psi.referenceContributor language="XML" implementation="de.vette.idea.neos.translation.TranslationUnitDeclarationContributor"/>
+    <renamePsiElementProcessor implementation="de.vette.idea.neos.translation.TranslationUnitRenameProcessor"/>
+    <renameInputValidator implementation="de.vette.idea.neos.translation.TranslationUnitRenameInputValidator"/>
+    <vetoRenameCondition implementation="de.vette.idea.neos.translation.PluralFormRenameVeto"/>
+    <codeInsight.lineMarkerProvider language="XLIFF" implementationClass="de.vette.idea.neos.translation.XliffLocaleLineMarkerProvider"/>
+    <gotoSymbolContributor implementation="de.vette.idea.neos.translation.TranslationSymbolContributor"/>
+    <defaultTemplatePropertiesProvider implementation="de.vette.idea.neos.translation.XliffTemplatePropertiesProvider"/>
+    <fileEditorProvider implementation="de.vette.idea.neos.translation.editor.TranslationEditorProvider"/>
+    <psi.referenceContributor language="PHP" implementation="de.vette.idea.neos.translation.php.PhpTranslationReferenceContributor"/>
+    <completion.contributor language="PHP" implementationClass="de.vette.idea.neos.translation.php.PhpTranslationCompletionContributor"/>
+    <lang.documentationProvider language="PHP" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
+    <psi.referenceContributor language="HTML" implementation="de.vette.idea.neos.translation.fluid.FluidTranslationReferenceContributor"/>
+    <completion.contributor language="HTML" implementationClass="de.vette.idea.neos.translation.fluid.FluidTranslationCompletionContributor"/>
+    <lang.documentationProvider language="HTML" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
+    <intentionAction>
+      <className>de.vette.idea.neos.translation.ExtractTranslationIntention</className>
+      <category>Neos</category>
+    </intentionAction>
+    <localInspection shortName="NeosTranslationNotFound" bundle="messages.XliffBundle" key="inspection.translation.not.found" groupName="Neos" enabledByDefault="true" level="WARNING" implementationClass="de.vette.idea.neos.translation.inspections.TranslationNotFoundInspection"/>
+    <localInspection shortName="NeosTranslationIncomplete" bundle="messages.XliffBundle" key="inspection.translation.incomplete.name" groupName="Neos" enabledByDefault="true" level="WEAK WARNING" implementationClass="de.vette.idea.neos.translation.inspections.TranslationIncompleteInspection"/>
+    <localInspection shortName="NeosNodeTypeLabelNotTranslated" bundle="messages.XliffBundle" key="inspection.node.type.label.not.translated.name" groupName="Neos" enabledByDefault="false" level="WEAK WARNING" implementationClass="de.vette.idea.neos.translation.inspections.NodeTypeLabelNotTranslatedInspection"/>
+    <localInspection language="XML" shortName="NeosXliffDuplicateId" bundle="messages.XliffBundle" key="inspection.xliff.duplicate.id.name" groupName="Neos" enabledByDefault="true" level="ERROR" implementationClass="de.vette.idea.neos.translation.inspections.XliffDuplicateIdInspection"/>
+    <localInspection language="XML" shortName="NeosXliffMissingTarget" bundle="messages.XliffBundle" key="inspection.xliff.missing.target.name" groupName="Neos" enabledByDefault="true" level="WARNING" implementationClass="de.vette.idea.neos.translation.inspections.XliffMissingTargetInspection"/>
+    <localInspection language="XML" shortName="NeosXliffLanguageMismatch" bundle="messages.XliffBundle" key="inspection.xliff.language.name" groupName="Neos" enabledByDefault="true" level="WARNING" implementationClass="de.vette.idea.neos.translation.inspections.XliffLanguageMismatchInspection"/>
+    <localInspection language="XML" shortName="NeosXliffOutOfSync" bundle="messages.XliffBundle" key="inspection.xliff.sync.name" groupName="Neos" enabledByDefault="true" level="WARNING" implementationClass="de.vette.idea.neos.translation.inspections.XliffOutOfSyncInspection"/>
+    <localInspection language="XML" shortName="NeosXliffUnusedTranslation" bundle="messages.XliffBundle" key="inspection.xliff.unused.name" groupName="Neos" enabledByDefault="false" level="WEAK WARNING" implementationClass="de.vette.idea.neos.translation.inspections.XliffUnusedTranslationInspection"/>
+    <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.translation.TranslationFoldingBuilder"/>
+    <lang.foldingBuilder language="NeosEel" implementationClass="de.vette.idea.neos.translation.TranslationFoldingBuilder"/>
+    <lang.foldingBuilder language="NeosAfx" implementationClass="de.vette.idea.neos.translation.AfxTranslationFoldingBuilder"/>
+    <codeFoldingOptionsProvider instance="de.vette.idea.neos.translation.NeosFoldingOptionsProvider"/>
+    <lang.documentationProvider language="XLIFF" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider" order="first"/>
 
     <!-- AFX -->
     <fileType name="Neos Afx" language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.AfxFileType" extensions="afx" fieldName="INSTANCE"/>
@@ -110,12 +145,17 @@
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.DefaultContextFileIndex"/>
     <fileBasedIndex implementation="de.vette.idea.neos.indexes.NodeTypesYamlFileIndex"/>
+    <fileBasedIndex implementation="de.vette.idea.neos.translation.TranslationUnitIndex"/>
+    <fileBasedIndex implementation="de.vette.idea.neos.translation.TranslationSourceIndex"/>
     <completion.contributor language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.completion.FusionCompletionContributor"/>
 
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.completion.NodeTypeCompletionContributor"/>
     <lookup.charFilter implementation="de.vette.idea.neos.lang.yaml.completion.NodeTypeCompletionContributor$NodeTypeCharFilter"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.value.ValueReferenceContributor"/>
+    <psi.referenceContributor language="yaml" implementation="de.vette.idea.neos.translation.yaml.YamlTranslationReferenceContributor"/>
+    <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.translation.yaml.YamlTranslationCompletionContributor"/>
+    <codeInsight.lineMarkerProvider language="yaml" implementationClass="de.vette.idea.neos.translation.yaml.YamlTranslationLineMarkerProvider"/>
 
     <codeInsight.parameterNameHints language="NeosFusion" implementationClass="de.vette.idea.neos.lang.eel.codeInsight.hints.EelInlayParameterHintsProvider"/>
 

@@ -1,0 +1,3 @@
+prototype(Acme.Site:Teaser) < prototype(Neos.Fusion:Component) {
+    buttonLabel = <spot>${I18n.translate('Acme.Site:Main:readMore')}</spot>
+}

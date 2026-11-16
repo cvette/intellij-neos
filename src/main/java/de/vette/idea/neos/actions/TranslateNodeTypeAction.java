@@ -23,6 +23,8 @@ import com.intellij.util.xml.DomManager;
 import de.vette.idea.neos.Settings;
 import de.vette.idea.neos.lang.xliff.XliffDomElement;
 import de.vette.idea.neos.lang.xliff.XliffFileType;
+import de.vette.idea.neos.translation.TranslationId;
+import de.vette.idea.neos.translation.yaml.NodeTypeTranslations;
 import de.vette.idea.neos.util.ComposerUtil;
 import de.vette.idea.neos.util.NeosUtil;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +34,6 @@ import org.jetbrains.yaml.psi.*;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class TranslateNodeTypeAction extends AnAction {
 
@@ -70,6 +71,14 @@ public class TranslateNodeTypeAction extends AnAction {
             return;
         }
 
+        translate(project, virtualFile);
+    }
+
+    /**
+     * Writes the labels of the node types in the file to XLIFF files of all configured locales
+     * and replaces them with "i18n"
+     */
+    public void translate(@NotNull Project project, @NotNull VirtualFile virtualFile) {
         Collection<String> locales = Settings.getInstance(project).locales;
 
         if (locales.isEmpty()) {
@@ -94,7 +103,6 @@ public class TranslateNodeTypeAction extends AnAction {
             return;
         }
 
-        String packageName = ComposerUtil.getPackageKey(composerManifest);
         packageDirectory = composerManifest.getContainingDirectory();
 
         final Optional<String> firstLocaleOpt = locales.stream().findFirst();
@@ -105,19 +113,22 @@ public class TranslateNodeTypeAction extends AnAction {
         final String sourceLocale = firstLocaleOpt.get();
 
         Properties properties = new Properties();
-        properties.setProperty("NEOS_PACKAGE_NAME", packageName);
         properties.setProperty("SOURCE_LANGUAGE", sourceLocale);
 
         HashMap<String, PairsByTransId> yamlPairsByTransId = extractNodeTypeTranslationIds(pairs);
 
         WriteCommandAction.runWriteCommandAction(project, "Translate NodeType", "", () -> {
             yamlPairsByTransId.forEach((nodeType, pairsByTransId) -> {
-                String[] nodeTypeParts = nodeType.split(":");
-                String nodeTypeWithoutNamespace = (nodeTypeParts.length == 2) ? nodeTypeParts[1] : nodeType;
+                // Neos looks the labels up in the package the node type name starts with, in the source
+                // "NodeTypes/<name>". The package is written to the file, so that it also applies if the node type
+                // is defined in another package.
+                TranslationId nodeTypeLabels = NodeTypeTranslations.translationId(nodeType, "");
+                String source = nodeTypeLabels.getSource();
+                properties.setProperty("NEOS_PACKAGE_NAME", nodeTypeLabels.getPackageKey());
 
                 for (String locale : locales) {
-                    PsiDirectory translationDir = createTranslationDirectories(packageDirectory, locale, nodeTypeWithoutNamespace);
-                    processTranslationFile(project, translationDir, locale, sourceLocale, pairsByTransId, properties, nodeTypeWithoutNamespace);
+                    PsiDirectory translationDir = createTranslationDirectories(packageDirectory, locale, source);
+                    processTranslationFile(project, translationDir, locale, sourceLocale, pairsByTransId, properties, source);
                 }
 
                 // replace text values in node type definition by "i18n"
@@ -164,9 +175,9 @@ public class TranslateNodeTypeAction extends AnAction {
             String sourceLocale,
             Map<String, YAMLKeyValue> yamlPairsByTransId,
             Properties properties,
-            String nodeType
+            String source
     ) {
-        String fileName = getFileName(nodeType);
+        String fileName = getFileName(source);
 
         properties.setProperty("TARGET_LANGUAGE", "");
         if (!locale.equals(sourceLocale)) {
@@ -184,21 +195,25 @@ public class TranslateNodeTypeAction extends AnAction {
         }
     }
 
-    private String getFileName(String nodeType) {
-        String[] nodeTypeParts = nodeType.split("\\.");
-        return nodeTypeParts[nodeTypeParts.length - 1];
+    /**
+     * @param source the translation source in path notation, e.g. "NodeTypes/Content/Text"
+     */
+    private String getFileName(String source) {
+        return source.substring(source.lastIndexOf("/") + 1);
     }
 
-    private PsiDirectory createTranslationDirectories(PsiDirectory baseDir, String locale, String nodeType) throws IncorrectOperationException {
+    /**
+     * @param source the translation source in path notation, e.g. "NodeTypes/Content/Text"
+     */
+    private PsiDirectory createTranslationDirectories(PsiDirectory baseDir, String locale, String source) throws IncorrectOperationException {
         PsiDirectory dir = createSubdirectory(baseDir, "Resources");
         dir = createSubdirectory(dir, "Private");
         PsiDirectory translationsDir = createSubdirectory(dir, "Translations");
         dir = createSubdirectory(translationsDir, locale);
-        dir = createSubdirectory(dir, "NodeTypes");
 
-        String[] nodeTypeParts = nodeType.split("\\.");
-        for (int i = 0; i < nodeTypeParts.length - 1; i++) {
-            dir = createSubdirectory(dir, nodeTypeParts[i]);
+        String[] sourceParts = source.split("/");
+        for (int i = 0; i < sourceParts.length - 1; i++) {
+            dir = createSubdirectory(dir, sourceParts[i]);
         }
         return dir;
     }
@@ -229,24 +244,31 @@ public class TranslateNodeTypeAction extends AnAction {
 
     class PairsByTransId extends LinkedHashMap<String,YAMLKeyValue> {}
 
+    /**
+     * Groups the pairs by node type and by the id Neos looks the label up with
+     */
     private LinkedHashMap<String, PairsByTransId> extractNodeTypeTranslationIds(List<YAMLKeyValue> pairs) {
         LinkedHashMap<String, PairsByTransId> nodeTypeIds = new LinkedHashMap<>();
 
         for (YAMLKeyValue pair : pairs) {
-            List<String> path = getTranslationKeyParts(pair);
-            String nodeType = path.get(0);
-
-            path = path.subList(1, path.size()); // removes the node type name
-
-            if (!nodeTypeIds.containsKey(nodeType)) {
-                nodeTypeIds.put(nodeType, new PairsByTransId());
+            TranslationId translationId = NodeTypeTranslations.translationId(pair);
+            if (translationId == null) {
+                continue;
             }
 
-            String id = String.join(".", path);
-            nodeTypeIds.get(nodeType).put(id, pair);
+            String nodeType = getTranslationKeyParts(pair).get(0);
+            nodeTypeIds.computeIfAbsent(nodeType, key -> new PairsByTransId()).put(translationId.getId(), pair);
         }
 
         return nodeTypeIds;
+    }
+
+    /**
+     * Earlier versions used the path of the key as id, e.g. "properties.title.ui.label" instead of "properties.title"
+     */
+    private static String getLegacyId(YAMLKeyValue pair) {
+        List<String> path = getTranslationKeyParts(pair);
+        return String.join(".", path.subList(1, path.size()));
     }
 
     private static Set<String> getExistingIds(XmlTag body) {
@@ -274,87 +296,30 @@ public class TranslateNodeTypeAction extends AnAction {
         return subDirectory;
     }
 
+    /**
+     * The keys whose values Neos translates, see {@link NodeTypeTranslations}. Values that are an Eel expression
+     * or already refer to a label of another source are left alone.
+     */
     private static List<YAMLKeyValue> getTranslateablePaths(VirtualFile virtualFile, Project project) {
-        @NotNull PsiManager psiManager = PsiManager.getInstance(project);
-        PsiFile psiFile = psiManager.findFile(virtualFile);
+        PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
 
-        @NotNull Collection<YAMLKeyValue> yamlKeyValuePairs = PsiTreeUtil.findChildrenOfType(psiFile, YAMLKeyValue.class);
+        List<YAMLKeyValue> pathsToTranslate = new ArrayList<>();
+        for (YAMLKeyValue pair : PsiTreeUtil.findChildrenOfType(psiFile, YAMLKeyValue.class)) {
+            if (!(pair.getValue() instanceof YAMLScalar)) {
+                continue;
+            }
 
-        List<YAMLKeyValue> pathsToTranslate = new Vector<>();
-        for (YAMLKeyValue pair : yamlKeyValuePairs) {
-            String value = pair.getValueText();
-            String key = pair.getKeyText();
+            String value = pair.getValueText().trim();
+            if (value.isEmpty() || value.startsWith("${") || TranslationId.parseShorthand(value) != null) {
+                continue;
+            }
 
-            if (value.equals("i18n")) {
+            if (NodeTypeTranslations.translationId(pair) != null) {
                 pathsToTranslate.add(pair);
-                continue;
-            }
-
-            // *.label
-            if (key.equals("label")) {
-                YAMLKeyValue parentPair = getParentKeyValue(pair);
-
-                // *.ui.label
-                if (parentPair != null && parentPair.getKeyText().equals("ui")) {
-                    pathsToTranslate.add(pair);
-                    continue;
-                }
-
-                // *.groups|tabs|views.*.label
-                YAMLKeyValue parentParentPair = getParentKeyValue(parentPair);
-                if (parentParentPair == null) {
-                    continue;
-                }
-
-                String keyText =  parentParentPair.getKeyText();
-                if (keyText.equals("groups") || keyText.equals("views") || keyText.equals("tabs")) {
-                    pathsToTranslate.add(pair);
-                }
-
-                continue;
-            }
-
-            // *.help.message
-            if (key.equals("message")) {
-                if (hasParentYamlKeyValueText(pair, "help")) {
-                    pathsToTranslate.add(pair);
-                }
-
-                continue;
-            }
-
-            // *.editorOptions.placeholder
-            if (key.equals("placeholder")) {
-                if (hasParentYamlKeyValueText(pair, "editorOptions")) {
-                    pathsToTranslate.add(pair);
-                }
             }
         }
 
         return pathsToTranslate;
-    }
-
-    @Nullable
-    private static YAMLKeyValue getParentKeyValue(YAMLKeyValue pair) {
-        AtomicReference<YAMLKeyValue> keyValue = new AtomicReference<>();
-        Optional.of(pair).map(YAMLKeyValue::getParent).map(PsiElement::getParent).ifPresent(psiElement -> {
-            if (!(psiElement instanceof YAMLKeyValue)) {
-                return;
-            }
-
-            keyValue.set((YAMLKeyValue) psiElement);
-        });
-
-        return keyValue.get();
-    }
-
-    public static boolean hasParentYamlKeyValueText(YAMLKeyValue pair, String text) {
-        YAMLKeyValue parentPair = getParentKeyValue(pair);
-        if (parentPair == null) {
-            return false;
-        }
-
-        return parentPair.getKeyText().equals(text);
     }
 
     private static List<String> getTranslationKeyParts(YAMLKeyValue pair) {
@@ -380,7 +345,7 @@ public class TranslateNodeTypeAction extends AnAction {
         FileTemplate template = FileTemplateManager.getInstance(project).getInternalTemplate("XLIFF File");
         String content = template.getText(properties);
         if (FileTypeManager.getInstance().isFileIgnored(fileName)) {
-            throw new IncorrectOperationException("This filename is ignored (Settings | Editor | FileDomElement Types | Ignore files and folders)");
+            throw new IncorrectOperationException("This filename is ignored (Settings | Editor | File Types | Ignore files and folders)");
         }
         PsiFile psiFile = dir.findFile(fileName);
         if (psiFile == null) {
@@ -406,6 +371,12 @@ public class TranslateNodeTypeAction extends AnAction {
         }
 
         XmlTag bodyTag = fileTag.findFirstSubTag("body");
+        if (bodyTag == null) {
+            return;
+        }
+
+        existingIds = new HashSet<>(existingIds);
+        migrateLegacyIds(bodyTag, yamlPairsByTransId, existingIds);
 
         Set<String> removedIds = new HashSet<>(existingIds);
         removedIds.removeAll(yamlPairsByTransId.keySet());
@@ -420,6 +391,27 @@ public class TranslateNodeTypeAction extends AnAction {
         XliffDomElement root = fileElement.getRootElement();
         removeObsoleteTranslations(root, removedIds);
         addNewTranslations(bodyTag, yamlPairsByTransId, existingIds, sourceLocale, locale);
+    }
+
+    /**
+     * Renames units that were created with the path of the key as id, so their translations are kept
+     */
+    private void migrateLegacyIds(XmlTag bodyTag, Map<String, YAMLKeyValue> yamlPairsByTransId, Set<String> existingIds) {
+        yamlPairsByTransId.forEach((id, yamlKeyValue) -> {
+            String legacyId = getLegacyId(yamlKeyValue);
+            if (legacyId.equals(id) || existingIds.contains(id) || !existingIds.contains(legacyId)) {
+                return;
+            }
+
+            for (XmlTag transUnit : bodyTag.findSubTags("trans-unit")) {
+                if (legacyId.equals(transUnit.getAttributeValue("id"))) {
+                    transUnit.setAttribute("id", id);
+                    existingIds.remove(legacyId);
+                    existingIds.add(id);
+                    break;
+                }
+            }
+        });
     }
 
     private void removeObsoleteTranslations(XliffDomElement root, Set<String> removedIds) {

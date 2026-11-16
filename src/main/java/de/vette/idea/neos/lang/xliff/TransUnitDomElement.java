@@ -9,4 +9,6 @@ public interface TransUnitDomElement extends DomElement {
     TargetDomElement getTarget();
 
     GenericAttributeValue<String> getId();
+
+    GenericAttributeValue<String> getApproved();
 }

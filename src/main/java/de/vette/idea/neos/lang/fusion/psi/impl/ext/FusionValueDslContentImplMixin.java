@@ -21,6 +21,7 @@ package de.vette.idea.neos.lang.fusion.psi.impl.ext;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.impl.source.tree.LeafElement;
 import de.vette.idea.neos.lang.fusion.injection.FusionDslTextEscaper;
 import de.vette.idea.neos.lang.fusion.psi.FusionValueDslContent;
 import de.vette.idea.neos.lang.fusion.psi.impl.FusionElementImpl;
@@ -39,7 +40,12 @@ public class FusionValueDslContentImplMixin extends FusionElementImpl implements
 
     @Override
     public PsiLanguageInjectionHost updateText(@NotNull String text) {
-        return null;
+        // the content of a DSL is a single token
+        ASTNode content = getNode().getFirstChildNode();
+        if (content instanceof LeafElement && content.getTreeNext() == null) {
+            ((LeafElement) content).replaceWithText(text);
+        }
+        return this;
     }
 
     @NotNull
