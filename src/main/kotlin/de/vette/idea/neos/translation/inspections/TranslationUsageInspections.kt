@@ -31,6 +31,9 @@ import com.intellij.pom.Navigatable
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiFile
+import com.intellij.psi.xml.XmlAttributeValue
+import com.intellij.psi.xml.XmlTag
+import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
 import de.vette.idea.neos.NeosProjectService
 import de.vette.idea.neos.actions.TranslateNodeTypeAction
 import de.vette.idea.neos.lang.eel.psi.EelValueStringLine
@@ -48,7 +51,8 @@ import org.jetbrains.yaml.psi.YAMLKeyValue
 import org.jetbrains.yaml.psi.YAMLScalar
 
 /**
- * Base of the inspections for the places labels are used in: Eel in Fusion, AFX and YAML, and YAML values.
+ * Base of the inspections for the places labels are used in: Eel in Fusion, AFX and YAML, YAML values,
+ * calls of the translator in PHP and the translate view helper in Fluid templates.
  */
 abstract class TranslationUsageInspection : LocalInspectionTool() {
 
@@ -61,7 +65,9 @@ abstract class TranslationUsageInspection : LocalInspectionTool() {
 
         return object : PsiElementVisitor() {
             override fun visitElement(element: PsiElement) {
-                if (element is EelValueStringLine || element is YAMLScalar) {
+                if (element is EelValueStringLine || element is YAMLScalar || element is StringLiteralExpression ||
+                    element is XmlAttributeValue || element is XmlTag
+                ) {
                     check(holder, element)
                 }
             }
@@ -74,7 +80,7 @@ abstract class TranslationUsageInspection : LocalInspectionTool() {
         element.references.filterIsInstance<TranslationReference>()
 
     companion object {
-        private val LANGUAGES = setOf("NeosFusion", "NeosAfx", "NeosEel", "yaml")
+        private val LANGUAGES = setOf("NeosFusion", "NeosAfx", "NeosEel", "yaml", "PHP", "HTML")
     }
 }
 

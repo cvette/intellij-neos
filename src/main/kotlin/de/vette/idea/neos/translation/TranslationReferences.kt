@@ -24,7 +24,44 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementResolveResult
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiPolyVariantReferenceBase
+import com.intellij.psi.PsiReference
 import com.intellij.psi.ResolveResult
+
+/**
+ * What a text at a usage site stands for, where package, source and id are given separately.
+ */
+enum class TranslationRole { ID, SOURCE, PACKAGE }
+
+/**
+ * The reference for an argument that holds an id, a source or a package (not the shorthand notation).
+ *
+ * @param range the range of the text in the element
+ * @param packageKey the package the label is looked up in, null if it is not known
+ * @param source the source the label is looked up in, null if it is not known
+ */
+fun translationArgumentReferences(
+    element: PsiElement,
+    range: TextRange,
+    role: TranslationRole,
+    packageKey: String?,
+    source: String?,
+): Array<PsiReference> {
+    val content = range.substring(element.text)
+    if (content.isBlank()) return PsiReference.EMPTY_ARRAY
+
+    return when (role) {
+        TranslationRole.PACKAGE -> arrayOf(TranslationPackageReference(element, range, content))
+        TranslationRole.SOURCE -> {
+            packageKey ?: return PsiReference.EMPTY_ARRAY
+            arrayOf(TranslationSourceReference(element, range, packageKey, TranslationId.normalizeSource(content)))
+        }
+        TranslationRole.ID -> {
+            packageKey ?: return PsiReference.EMPTY_ARRAY
+            source ?: return PsiReference.EMPTY_ARRAY
+            arrayOf(TranslationUnitReference(element, range, TranslationId.of(packageKey, source, content)))
+        }
+    }
+}
 
 /**
  * Base of the references from a usage site (Eel, YAML) to translations. The references are soft: a label that

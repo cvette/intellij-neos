@@ -18,6 +18,7 @@
 
 package de.vette.idea.neos.translation
 
+import com.intellij.ide.highlighter.HtmlFileType
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.application.QueryExecutorBase
 import com.intellij.openapi.progress.ProgressManager
@@ -31,11 +32,14 @@ import com.intellij.psi.PsiReference
 import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.LocalSearchScope
+import com.intellij.psi.search.PsiSearchHelper
 import com.intellij.psi.search.SearchScope
+import com.intellij.psi.search.UsageSearchContext
 import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.Processor
 import com.intellij.util.indexing.FileBasedIndex
+import com.jetbrains.php.lang.PhpFileType
 import de.vette.idea.neos.NeosProjectService
 import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex
 import de.vette.idea.neos.lang.fusion.FusionFileType
@@ -45,10 +49,10 @@ import org.jetbrains.yaml.YAMLFileType
 import org.jetbrains.yaml.psi.YAMLScalar
 
 /**
- * Finds the usages of a translation unit in Fusion, AFX and YAML.
+ * Finds the usages of a translation unit in Fusion, AFX, YAML, PHP and Fluid templates.
  *
- * The files are searched for the text of the id directly instead of through the word index: the words inside of
- * Eel expressions are not part of that index, and labels of node types ("i18n") do not contain the id at all.
+ * Fusion and YAML files are searched for the text of the id directly instead of through the word index: the words
+ * inside of Eel expressions are not part of that index, and labels of node types ("i18n") do not contain the id.
  */
 class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>(true) {
 
@@ -65,7 +69,7 @@ class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearc
             !reported.add(reference.element) || consumer.process(reference)
 
         val psiManager = PsiManager.getInstance(project)
-        for (file in candidateFiles(project, scope)) {
+        for (file in candidateFiles(project, scope, id)) {
             ProgressManager.checkCanceled()
             val psiFile = psiManager.findFile(file) ?: continue
             if (!processOccurrences(psiFile, id, ::report)) return
@@ -113,12 +117,26 @@ class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearc
     /**
      * Fusion files and the YAML configuration of Neos
      */
-    private fun candidateFiles(project: Project, scope: SearchScope): Collection<VirtualFile> = when (scope) {
+    private fun candidateFiles(project: Project, scope: SearchScope, id: TranslationId): Collection<VirtualFile> = when (scope) {
         is GlobalSearchScope ->
             FileTypeIndex.getFiles(FusionFileType.INSTANCE, scope) +
-                    FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration)
+                    FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration) +
+                    indexedCandidates(project, scope, id)
         is LocalSearchScope -> scope.virtualFiles.toList()
         else -> emptyList()
+    }
+
+    /**
+     * PHP files and Fluid templates that contain the words of the id. There are far too many of them to read
+     * them all, and unlike Eel their strings are part of the word index.
+     */
+    private fun indexedCandidates(project: Project, scope: GlobalSearchScope, id: TranslationId): Collection<VirtualFile> {
+        val files = ArrayList<VirtualFile>()
+        PsiSearchHelper.getInstance(project).processCandidateFilesForText(scope, UsageSearchContext.ANY, true, id.id) { file ->
+            if (file.fileType == PhpFileType.INSTANCE || file.fileType == HtmlFileType.INSTANCE) files.add(file)
+            true
+        }
+        return files
     }
 
     /**
