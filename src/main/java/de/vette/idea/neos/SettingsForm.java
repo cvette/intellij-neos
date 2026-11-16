@@ -18,9 +18,9 @@
 
 package de.vette.idea.neos;
 
-import java.util.List;
 import com.intellij.openapi.application.ReadAction;
-import com.intellij.openapi.project.DumbService;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import de.vette.idea.neos.translation.TranslationResolver;
 import com.intellij.ide.actions.ShowSettingsUtilImpl;
 import com.intellij.openapi.project.Project;
@@ -166,16 +166,17 @@ public class SettingsForm implements PhpFrameworkConfigurable {
      * Adds the locales that have XLIFF files in the project and are not in the list yet
      */
     private void addDetectedLocales() {
-        if (DumbService.isDumb(project)) {
-            return;
-        }
-
-        List<String> detected = ReadAction.compute(() -> TranslationResolver.getInstance(project).discoveredLocales());
-        for (String locale : detected) {
-            if (!locales.getItems().contains(locale)) {
-                locales.add(locale);
-            }
-        }
+        // the index is not read on the UI thread
+        ReadAction.nonBlocking(() -> TranslationResolver.getInstance(project).discoveredLocales())
+                .inSmartMode(project)
+                .finishOnUiThread(ModalityState.any(), detected -> {
+                    for (String locale : detected) {
+                        if (!locales.getItems().contains(locale)) {
+                            locales.add(locale);
+                        }
+                    }
+                })
+                .submit(AppExecutorUtil.getAppExecutorService());
     }
 
     private Settings getSettings() {

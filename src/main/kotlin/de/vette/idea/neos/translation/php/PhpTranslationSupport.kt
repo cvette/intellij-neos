@@ -162,18 +162,9 @@ class PhpTranslationCompletionContributor : CompletionContributor() {
                 val valueStart = literal.textRange.startOffset + literal.valueRange.startOffset
                 val content = literal.contents
                 val prefix = content.take((parameters.offset - valueStart).coerceIn(0, content.length))
-                val resolver = TranslationResolver.getInstance(project)
-
-                val elements = when (argument.role) {
-                    TranslationRole.PACKAGE -> TranslationLookups.packages(resolver)
-                    TranslationRole.SOURCE -> TranslationLookups.sources(resolver, argument.packageKey ?: return)
-                    TranslationRole.ID -> TranslationLookups.ids(
-                        resolver,
-                        argument.packageKey ?: return,
-                        TranslationId.normalizeSource(argument.source ?: return)
-                    )
-                }
-                result.withPrefixMatcher(prefix).addAllElements(elements)
+                TranslationLookups.addArgument(
+                    TranslationResolver.getInstance(project), argument.role, argument.packageKey, argument.source, prefix, result
+                )
             }
         })
     }

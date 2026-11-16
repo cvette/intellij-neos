@@ -49,6 +49,29 @@ object TranslationLookups {
     }
 
     /**
+     * Completes an argument that holds an id, a source or a package (not the shorthand notation).
+     *
+     * @param packageKey the package of the label, null if it is not known
+     * @param source the source of the label, null if it is not known
+     * @param prefix the text of the argument before the caret
+     */
+    fun addArgument(
+        resolver: TranslationResolver,
+        role: TranslationRole,
+        packageKey: String?,
+        source: String?,
+        prefix: String,
+        result: CompletionResultSet,
+    ) {
+        val elements = when (role) {
+            TranslationRole.PACKAGE -> packages(resolver)
+            TranslationRole.SOURCE -> sources(resolver, packageKey ?: return)
+            TranslationRole.ID -> ids(resolver, packageKey ?: return, TranslationId.normalizeSource(source ?: return))
+        }
+        result.withPrefixMatcher(prefix).addAllElements(elements)
+    }
+
+    /**
      * @param shorthand true if the package is a segment of a shorthand id: the separator is added after it
      */
     fun packages(resolver: TranslationResolver, shorthand: Boolean = false): List<LookupElement> =

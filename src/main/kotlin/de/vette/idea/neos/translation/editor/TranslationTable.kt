@@ -137,8 +137,6 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
     private val locales: List<String>
         get() = data?.locales.orEmpty()
 
-    fun row(index: Int): TranslationRow = rows[index]
-
     fun isMissing(rowIndex: Int, columnIndex: Int): Boolean =
         columnIndex > 0 && rows[rowIndex].texts[locales[columnIndex - 1]].isNullOrEmpty()
 

@@ -94,7 +94,7 @@ class TranslationNotFoundInspection : TranslationUsageInspection() {
         if (references.isEmpty()) return
 
         val unit = references.filterIsInstance<TranslationUnitReference>().firstOrNull()
-        val fixes = unit?.let { arrayOf<LocalQuickFix>(createFix(holder.project, it.translationId)) } ?: emptyArray()
+        val fixes = unit?.let { arrayOf(createFix(holder.project, it.translationId)) } ?: emptyArray()
 
         // of the segments of a shorthand id only the first one that is not found is reported
         for (reference in references) {
@@ -172,7 +172,7 @@ class NodeTypeLabelNotTranslatedInspection : TranslationUsageInspection() {
         if (!NeosUtil.isNodeTypeDefinition(file)) return
 
         val text = scalar.textValue.trim()
-        if (text.isEmpty() || text == NodeTypeTranslations.I18N || text.startsWith("\${")) return
+        if (text.isEmpty() || text == NodeTypeTranslations.I18N || text.startsWith($$"${")) return
         if (TranslationId.parseShorthand(text) != null || NodeTypeTranslations.translationId(keyValue) == null) return
 
         holder.registerProblem(scalar, XliffBundle.message("inspection.node.type.label.not.translated"), TranslateNodeTypeFix())

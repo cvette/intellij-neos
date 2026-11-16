@@ -296,7 +296,7 @@ class XliffUnusedTranslationInspection : XliffInspection() {
      * quotes, whitespace and brackets, and for shorthand ids also the part after the source.
      */
     private fun usedTexts(project: Project): Set<String> =
-        CachedValuesManager.getManager(project).getCachedValue(project, USED_TEXTS, CachedValueProvider {
+        CachedValuesManager.getManager(project).getCachedValue(project, USED_TEXTS, {
             val scope = GlobalSearchScope.allScope(project)
             val files = FileTypeIndex.getFiles(FusionFileType.INSTANCE, scope) +
                     FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration)

@@ -90,7 +90,7 @@ class ExtractTranslationIntention : PsiElementBaseIntentionAction() {
         val file = element.containingFile
         val call = "${helperName(project)}.translate('${id.toShorthand()}')"
 
-        WriteCommandAction.writeCommandAction(project, hostFile).withName(familyName).run<RuntimeException> {
+        WriteCommandAction.writeCommandAction(project, hostFile).withName(TITLE).run<RuntimeException> {
             val locales = resolver.locales().ifEmpty { listOf(resolver.sourceLocale) }
             TranslationWriter.addUnit(project, id, locales, target.text, hostFile)
 
@@ -126,7 +126,7 @@ class ExtractTranslationIntention : PsiElementBaseIntentionAction() {
         val string = PsiTreeUtil.getParentOfType(element, FusionValueStringLine::class.java, false) ?: return null
         val content = string.valueStringLineContent?.text ?: return null
         if (content.startsWith("resource://")) return null
-        return Target(string.textRange, content) { "\${$it}" }
+        return Target(string.textRange, content) { $$"${$$it}" }
     }
 
     /** `title="Text"` becomes `title={...}` */
@@ -189,6 +189,9 @@ class ExtractTranslationIntention : PsiElementBaseIntentionAction() {
     }
 
     companion object {
+        private val TITLE: String
+            get() = XliffBundle.message("intention.extract.translation.title")
+
         private const val AFX = "NeosAfx"
         private const val QUOTES = "\"'"
         private const val MAX_WORDS = 4
@@ -218,7 +221,7 @@ private class ExtractTranslationDialog(
         get() = TranslationId.of(suggestion.packageKey, sourceBox.editor.item?.toString(), idField.text.trim())
 
     init {
-        title = XliffBundle.message("intention.extract.translation")
+        title = XliffBundle.message("intention.extract.translation.title")
         init()
     }
 
