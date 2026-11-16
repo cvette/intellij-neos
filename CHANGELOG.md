@@ -16,11 +16,15 @@
 - Go to the translation unit, XLIFF file or package from the arguments of `I18n.translate()` and `I18n.id()` in Fusion, AFX and YAML
 - Completion of packages, sources and ids in the arguments of the translation helper
 - Quick documentation that shows a label in all locales, at its usage and on the id of a translation unit
+- Go to the translation unit from `i18n` values in node type definitions and from shorthand ids (`Package:Source:id`) in node type definitions and other configuration, with a gutter icon that shows the label
+- Completion of shorthand translation ids in YAML configuration
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
 ### Fixed
 
+- "Translate NodeType" created translation units with ids Neos does not look up, e.g. `properties.title.ui.label` instead of `properties.title`. Existing units are renamed and keep their translations
+- "Translate NodeType" replaced Eel expressions and labels of other sources with `i18n`
 - Node type references were added to root level keys of all YAML files
 - Quoted PHP class names in YAML files were not resolved
 - Template lookup for controller actions containing "Action" or "Controller" in their name
