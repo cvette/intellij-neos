@@ -25,6 +25,9 @@
 - Inspections for labels used in Fusion, AFX and YAML: translation not found and translation missing in some locales, with quick-fixes that create the translation units and XLIFF files
 - Inspection for texts in node type definitions that are not translated (disabled by default)
 - Inspections for XLIFF files: duplicate ids, units without translation, target language that does not match the directory, units out of sync with other locales, and unused units (disabled by default)
+- Intention "Extract to translation" for strings in Fusion and Eel and for texts and attribute values in AFX: moves the text to the XLIFF files of all locales and replaces it with a call of the translation helper
+- New XLIFF files are prefilled with the package, the source language and the target language of the directory
+- "Detect Locales" button in the settings that adds the locales that have XLIFF files
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
@@ -32,6 +35,7 @@
 
 - "Translate NodeType" created translation units with ids Neos does not look up, e.g. `properties.title.ui.label` instead of `properties.title`. Existing units are renamed and keep their translations
 - "Translate NodeType" replaced Eel expressions and labels of other sources with `i18n`
+- Locales were listed twice in the settings after a reset
 - Node type references were added to root level keys of all YAML files
 - Quoted PHP class names in YAML files were not resolved
 - Template lookup for controller actions containing "Action" or "Controller" in their name
