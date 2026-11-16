@@ -41,6 +41,8 @@
 
 - "Translate NodeType" created translation units with ids Neos does not look up, e.g. `properties.title.ui.label` instead of `properties.title`. Existing units are renamed and keep their translations
 - "Translate NodeType" replaced Eel expressions and labels of other sources with `i18n`
+- "Translate NodeType" created a second directory for a locale that is configured in another notation than its directory, e.g. `pt-BR` next to `pt_BR`
+- "Translate NodeType" added units to a regional locale like `de_CH` although it takes them from `de`
 - Locales were listed twice in the settings after a reset
 - Node type references were added to root level keys of all YAML files
 - Quoted PHP class names in YAML files were not resolved
