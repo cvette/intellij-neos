@@ -45,10 +45,12 @@ import de.vette.idea.neos.translation.NodeTypeLabelReference
 import de.vette.idea.neos.translation.TranslationId
 import de.vette.idea.neos.translation.TranslationLocales
 import de.vette.idea.neos.translation.TranslationResolver
+import de.vette.idea.neos.translation.TranslationUnit
 import de.vette.idea.neos.translation.TranslationWriter
 import de.vette.idea.neos.translation.XliffIndexing
 import de.vette.idea.neos.translation.XliffLocation
 import de.vette.idea.neos.translation.yaml.NodeTypeTranslations
+import java.util.concurrent.ConcurrentHashMap
 import org.jetbrains.yaml.psi.YAMLScalar
 
 /**
@@ -64,11 +66,12 @@ abstract class XliffInspection : LocalInspectionTool() {
             return PsiElementVisitor.EMPTY_VISITOR
         }
 
+        val lookup = TranslationLookup(project)
         return object : XmlElementVisitor() {
             override fun visitXmlTag(tag: XmlTag) {
                 when (tag.localName) {
                     "file" -> checkFile(holder, tag, location)
-                    "trans-unit" -> checkUnit(holder, tag, location)
+                    "trans-unit" -> checkUnit(holder, tag, location, lookup)
                 }
             }
         }
@@ -76,7 +79,26 @@ abstract class XliffInspection : LocalInspectionTool() {
 
     protected open fun checkFile(holder: ProblemsHolder, fileTag: XmlTag, location: XliffLocation) {}
 
-    protected open fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation) {}
+    protected open fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation, lookup: TranslationLookup) {}
+
+    /**
+     * What the check of a file asks the index for, read once for all units of the file instead of once for
+     * each unit.
+     */
+    protected class TranslationLookup(project: Project) {
+        val resolver: TranslationResolver = TranslationResolver.getInstance(project)
+
+        val locales: List<String> by lazy { resolver.locales() }
+
+        private val sources = ConcurrentHashMap<String, Map<String, List<TranslationUnit>>>()
+
+        /** The units of all locales for the id, the source locale first */
+        fun units(id: TranslationId): List<TranslationUnit> {
+            val units = sources[id.sourceKey]
+                ?: resolver.findUnitsOfSource(id.packageKey, id.source).also { sources[id.sourceKey] = it }
+            return units[id.id].orEmpty()
+        }
+    }
 
     /** The locale the texts in `<source>` are written in, as the file states it. */
     protected fun sourceLocale(tag: XmlTag): String {
@@ -127,7 +149,7 @@ class XliffDuplicateIdInspection : XliffInspection() {
  */
 class XliffMissingTargetInspection : XliffInspection() {
 
-    override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation) {
+    override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation, lookup: TranslationLookup) {
         if (isSourceLocaleFile(unit, location)) return
 
         val target = unit.findFirstSubTag("target")
@@ -206,19 +228,19 @@ class XliffLanguageMismatchInspection : XliffInspection() {
  */
 class XliffOutOfSyncInspection : XliffInspection() {
 
-    override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation) {
+    override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation, lookup: TranslationLookup) {
         // a plural label is checked as a whole at its first form, only the source texts are compared for each form
         val group = TranslationWriter.pluralGroupOf(unit)
         val firstForm = group == null || TranslationWriter.pluralForms(group).firstOrNull() == unit
         val id = XliffIndexing.translationIdOf(unit) ?: return
-        val resolver = TranslationResolver.getInstance(holder.project)
-        val units = resolver.findUnits(id)
+        val resolver = lookup.resolver
+        val units = lookup.units(id)
 
         if (isSourceLocaleFile(unit, location)) {
             if (!firstForm) return
             // a locale that falls back to a locale with the label is not missing it
             val available = units.map { it.locale }
-            val missing = resolver.locales().filterNot { TranslationLocales.isCovered(it, available) }
+            val missing = lookup.locales.filterNot { TranslationLocales.isCovered(it, available) }
             if (missing.isNotEmpty()) {
                 holder.registerProblem(
                     anchor(unit),
@@ -299,7 +321,7 @@ class XliffOutOfSyncInspection : XliffInspection() {
  */
 class XliffUnusedTranslationInspection : XliffInspection() {
 
-    override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation) {
+    override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation, lookup: TranslationLookup) {
         if (!isSourceLocaleFile(unit, location)) return
         if (isPluralForm(unit) && unit.parentTag?.findFirstSubTag("trans-unit") != unit) return
         val id = XliffIndexing.translationIdOf(unit) ?: return

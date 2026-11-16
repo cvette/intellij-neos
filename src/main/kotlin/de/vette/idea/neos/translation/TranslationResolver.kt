@@ -28,6 +28,8 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlTag
 import com.intellij.util.indexing.FileBasedIndex
 import de.vette.idea.neos.Settings
+import java.util.SortedMap
+import java.util.TreeMap
 
 /**
  * A translation unit of one locale, as found in the index.
@@ -109,6 +111,25 @@ class TranslationResolver(private val project: Project) {
         }, scope)
 
         return units.sortedWith(compareBy<TranslationUnit, String>(localeOrder()) { it.locale }.thenBy { it.file.path })
+    }
+
+    /**
+     * The units of all labels of a source by the id of the label, each list in the order of [findUnits].
+     * Reads every file of the source once, which is much cheaper than asking for each label of a file.
+     */
+    fun findUnitsOfSource(packageKey: String, source: String): SortedMap<String, List<TranslationUnit>> {
+        val prefix = "${TranslationId.sourceKey(packageKey, source)}${TranslationId.SEPARATOR}"
+        val units = TreeMap<String, MutableList<TranslationUnit>>()
+        // the files are in the order of the units: the source locale first, then by locale and path
+        for (file in sourceFiles(packageKey, source)) {
+            for ((key, data) in index.getFileData(TranslationUnitIndex.KEY, file, project)) {
+                if (!key.startsWith(prefix)) continue
+                val id = key.substring(prefix.length)
+                units.getOrPut(id) { ArrayList() }.add(TranslationUnit(TranslationId(packageKey, source, id), file, data))
+            }
+        }
+        @Suppress("UNCHECKED_CAST")
+        return units as SortedMap<String, List<TranslationUnit>>
     }
 
     fun hasUnit(id: TranslationId): Boolean =

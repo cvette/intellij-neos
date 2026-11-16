@@ -29,7 +29,6 @@ import com.intellij.psi.SmartPsiElementPointer
 import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
 import de.vette.idea.neos.lang.xliff.XliffBundle
-import de.vette.idea.neos.translation.TranslationId
 import de.vette.idea.neos.translation.TranslationLocales
 import de.vette.idea.neos.translation.TranslationResolver
 import de.vette.idea.neos.translation.TranslationWriter
@@ -97,8 +96,7 @@ class TranslationTableData(
             }
             val locales = (listOf(sourceLocale) + resolver.locales() + files.keys).distinct()
 
-            val rows = resolver.ids(section.packageKey, section.source).flatMap { id ->
-                val units = resolver.findUnits(TranslationId(section.packageKey, section.source, id))
+            val rows = resolver.findUnitsOfSource(section.packageKey, section.source).flatMap { (id, units) ->
                 // the unit of each locale, for a plural label its first form
                 val tags = LinkedHashMap<String, XmlTag>()
                 for (locale in locales) {

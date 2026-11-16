@@ -78,6 +78,18 @@ class TranslationIndexTest : BasePlatformTestCase() {
         assertFalse(units[0].data.plural)
     }
 
+    fun testUnitsOfASourceMatchTheUnitsOfEachLabel() {
+        for ((packageKey, source) in listOf("Acme.Site" to "Main", "Acme.Shared" to "Main")) {
+            val units = resolver.findUnitsOfSource(packageKey, source)
+
+            assertEquals(resolver.ids(packageKey, source).toList(), units.keys.toList())
+            for ((id, ofLabel) in units) {
+                assertEquals(resolver.findUnits(TranslationId(packageKey, source, id)), ofLabel)
+            }
+        }
+        assertEmpty(resolver.findUnitsOfSource("Acme.Site", "Unknown").keys)
+    }
+
     fun testUnitMissingInOneLocale() {
         val id = TranslationId("Acme.Site", "Main", "button.submit")
 
