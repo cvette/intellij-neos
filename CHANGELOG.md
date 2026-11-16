@@ -12,6 +12,7 @@
 - Context-aware completion in Eel expressions: helpers, helper methods, FlowQuery operations, context variables and prototype properties
 - Completion of prototype properties in Fusion blocks, including inherited properties
 - Completion of node type names in node type definitions: super types, constraints, child node types and editor options
+- Index of XLIFF translation units by package, source and id, including plural forms and labels overridden by other packages
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
 ### Fixed
