@@ -113,6 +113,8 @@
     <completion.contributor language="NeosFusion" implementationClass="de.vette.idea.neos.lang.fusion.completion.FusionCompletionContributor"/>
 
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.nodeType.NodeTypeReferenceContributor"/>
+    <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.completion.NodeTypeCompletionContributor"/>
+    <lookup.charFilter implementation="de.vette.idea.neos.lang.yaml.completion.NodeTypeCompletionContributor$NodeTypeCharFilter"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.value.ValueReferenceContributor"/>
 
     <codeInsight.parameterNameHints language="NeosFusion" implementationClass="de.vette.idea.neos.lang.eel.codeInsight.hints.EelInlayParameterHintsProvider"/>
