@@ -13,6 +13,10 @@
 - Completion of prototype properties in Fusion blocks, including inherited properties
 - Completion of node type names in node type definitions: super types, constraints, child node types and editor options
 - Index of XLIFF translation units by package, source and id, including plural forms and labels overridden by other packages
+- Go to the translation unit, XLIFF file or package from the arguments of `I18n.translate()` and `I18n.id()` in Fusion, AFX and YAML
+- Completion of packages, sources and ids in the arguments of the translation helper
+- Quick documentation that shows a label in all locales, at its usage and on the id of a translation unit
+- Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
 ### Fixed
