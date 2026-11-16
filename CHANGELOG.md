@@ -32,6 +32,7 @@
 - Translation support in Fluid templates for the translate view helper, as tag and in inline notation
 - "Translations" tab for XLIFF files that shows the labels of a source side by side in all locales and lets you edit them
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
+- Plural labels in the "Translations" tab, with one editable row for each form, and in the inspection for units out of sync with other locales; the quick-fixes add and remove a plural label with all of its forms
 - Locale fallback of Flow in the translation inspections, quick-fixes and the "Translations" tab: a locale like `de_CH` takes the labels it does not have from `de` and is not reported as incomplete
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
