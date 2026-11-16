@@ -25,19 +25,13 @@ import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.util.Key
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiManager
 import com.intellij.psi.XmlElementVisitor
-import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.PsiSearchHelper
 import com.intellij.psi.search.UsageSearchContext
-import com.intellij.psi.util.CachedValue
-import com.intellij.psi.util.CachedValueProvider
-import com.intellij.psi.util.CachedValuesManager
-import com.intellij.psi.util.PsiModificationTracker
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
@@ -45,7 +39,6 @@ import com.intellij.util.indexing.FileBasedIndex
 import com.intellij.xml.util.XmlTagUtil
 import de.vette.idea.neos.NeosProjectService
 import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex
-import de.vette.idea.neos.lang.fusion.FusionFileType
 import de.vette.idea.neos.lang.xliff.GroupDomElement
 import de.vette.idea.neos.lang.xliff.XliffBundle
 import de.vette.idea.neos.translation.NodeTypeLabelReference
@@ -55,8 +48,6 @@ import de.vette.idea.neos.translation.TranslationWriter
 import de.vette.idea.neos.translation.XliffIndexing
 import de.vette.idea.neos.translation.XliffLocation
 import de.vette.idea.neos.translation.yaml.NodeTypeTranslations
-import de.vette.idea.neos.translation.yaml.YamlTranslationUsage
-import org.jetbrains.yaml.YAMLFileType
 import org.jetbrains.yaml.psi.YAMLScalar
 
 /**
@@ -274,9 +265,9 @@ class XliffOutOfSyncInspection : XliffInspection() {
  * Reports translation units of the source locale that seem to be unused.
  *
  * A precise search for each unit would be far too slow, so this is an estimate that errs on the side of "used":
- * a unit counts as used if its id occurs as text in a Fusion file or in the configuration of Neos, if the word
- * index knows a file of another type that contains it (PHP, templates, JavaScript), or if it is the label of a
- * node type that is set to "i18n".
+ * a unit counts as used if the word index knows a file other than a translation file that contains the words of
+ * its id (Fusion, configuration, PHP, templates, JavaScript), or if it is the label of a node type that is set
+ * to "i18n".
  */
 class XliffUnusedTranslationInspection : XliffInspection() {
 
@@ -286,34 +277,10 @@ class XliffUnusedTranslationInspection : XliffInspection() {
         val id = XliffIndexing.translationIdOf(unit) ?: return
 
         val project = holder.project
-        if (id.id in usedTexts(project) || isNodeTypeLabel(project, id) || occursInOtherFiles(project, id)) return
+        if (isNodeTypeLabel(project, id) || occursInOtherFiles(project, id)) return
 
         holder.registerProblem(anchor(unit), XliffBundle.message("inspection.xliff.unused", id.id))
     }
-
-    /**
-     * The texts in Fusion files and the configuration of Neos a translation id could be: everything between
-     * quotes, whitespace and brackets, and for shorthand ids also the part after the source.
-     */
-    private fun usedTexts(project: Project): Set<String> =
-        CachedValuesManager.getManager(project).getCachedValue(project, USED_TEXTS, {
-            val scope = GlobalSearchScope.allScope(project)
-            val files = FileTypeIndex.getFiles(FusionFileType.INSTANCE, scope) +
-                    FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration)
-            val psiManager = PsiManager.getInstance(project)
-
-            val texts = HashSet<String>()
-            for (file in files) {
-                val content = psiManager.findFile(file)?.viewProvider?.contents ?: continue
-                for (token in content.split(DELIMITERS)) {
-                    if (token.isEmpty()) continue
-                    texts.add(token)
-                    val shorthand = TranslationId.parseShorthand(token) ?: continue
-                    texts.add(shorthand.translationId.id)
-                }
-            }
-            CachedValueProvider.Result.create(texts, PsiModificationTracker.MODIFICATION_COUNT)
-        }, false)
 
     private fun isNodeTypeLabel(project: Project, id: TranslationId): Boolean {
         if (!id.source.startsWith(NODE_TYPES_SOURCE)) return false
@@ -329,6 +296,9 @@ class XliffUnusedTranslationInspection : XliffInspection() {
     }
 
     private fun occursInOtherFiles(project: Project, id: TranslationId): Boolean {
+        // the word index cannot be asked for an id without words
+        if (id.id.none(Character::isJavaIdentifierPart)) return true
+
         var found = false
         PsiSearchHelper.getInstance(project).processCandidateFilesForText(
             GlobalSearchScope.allScope(project), UsageSearchContext.ANY, true, id.id
@@ -341,7 +311,5 @@ class XliffUnusedTranslationInspection : XliffInspection() {
 
     companion object {
         private const val NODE_TYPES_SOURCE = "NodeTypes/"
-        private val DELIMITERS = Regex("""[\s'"`(){}\[\]<>=,;]+""")
-        private val USED_TEXTS = Key.create<CachedValue<Set<String>>>("neos.translation.usedTexts")
     }
 }

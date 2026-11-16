@@ -18,12 +18,9 @@
 
 package de.vette.idea.neos.lang.fusion.usages;
 
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.TokenSet;
-import de.vette.idea.neos.lang.fusion.FusionLexerAdapter;
 import de.vette.idea.neos.lang.fusion.psi.*;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
@@ -37,11 +34,7 @@ public class PrototypeFindUsagesProvider implements FindUsagesProvider {
 
     @Override
     public @Nullable WordsScanner getWordsScanner() {
-        return new DefaultWordsScanner(new FusionLexerAdapter(),
-                TokenSet.create(FusionTypes.TYPE),
-                TokenSet.create(FusionTypes.SINGLE_LINE_COMMENT, FusionTypes.DOC_COMMENT),
-                TokenSet.EMPTY
-        );
+        return new FusionWordsScanner();
     }
 
     @Override

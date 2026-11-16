@@ -51,8 +51,8 @@ import org.jetbrains.yaml.psi.YAMLScalar
 /**
  * Finds the usages of a translation unit in Fusion, AFX, YAML, PHP and Fluid templates.
  *
- * Fusion and YAML files are searched for the text of the id directly instead of through the word index: the words
- * inside of Eel expressions are not part of that index, and labels of node types ("i18n") do not contain the id.
+ * The word index narrows the search down to the files that contain the words of the id. Labels of node types
+ * ("i18n") do not contain the id, their definitions are found through the index of node types.
  */
 class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>(true) {
 
@@ -114,30 +114,39 @@ class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearc
     private fun unitReferences(element: PsiElement): List<TranslationUnitReference> =
         element.references.filterIsInstance<TranslationUnitReference>()
 
-    /**
-     * Fusion files and the YAML configuration of Neos
-     */
     private fun candidateFiles(project: Project, scope: SearchScope, id: TranslationId): Collection<VirtualFile> = when (scope) {
-        is GlobalSearchScope ->
-            FileTypeIndex.getFiles(FusionFileType.INSTANCE, scope) +
-                    FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration) +
-                    indexedCandidates(project, scope, id)
+        is GlobalSearchScope -> if (hasWords(id.id)) indexedCandidates(project, scope, id) else allCandidates(scope)
         is LocalSearchScope -> scope.virtualFiles.toList()
         else -> emptyList()
     }
 
     /**
-     * PHP files and Fluid templates that contain the words of the id. There are far too many of them to read
-     * them all, and unlike Eel their strings are part of the word index.
+     * The files that contain the words of the id, according to the word index: Fusion files (see
+     * [de.vette.idea.neos.lang.fusion.usages.FusionWordsScanner]), the YAML configuration of Neos, PHP files
+     * and Fluid templates.
      */
     private fun indexedCandidates(project: Project, scope: GlobalSearchScope, id: TranslationId): Collection<VirtualFile> {
         val files = ArrayList<VirtualFile>()
         PsiSearchHelper.getInstance(project).processCandidateFilesForText(scope, UsageSearchContext.ANY, true, id.id) { file ->
-            if (file.fileType == PhpFileType.INSTANCE || file.fileType == HtmlFileType.INSTANCE) files.add(file)
+            ProgressManager.checkCanceled()
+            when (file.fileType) {
+                FusionFileType.INSTANCE, PhpFileType.INSTANCE, HtmlFileType.INSTANCE -> files.add(file)
+                YAMLFileType.YML -> if (YamlTranslationUsage.isNeosConfiguration(file)) files.add(file)
+            }
             true
         }
         return files
     }
+
+    /**
+     * All Fusion files and the YAML configuration of Neos, for ids the word index cannot be asked for
+     * because they consist of punctuation only.
+     */
+    private fun allCandidates(scope: GlobalSearchScope): Collection<VirtualFile> =
+        FileTypeIndex.getFiles(FusionFileType.INSTANCE, scope) +
+                FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration)
+
+    private fun hasWords(text: String): Boolean = text.any(Character::isJavaIdentifierPart)
 
     /**
      * The definitions of the node type a source like "NodeTypes/Content/Text" belongs to

@@ -88,6 +88,24 @@ class TranslationUsagesTest : BasePlatformTestCase() {
         assertEmpty(usages(idValue(TranslationId("Acme.Site", "Main", "button.submit"), "en")))
     }
 
+    fun testWordIndexKnowsTheTextOfEelExpressionsAndAfx() {
+        fun fusionFilesWith(text: String): List<String> {
+            val files = ArrayList<String>()
+            com.intellij.psi.search.PsiSearchHelper.getInstance(project).processCandidateFilesForText(
+                GlobalSearchScope.allScope(project), com.intellij.psi.search.UsageSearchContext.ANY, true, text
+            ) { file ->
+                if (file.extension == "fusion") files.add(file.name)
+                true
+            }
+            return files
+        }
+
+        assertEquals(listOf("Root.fusion"), fusionFilesWith("headline"))
+        assertEquals(listOf("Root.fusion"), fusionFilesWith("Acme.Shared:Main:greeting"))
+        assertEquals(listOf("Root.fusion"), fusionFilesWith("h1"))
+        assertEmpty(fusionFilesWith("button.submit"))
+    }
+
     fun testIdValueIsFoundAtCaret() {
         val file = myFixture.findFileInTempDir("$TRANSLATIONS/en/Main.xlf")
         myFixture.configureFromExistingVirtualFile(file)
