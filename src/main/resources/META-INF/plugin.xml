@@ -59,6 +59,13 @@
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.eel.formatter.EelLanguageCodeStyleSettingsProvider"/>
     <completion.contributor language="NeosEel" implementationClass="de.vette.idea.neos.lang.eel.completion.EelCompletionContributor"/>
     <multiHostInjector implementation="de.vette.idea.neos.lang.yaml.injection.EelYamlInjector"/>
+    <lookup.charFilter implementation="de.vette.idea.neos.translation.eel.EelTranslationCompletionProvider$TranslationCharFilter"/>
+    <lang.documentationProvider language="NeosEel" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
+    <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.translation.TranslationFoldingBuilder"/>
+    <lang.foldingBuilder language="NeosEel" implementationClass="de.vette.idea.neos.translation.TranslationFoldingBuilder"/>
+    <lang.foldingBuilder language="NeosAfx" implementationClass="de.vette.idea.neos.translation.AfxTranslationFoldingBuilder"/>
+    <codeFoldingOptionsProvider instance="de.vette.idea.neos.translation.NeosFoldingOptionsProvider"/>
+    <lang.documentationProvider language="XLIFF" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider" order="first"/>
 
     <!-- AFX -->
     <fileType name="Neos Afx" language="NeosAfx" implementationClass="de.vette.idea.neos.lang.afx.AfxFileType" extensions="afx" fieldName="INSTANCE"/>

@@ -112,8 +112,27 @@ class TranslationResolver(private val project: Project) {
     /**
      * The XLIFF files of all locales that contribute to a source, including overrides from other packages.
      */
-    fun sourceFiles(packageKey: String, source: String): Collection<VirtualFile> =
+    fun sourceFiles(packageKey: String, source: String): List<VirtualFile> =
         index.getContainingFiles(TranslationSourceIndex.KEY, TranslationId.sourceKey(packageKey, source), scope)
+            .sortedWith(compareBy<VirtualFile, String>(localeOrder()) { XliffLocation.fromFile(it)?.locale.orEmpty() }
+                .thenBy { it.path })
+
+    /**
+     * The directories of the package with the given key, found through its translations.
+     */
+    fun packageDirectories(packageKey: String): List<VirtualFile> {
+        val directories = LinkedHashSet<VirtualFile>()
+        for (source in sources(packageKey)) {
+            for (file in sourceFiles(packageKey, source)) {
+                if (XliffLocation.fromFile(file)?.packageKey != packageKey) continue
+                generateSequence(file.parent) { it.parent }
+                    .firstOrNull { it.name == "Translations" && it.parent?.name == "Private" }
+                    ?.parent?.parent?.parent
+                    ?.let(directories::add)
+            }
+        }
+        return directories.toList()
+    }
 
     /**
      * The ids of all translation units of a source, from all locales.

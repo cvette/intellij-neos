@@ -30,7 +30,7 @@ import de.vette.idea.neos.lang.xliff.GroupDomElement
  * and `original` win over the package and the source derived from the path. That is how a package overrides
  * labels of another package.
  */
-internal class XliffFileSection(
+class XliffFileSection(
     val packageKey: String,
     val source: String,
     /** Translation unit id to its data. Plural forms are merged into one entry under the id of the group. */
@@ -43,7 +43,7 @@ internal class XliffFileSection(
 /**
  * Reads the content of XLIFF files for [TranslationUnitIndex] and [TranslationSourceIndex].
  */
-internal object XliffIndexing {
+object XliffIndexing {
     private const val MAX_FILE_BYTE_SIZE = 5 * 1024 * 1024
     private const val SUPPORTED_VERSION = "1.2"
     private const val MAX_TEXT_LENGTH = 200
@@ -69,12 +69,31 @@ internal object XliffIndexing {
             val units = LinkedHashMap<String, TranslationUnitData>()
             fileTag.findFirstSubTag("body")?.let { collectUnits(it, location.locale, units) }
 
-            XliffFileSection(
-                packageKey = fileTag.attribute("product-name") ?: location.packageKey,
-                source = TranslationId.normalizeSource(fileTag.attribute("original") ?: location.source),
-                units = units,
-            )
+            XliffFileSection(packageKey(fileTag, location), source(fileTag, location), units)
         }
+    }
+
+    fun packageKey(fileTag: XmlTag, location: XliffLocation): String =
+        fileTag.attribute("product-name") ?: location.packageKey
+
+    fun source(fileTag: XmlTag, location: XliffLocation): String =
+        TranslationId.normalizeSource(fileTag.attribute("original") ?: location.source)
+
+    /**
+     * The id a `<trans-unit>` tag is addressed with, null if the tag is not part of a translation file.
+     */
+    fun translationIdOf(unitTag: XmlTag): TranslationId? {
+        if (unitTag.localName != "trans-unit") return null
+        val file = unitTag.containingFile?.originalFile?.virtualFile ?: return null
+        val location = XliffLocation.fromFile(file) ?: return null
+        val fileTag = generateSequence(unitTag.parentTag) { it.parentTag }.firstOrNull { it.localName == "file" }
+            ?: return null
+
+        val rawId = unitTag.attribute("id") ?: return null
+        val isPluralForm = unitTag.parentTag?.getAttributeValue("restype") == GroupDomElement.PLURALS_RESTYPE
+        val id = if (isPluralForm) rawId.substringBefore('[') else rawId
+
+        return TranslationId(packageKey(fileTag, location), source(fileTag, location), id)
     }
 
     private fun collectUnits(parent: XmlTag, locale: String, units: MutableMap<String, TranslationUnitData>) {
