@@ -70,6 +70,13 @@
     <codeInsight.lineMarkerProvider language="XLIFF" implementationClass="de.vette.idea.neos.translation.XliffLocaleLineMarkerProvider"/>
     <gotoSymbolContributor implementation="de.vette.idea.neos.translation.TranslationSymbolContributor"/>
     <defaultTemplatePropertiesProvider implementation="de.vette.idea.neos.translation.XliffTemplatePropertiesProvider"/>
+    <fileEditorProvider implementation="de.vette.idea.neos.translation.editor.TranslationEditorProvider"/>
+    <psi.referenceContributor language="PHP" implementation="de.vette.idea.neos.translation.php.PhpTranslationReferenceContributor"/>
+    <completion.contributor language="PHP" implementationClass="de.vette.idea.neos.translation.php.PhpTranslationCompletionContributor"/>
+    <lang.documentationProvider language="PHP" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
+    <psi.referenceContributor language="HTML" implementation="de.vette.idea.neos.translation.fluid.FluidTranslationReferenceContributor"/>
+    <completion.contributor language="HTML" implementationClass="de.vette.idea.neos.translation.fluid.FluidTranslationCompletionContributor"/>
+    <lang.documentationProvider language="HTML" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
     <intentionAction>
       <className>de.vette.idea.neos.translation.ExtractTranslationIntention</className>
       <category>Neos</category>

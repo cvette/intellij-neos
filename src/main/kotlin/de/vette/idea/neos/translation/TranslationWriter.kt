@@ -75,6 +75,14 @@ object TranslationWriter {
         return added
     }
 
+    /**
+     * Adds a unit to an XLIFF file, without looking at other locales.
+     *
+     * @param withTarget true to add an empty `<target>`, for files of a locale other than the source locale
+     */
+    fun addUnitToFile(file: XmlFile, id: String, sourceText: String, withTarget: Boolean): XmlTag? =
+        body(file)?.let { addUnit(it, id, sourceText, withTarget) }
+
     /** The text of the `<source>` of a unit. */
     fun sourceText(unit: XmlTag): String = unit.findFirstSubTag("source")?.value?.trimmedText.orEmpty()
 
