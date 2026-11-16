@@ -118,6 +118,42 @@ class TranslationEditorTest : BasePlatformTestCase() {
         assertEquals(listOf("button.submit", "Submit", "Absenden"), rows(model("en/Main.xlf")).first())
     }
 
+    fun testLocaleShowsTheTextItFallsBackTo() {
+        myFixture.addFileToProject(
+            "$TRANSLATIONS/de_CH/Main.xlf",
+            """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file original="" product-name="Acme.Site" source-language="en" target-language="de_CH" datatype="plaintext">
+                    <body>
+                        <trans-unit id="button.submit" xml:space="preserve">
+                            <source>Submit</source>
+                            <target>Abschicken</target>
+                        </trans-unit>
+                    </body>
+                </file>
+            </xliff>
+            """.trimIndent()
+        )
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+        val model = model("en/Main.xlf")
+        assertEquals(listOf("Id", "en", "de", "de_CH"), (0 until model.columnCount).map(model::getColumnName))
+
+        // "headline" exists in "de" only: "de_CH" takes it from there and is not missing it
+        assertEquals("", model.getValueAt(1, 3))
+        assertEquals("Willkommen", model.inheritedText(1, 3))
+        assertFalse(model.isMissing(1, 3))
+
+        // "button.submit" exists in "de_CH" only: "de" does not fall back to it
+        assertEquals("Abschicken", model.getValueAt(0, 3))
+        assertNull(model.inheritedText(0, 3))
+        assertNull(model.inheritedText(0, 2))
+        assertTrue(model.isMissing(0, 2))
+
+        model.onlyIncomplete = true
+        assertEquals(listOf("button.submit"), rows(model).map { it.first() })
+    }
+
     fun testReadOnlyFileKeepsItsText() {
         val model = model("en/Main.xlf")
         val german = myFixture.findFileInTempDir("$TRANSLATIONS/de/Main.xlf")

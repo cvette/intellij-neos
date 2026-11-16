@@ -39,6 +39,7 @@ import de.vette.idea.neos.actions.TranslateNodeTypeAction
 import de.vette.idea.neos.lang.eel.psi.EelValueStringLine
 import de.vette.idea.neos.lang.xliff.XliffBundle
 import de.vette.idea.neos.translation.TranslationId
+import de.vette.idea.neos.translation.TranslationLocales
 import de.vette.idea.neos.translation.TranslationPackageReference
 import de.vette.idea.neos.translation.TranslationReference
 import de.vette.idea.neos.translation.TranslationResolver
@@ -144,7 +145,9 @@ class TranslationIncompleteInspection : TranslationUsageInspection() {
             val units = resolver.findUnits(reference.translationId)
             if (units.isEmpty()) continue
 
-            val missing = resolver.locales() - units.map { it.locale }.toSet()
+            // a locale that falls back to a locale with the label is not missing it
+            val available = units.map { it.locale }
+            val missing = resolver.locales().filterNot { TranslationLocales.isCovered(it, available) }
             if (missing.isEmpty()) continue
 
             holder.registerProblem(

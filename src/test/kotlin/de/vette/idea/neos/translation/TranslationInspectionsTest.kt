@@ -152,6 +152,41 @@ class TranslationInspectionsTest : BasePlatformTestCase() {
         assertEmpty(problems())
     }
 
+    fun testLocaleThatFallsBackToATranslatedLocaleIsNotMissing() {
+        Settings.getInstance(project).locales.addAll(listOf("en", "de", "de_CH"))
+        val problems = fusionProblems(
+            TranslationIncompleteInspection(),
+            """
+            inherited = ${'$'}{I18n.translate('Acme.Site:Main:headline')}
+            partial = ${'$'}{I18n.translate('Acme.Site:Main:button.sub<caret>mit')}
+            """
+        )
+        assertEquals(listOf("Translation \"Acme.Site:Main:button.submit\" is missing in: de, de_CH"), problems)
+
+        applyFix("Add translation to: de, de_CH")
+
+        // "de_CH" gets the label from "de"
+        assertTrue(text("$TRANSLATIONS/de/Main.xlf").contains("id=\"button.submit\""))
+        assertNull(myFixture.tempDirFixture.getFile("$TRANSLATIONS/de_CH/Main.xlf"))
+        assertEmpty(problems())
+    }
+
+    fun testSourceUnitIsInSyncIfMissingLocalesFallBack() {
+        Settings.getInstance(project).locales.addAll(listOf("en", "de", "de_CH"))
+        myFixture.enableInspections(XliffOutOfSyncInspection())
+        myFixture.configureFromExistingVirtualFile(myFixture.findFileInTempDir("$TRANSLATIONS/en/Main.xlf"))
+
+        assertEquals(listOf("Translation unit \"button.submit\" is not translated to: de, de_CH"), problems())
+    }
+
+    fun testConfiguredLocalesAreWrittenLikeTheirDirectories() {
+        Settings.getInstance(project).locales.addAll(listOf("EN", "de", "fr-FR"))
+        val resolver = TranslationResolver.getInstance(project)
+
+        assertEquals("en", resolver.sourceLocale)
+        assertEquals(listOf("en", "de", "fr-FR"), resolver.locales())
+    }
+
     fun testReportsTextsOfNodeTypesThatAreNotTranslated() {
         Settings.getInstance(project).locales.addAll(listOf("en", "de"))
         problems(

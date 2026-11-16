@@ -41,7 +41,8 @@ object TranslationWriter {
     private const val TEMPLATE = "XLIFF File"
 
     /**
-     * Adds the unit to the XLIFF file of each of the locales, unless it already exists there.
+     * Adds the unit to the XLIFF file of each of the locales, unless it already exists there. A locale that falls
+     * back to another locale with the unit is left out as well ("de_CH" if "de" has it), see [TranslationLocales].
      *
      * @param sourceText the text in the source locale; taken from an existing unit of the source locale if null
      * @param anchor a file of the package the label belongs to, used to find the package if it has no translations yet
@@ -63,7 +64,12 @@ object TranslationWriter {
             ?: ""
 
         // the index is asked before anything is changed
-        val missing = locales.filter { locale -> existing.none { it.locale == locale } }
+        // a locale gets the unit from the locale it falls back to, if that one has it or is about to get it
+        val provided = existing.map { it.locale } + locales
+        val missing = locales.filter { locale ->
+            existing.none { it.locale == locale } &&
+                    TranslationLocales.parents(locale).none { TranslationLocales.contains(provided, it) }
+        }
         val files = missing.associateWith { findFile(project, id, it) }
 
         val added = LinkedHashMap<String, XmlTag>()

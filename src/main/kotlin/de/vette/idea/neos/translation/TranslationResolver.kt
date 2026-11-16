@@ -19,6 +19,7 @@
 package de.vette.idea.neos.translation
 
 import com.intellij.openapi.components.Service
+import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiManager
@@ -53,14 +54,14 @@ class TranslationResolver(private val project: Project) {
      * The locale labels are written in: the first configured locale, "en" if none is configured.
      */
     val sourceLocale: String
-        get() = Settings.getInstance(project).locales.firstOrNull() ?: DEFAULT_SOURCE_LOCALE
+        get() = Settings.getInstance(project).locales.firstOrNull()?.let(::directoryNotation) ?: DEFAULT_SOURCE_LOCALE
 
     /**
      * The locales labels should exist in: the configured ones, or else all locales that have XLIFF files.
      */
     fun locales(): List<String> {
         val configured = Settings.getInstance(project).locales
-        if (configured.isNotEmpty()) return configured.toList()
+        if (configured.isNotEmpty()) return configured.map(::directoryNotation).distinct()
 
         return discoveredLocales()
     }
@@ -68,14 +69,34 @@ class TranslationResolver(private val project: Project) {
     /**
      * All locales that have XLIFF files, the source locale first.
      */
-    fun discoveredLocales(): List<String> {
+    fun discoveredLocales(): List<String> = localeDirectories().sortedWith(localeOrder())
+
+    /**
+     * A configured locale the way its directory is written, so that "en-US" from the settings is the locale
+     * of the files in "en_US". Locales without files are kept as they are.
+     */
+    private fun directoryNotation(locale: String): String {
+        if (DumbService.isDumb(project)) return locale
+        val directories = localeDirectories()
+        return if (locale in directories) locale else directories.firstOrNull { TranslationLocales.same(it, locale) } ?: locale
+    }
+
+    /** The names of the locale directories that have XLIFF files. Read from the index again when it changed. */
+    private fun localeDirectories(): Set<String> {
+        val stamp = index.getIndexModificationStamp(TranslationSourceIndex.KEY, project)
+        cachedLocaleDirectories?.takeIf { it.first == stamp }?.let { return it.second }
+
         val locales = sortedSetOf<String>()
         for (sourceKey in index.getAllKeys(TranslationSourceIndex.KEY, project)) {
             index.getContainingFiles(TranslationSourceIndex.KEY, sourceKey, scope)
                 .mapNotNullTo(locales) { XliffLocation.fromFile(it)?.locale }
         }
-        return locales.sortedWith(localeOrder())
+        cachedLocaleDirectories = stamp to locales
+        return locales
     }
+
+    @Volatile
+    private var cachedLocaleDirectories: Pair<Long, Set<String>>? = null
 
     /**
      * All units for the id, one per locale and file. The source locale comes first.

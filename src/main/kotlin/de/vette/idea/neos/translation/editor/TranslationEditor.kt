@@ -37,6 +37,7 @@ import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.table.JBTable
 import com.intellij.util.concurrency.AppExecutorUtil
 import com.intellij.util.ui.JBUI
+import com.intellij.util.ui.UIUtil
 import de.vette.idea.neos.NeosProjectService
 import de.vette.idea.neos.lang.xliff.XliffBundle
 import de.vette.idea.neos.translation.XliffLocation
@@ -151,15 +152,23 @@ class TranslationEditor(private val project: Project, private val file: VirtualF
 
     override fun dispose() {}
 
-    /** Marks the cells of labels that are missing in a locale */
+    /** Marks the cells of labels that are missing in a locale and shows the texts that come from another locale */
     private class MissingTextRenderer(private val model: TranslationTableModel) : DefaultTableCellRenderer() {
         override fun getTableCellRendererComponent(
             table: JTable, value: Any?, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int,
         ): Component {
             val component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column)
+            val modelRow = table.convertRowIndexToModel(row)
+            val modelColumn = table.convertColumnIndexToModel(column)
+
+            // the text of the locale the cell falls back to is shown as a hint, the cell itself is empty
+            val inherited = model.inheritedText(modelRow, modelColumn)
+            if (inherited != null) {
+                text = inherited
+                if (!isSelected) foreground = UIUtil.getInactiveTextColor()
+            }
             if (!isSelected) {
-                val missing = model.isMissing(table.convertRowIndexToModel(row), table.convertColumnIndexToModel(column))
-                component.background = if (missing) LightColors.RED else table.background
+                component.background = if (model.isMissing(modelRow, modelColumn)) LightColors.RED else table.background
             }
             return component
         }

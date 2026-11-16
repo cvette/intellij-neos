@@ -43,6 +43,7 @@ import de.vette.idea.neos.lang.xliff.GroupDomElement
 import de.vette.idea.neos.lang.xliff.XliffBundle
 import de.vette.idea.neos.translation.NodeTypeLabelReference
 import de.vette.idea.neos.translation.TranslationId
+import de.vette.idea.neos.translation.TranslationLocales
 import de.vette.idea.neos.translation.TranslationResolver
 import de.vette.idea.neos.translation.TranslationWriter
 import de.vette.idea.neos.translation.XliffIndexing
@@ -87,8 +88,7 @@ abstract class XliffInspection : LocalInspectionTool() {
     protected fun isSourceLocaleFile(tag: XmlTag, location: XliffLocation): Boolean =
         sameLocale(location.locale, sourceLocale(tag))
 
-    protected fun sameLocale(a: String, b: String): Boolean =
-        a.replace('-', '_').equals(b.replace('-', '_'), ignoreCase = true)
+    protected fun sameLocale(a: String, b: String): Boolean = TranslationLocales.same(a, b)
 
     protected fun isPluralForm(unit: XmlTag): Boolean =
         unit.parentTag?.getAttributeValue("restype") == GroupDomElement.PLURALS_RESTYPE
@@ -196,7 +196,8 @@ class XliffLanguageMismatchInspection : XliffInspection() {
 /**
  * Reports translation units that got out of sync with the other locales:
  *
- * - a unit of the source locale that is not translated to all locales
+ * - a unit of the source locale that is not translated to all locales; a locale that falls back to a locale
+ *   with a translation counts as translated, see [TranslationLocales]
  * - a unit that does not exist in the source locale any more
  * - a unit whose source text differs from the one of the source locale
  */
@@ -209,7 +210,9 @@ class XliffOutOfSyncInspection : XliffInspection() {
         val units = resolver.findUnits(id)
 
         if (isSourceLocaleFile(unit, location)) {
-            val missing = resolver.locales().filter { locale -> units.none { sameLocale(it.locale, locale) } }
+            // a locale that falls back to a locale with the label is not missing it
+            val available = units.map { it.locale }
+            val missing = resolver.locales().filterNot { TranslationLocales.isCovered(it, available) }
             if (missing.isNotEmpty()) {
                 holder.registerProblem(
                     anchor(unit),

@@ -30,6 +30,7 @@ import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
 import de.vette.idea.neos.lang.xliff.XliffBundle
 import de.vette.idea.neos.translation.TranslationId
+import de.vette.idea.neos.translation.TranslationLocales
 import de.vette.idea.neos.translation.TranslationResolver
 import de.vette.idea.neos.translation.TranslationWriter
 import de.vette.idea.neos.translation.XliffIndexing
@@ -146,7 +147,25 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
         get() = data?.locales.orEmpty()
 
     fun isMissing(rowIndex: Int, columnIndex: Int): Boolean =
-        columnIndex > 0 && rows[rowIndex].texts[locales[columnIndex - 1]].isNullOrEmpty()
+        columnIndex > 0 && isMissing(rows[rowIndex], locales[columnIndex - 1])
+
+    /**
+     * The text a locale without the label takes from the locale it falls back to, e.g. "de_CH" from "de".
+     * Null if the locale has the label itself, also with an empty text, or if there is nothing to fall back to.
+     */
+    fun inheritedText(rowIndex: Int, columnIndex: Int): String? =
+        if (columnIndex > 0) inheritedText(rows[rowIndex], locales[columnIndex - 1]) else null
+
+    private fun inheritedText(row: TranslationRow, locale: String): String? {
+        if (row.texts[locale] != null) return null
+
+        return TranslationLocales.parents(locale).firstNotNullOfOrNull { parent ->
+            locales.filter { TranslationLocales.same(it, parent) }.firstNotNullOfOrNull { row.texts[it]?.takeIf(String::isNotEmpty) }
+        }
+    }
+
+    private fun isMissing(row: TranslationRow, locale: String): Boolean =
+        row.texts[locale].isNullOrEmpty() && inheritedText(row, locale) == null
 
     fun idAt(rowIndex: Int): String = rows[rowIndex].id
 
@@ -242,6 +261,6 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
 
     private fun updateRows() {
         val all = data?.rows.orEmpty()
-        rows = if (onlyIncomplete) all.filter { row -> locales.any { row.texts[it].isNullOrEmpty() } } else all
+        rows = if (onlyIncomplete) all.filter { row -> locales.any { isMissing(row, it) } } else all
     }
 }
