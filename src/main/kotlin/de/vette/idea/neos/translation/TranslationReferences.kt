@@ -49,11 +49,21 @@ abstract class TranslationReference(element: PsiElement, range: TextRange) :
 /**
  * Resolves to the `id` attribute of the translation unit in every locale, the source locale first.
  */
-class TranslationUnitReference(element: PsiElement, range: TextRange, val translationId: TranslationId) :
+open class TranslationUnitReference(element: PsiElement, range: TextRange, val translationId: TranslationId) :
     TranslationReference(element, range) {
 
     override fun targets(): List<PsiElement> =
         resolver.findUnitTags(translationId).map { it.getAttribute("id")?.valueElement ?: it }
+}
+
+/**
+ * The reference of a value "i18n" in a node type definition. Neos generates the id from the place of the value,
+ * so the text of the reference does not contain the id and must stay as it is when the unit is renamed.
+ */
+class NodeTypeLabelReference(element: PsiElement, range: TextRange, translationId: TranslationId) :
+    TranslationUnitReference(element, range, translationId) {
+
+    override fun handleElementRename(newElementName: String): PsiElement = element
 }
 
 /**

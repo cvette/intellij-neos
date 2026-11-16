@@ -19,6 +19,9 @@
 package de.vette.idea.neos.translation
 
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.psi.PsiElement
+import com.intellij.psi.xml.XmlAttribute
+import com.intellij.psi.xml.XmlAttributeValue
 import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
 import com.intellij.util.indexing.FileContent
@@ -78,6 +81,19 @@ object XliffIndexing {
 
     fun source(fileTag: XmlTag, location: XliffLocation): String =
         TranslationId.normalizeSource(fileTag.attribute("original") ?: location.source)
+
+    /**
+     * The `<trans-unit>` tag for the tag itself or for the value of its `id` attribute, which is what the
+     * references to a translation unit resolve to.
+     */
+    fun unitTagOf(element: PsiElement?): XmlTag? {
+        val tag = when (element) {
+            is XmlTag -> element
+            is XmlAttributeValue -> (element.parent as? XmlAttribute)?.takeIf { it.name == "id" }?.parent
+            else -> null
+        }
+        return tag?.takeIf { it.localName == "trans-unit" }
+    }
 
     /**
      * The id a `<trans-unit>` tag is addressed with, null if the tag is not part of a translation file.

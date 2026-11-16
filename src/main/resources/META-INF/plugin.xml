@@ -61,6 +61,14 @@
     <multiHostInjector implementation="de.vette.idea.neos.lang.yaml.injection.EelYamlInjector"/>
     <lookup.charFilter implementation="de.vette.idea.neos.translation.eel.EelTranslationCompletionProvider$TranslationCharFilter"/>
     <lang.documentationProvider language="NeosEel" implementationClass="de.vette.idea.neos.translation.TranslationDocumentationProvider"/>
+    <lang.elementManipulator forClass="de.vette.idea.neos.lang.eel.psi.EelValueStringLine" implementationClass="de.vette.idea.neos.translation.eel.EelStringManipulator"/>
+    <referencesSearch implementation="de.vette.idea.neos.translation.TranslationUsageSearcher"/>
+    <psi.referenceContributor language="XML" implementation="de.vette.idea.neos.translation.TranslationUnitDeclarationContributor"/>
+    <renamePsiElementProcessor implementation="de.vette.idea.neos.translation.TranslationUnitRenameProcessor"/>
+    <renameInputValidator implementation="de.vette.idea.neos.translation.TranslationUnitRenameInputValidator"/>
+    <vetoRenameCondition implementation="de.vette.idea.neos.translation.PluralFormRenameVeto"/>
+    <codeInsight.lineMarkerProvider language="XLIFF" implementationClass="de.vette.idea.neos.translation.XliffLocaleLineMarkerProvider"/>
+    <gotoSymbolContributor implementation="de.vette.idea.neos.translation.TranslationSymbolContributor"/>
     <lang.foldingBuilder language="NeosFusion" implementationClass="de.vette.idea.neos.translation.TranslationFoldingBuilder"/>
     <lang.foldingBuilder language="NeosEel" implementationClass="de.vette.idea.neos.translation.TranslationFoldingBuilder"/>
     <lang.foldingBuilder language="NeosAfx" implementationClass="de.vette.idea.neos.translation.AfxTranslationFoldingBuilder"/>

@@ -39,6 +39,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ProcessingContext
 import de.vette.idea.neos.NeosProjectService
 import de.vette.idea.neos.lang.xliff.XliffIcons
+import de.vette.idea.neos.translation.NodeTypeLabelReference
 import de.vette.idea.neos.translation.TranslationId
 import de.vette.idea.neos.translation.TranslationLookups
 import de.vette.idea.neos.translation.TranslationPackageReference
@@ -81,7 +82,7 @@ object YamlTranslationUsage {
             val keyValue = scalar.parent as? YAMLKeyValue ?: return PsiReference.EMPTY_ARRAY
             if (!NeosUtil.isNodeTypeDefinition(file)) return PsiReference.EMPTY_ARRAY
             val id = NodeTypeTranslations.translationId(keyValue) ?: return PsiReference.EMPTY_ARRAY
-            return arrayOf(TranslationUnitReference(scalar, range, id))
+            return arrayOf(NodeTypeLabelReference(scalar, range, id))
         }
 
         val shorthand = TranslationId.parseShorthand(text) ?: return PsiReference.EMPTY_ARRAY
