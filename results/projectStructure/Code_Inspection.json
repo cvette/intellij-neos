@@ -364,11 +364,6 @@
               "path": "file://$PROJECT_DIR$/src/test/java",
               "type": "TestSource",
               "packagePrefix": ""
-            },
-            {
-              "path": "file://$PROJECT_DIR$/src/test/kotlin",
-              "type": "TestSource",
-              "packagePrefix": ""
             }
           ]
         }
