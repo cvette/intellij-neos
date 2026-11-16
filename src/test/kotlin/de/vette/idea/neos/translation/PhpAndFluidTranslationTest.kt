@@ -162,6 +162,39 @@ class PhpAndFluidTranslationTest : BasePlatformTestCase() {
         assertEquals(3, targets(inAttribute).size)
     }
 
+    fun testInlineNotationWithNestedArguments() {
+        val afterArray = fluidReference(
+            """<p>{f:translate(id: 'headline', arguments: {0: item.name(), 1: '(new), x'}, package: 'Acme.Sha<caret>red')}</p>"""
+        )
+        assertInstanceOf(afterArray, TranslationPackageReference::class.java)
+
+        val id = fluidReference(
+            """<p>{f:translate(arguments: {0: 'id: nested'}, id: 'gree<caret>ting', package: "Acme.Shared")} {f:format.raw(value: 'x')}</p>"""
+        )
+        assertEquals(TranslationId("Acme.Shared", "Main", "greeting"), (id as TranslationUnitReference).translationId)
+    }
+
+    fun testInlineCallsAreReadUpToTheirEnd() {
+        val calls = de.vette.idea.neos.translation.fluid.FluidTranslationUsage.inlineCalls(
+            "{f:translate(id: 'a', quantity: count(items), source: 'Main')} and {neos:backend.translate(id: 'b')} {f:translate(id: 'open"
+        )
+
+        assertEquals(
+            listOf(mapOf("id" to "a", "source" to "Main"), mapOf("id" to "b"), mapOf("id" to "open")),
+            calls.map { call -> call.mapValues { it.value.value } }
+        )
+    }
+
+    fun testCompletionInInlineNotation() {
+        configureFluid("""<p>{f:translate(id: '<caret>', arguments: {0: name}, package: 'Acme.Site')}</p>""")
+        myFixture.completeBasic()
+        assertContainsElements(myFixture.lookupElementStrings!!, "button.submit", "headline", "items.count")
+
+        configureFluid("""<a title="{f:translate(id: 'headline', package: 'Acme.S<caret>')}">x</a>""")
+        myFixture.completeBasic()
+        assertContainsElements(myFixture.lookupElementStrings!!, "Acme.Shared", "Acme.Site")
+    }
+
     fun testDynamicValuesAndOtherFilesHaveNoReferences() {
         configureFluid("""<f:translate id="{la<caret>bel}" package="Acme.Site"/>""")
         assertNull(referenceAtCaret())

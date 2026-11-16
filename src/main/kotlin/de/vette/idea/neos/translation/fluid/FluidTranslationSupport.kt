@@ -61,8 +61,7 @@ object FluidTranslationUsage {
     private const val SOURCE = "source"
     private const val PACKAGE = "package"
 
-    private val INLINE = Regex("""[\w.]+:(?:backend\.)?translate\(([^)]*)\)""")
-    private val INLINE_ARGUMENT = Regex("""(\w+)\s*:\s*(['"])(.*?)\2""")
+    private val INLINE_START = Regex("""[\w.]+:(?:backend\.)?translate\(""")
 
     /** Fluid templates are HTML files in the private resources of a package */
     @JvmStatic
@@ -116,27 +115,110 @@ object FluidTranslationUsage {
      * @param offset where the text starts in the element
      */
     private fun inlineReferences(element: PsiElement, text: String, offset: Int): List<PsiReference> {
-        if (!text.contains("translate(")) return emptyList()
-
         val references = ArrayList<PsiReference>()
-        for (call in INLINE.findAll(text)) {
-            val argumentsStart = offset + call.groups[1]!!.range.first
-            val arguments = INLINE_ARGUMENT.findAll(call.groupValues[1]).associate { match ->
-                val valueGroup = match.groups[3]!!
-                match.groupValues[1] to (valueGroup.value to TextRange(
-                    argumentsStart + valueGroup.range.first, argumentsStart + valueGroup.range.last + 1
-                ))
-            }
-
-            val packageKey = arguments[PACKAGE]?.first ?: packageOf(element.containingFile)
-            val source = arguments[SOURCE]?.first ?: TranslationId.DEFAULT_SOURCE
-            for ((name, valueAndRange) in arguments) {
+        for (arguments in inlineCalls(text)) {
+            val packageKey = arguments[PACKAGE]?.value ?: packageOf(element.containingFile)
+            val source = arguments[SOURCE]?.value ?: TranslationId.DEFAULT_SOURCE
+            for ((name, argument) in arguments) {
                 val role = role(name) ?: continue
-                references += translationArgumentReferences(element, valueAndRange.second, role, packageKey, source)
+                references += translationArgumentReferences(element, argument.range.shiftRight(offset), role, packageKey, source)
             }
         }
         return references
     }
+
+    /**
+     * The argument of an inline view helper call the offset is in, for completion
+     *
+     * @param text the text of the template
+     */
+    @JvmStatic
+    fun inlineArgumentAt(file: PsiFile, text: String, offset: Int): Pair<FluidTranslationArgument, InlineArgument>? {
+        for (arguments in inlineCalls(text)) {
+            val (name, argument) = arguments.entries.firstOrNull { it.value.range.containsOffset(offset) } ?: continue
+            val role = role(name) ?: return null
+            return FluidTranslationArgument(
+                role,
+                packageKey = arguments[PACKAGE]?.value ?: packageOf(file),
+                source = arguments[SOURCE]?.value ?: TranslationId.DEFAULT_SOURCE,
+            ) to argument
+        }
+        return null
+    }
+
+    /**
+     * The string arguments of the calls of the translate view helper in inline notation, by their name.
+     * The ranges are the ones of the values without quotes, relative to the text.
+     */
+    @JvmStatic
+    fun inlineCalls(text: String): List<Map<String, InlineArgument>> {
+        if (!text.contains("translate(")) return emptyList()
+
+        return INLINE_START.findAll(text).map { inlineArguments(text, it.range.last + 1) }.toList()
+    }
+
+    /**
+     * Reads `name: 'value'` pairs up to the parenthesis that closes the call. Values that are not strings are
+     * skipped, with the arrays, calls and strings nested in them: `arguments: {0: item.name, 1: '(new)'}`.
+     */
+    private fun inlineArguments(text: String, start: Int): Map<String, InlineArgument> {
+        val arguments = LinkedHashMap<String, InlineArgument>()
+        var index = start
+        while (index < text.length) {
+            index = skipWhitespace(text, index)
+            if (index >= text.length || text[index] == ')') break
+
+            // the name of the argument and the colon
+            val nameStart = index
+            while (index < text.length && (text[index].isLetterOrDigit() || text[index] == '_')) index++
+            val name = text.substring(nameStart, index)
+            index = skipWhitespace(text, index)
+            if (name.isNotEmpty() && index < text.length && text[index] == ':') {
+                index = skipWhitespace(text, index + 1)
+                if (index < text.length && isQuote(text[index])) {
+                    val end = stringEnd(text, index)
+                    val range = TextRange(index + 1, end)
+                    arguments.putIfAbsent(name, InlineArgument(range.substring(text), range))
+                    index = minOf(end + 1, text.length)
+                }
+            }
+
+            // the rest of the value, up to the comma or the end of the call
+            var depth = 0
+            while (index < text.length) {
+                val char = text[index]
+                when {
+                    isQuote(char) -> index = stringEnd(text, index)
+                    char == '(' || char == '{' || char == '[' -> depth++
+                    char == ')' && depth == 0 -> return arguments
+                    char == ')' || char == '}' || char == ']' -> depth--
+                    char == ',' && depth == 0 -> break
+                }
+                index++
+            }
+            index++
+        }
+        return arguments
+    }
+
+    /** The offset of the quote that closes the string starting at the offset, or the end of the text */
+    private fun stringEnd(text: String, start: Int): Int {
+        val quote = text[start]
+        var index = start + 1
+        while (index < text.length && text[index] != quote) {
+            if (text[index] == '\\') index++
+            index++
+        }
+        return minOf(index, text.length)
+    }
+
+    private fun skipWhitespace(text: String, start: Int): Int {
+        var index = start
+        while (index < text.length && text[index].isWhitespace()) index++
+        return index
+    }
+
+    private fun isQuote(char: Char): Boolean = char == '\'' || char == '"'
 
     private fun isTranslateTag(name: String): Boolean = name.endsWith(":translate") || name.endsWith(":backend.translate")
 
@@ -168,6 +250,9 @@ object FluidTranslationUsage {
 
 class FluidTranslationArgument(val role: TranslationRole, val packageKey: String?, val source: String?)
 
+/** A string argument of a view helper call in inline notation: its value and where it is written */
+class InlineArgument(val value: String, val range: TextRange)
+
 class FluidTranslationReferenceContributor : PsiReferenceContributor() {
 
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
@@ -192,17 +277,26 @@ class FluidTranslationCompletionContributor : CompletionContributor() {
                 context: ProcessingContext,
                 result: CompletionResultSet,
             ) {
-                val value = PsiTreeUtil.getParentOfType(parameters.position, XmlAttributeValue::class.java, false) ?: return
-                val project = value.project
-                if (DumbService.isDumb(project) || !FluidTranslationUsage.isTemplate(parameters.originalFile)) return
-                val argument = FluidTranslationUsage.tagArgument(value) ?: return
+                val file = parameters.originalFile
+                val project = file.project
+                if (DumbService.isDumb(project) || !FluidTranslationUsage.isTemplate(file)) return
+                val resolver = TranslationResolver.getInstance(project)
 
-                val valueStart = value.textRange.startOffset + ElementManipulators.getValueTextRange(value).startOffset
-                val content = value.value
-                val prefix = content.take((parameters.offset - valueStart).coerceIn(0, content.length))
-                TranslationLookups.addArgument(
-                    TranslationResolver.getInstance(project), argument.role, argument.packageKey, argument.source, prefix, result
-                )
+                val value = PsiTreeUtil.getParentOfType(parameters.position, XmlAttributeValue::class.java, false)
+                val argument = value?.let(FluidTranslationUsage::tagArgument)
+                if (value != null && argument != null) {
+                    val valueStart = value.textRange.startOffset + ElementManipulators.getValueTextRange(value).startOffset
+                    val content = value.value
+                    val prefix = content.take((parameters.offset - valueStart).coerceIn(0, content.length))
+                    TranslationLookups.addArgument(resolver, argument.role, argument.packageKey, argument.source, prefix, result)
+                    return
+                }
+
+                // the inline notation, in a text or in an attribute of any tag
+                val text = file.text
+                val (inline, written) = FluidTranslationUsage.inlineArgumentAt(file, text, parameters.offset) ?: return
+                val prefix = text.substring(written.range.startOffset, parameters.offset)
+                TranslationLookups.addArgument(resolver, inline.role, inline.packageKey, inline.source, prefix, result)
             }
         })
     }
