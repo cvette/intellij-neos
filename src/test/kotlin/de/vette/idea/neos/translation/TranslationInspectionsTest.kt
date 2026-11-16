@@ -303,6 +303,28 @@ class TranslationInspectionsTest : BasePlatformTestCase() {
 
         val german = text("$TRANSLATIONS/de/Main.xlf")
         assertTrue(german, Regex("""id="button.submit"[^>]*>\s*<source>Submit</source>\s*<target""").containsMatchIn(german))
+        // the unit is at the place it has in the English file: between the headline and the plural label
+        assertTrue(german, german.indexOf("\"headline\"") < german.indexOf("\"button.submit\""))
+        assertTrue(german, german.indexOf("\"button.submit\"") < german.indexOf("\"items.count\""))
+    }
+
+    fun testNewUnitIsAddedBeforeTheLabelsThatFollowIt() {
+        xliffProblems(
+            XliffOutOfSyncInspection(), "fr", "Main",
+            """<trans-unit id="button.submit"><source>Submit</source><target>Envoyer</target></trans-unit>""",
+            targetLanguage = "fr"
+        )
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+
+        com.intellij.openapi.command.WriteCommandAction.runWriteCommandAction(project) {
+            TranslationWriter.addUnit(project, TranslationId("Acme.Site", "Main", "headline"), listOf("fr"))
+            TranslationWriter.addUnit(project, TranslationId("Acme.Site", "Main", "items.count"), listOf("fr"))
+        }
+        PsiDocumentManager.getInstance(project).commitAllDocuments()
+
+        val french = text("$TRANSLATIONS/fr/Main.xlf")
+        val order = listOf("\"headline\"", "\"button.submit\"", "<group id=\"items.count\"").map(french::indexOf)
+        assertTrue(french, order.all { it >= 0 } && order == order.sorted())
     }
 
     fun testReportsObsoleteUnitsAndChangedSourceTexts() {

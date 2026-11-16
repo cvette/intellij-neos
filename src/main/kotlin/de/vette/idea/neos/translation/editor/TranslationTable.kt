@@ -351,7 +351,8 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
             TranslationWriter.pluralGroupOf(form)?.let { groups[locale] = pointers.createSmartPsiElementPointer(it) }
             form
         } else {
-            TranslationWriter.addUnitToFile(file, row.id, sourceText, withTarget) ?: return null
+            val template = (row.units[data.sourceLocale] ?: row.units.values.firstOrNull())?.element
+            TranslationWriter.addUnitToFile(file, row.id, sourceText, withTarget, template) ?: return null
         }
         row.units[locale] = pointers.createSmartPsiElementPointer(unit)
         return unit

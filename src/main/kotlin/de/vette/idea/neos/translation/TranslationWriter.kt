@@ -83,10 +83,45 @@ object TranslationWriter {
             added[locale] = if (templateGroup != null) {
                 addPluralGroup(body, id.id, templateGroup, withTarget) ?: continue
             } else {
-                addUnit(body, id.id, text, withTarget)
+                addUnit(body, id.id, text, withTarget, template)
             }
         }
         return added
+    }
+
+    /**
+     * Adds a unit or a plural label to the body, at the place its template has among the labels of its own
+     * file: after the closest label before the template that the body has as well, or else before the
+     * closest one after it. Without such a label it is added at the end.
+     */
+    private fun insert(body: XmlTag, tag: XmlTag, template: XmlTag?): XmlTag {
+        val item = template?.let { pluralGroupOf(it) ?: it } ?: return body.addSubTag(tag, false)
+        val labels = PsiTreeUtil.findChildrenOfType(body, XmlTag::class.java)
+            .mapNotNull { label -> labelId(label)?.let { it to label } }
+            .toMap()
+
+        siblings(item, forward = false).firstNotNullOfOrNull { labelId(it)?.let(labels::get) }
+            ?.let { return it.parent.addAfter(tag, it) as XmlTag }
+        siblings(item, forward = true).firstNotNullOfOrNull { labelId(it)?.let(labels::get) }
+            ?.let { return it.parent.addBefore(tag, it) as XmlTag }
+        return body.addSubTag(tag, false)
+    }
+
+    /** The id of the label a tag stands for: a unit that is not a plural form, or the group of a plural label */
+    private fun labelId(tag: XmlTag): String? = when {
+        tag.localName == "trans-unit" && pluralGroupOf(tag) == null -> tag.getAttributeValue("id")
+        tag.localName == "group" && tag.getAttributeValue("restype") == GroupDomElement.PLURALS_RESTYPE ->
+            pluralForms(tag).firstOrNull()?.getAttributeValue("id")?.substringBefore('[')
+        else -> null
+    }
+
+    private fun siblings(tag: XmlTag, forward: Boolean): Sequence<XmlTag> {
+        fun next(current: XmlTag): XmlTag? = if (forward) {
+            PsiTreeUtil.getNextSiblingOfType(current, XmlTag::class.java)
+        } else {
+            PsiTreeUtil.getPrevSiblingOfType(current, XmlTag::class.java)
+        }
+        return generateSequence(next(tag), ::next)
     }
 
     /**
@@ -142,7 +177,7 @@ object TranslationWriter {
         var group = body.createChildTag("group", body.namespace, null, false)
         group.setAttribute("id", templateGroup.getAttributeValue("id") ?: id)
         group.setAttribute("restype", GroupDomElement.PLURALS_RESTYPE)
-        group = body.addSubTag(group, false)
+        group = insert(body, group, templateGroup)
 
         val forms = pluralForms(templateGroup).map { form ->
             addUnit(group, form.getAttributeValue("id") ?: return null, sourceText(form), withTarget)
@@ -154,18 +189,19 @@ object TranslationWriter {
      * Adds a unit to an XLIFF file, without looking at other locales.
      *
      * @param withTarget true to add an empty `<target>`, for files of a locale other than the source locale
+     * @param template the unit in another locale, the new one is added at the same place among the labels
      */
-    fun addUnitToFile(file: XmlFile, id: String, sourceText: String, withTarget: Boolean): XmlTag? =
-        body(file)?.let { addUnit(it, id, sourceText, withTarget) }
+    fun addUnitToFile(file: XmlFile, id: String, sourceText: String, withTarget: Boolean, template: XmlTag? = null): XmlTag? =
+        body(file)?.let { addUnit(it, id, sourceText, withTarget, template) }
 
     /** The text of the `<source>` of a unit. */
     fun sourceText(unit: XmlTag): String = unit.findFirstSubTag("source")?.value?.trimmedText.orEmpty()
 
-    private fun addUnit(body: XmlTag, id: String, sourceText: String, withTarget: Boolean): XmlTag {
+    private fun addUnit(body: XmlTag, id: String, sourceText: String, withTarget: Boolean, template: XmlTag? = null): XmlTag {
         var unit = body.createChildTag("trans-unit", body.namespace, null, false)
         unit.setAttribute("id", id)
         unit.setAttribute("xml:space", "preserve")
-        unit = body.addSubTag(unit, false)
+        unit = insert(body, unit, template)
 
         // the text is set as value, so that characters like "&" and "<" are escaped
         val source = unit.addSubTag(unit.createChildTag("source", unit.namespace, null, false), false)
