@@ -28,6 +28,9 @@
 - Intention "Extract to translation" for strings in Fusion and Eel and for texts and attribute values in AFX: moves the text to the XLIFF files of all locales and replaces it with a call of the translation helper
 - New XLIFF files are prefilled with the package, the source language and the target language of the directory
 - "Detect Locales" button in the settings that adds the locales that have XLIFF files
+- Translation support in PHP for `translateById()` and `translateByOriginalLabel()` of Flow's translator: navigation, completion, inspections, find usages and rename
+- Translation support in Fluid templates for the translate view helper, as tag and in inline notation
+- "Translations" tab for XLIFF files that shows the labels of a source side by side in all locales and lets you edit them
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
