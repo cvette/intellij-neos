@@ -29,6 +29,20 @@ class TranslationIndexTest : BasePlatformTestCase() {
         }
     }
 
+    fun testIndexIsBuiltAgainWhenThePluginIsToggled() {
+        val id = TranslationId("Acme.Site", "Main", "headline")
+        try {
+            de.vette.idea.neos.NeosProjectService.setEnabled(project, false)
+            CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+            assertFalse(resolver.hasUnit(id))
+        } finally {
+            de.vette.idea.neos.NeosProjectService.setEnabled(project, true)
+        }
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+
+        assertTrue(resolver.hasUnit(id))
+    }
+
     fun testFindsUnitsOfAllLocales() {
         val units = resolver.findUnits(TranslationId("Acme.Site", "Main", "headline"))
 

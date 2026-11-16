@@ -22,6 +22,11 @@ package de.vette.idea.neos
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
+import com.intellij.util.indexing.FileBasedIndex
+import de.vette.idea.neos.indexes.DefaultContextFileIndex
+import de.vette.idea.neos.indexes.NodeTypesYamlFileIndex
+import de.vette.idea.neos.translation.TranslationSourceIndex
+import de.vette.idea.neos.translation.TranslationUnitIndex
 import com.jetbrains.php.composer.ComposerConfigUtils
 import com.jetbrains.php.composer.ComposerDataService
 import java.io.IOException
@@ -47,6 +52,25 @@ class NeosProjectService(private val project: Project) {
          */
         @JvmStatic
         fun isEnabledForIndex(project: Project): Boolean = isEnabled(project) || isNeosProject(project)
+
+        /**
+         * Enables or disables the plugin for the project. The indexes are empty for a project they are not
+         * enabled for, so they are built again if that changed.
+         */
+        @JvmStatic
+        fun setEnabled(project: Project, enabled: Boolean) {
+            val settings = Settings.getInstance(project)
+            if (settings.pluginEnabled == enabled) return
+
+            val indexedBefore = isEnabledForIndex(project)
+            settings.pluginEnabled = enabled
+            if (indexedBefore != isEnabledForIndex(project)) {
+                val index = FileBasedIndex.getInstance()
+                listOf(
+                    DefaultContextFileIndex.KEY, NodeTypesYamlFileIndex.KEY, TranslationUnitIndex.KEY, TranslationSourceIndex.KEY
+                ).forEach(index::requestRebuild)
+            }
+        }
 
         @JvmStatic
         fun isEnabled(project: Project?): Boolean =

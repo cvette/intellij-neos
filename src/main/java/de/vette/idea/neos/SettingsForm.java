@@ -145,7 +145,7 @@ public class SettingsForm implements PhpFrameworkConfigurable {
             ComposerUpdateListener.addSymlinks(project);
         }
 
-        getSettings().pluginEnabled = pluginEnabled.isSelected();
+        NeosProjectService.setEnabled(project, pluginEnabled.isSelected());
         getSettings().excludePackageSymlinks = excludePackageSymlinks.isSelected();
         getSettings().locales = new ArrayList<>(locales.getItems());
     }

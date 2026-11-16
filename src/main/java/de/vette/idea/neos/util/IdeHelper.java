@@ -24,6 +24,7 @@ import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import de.vette.idea.neos.NeosIcons;
+import de.vette.idea.neos.NeosProjectService;
 import de.vette.idea.neos.Settings;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +55,6 @@ public class IdeHelper {
     }
 
     public static void enablePluginAndConfigure(@NotNull Project project) {
-        Settings.getInstance(project).pluginEnabled = true;
+        NeosProjectService.setEnabled(project, true);
     }
 }
