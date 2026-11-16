@@ -71,6 +71,14 @@ public class TranslateNodeTypeAction extends AnAction {
             return;
         }
 
+        translate(project, virtualFile);
+    }
+
+    /**
+     * Writes the labels of the node types in the file to XLIFF files of all configured locales
+     * and replaces them with "i18n"
+     */
+    public void translate(@NotNull Project project, @NotNull VirtualFile virtualFile) {
         Collection<String> locales = Settings.getInstance(project).locales;
 
         if (locales.isEmpty()) {
