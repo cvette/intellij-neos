@@ -376,21 +376,21 @@
         "Sanity"
       ],
       "severity": "Critical",
-      "comment": "Unresolved reference EelValueStringLine",
+      "comment": "Unresolved reference EelExpression",
       "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
       "sources": [
         {
           "type": "file",
           "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelTranslationUsage.kt",
           "language": "kotlin",
-          "line": 126,
+          "line": 147,
           "offset": 41,
-          "length": 18,
+          "length": 13,
           "code": {
-            "startLine": 124,
-            "length": 18,
-            "offset": 47,
-            "surroundingCode": "    }\n\n    private fun packageArgument(string: EelValueStringLine) = EelTranslationArgument(\n        string, EelTranslationArgument.Role.PACKAGE,\n        packageKey = content(string),"
+            "startLine": 145,
+            "length": 13,
+            "offset": 150,
+            "surroundingCode": "\n    /** The value of the n-th argument: the default if it is omitted, null if it is not a string literal. */\n    private fun literal(arguments: List<EelExpression>, index: Int, default: String): String? {\n        val argument = arguments.getOrNull(index) ?: return default\n        if (argument.text == \"null\") return default"
           }
         }
       ],
@@ -398,7 +398,7 @@
         "module": "Intellij_Neos.main",
         "inspectionName": "QodanaKotlinSanity"
       },
-      "hash": "073bacacebed6cb654b5af3daf091b883b601550f70d4dd86303f75aa09b00e4",
+      "hash": "05ee23de9b5e3b8462a126e7972aa8bbf26875f512f4fac20cd732698f8b80c3",
       "problemType": "REGULAR"
     },
     {
@@ -456,21 +456,21 @@
         "Sanity"
       ],
       "severity": "Critical",
-      "comment": "Unresolved reference de.vette.idea.neos.lang.eel.psi.EelValueStringLine",
+      "comment": "Unresolved reference EelValueStringLine",
       "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
       "sources": [
         {
           "type": "file",
-          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelStringManipulator.kt",
+          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelTranslationUsage.kt",
           "language": "kotlin",
-          "line": 28,
-          "offset": 8,
-          "length": 50,
+          "line": 150,
+          "offset": 30,
+          "length": 18,
           "code": {
-            "startLine": 26,
-            "length": 50,
-            "offset": 95,
-            "surroundingCode": "import com.intellij.psi.util.PsiTreeUtil\nimport de.vette.idea.neos.lang.eel.EelFileType\nimport de.vette.idea.neos.lang.eel.psi.EelValueStringLine\n\n/**"
+            "startLine": 148,
+            "length": 18,
+            "offset": 149,
+            "surroundingCode": "        val argument = arguments.getOrNull(index) ?: return default\n        if (argument.text == \"null\") return default\n        return (argument as? EelValueStringLine)?.let(::content)\n    }\n"
           }
         }
       ],
@@ -478,7 +478,47 @@
         "module": "Intellij_Neos.main",
         "inspectionName": "QodanaKotlinSanity"
       },
-      "hash": "5d068f0433da9c566a41e56f4d0667fd8944e524c3b64a5d2fe8216c3a5eded4",
+      "hash": "3c1a73d6d0d2ace07a6d9a6ebf2722a8c17ced7d73f595300b4c9ec8e0b963ca",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "General",
+      "categoryPath": [
+        {
+          "id": "General",
+          "name": "General"
+        }
+      ],
+      "type": "Kotlin sanity",
+      "tags": [
+        "kotlin",
+        "Sanity"
+      ],
+      "severity": "Critical",
+      "comment": "Unresolved reference EelObjectPath",
+      "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelTranslationUsage.kt",
+          "language": "kotlin",
+          "line": 133,
+          "offset": 43,
+          "length": 13,
+          "code": {
+            "startLine": 131,
+            "length": 13,
+            "offset": 49,
+            "surroundingCode": "    )\n\n    private fun isTranslationHelper(path: EelObjectPath): Boolean {\n        val helper = (path.firstChild as? EelCompositeIdentifier)?.text ?: return false\n        if (helper in HELPER_NAMES) return true"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "QodanaKotlinSanity"
+      },
+      "hash": "52ecf66df6a8133c854f11d7850bcda3f1287f337026737fdd749403c12711fc",
       "problemType": "REGULAR"
     },
     {
@@ -519,46 +559,6 @@
         "inspectionName": "QodanaKotlinSanity"
       },
       "hash": "6807de5557689ce2816700ff8032a3372b25c09b39cfee9f377645b34da90d2b",
-      "problemType": "REGULAR"
-    },
-    {
-      "tool": "Code Inspection",
-      "category": "General",
-      "categoryPath": [
-        {
-          "id": "General",
-          "name": "General"
-        }
-      ],
-      "type": "Kotlin sanity",
-      "tags": [
-        "kotlin",
-        "Sanity"
-      ],
-      "severity": "Critical",
-      "comment": "Unresolved reference EelObjectPath",
-      "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
-      "sources": [
-        {
-          "type": "file",
-          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelTranslationUsage.kt",
-          "language": "kotlin",
-          "line": 154,
-          "offset": 30,
-          "length": 13,
-          "code": {
-            "startLine": 152,
-            "length": 13,
-            "offset": 114,
-            "surroundingCode": "\n    /** The argument of `.package('...')` or `.source('...')` in a fluent chain. */\n    private fun fluent(path: EelObjectPath, method: String, default: String): String? {\n        val call = path.methodCallList.firstOrNull { it.methodName.text == method } ?: return default\n        return (call.expressionList.firstOrNull() as? EelValueStringLine)?.let(::content)"
-          }
-        }
-      ],
-      "attributes": {
-        "module": "Intellij_Neos.main",
-        "inspectionName": "QodanaKotlinSanity"
-      },
-      "hash": "6ab99f262c8ea5051e1cec1397260ea53088e6f7586b4a9a499b5948530f68d7",
       "problemType": "REGULAR"
     },
     {
@@ -621,16 +621,16 @@
       "sources": [
         {
           "type": "file",
-          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelTranslationUsage.kt",
+          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelStringManipulator.kt",
           "language": "kotlin",
-          "line": 156,
-          "offset": 55,
+          "line": 35,
+          "offset": 106,
           "length": 18,
           "code": {
-            "startLine": 154,
+            "startLine": 33,
             "length": 18,
-            "offset": 244,
-            "surroundingCode": "    private fun fluent(path: EelObjectPath, method: String, default: String): String? {\n        val call = path.methodCallList.firstOrNull { it.methodName.text == method } ?: return default\n        return (call.expressionList.firstOrNull() as? EelValueStringLine)?.let(::content)\n    }\n}"
+            "offset": 186,
+            "surroundingCode": "class EelStringManipulator : AbstractElementManipulator<EelValueStringLine>() {\n\n    override fun handleContentChange(element: EelValueStringLine, range: TextRange, newContent: String): EelValueStringLine {\n        // Eel in AFX and YAML is injected: the text of the host element has to be changed, a change of the\n        // injected syntax tree would be lost"
           }
         }
       ],
@@ -638,7 +638,47 @@
         "module": "Intellij_Neos.main",
         "inspectionName": "QodanaKotlinSanity"
       },
-      "hash": "92015e3a6055df6ae890a67467276111aa86c75540e57f6ef4da20cfe240db90",
+      "hash": "6eafa142767e29b8a18c1fd4e42346eb6a5dfb21effd80610971a28bd18dc9f8",
+      "problemType": "REGULAR"
+    },
+    {
+      "tool": "Code Inspection",
+      "category": "General",
+      "categoryPath": [
+        {
+          "id": "General",
+          "name": "General"
+        }
+      ],
+      "type": "Kotlin sanity",
+      "tags": [
+        "kotlin",
+        "Sanity"
+      ],
+      "severity": "Critical",
+      "comment": "Unresolved reference EelValueStringLine",
+      "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
+      "sources": [
+        {
+          "type": "file",
+          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelStringManipulator.kt",
+          "language": "kotlin",
+          "line": 57,
+          "offset": 46,
+          "length": 18,
+          "code": {
+            "startLine": 55,
+            "length": 18,
+            "offset": 154,
+            "surroundingCode": "        val newString = PsiTreeUtil.findChildOfType(file, EelValueStringLine::class.java) ?: return element\n\n        return element.replace(newString) as EelValueStringLine\n    }\n"
+          }
+        }
+      ],
+      "attributes": {
+        "module": "Intellij_Neos.main",
+        "inspectionName": "QodanaKotlinSanity"
+      },
+      "hash": "a13154254d99f4e6c510571cdcbaa27812f0b2ce953c5a29841607e4a0fa9523",
       "problemType": "REGULAR"
     },
     {
@@ -776,61 +816,21 @@
         "Sanity"
       ],
       "severity": "Critical",
-      "comment": "Unresolved reference EelValueStringLine",
-      "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
-      "sources": [
-        {
-          "type": "file",
-          "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelStringManipulator.kt",
-          "language": "kotlin",
-          "line": 33,
-          "offset": 57,
-          "length": 18,
-          "code": {
-            "startLine": 31,
-            "length": 18,
-            "offset": 155,
-            "surroundingCode": " * Changes the content of an Eel string, e.g. when a translation unit it refers to is renamed.\n */\nclass EelStringManipulator : AbstractElementManipulator<EelValueStringLine>() {\n\n    override fun handleContentChange(element: EelValueStringLine, range: TextRange, newContent: String): EelValueStringLine {"
-          }
-        }
-      ],
-      "attributes": {
-        "module": "Intellij_Neos.main",
-        "inspectionName": "QodanaKotlinSanity"
-      },
-      "hash": "b8a330bf616fcc7d1d78d3a6d48ee8df2bdb2c31ff17f8eb59cc3d53af47f2cc",
-      "problemType": "REGULAR"
-    },
-    {
-      "tool": "Code Inspection",
-      "category": "General",
-      "categoryPath": [
-        {
-          "id": "General",
-          "name": "General"
-        }
-      ],
-      "type": "Kotlin sanity",
-      "tags": [
-        "kotlin",
-        "Sanity"
-      ],
-      "severity": "Critical",
-      "comment": "Unresolved reference EelValueStringLine",
+      "comment": "Unresolved reference EelCompositeIdentifier",
       "detailsInfo": "Reports unresolved references in Kotlin code.\n\nInspection ID: QodanaKotlinSanity",
       "sources": [
         {
           "type": "file",
           "path": "src/main/kotlin/de/vette/idea/neos/translation/eel/EelTranslationUsage.kt",
           "language": "kotlin",
-          "line": 72,
-          "offset": 27,
-          "length": 18,
+          "line": 134,
+          "offset": 43,
+          "length": 22,
           "code": {
-            "startLine": 70,
-            "length": 18,
-            "offset": 42,
-            "surroundingCode": "\n    @JvmStatic\n    fun forString(string: EelValueStringLine): EelTranslationArgument? {\n        val call = string.parent as? EelMethodCall ?: return null\n        val path = call.parent as? EelObjectPath ?: return null"
+            "startLine": 132,
+            "length": 22,
+            "offset": 111,
+            "surroundingCode": "\n    private fun isTranslationHelper(path: EelObjectPath): Boolean {\n        val helper = (path.firstChild as? EelCompositeIdentifier)?.text ?: return false\n        if (helper in HELPER_NAMES) return true\n"
           }
         }
       ],
@@ -838,7 +838,7 @@
         "module": "Intellij_Neos.main",
         "inspectionName": "QodanaKotlinSanity"
       },
-      "hash": "bf8922fb2e2ddddc19aefd011c1d2f851c2de99d9025f4807480825ec0cea76a",
+      "hash": "ce5717785e1641e708416e61e058e5de6cc9c796819f828ed5b0763ec4c936e7",
       "problemType": "REGULAR"
     },
     {

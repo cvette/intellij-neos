@@ -1,17 +1,17 @@
 {
   "version": "1.0",
-  "total": 9,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 9
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43923431736",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/43928785772",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "431341f8f07c78adb665992e43b97f1d314f293e",
+        "revisionId": "98212bd7004cb25f1b706a0936f34a9daa26a2b9",
         "branch": "feat/translation-index"
       }
     },
