@@ -42,10 +42,9 @@ import de.vette.idea.neos.lang.xliff.XliffIcons
 import de.vette.idea.neos.translation.NodeTypeLabelReference
 import de.vette.idea.neos.translation.TranslationId
 import de.vette.idea.neos.translation.TranslationLookups
-import de.vette.idea.neos.translation.TranslationPackageReference
 import de.vette.idea.neos.translation.TranslationResolver
-import de.vette.idea.neos.translation.TranslationSourceReference
 import de.vette.idea.neos.translation.TranslationUnitReference
+import de.vette.idea.neos.translation.translationShorthandReferences
 import de.vette.idea.neos.util.NeosUtil
 import org.jetbrains.yaml.YAMLFileType
 import org.jetbrains.yaml.psi.YAMLKeyValue
@@ -85,14 +84,7 @@ object YamlTranslationUsage {
             return arrayOf(NodeTypeLabelReference(scalar, range, id))
         }
 
-        val shorthand = TranslationId.parseShorthand(text) ?: return PsiReference.EMPTY_ARRAY
-        val id = shorthand.translationId
-        val offset = range.startOffset
-        return arrayOf(
-            TranslationPackageReference(scalar, shorthand.packageRange.shiftRight(offset), id.packageKey),
-            TranslationSourceReference(scalar, shorthand.sourceRange.shiftRight(offset), id.packageKey, id.source),
-            TranslationUnitReference(scalar, shorthand.idRange.shiftRight(offset), id),
-        )
+        return translationShorthandReferences(scalar, range)
     }
 }
 

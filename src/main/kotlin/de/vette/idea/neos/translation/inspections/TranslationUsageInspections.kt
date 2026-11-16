@@ -31,6 +31,7 @@ import com.intellij.pom.Navigatable
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.xml.XmlAttributeValue
 import com.intellij.psi.xml.XmlTag
 import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
@@ -53,21 +54,26 @@ import org.jetbrains.yaml.psi.YAMLScalar
 
 /**
  * Base of the inspections for the places labels are used in: Eel in Fusion, AFX and YAML, YAML values,
- * calls of the translator in PHP and the translate view helper in Fluid templates.
+ * calls of the translator in PHP, the translate view helper in Fluid templates and plugins for the Neos UI.
  */
 abstract class TranslationUsageInspection : LocalInspectionTool() {
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         val file = holder.file
         val project = file.project
-        if (file.language.id !in LANGUAGES || !NeosProjectService.isEnabled(project) || DumbService.isDumb(project)) {
+        // JavaScript is an optional dependency, so its files and strings are told by what they have in common
+        val javaScript = generateSequence(file.language) { it.baseLanguage }.any { it.id == JAVASCRIPT }
+        if ((file.language.id !in LANGUAGES && !javaScript) || !NeosProjectService.isEnabled(project) ||
+            DumbService.isDumb(project)
+        ) {
             return PsiElementVisitor.EMPTY_VISITOR
         }
 
         return object : PsiElementVisitor() {
             override fun visitElement(element: PsiElement) {
                 if (element is EelValueStringLine || element is YAMLScalar || element is StringLiteralExpression ||
-                    element is XmlAttributeValue || element is XmlTag
+                    element is XmlAttributeValue || element is XmlTag ||
+                    (javaScript && element is PsiLanguageInjectionHost)
                 ) {
                     check(holder, element)
                 }
@@ -81,6 +87,7 @@ abstract class TranslationUsageInspection : LocalInspectionTool() {
         element.references.filterIsInstance<TranslationReference>()
 
     companion object {
+        private const val JAVASCRIPT = "JavaScript"
         private val LANGUAGES = setOf("NeosFusion", "NeosAfx", "NeosEel", "yaml", "PHP", "HTML")
     }
 }

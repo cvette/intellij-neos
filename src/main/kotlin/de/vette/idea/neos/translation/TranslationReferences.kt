@@ -64,6 +64,22 @@ fun translationArgumentReferences(
 }
 
 /**
+ * The references for an id in shorthand notation (`Package:Source:id`): to the package, the source and the unit.
+ *
+ * @param range the range of the text in the element
+ */
+fun translationShorthandReferences(element: PsiElement, range: TextRange): Array<PsiReference> {
+    val shorthand = TranslationId.parseShorthand(range.substring(element.text)) ?: return PsiReference.EMPTY_ARRAY
+    val id = shorthand.translationId
+    val offset = range.startOffset
+    return arrayOf(
+        TranslationPackageReference(element, shorthand.packageRange.shiftRight(offset), id.packageKey),
+        TranslationSourceReference(element, shorthand.sourceRange.shiftRight(offset), id.packageKey, id.source),
+        TranslationUnitReference(element, shorthand.idRange.shiftRight(offset), id),
+    )
+}
+
+/**
  * Base of the references from a usage site (Eel, YAML) to translations. The references are soft: a label that
  * does not exist is reported by an inspection, not as an unresolved reference.
  */

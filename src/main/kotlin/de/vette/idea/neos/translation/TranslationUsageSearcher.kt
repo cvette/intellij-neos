@@ -21,6 +21,7 @@ package de.vette.idea.neos.translation
 import com.intellij.ide.highlighter.HtmlFileType
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.application.QueryExecutorBase
+import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
@@ -49,7 +50,7 @@ import org.jetbrains.yaml.YAMLFileType
 import org.jetbrains.yaml.psi.YAMLScalar
 
 /**
- * Finds the usages of a translation unit in Fusion, AFX, YAML, PHP and Fluid templates.
+ * Finds the usages of a translation unit in Fusion, AFX, YAML, PHP, Fluid templates and JavaScript.
  *
  * The word index narrows the search down to the files that contain the words of the id. Labels of node types
  * ("i18n") do not contain the id, their definitions are found through the index of node types.
@@ -122,8 +123,8 @@ class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearc
 
     /**
      * The files that contain the words of the id, according to the word index: Fusion files (see
-     * [de.vette.idea.neos.lang.fusion.usages.FusionWordsScanner]), the YAML configuration of Neos, PHP files
-     * and Fluid templates.
+     * [de.vette.idea.neos.lang.fusion.usages.FusionWordsScanner]), the YAML configuration of Neos, PHP files,
+     * Fluid templates and JavaScript files.
      */
     private fun indexedCandidates(project: Project, scope: GlobalSearchScope, id: TranslationId): Collection<VirtualFile> {
         val files = ArrayList<VirtualFile>()
@@ -132,6 +133,7 @@ class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearc
             when (file.fileType) {
                 FusionFileType.INSTANCE, PhpFileType.INSTANCE, HtmlFileType.INSTANCE -> files.add(file)
                 YAMLFileType.YML -> if (YamlTranslationUsage.isNeosConfiguration(file)) files.add(file)
+                else -> if (isJavaScript(file)) files.add(file)
             }
             true
         }
@@ -145,6 +147,12 @@ class TranslationUsageSearcher : QueryExecutorBase<PsiReference, ReferencesSearc
     private fun allCandidates(scope: GlobalSearchScope): Collection<VirtualFile> =
         FileTypeIndex.getFiles(FusionFileType.INSTANCE, scope) +
                 FileTypeIndex.getFiles(YAMLFileType.YML, scope).filter(YamlTranslationUsage::isNeosConfiguration)
+
+    /** JavaScript is an optional dependency, so its file types are told by their language */
+    private fun isJavaScript(file: VirtualFile): Boolean {
+        val language = (file.fileType as? LanguageFileType)?.language ?: return false
+        return generateSequence(language) { it.baseLanguage }.any { it.id == "JavaScript" }
+    }
 
     private fun hasWords(text: String): Boolean = text.any(Character::isJavaIdentifierPart)
 

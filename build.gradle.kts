@@ -57,6 +57,7 @@ dependencies {
             "com.intellij.java",
             "com.intellij.java-i18n",
             "com.intellij.properties",
+            "JavaScript",
         )
         bundledModules("intellij.platform.langInjection")
 
