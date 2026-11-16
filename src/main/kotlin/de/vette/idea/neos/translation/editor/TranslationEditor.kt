@@ -28,6 +28,9 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.UserDataHolderBase
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiManager
+import com.intellij.psi.PsiTreeAnyChangeAbstractAdapter
 import com.intellij.ui.LightColors
 import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.components.JBScrollPane
@@ -65,9 +68,11 @@ class TranslationEditorProvider : FileEditorProvider, DumbAware {
  */
 class TranslationEditor(private val project: Project, private val file: VirtualFile) : UserDataHolderBase(), FileEditor {
 
-    private val model = TranslationTableModel(project)
+    internal val model = TranslationTableModel(project)
     private val table = JBTable(model)
     private val panel = JPanel(BorderLayout())
+    private val reloadKey = Any()
+    private var selected = false
 
     init {
         val onlyIncomplete = JBCheckBox(XliffBundle.message("editor.only.incomplete"))
@@ -79,18 +84,51 @@ class TranslationEditor(private val project: Project, private val file: VirtualF
 
         panel.add(onlyIncomplete, BorderLayout.NORTH)
         panel.add(JBScrollPane(table), BorderLayout.CENTER)
+
+        // the files change in the text editor, by undo and by refactorings while the tab is shown
+        PsiManager.getInstance(project).addPsiTreeChangeListener(object : PsiTreeAnyChangeAbstractAdapter() {
+            override fun onChange(changedFile: PsiFile?) {
+                if (!selected || model.writing) return
+                val virtualFile = changedFile?.virtualFile
+                if (virtualFile == null || XliffLocation.isTranslationFile(virtualFile)) reload()
+            }
+        }, this)
     }
 
-    /** The files may have changed in the text editor, so the labels are read again when the tab is shown */
+    /** The files may have changed while the tab was hidden, so the labels are read again when it is shown */
     override fun selectNotify() {
+        selected = true
+        reload()
+    }
+
+    override fun deselectNotify() {
+        selected = false
+    }
+
+    /** Reads the labels again. Requests that follow each other closely are merged into one. */
+    private fun reload() {
         ReadAction.nonBlocking<TranslationTableData?> { TranslationTableData.load(project, file) }
             .inSmartMode(project)
+            .withDocumentsCommitted(project)
+            .coalesceBy(reloadKey)
             .expireWith(this)
-            .finishOnUiThread(ModalityState.any()) { data ->
-                if (table.isEditing) table.cellEditor?.cancelCellEditing()
-                model.data = data
-            }
+            .finishOnUiThread(ModalityState.any(), ::show)
             .submit(AppExecutorUtil.getAppExecutorService())
+    }
+
+    /** Shows the labels and keeps the selection, as far as the selected label still exists */
+    private fun show(data: TranslationTableData?) {
+        if (table.isEditing) table.cellEditor?.cancelCellEditing()
+
+        val selectedId = table.selectedRow.takeIf { it >= 0 }?.let { model.idAt(table.convertRowIndexToModel(it)) }
+        val selectedColumn = table.selectedColumn
+        model.data = data
+
+        val row = selectedId?.let(model::rowOf)?.takeIf { it >= 0 }?.let(table::convertRowIndexToView) ?: return
+        table.setRowSelectionInterval(row, row)
+        if (selectedColumn in 0 until table.columnCount) {
+            table.setColumnSelectionInterval(selectedColumn, selectedColumn)
+        }
     }
 
     override fun getComponent(): JComponent = panel

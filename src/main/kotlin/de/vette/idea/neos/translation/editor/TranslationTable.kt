@@ -20,7 +20,9 @@ package de.vette.idea.neos.translation.editor
 
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.ReadonlyStatusHandler
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.SmartPointerManager
 import com.intellij.psi.SmartPsiElementPointer
@@ -119,9 +121,11 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
 
     var data: TranslationTableData? = null
         set(value) {
+            val sameColumns = field?.locales == value?.locales
             field = value
             updateRows()
-            fireTableStructureChanged()
+            // a change of the structure resets the widths of the columns
+            if (sameColumns) fireTableDataChanged() else fireTableStructureChanged()
         }
 
     /** Show only the labels that are not translated to all locales */
@@ -132,6 +136,10 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
             fireTableDataChanged()
         }
 
+    /** True while the model writes to the XLIFF files itself */
+    var writing: Boolean = false
+        private set
+
     private var rows: List<TranslationRow> = emptyList()
 
     private val locales: List<String>
@@ -139,6 +147,11 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
 
     fun isMissing(rowIndex: Int, columnIndex: Int): Boolean =
         columnIndex > 0 && rows[rowIndex].texts[locales[columnIndex - 1]].isNullOrEmpty()
+
+    fun idAt(rowIndex: Int): String = rows[rowIndex].id
+
+    /** The index of the row of a label, -1 if it is not shown */
+    fun rowOf(id: String): Int = rows.indexOfFirst { it.id == id }
 
     override fun getRowCount(): Int = rows.size
 
@@ -163,30 +176,54 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
         val text = value?.toString().orEmpty()
         if (text == row.texts[locale].orEmpty()) return
 
-        WriteCommandAction.runWriteCommandAction(project, XliffBundle.message("editor.command"), null, {
-            if (locale == data.sourceLocale) {
-                writeSourceText(data, row, text)
-            } else {
-                writeTranslation(data, row, locale, text)
-            }
-        })
+        // the table keeps the old text if nothing can be written, e.g. to a read-only file
+        val files = affectedFiles(data, row, locale)
+        val virtualFiles = files.mapNotNull { it.virtualFile }
+        if (files.isEmpty() || ReadonlyStatusHandler.getInstance(project).ensureFilesWritable(virtualFiles).hasReadonlyFiles()) {
+            return
+        }
+
+        var written = false
+        writing = true
+        try {
+            WriteCommandAction.runWriteCommandAction(project, XliffBundle.message("editor.command"), null, {
+                written = if (locale == data.sourceLocale) {
+                    writeSourceText(data, row, text)
+                } else {
+                    writeTranslation(data, row, locale, text)
+                }
+            }, *files.toTypedArray())
+        } finally {
+            writing = false
+        }
+        if (!written) return
 
         row.texts[locale] = text
         fireTableRowsUpdated(rowIndex, rowIndex)
     }
 
-    private fun writeSourceText(data: TranslationTableData, row: TranslationRow, text: String) {
-        if (unit(data, row, data.sourceLocale, text) == null) return
+    /** The files an edit of the cell writes to: all files of the label for the source locale, else the one of the locale */
+    private fun affectedFiles(data: TranslationTableData, row: TranslationRow, locale: String): List<PsiFile> {
+        val ofLocale = listOfNotNull(row.units[locale]?.element?.containingFile ?: data.files[locale]?.element)
+        if (locale != data.sourceLocale) return ofLocale
+
+        return (ofLocale + row.units.values.mapNotNull { it.element?.containingFile }).distinct()
+    }
+
+    private fun writeSourceText(data: TranslationTableData, row: TranslationRow, text: String): Boolean {
+        if (unit(data, row, data.sourceLocale, text) == null) return false
         for (pointer in row.units.values) {
             val source = pointer.element?.let { it.findFirstSubTag("source") ?: addSubTag(it, "source") } ?: continue
             source.value.text = text
         }
+        return true
     }
 
-    private fun writeTranslation(data: TranslationTableData, row: TranslationRow, locale: String, text: String) {
-        val unit = unit(data, row, locale, row.texts[data.sourceLocale].orEmpty()) ?: return
+    private fun writeTranslation(data: TranslationTableData, row: TranslationRow, locale: String, text: String): Boolean {
+        val unit = unit(data, row, locale, row.texts[data.sourceLocale].orEmpty()) ?: return false
         val target = unit.findFirstSubTag("target") ?: addSubTag(unit, "target")
         target.value.text = text
+        return true
     }
 
     /** The unit of the label in the locale, it is added to the file of the locale if it does not exist yet */
