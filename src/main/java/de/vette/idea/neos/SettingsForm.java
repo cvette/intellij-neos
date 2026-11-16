@@ -18,6 +18,10 @@
 
 package de.vette.idea.neos;
 
+import java.util.List;
+import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.project.DumbService;
+import de.vette.idea.neos.translation.TranslationResolver;
 import com.intellij.ide.actions.ShowSettingsUtilImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.AnActionButton;
@@ -87,7 +91,10 @@ public class SettingsForm implements PhpFrameworkConfigurable {
         editableList.setPreferredSize(new Dimension(150, 100));
         editableList.setAddAction(new AddAction(this.locales));
 
-        GridLayoutManager layout = new GridLayoutManager(5,1);
+        JButton detectLocales = new JButton(XliffBundle.message("settings.locales.detect"));
+        detectLocales.addActionListener(event -> addDetectedLocales());
+
+        GridLayoutManager layout = new GridLayoutManager(6,1);
         GridConstraints c = new GridConstraints();
         c.setAnchor(GridConstraints.ANCHOR_NORTHWEST);
         c.setRow(0);
@@ -106,6 +113,8 @@ public class SettingsForm implements PhpFrameworkConfigurable {
 
         c.setRow(4);
         panel1.add(editableList.createPanel(), c);
+        c.setRow(5);
+        panel1.add(detectLocales, c);
 
         return panel1;
     }
@@ -149,7 +158,24 @@ public class SettingsForm implements PhpFrameworkConfigurable {
     private void updateUIFromSettings() {
         pluginEnabled.setSelected(getSettings().pluginEnabled);
         excludePackageSymlinks.setSelected(getSettings().excludePackageSymlinks);
+        locales.removeAll();
         getSettings().locales.forEach(s -> locales.add(s));
+    }
+
+    /**
+     * Adds the locales that have XLIFF files in the project and are not in the list yet
+     */
+    private void addDetectedLocales() {
+        if (DumbService.isDumb(project)) {
+            return;
+        }
+
+        List<String> detected = ReadAction.compute(() -> TranslationResolver.getInstance(project).discoveredLocales());
+        for (String locale : detected) {
+            if (!locales.getItems().contains(locale)) {
+                locales.add(locale);
+            }
+        }
     }
 
     private Settings getSettings() {

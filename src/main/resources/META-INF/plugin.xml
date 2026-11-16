@@ -69,6 +69,11 @@
     <vetoRenameCondition implementation="de.vette.idea.neos.translation.PluralFormRenameVeto"/>
     <codeInsight.lineMarkerProvider language="XLIFF" implementationClass="de.vette.idea.neos.translation.XliffLocaleLineMarkerProvider"/>
     <gotoSymbolContributor implementation="de.vette.idea.neos.translation.TranslationSymbolContributor"/>
+    <defaultTemplatePropertiesProvider implementation="de.vette.idea.neos.translation.XliffTemplatePropertiesProvider"/>
+    <intentionAction>
+      <className>de.vette.idea.neos.translation.ExtractTranslationIntention</className>
+      <category>Neos</category>
+    </intentionAction>
     <localInspection shortName="NeosTranslationNotFound" bundle="messages.XliffBundle" key="inspection.translation.not.found" groupName="Neos" enabledByDefault="true" level="WARNING" implementationClass="de.vette.idea.neos.translation.inspections.TranslationNotFoundInspection"/>
     <localInspection shortName="NeosTranslationIncomplete" bundle="messages.XliffBundle" key="inspection.translation.incomplete.name" groupName="Neos" enabledByDefault="true" level="WEAK WARNING" implementationClass="de.vette.idea.neos.translation.inspections.TranslationIncompleteInspection"/>
     <localInspection shortName="NeosNodeTypeLabelNotTranslated" bundle="messages.XliffBundle" key="inspection.node.type.label.not.translated.name" groupName="Neos" enabledByDefault="false" level="WEAK WARNING" implementationClass="de.vette.idea.neos.translation.inspections.NodeTypeLabelNotTranslatedInspection"/>

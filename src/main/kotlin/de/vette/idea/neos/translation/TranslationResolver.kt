@@ -62,6 +62,13 @@ class TranslationResolver(private val project: Project) {
         val configured = Settings.getInstance(project).locales
         if (configured.isNotEmpty()) return configured.toList()
 
+        return discoveredLocales()
+    }
+
+    /**
+     * All locales that have XLIFF files, the source locale first.
+     */
+    fun discoveredLocales(): List<String> {
         val locales = sortedSetOf<String>()
         for (sourceKey in index.getAllKeys(TranslationSourceIndex.KEY, project)) {
             index.getContainingFiles(TranslationSourceIndex.KEY, sourceKey, scope)

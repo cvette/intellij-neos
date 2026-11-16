@@ -84,7 +84,11 @@ object TranslationWriter {
         unit.setAttribute("xml:space", "preserve")
         unit = body.addSubTag(unit, false)
 
-        unit.addSubTag(unit.createChildTag("source", unit.namespace, sourceText, false), false)
+        // the text is set as value, so that characters like "&" and "<" are escaped
+        val source = unit.addSubTag(unit.createChildTag("source", unit.namespace, null, false), false)
+        if (sourceText.isNotEmpty()) {
+            source.value.text = sourceText
+        }
         if (withTarget) {
             unit.addSubTag(unit.createChildTag("target", unit.namespace, "", false), false)
         }
