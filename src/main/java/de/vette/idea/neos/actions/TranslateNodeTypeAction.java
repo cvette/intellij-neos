@@ -24,6 +24,8 @@ import de.vette.idea.neos.Settings;
 import de.vette.idea.neos.lang.xliff.XliffDomElement;
 import de.vette.idea.neos.lang.xliff.XliffFileType;
 import de.vette.idea.neos.translation.TranslationId;
+import de.vette.idea.neos.translation.TranslationLocales;
+import de.vette.idea.neos.translation.TranslationResolver;
 import de.vette.idea.neos.translation.yaml.NodeTypeTranslations;
 import de.vette.idea.neos.util.ComposerUtil;
 import de.vette.idea.neos.util.NeosUtil;
@@ -79,12 +81,13 @@ public class TranslateNodeTypeAction extends AnAction {
      * and replaces them with "i18n"
      */
     public void translate(@NotNull Project project, @NotNull VirtualFile virtualFile) {
-        Collection<String> locales = Settings.getInstance(project).locales;
-
-        if (locales.isEmpty()) {
+        if (Settings.getInstance(project).locales.isEmpty()) {
             showNotification(project);
             return;
         }
+
+        // the locales the way their directories are written: "de-CH" of the settings is the locale of "de_CH"
+        Collection<String> locales = TranslationResolver.getInstance(project).locales();
 
         if (FileTypeRegistry.getInstance().getFileTypeByExtension("xlf") != XliffFileType.INSTANCE) {
             showFileTypeNotification(project);
@@ -127,8 +130,17 @@ public class TranslateNodeTypeAction extends AnAction {
                 properties.setProperty("NEOS_PACKAGE_NAME", nodeTypeLabels.getPackageKey());
 
                 for (String locale : locales) {
-                    PsiDirectory translationDir = createTranslationDirectories(packageDirectory, locale, source);
-                    processTranslationFile(project, translationDir, locale, sourceLocale, pairsByTransId, properties, source);
+                    // a locale takes the labels it does not have from its parent ("de_CH" from "de"), so it gets
+                    // no units of its own if the parent is translated as well; a file it has is still cleaned up
+                    boolean inherits = TranslationLocales.parents(locale).stream()
+                            .anyMatch(parent -> TranslationLocales.contains(locales, parent));
+                    PsiDirectory translationDir = inherits
+                            ? findTranslationDirectory(packageDirectory, locale, source)
+                            : createTranslationDirectories(packageDirectory, locale, source);
+                    if (translationDir == null) {
+                        continue;
+                    }
+                    processTranslationFile(project, translationDir, locale, sourceLocale, pairsByTransId, properties, source, !inherits);
                 }
 
                 // replace text values in node type definition by "i18n"
@@ -175,7 +187,8 @@ public class TranslateNodeTypeAction extends AnAction {
             String sourceLocale,
             Map<String, YAMLKeyValue> yamlPairsByTransId,
             Properties properties,
-            String source
+            String source,
+            boolean addUnits
     ) {
         String fileName = getFileName(source);
 
@@ -186,10 +199,12 @@ public class TranslateNodeTypeAction extends AnAction {
 
         try {
             fileName = fileName.concat(XliffFileType.DOT_DEFAULT_EXTENSION);
-            createOrUpdateFileInDirectory(project, dir, fileName, properties);
+            if (addUnits) {
+                createOrUpdateFileInDirectory(project, dir, fileName, properties);
+            }
 
             Set<String> existingIds = getExistingIdsForFile(dir, fileName);
-            updateTranslationFileContent(project, dir, fileName, existingIds, yamlPairsByTransId, locale, sourceLocale);
+            updateTranslationFileContent(project, dir, fileName, existingIds, yamlPairsByTransId, locale, sourceLocale, addUnits);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -214,6 +229,26 @@ public class TranslateNodeTypeAction extends AnAction {
         String[] sourceParts = source.split("/");
         for (int i = 0; i < sourceParts.length - 1; i++) {
             dir = createSubdirectory(dir, sourceParts[i]);
+        }
+        return dir;
+    }
+
+    /**
+     * The directory of the XLIFF file of a source, null if it does not exist
+     *
+     * @param source the translation source in path notation, e.g. "NodeTypes/Content/Text"
+     */
+    private @Nullable PsiDirectory findTranslationDirectory(PsiDirectory baseDir, String locale, String source) {
+        List<String> names = new ArrayList<>(List.of("Resources", "Private", "Translations", locale));
+        String[] sourceParts = source.split("/");
+        names.addAll(Arrays.asList(sourceParts).subList(0, sourceParts.length - 1));
+
+        PsiDirectory dir = baseDir;
+        for (String name : names) {
+            dir = dir.findSubdirectory(name);
+            if (dir == null) {
+                return null;
+            }
         }
         return dir;
     }
@@ -354,7 +389,7 @@ public class TranslateNodeTypeAction extends AnAction {
         }
     }
 
-    private void updateTranslationFileContent(Project project, PsiDirectory dir, String fileName, Set<String> existingIds, Map<String, YAMLKeyValue> yamlPairsByTransId, String locale, String sourceLocale) {
+    private void updateTranslationFileContent(Project project, PsiDirectory dir, String fileName, Set<String> existingIds, Map<String, YAMLKeyValue> yamlPairsByTransId, String locale, String sourceLocale, boolean addUnits) {
         XmlFile xmlFile = (XmlFile) dir.findFile(fileName);
         if (xmlFile == null) {
             return;
@@ -390,7 +425,9 @@ public class TranslateNodeTypeAction extends AnAction {
 
         XliffDomElement root = fileElement.getRootElement();
         removeObsoleteTranslations(root, removedIds);
-        addNewTranslations(bodyTag, yamlPairsByTransId, existingIds, sourceLocale, locale);
+        if (addUnits) {
+            addNewTranslations(bodyTag, yamlPairsByTransId, existingIds, sourceLocale, locale);
+        }
     }
 
     /**

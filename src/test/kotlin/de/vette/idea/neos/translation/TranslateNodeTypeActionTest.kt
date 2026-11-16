@@ -176,6 +176,83 @@ class TranslateNodeTypeActionTest : BasePlatformTestCase() {
         assertTrue(xliff("en").contains("product-name=\"Acme.Shared\""))
     }
 
+    fun testRegionalLocaleGetsNoUnitsIfItsParentIsTranslated() {
+        Settings.getInstance(project).locales.addAll(listOf("de_CH", "fr_CA"))
+
+        translate(
+            """
+            'Acme.Site:Content.Teaser':
+              ui:
+                label: Teaser
+            """
+        )
+
+        assertEquals(setOf("ui.label"), units(xliff("de")).keys)
+        assertNull(myFixture.tempDirFixture.getFile("$TRANSLATIONS/de_CH/NodeTypes/Content/Teaser.xlf"))
+        // "fr" is not one of the locales, so the regional locale needs the label itself
+        assertEquals(setOf("ui.label"), units(xliff("fr_CA")).keys)
+    }
+
+    fun testFileOfARegionalLocaleIsCleanedUpButNotFilled() {
+        Settings.getInstance(project).locales.add("de_CH")
+        myFixture.addFileToProject(
+            "$TRANSLATIONS/de_CH/NodeTypes/Content/Teaser.xlf",
+            """
+            <?xml version="1.0"?>
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file original="" product-name="Acme.Site" source-language="en" target-language="de_CH" datatype="plaintext">
+                    <body>
+                        <trans-unit id="properties.title.ui.label"><source>Title</source><target>Titel</target></trans-unit>
+                        <trans-unit id="properties.removed"><source>Removed</source><target>Entfernt</target></trans-unit>
+                    </body>
+                </file>
+            </xliff>
+            """.trimIndent()
+        )
+
+        translate(
+            """
+            'Acme.Site:Content.Teaser':
+              ui:
+                label: Teaser
+              properties:
+                title:
+                  ui:
+                    label: Title
+            """
+        )
+
+        assertEquals(setOf("ui.label", "properties.title"), units(xliff("de")).keys)
+        assertEquals(setOf("properties.title"), units(xliff("de_CH")).keys)
+    }
+
+    fun testWritesToTheDirectoryOfALocaleThatIsConfiguredInAnotherNotation() {
+        Settings.getInstance(project).locales.add("pt-BR")
+        myFixture.addFileToProject(
+            "$TRANSLATIONS/pt_BR/Main.xlf",
+            """
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file original="" source-language="en" target-language="pt_BR" datatype="plaintext">
+                    <body><trans-unit id="headline"><source>Welcome</source><target>Bem-vindo</target></trans-unit></body>
+                </file>
+            </xliff>
+            """.trimIndent()
+        )
+
+        translate(
+            """
+            'Acme.Site:Content.Teaser':
+              ui:
+                label: Teaser
+            """
+        )
+
+        val portuguese = xliff("pt_BR")
+        assertEquals(setOf("ui.label"), units(portuguese).keys)
+        assertTrue(portuguese, portuguese.contains("target-language=\"pt_BR\""))
+        assertNull(myFixture.tempDirFixture.getFile("$TRANSLATIONS/pt-BR"))
+    }
+
     private fun translate(yaml: String) {
         val file = myFixture.addFileToProject("$PACKAGE/NodeTypes/Content/Teaser.yaml", yaml.trimIndent())
         myFixture.configureFromExistingVirtualFile(file.virtualFile)
