@@ -117,9 +117,11 @@ object FluidTranslationUsage {
     private fun inlineReferences(element: PsiElement, text: String, offset: Int): List<PsiReference> {
         val references = ArrayList<PsiReference>()
         for (arguments in inlineCalls(text)) {
-            val packageKey = arguments[PACKAGE]?.value ?: packageOf(element.containingFile)
-            val source = arguments[SOURCE]?.value ?: TranslationId.DEFAULT_SOURCE
+            val packageKey = constant(arguments[PACKAGE]?.value, packageOf(element.containingFile))
+            val source = constant(arguments[SOURCE]?.value, TranslationId.DEFAULT_SOURCE)
             for ((name, argument) in arguments) {
+                // a value with an expression in it is not a constant id
+                if (argument.value.contains('{')) continue
                 val role = role(name) ?: continue
                 references += translationArgumentReferences(element, argument.range.shiftRight(offset), role, packageKey, source)
             }
@@ -139,8 +141,8 @@ object FluidTranslationUsage {
             val role = role(name) ?: return null
             return FluidTranslationArgument(
                 role,
-                packageKey = arguments[PACKAGE]?.value ?: packageOf(file),
-                source = arguments[SOURCE]?.value ?: TranslationId.DEFAULT_SOURCE,
+                packageKey = constant(arguments[PACKAGE]?.value, packageOf(file)),
+                source = constant(arguments[SOURCE]?.value, TranslationId.DEFAULT_SOURCE),
             ) to argument
         }
         return null

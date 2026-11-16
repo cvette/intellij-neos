@@ -203,6 +203,19 @@ class PhpAndFluidTranslationTest : BasePlatformTestCase() {
         assertNull(referenceAtCaret())
     }
 
+    fun testDynamicValuesInInlineNotationHaveNoReferences() {
+        configureFluid("""<p>{f:translate(id: 'label.{ty<caret>pe}', package: 'Acme.Site')}</p>""")
+        assertNull(referenceAtCaret())
+
+        // the id cannot be looked up in a package that is not known
+        configureFluid("""<p>{f:translate(id: 'head<caret>line', package: '{package}')}</p>""")
+        referenceAtCaret()?.let { assertEmpty(targets(it)) }
+
+        myFixture.enableInspections(TranslationNotFoundInspection())
+        configureFluid("""<p>{f:translate(id: 'label.{type}')} {f:translate(id: 'unknown')}</p>""")
+        assertEquals(listOf("Translation \"Acme.Site:Main:unknown\" not found"), problems())
+    }
+
     fun testCompletionInFluid() {
         configureFluid("""<f:translate id="<caret>" package="Acme.Shared"/>""")
         myFixture.completeBasic()
