@@ -38,18 +38,26 @@ import de.vette.idea.neos.translation.XliffLocation
 import javax.swing.table.AbstractTableModel
 
 /**
- * A label with its text in every locale.
+ * A label with its text in every locale. A plural label has one row for each of its forms.
  *
+ * @property id the id of the translation unit, for a plural form with its index: "label[1]"
+ * @property label the id of the label, for a plural form without its index: "label"
  * @property texts the text by locale: the source text for the source locale, the translation for the others;
- *                 null if the label does not exist in the locale
+ *                 null if the label or the plural form does not exist in the locale
  * @property units the translation units by locale
+ * @property groups for plural forms the groups of the label by locale, shared by the rows of its forms;
+ *                  null for other labels
  */
 class TranslationRow(
     val id: String,
-    val plural: Boolean,
+    val label: String,
     val texts: MutableMap<String, String?>,
     val units: MutableMap<String, SmartPsiElementPointer<XmlTag>>,
-)
+    val groups: MutableMap<String, SmartPsiElementPointer<XmlTag>>? = null,
+) {
+    val plural: Boolean
+        get() = groups != null
+}
 
 /**
  * All labels of one source of a package, e.g. "Acme.Site:Main".
@@ -89,21 +97,23 @@ class TranslationTableData(
             }
             val locales = (listOf(sourceLocale) + resolver.locales() + files.keys).distinct()
 
-            val rows = resolver.ids(section.packageKey, section.source).map { id ->
+            val rows = resolver.ids(section.packageKey, section.source).flatMap { id ->
                 val units = resolver.findUnits(TranslationId(section.packageKey, section.source, id))
-                val row = TranslationRow(id, units.any { it.data.plural }, HashMap(), HashMap())
+                // the unit of each locale, for a plural label its first form
+                val tags = LinkedHashMap<String, XmlTag>()
                 for (locale in locales) {
                     val unit = units.firstOrNull { it.locale == locale && it.file == files[locale]?.virtualFile }
                         ?: units.firstOrNull { it.locale == locale }
-                    val tag = unit?.let(resolver::findTag) ?: continue
-                    row.units[locale] = pointers.createSmartPsiElementPointer(tag)
-                    row.texts[locale] = if (locale == sourceLocale) {
-                        TranslationWriter.sourceText(tag)
-                    } else {
-                        tag.findFirstSubTag("target")?.value?.trimmedText.orEmpty()
-                    }
+                    unit?.let(resolver::findTag)?.let { tags[locale] = it }
                 }
-                row
+
+                val groups = LinkedHashMap<String, XmlTag>()
+                tags.forEach { (locale, tag) -> TranslationWriter.pluralGroupOf(tag)?.let { groups[locale] = it } }
+                if (groups.isEmpty()) {
+                    listOf(row(id, id, tags, null, sourceLocale, pointers))
+                } else {
+                    pluralRows(id, tags, groups, sourceLocale, pointers)
+                }
             }
 
             return TranslationTableData(
@@ -111,6 +121,62 @@ class TranslationTableData(
                 files.mapValues { pointers.createSmartPsiElementPointer(it.value) }, rows
             )
         }
+
+        /**
+         * One row for each form of a plural label. The languages differ in the number of forms, so a row may
+         * be without a unit in some of the locales.
+         */
+        private fun pluralRows(
+            label: String,
+            tags: Map<String, XmlTag>,
+            groups: Map<String, XmlTag>,
+            sourceLocale: String,
+            pointers: SmartPointerManager,
+        ): List<TranslationRow> {
+            val forms = groups.mapValues { (_, group) ->
+                TranslationWriter.pluralForms(group).mapNotNull { form -> form.getAttributeValue("id")?.let { it to form } }.toMap()
+            }
+            val formIds = forms.values.flatMap { it.keys }.distinct().sortedBy(::formIndex)
+            val groupPointers = HashMap<String, SmartPsiElementPointer<XmlTag>>()
+            groups.forEach { (locale, group) -> groupPointers[locale] = pointers.createSmartPsiElementPointer(group) }
+
+            return formIds.mapIndexed { index, formId ->
+                val formTags = LinkedHashMap<String, XmlTag>()
+                for ((locale, tag) in tags) {
+                    // a locale that has the label as a plain unit shows it at the first form
+                    val form = if (locale in groups) forms[locale]?.get(formId) else tag.takeIf { index == 0 }
+                    form?.let { formTags[locale] = it }
+                }
+                row(formId, label, formTags, groupPointers, sourceLocale, pointers)
+            }
+        }
+
+        private fun row(
+            id: String,
+            label: String,
+            tags: Map<String, XmlTag>,
+            groups: MutableMap<String, SmartPsiElementPointer<XmlTag>>?,
+            sourceLocale: String,
+            pointers: SmartPointerManager,
+        ): TranslationRow {
+            val row = TranslationRow(id, label, HashMap(), HashMap(), groups)
+            for ((locale, tag) in tags) {
+                row.units[locale] = pointers.createSmartPsiElementPointer(tag)
+                row.texts[locale] = text(tag, locale, sourceLocale)
+            }
+            return row
+        }
+
+        /** The text a unit shows in the column of its locale */
+        fun text(unit: XmlTag, locale: String, sourceLocale: String): String = if (locale == sourceLocale) {
+            TranslationWriter.sourceText(unit)
+        } else {
+            unit.findFirstSubTag("target")?.value?.trimmedText.orEmpty()
+        }
+
+        /** The index of a plural form: 1 for "label[1]" */
+        private fun formIndex(formId: String): Int =
+            formId.substringAfterLast('[', "").substringBefore(']').toIntOrNull() ?: Int.MAX_VALUE
     }
 }
 
@@ -164,8 +230,14 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
         }
     }
 
-    private fun isMissing(row: TranslationRow, locale: String): Boolean =
-        row.texts[locale].isNullOrEmpty() && inheritedText(row, locale) == null
+    private fun isMissing(row: TranslationRow, locale: String): Boolean {
+        val text = row.texts[locale]
+        if (text == null && row.groups != null) {
+            // a plural form the locale or the source locale does not have: the languages differ in their forms
+            if (locale in row.groups || data?.sourceLocale?.let { row.texts[it] } == null) return false
+        }
+        return text.isNullOrEmpty() && inheritedText(row, locale) == null
+    }
 
     fun idAt(rowIndex: Int): String = rows[rowIndex].id
 
@@ -182,9 +254,9 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
     override fun getValueAt(rowIndex: Int, columnIndex: Int): Any =
         if (columnIndex == 0) rows[rowIndex].id else rows[rowIndex].texts[locales[columnIndex - 1]].orEmpty()
 
-    /** Plural forms have several texts per locale, and a locale without a file has no place to write to */
+    /** A locale without a file has no place to write to */
     override fun isCellEditable(rowIndex: Int, columnIndex: Int): Boolean =
-        columnIndex > 0 && !rows[rowIndex].plural && data?.files?.containsKey(locales[columnIndex - 1]) == true
+        columnIndex > 0 && data?.files?.containsKey(locales[columnIndex - 1]) == true
 
     override fun setValueAt(value: Any?, rowIndex: Int, columnIndex: Int) {
         val data = data ?: return
@@ -218,7 +290,26 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
         if (!written) return
 
         row.texts[locale] = text
-        fireTableRowsUpdated(rowIndex, rowIndex)
+        if (row.plural) {
+            showNewForms(data, row, locale)
+            if (rows.isNotEmpty()) fireTableRowsUpdated(0, rows.size - 1)
+        } else {
+            fireTableRowsUpdated(rowIndex, rowIndex)
+        }
+    }
+
+    /** An edit may have added the plural label to the locale: its other forms are shown in their rows */
+    private fun showNewForms(data: TranslationTableData, row: TranslationRow, locale: String) {
+        val group = row.groups?.get(locale)?.element ?: return
+        val pointers = SmartPointerManager.getInstance(project)
+        val forms = TranslationWriter.pluralForms(group).associateBy { it.getAttributeValue("id") }
+
+        for (sibling in data.rows) {
+            if (sibling.groups !== row.groups || sibling.units[locale]?.element != null) continue
+            val form = forms[sibling.id] ?: continue
+            sibling.units[locale] = pointers.createSmartPsiElementPointer(form)
+            sibling.texts[locale] = TranslationTableData.text(form, locale, data.sourceLocale)
+        }
     }
 
     /** The files an edit of the cell writes to: all files of the label for the source locale, else the one of the locale */
@@ -250,9 +341,19 @@ class TranslationTableModel(private val project: Project) : AbstractTableModel()
         row.units[locale]?.element?.let { return it }
 
         val file = data.files[locale]?.element ?: return null
-        val unit = TranslationWriter.addUnitToFile(file, row.id, sourceText, withTarget = locale != data.sourceLocale)
-            ?: return null
-        row.units[locale] = SmartPointerManager.getInstance(project).createSmartPsiElementPointer(unit)
+        val pointers = SmartPointerManager.getInstance(project)
+        val withTarget = locale != data.sourceLocale
+        val groups = row.groups
+        val unit = if (groups != null) {
+            // the label is added with the forms of the source locale, if the locale does not have it yet
+            val template = (groups[data.sourceLocale] ?: groups.values.firstOrNull())?.element
+            val form = TranslationWriter.addPluralForm(file, row.label, row.id, template, sourceText, withTarget) ?: return null
+            TranslationWriter.pluralGroupOf(form)?.let { groups[locale] = pointers.createSmartPsiElementPointer(it) }
+            form
+        } else {
+            TranslationWriter.addUnitToFile(file, row.id, sourceText, withTarget) ?: return null
+        }
+        row.units[locale] = pointers.createSmartPsiElementPointer(unit)
         return unit
     }
 

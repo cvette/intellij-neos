@@ -331,6 +331,71 @@ class TranslationInspectionsTest : BasePlatformTestCase() {
         assertFalse(myFixture.file.text.contains("removed"))
     }
 
+    fun testAddsPluralLabelsWithAllForms() {
+        // French has the other labels, so that the plural label is the only one that is missing there
+        xliffProblems(
+            XliffOutOfSyncInspection(), "fr", "Main",
+            """
+            <trans-unit id="headline"><source>Welcome</source><target>Bienvenue</target></trans-unit>
+            <trans-unit id="button.submit"><source>Submit</source><target>Envoyer</target></trans-unit>
+            """,
+            targetLanguage = "fr"
+        )
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+        myFixture.configureFromExistingVirtualFile(myFixture.findFileInTempDir("$TRANSLATIONS/en/Main.xlf"))
+        myFixture.editor.caretModel.moveToOffset(myFixture.file.text.indexOf("items.count[0]") + 2)
+
+        assertEquals(
+            listOf(
+                "Translation unit \"button.submit\" is not translated to: de",
+                "Translation unit \"items.count\" is not translated to: fr",
+            ),
+            problems()
+        )
+
+        applyFix("Add translation to: fr")
+
+        val french = text("$TRANSLATIONS/fr/Main.xlf")
+        assertTrue(french, Regex("""<group id="items.count" restype="x-gettext-plurals">""").containsMatchIn(french))
+        assertTrue(french, Regex("""id="items.count\[0]"[^>]*>\s*<source>One item</source>\s*<target""").containsMatchIn(french))
+        assertTrue(french, Regex("""id="items.count\[1]"[^>]*>\s*<source>\{0} items</source>\s*<target""").containsMatchIn(french))
+    }
+
+    fun testChecksPluralLabelsOfOtherLocales() {
+        val problems = xliffProblems(
+            XliffOutOfSyncInspection(), "fr", "Main",
+            """
+            <group id="items.count" restype="x-gettext-plurals">
+                <trans-unit id="items.count[0]"><source>One item</source><target>Un</target></trans-unit>
+                <trans-unit id="items.count[1]"><source>{0} things</source><target>{0}</target></trans-unit>
+                <trans-unit id="items.count[2]"><source>Many items</source><target>{0}</target></trans-unit>
+            </group>
+            <group id="gone" restype="x-gettext-plurals">
+                <trans-unit id="gone[0]"><source>Gone</source><target>x</target></trans-unit>
+                <trans-unit id="gone[1]"><source>Gone</source><target>x</target></trans-unit>
+            </group>
+            <group id="headline" restype="x-gettext-plurals">
+                <trans-unit id="headline[0]"><source>Welcome</source><target>x</target></trans-unit>
+            </group>
+            <trans-unit id="button.submit"><source>Submit</source><target>Envoyer</target></trans-unit>
+            """,
+            targetLanguage = "fr"
+        )
+        // the third form has no counterpart in English, which is fine
+        assertEquals(
+            listOf(
+                "Source text differs from the source locale \"en\"",
+                "Translation unit \"gone\" does not exist in the source locale \"en\"",
+                "Translation unit \"headline\" is not a plural label in the source locale \"en\"",
+            ),
+            problems
+        )
+
+        myFixture.editor.caretModel.moveToOffset(myFixture.file.text.indexOf("gone[0]") + 2)
+        applyFix("Remove translation unit")
+        assertFalse(myFixture.file.text.contains("gone"))
+    }
+
     fun testReportsUnitsThatSeemToBeUnused() {
         myFixture.addFileToProject(
             "$SITE/Resources/Private/Fusion/Root.fusion",

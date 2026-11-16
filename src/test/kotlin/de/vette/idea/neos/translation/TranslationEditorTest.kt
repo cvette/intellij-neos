@@ -39,7 +39,8 @@ class TranslationEditorTest : BasePlatformTestCase() {
             listOf(
                 listOf("button.submit", "Submit", ""),
                 listOf("headline", "Welcome", "Willkommen"),
-                listOf("items.count", "One item", "Ein Eintrag"),
+                listOf("items.count[0]", "One item", "Ein Eintrag"),
+                listOf("items.count[1]", "{0} items", "{0} Einträge"),
             ),
             rows(model)
         )
@@ -65,16 +66,87 @@ class TranslationEditorTest : BasePlatformTestCase() {
         assertEquals(listOf(listOf("button.submit", "Submit", "")), rows(model))
 
         model.onlyIncomplete = false
-        assertEquals(3, model.rowCount)
+        assertEquals(4, model.rowCount)
     }
 
-    fun testIdsAndPluralFormsAreNotEditable() {
+    fun testIdsAreNotEditable() {
         val model = model("en/Main.xlf")
 
         assertFalse(model.isCellEditable(1, 0))
         assertTrue(model.isCellEditable(1, 1))
         assertTrue(model.isCellEditable(1, 2))
-        assertFalse(model.isCellEditable(2, 2))
+        assertTrue(model.isCellEditable(2, 2))
+    }
+
+    fun testEditingAPluralFormWritesItsTarget() {
+        val model = model("en/Main.xlf")
+
+        model.setValueAt("{0} Elemente", 3, 2)
+
+        assertEquals("{0} Elemente", model.getValueAt(3, 2))
+        val german = text("de/Main.xlf")
+        assertTrue(german, german.contains("<target>{0} Elemente</target>"))
+        assertTrue(german, german.contains("<target>Ein Eintrag</target>"))
+    }
+
+    fun testEditingAPluralFormAddsTheLabelWithAllForms() {
+        addTranslations("fr", """<trans-unit id="headline"><source>Welcome</source><target>Bienvenue</target></trans-unit>""")
+        val model = model("en/Main.xlf")
+        assertEquals(listOf("Id", "en", "de", "fr"), (0 until model.columnCount).map(model::getColumnName))
+        assertTrue(model.isMissing(2, 3))
+
+        model.setValueAt("Un élément", 2, 3)
+
+        val french = text("fr/Main.xlf")
+        assertTrue(french, french.contains("<group id=\"items.count\" restype=\"x-gettext-plurals\">"))
+        assertTrue(french, Regex("""id="items.count\[0]"[^>]*>\s*<source>One item</source>\s*<target>Un élément</target>""").containsMatchIn(french))
+        assertTrue(french, Regex("""id="items.count\[1]"[^>]*>\s*<source>\{0} items</source>\s*<target""").containsMatchIn(french))
+        // the other form is there now, but not translated yet
+        assertFalse(model.isMissing(2, 3))
+        assertEquals("", model.getValueAt(3, 3))
+        assertTrue(model.isMissing(3, 3))
+
+        model.setValueAt("{0} éléments", 3, 3)
+        assertEquals(1, Regex("<group ").findAll(text("fr/Main.xlf")).count())
+        assertTrue(text("fr/Main.xlf").contains("<target>{0} éléments</target>"))
+    }
+
+    fun testLanguagesWithMoreFormsHaveRowsOfTheirOwn() {
+        addTranslations(
+            "pl",
+            """
+            <group id="items.count" restype="x-gettext-plurals">
+                <trans-unit id="items.count[0]"><source>One item</source><target>jeden</target></trans-unit>
+                <trans-unit id="items.count[1]"><source>{0} items</source><target>kilka</target></trans-unit>
+                <trans-unit id="items.count[2]"><source>{0} items</source><target>wiele</target></trans-unit>
+            </group>
+            """
+        )
+        val model = model("en/Main.xlf")
+
+        assertEquals(listOf("items.count[2]", "", "", "wiele"), rows(model).last())
+        // English and German do not have a third form
+        assertFalse(model.isMissing(4, 1))
+        assertFalse(model.isMissing(4, 2))
+
+        model.onlyIncomplete = true
+        assertEquals(listOf("button.submit", "headline"), rows(model).map { it.first() })
+    }
+
+    private fun addTranslations(locale: String, units: String) {
+        myFixture.addFileToProject(
+            "$TRANSLATIONS/$locale/Main.xlf",
+            """<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="Acme.Site" source-language="en" target-language="$locale" datatype="plaintext">
+        <body>
+            ${units.trimIndent().lines().joinToString("\n            ")}
+        </body>
+    </file>
+</xliff>
+"""
+        )
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
     }
 
     fun testEditingATranslationWritesTheTarget() {

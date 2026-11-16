@@ -27,6 +27,8 @@ import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.PsiManager
 import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.psi.util.PsiTreeUtil
+import de.vette.idea.neos.lang.xliff.GroupDomElement
 import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
 import de.vette.idea.neos.lang.xliff.XliffFileType
@@ -58,10 +60,11 @@ object TranslationWriter {
         val resolver = TranslationResolver.getInstance(project)
         val existing = resolver.findUnits(id)
         val sourceLocale = resolver.sourceLocale
-        val text = sourceText
-            ?: existing.firstOrNull { it.locale == sourceLocale }?.let(resolver::findTag)?.let(::sourceText)
-            ?: existing.firstOrNull()?.let(resolver::findTag)?.let(::sourceText)
-            ?: ""
+        // the unit the new ones are modeled on: the one of the source locale, if there is one
+        val template = existing.firstOrNull { it.locale == sourceLocale }?.let(resolver::findTag)
+            ?: existing.firstOrNull()?.let(resolver::findTag)
+        val templateGroup = template?.let(::pluralGroupOf)
+        val text = sourceText ?: template?.let(::sourceText) ?: ""
 
         // the index is asked before anything is changed
         // a locale gets the unit from the locale it falls back to, if that one has it or is about to get it
@@ -76,9 +79,75 @@ object TranslationWriter {
         for (locale in missing) {
             val file = files[locale] ?: createFile(project, id, locale, sourceLocale, anchor) ?: continue
             val body = body(file) ?: continue
-            added[locale] = addUnit(body, id.id, text, withTarget = locale != sourceLocale)
+            val withTarget = locale != sourceLocale
+            added[locale] = if (templateGroup != null) {
+                addPluralGroup(body, id.id, templateGroup, withTarget) ?: continue
+            } else {
+                addUnit(body, id.id, text, withTarget)
+            }
         }
         return added
+    }
+
+    /**
+     * The group a plural form is part of, null for other units. The forms of a plural label are units with
+     * ids like "label[0]" and "label[1]" in a group.
+     */
+    fun pluralGroupOf(unit: XmlTag): XmlTag? =
+        unit.parentTag?.takeIf { it.getAttributeValue("restype") == GroupDomElement.PLURALS_RESTYPE }
+
+    /** The forms of a plural label, in the order they are written in */
+    fun pluralForms(group: XmlTag): List<XmlTag> = group.findSubTags("trans-unit").toList()
+
+    /** The group of the plural label with the given id in a file, null if the file does not have it */
+    fun findPluralGroup(file: XmlFile, id: String): XmlTag? {
+        val body = file.rootTag?.findFirstSubTag("file")?.findFirstSubTag("body") ?: return null
+        return PsiTreeUtil.findChildrenOfType(body, XmlTag::class.java).firstOrNull { group ->
+            group.localName == "group" && group.getAttributeValue("restype") == GroupDomElement.PLURALS_RESTYPE &&
+                    pluralForms(group).firstOrNull()?.getAttributeValue("id")?.substringBefore('[') == id
+        }
+    }
+
+    /**
+     * Adds a form to a plural label of a file. The group of the label is added with all forms of the
+     * template first, if the file does not have it yet.
+     *
+     * @param formId the id of the form, e.g. "label[1]"
+     * @param templateGroup the group of the label in another locale
+     * @return the form, which may have existed already
+     */
+    fun addPluralForm(
+        file: XmlFile,
+        id: String,
+        formId: String,
+        templateGroup: XmlTag?,
+        sourceText: String,
+        withTarget: Boolean,
+    ): XmlTag? {
+        val group = findPluralGroup(file, id)
+            ?: templateGroup?.let { template -> body(file)?.let { addPluralGroup(it, id, template, withTarget) }?.parentTag }
+            ?: return null
+
+        return pluralForms(group).firstOrNull { it.getAttributeValue("id") == formId }
+            ?: addUnit(group, formId, sourceText, withTarget)
+    }
+
+    /**
+     * Adds a plural label with the forms of the template. The number of forms depends on the language, so
+     * further forms may have to be added by hand.
+     *
+     * @return the first form
+     */
+    private fun addPluralGroup(body: XmlTag, id: String, templateGroup: XmlTag, withTarget: Boolean): XmlTag? {
+        var group = body.createChildTag("group", body.namespace, null, false)
+        group.setAttribute("id", templateGroup.getAttributeValue("id") ?: id)
+        group.setAttribute("restype", GroupDomElement.PLURALS_RESTYPE)
+        group = body.addSubTag(group, false)
+
+        val forms = pluralForms(templateGroup).map { form ->
+            addUnit(group, form.getAttributeValue("id") ?: return null, sourceText(form), withTarget)
+        }
+        return forms.firstOrNull()
     }
 
     /**

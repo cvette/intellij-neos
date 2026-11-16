@@ -200,16 +200,22 @@ class XliffLanguageMismatchInspection : XliffInspection() {
  *   with a translation counts as translated, see [TranslationLocales]
  * - a unit that does not exist in the source locale any more
  * - a unit whose source text differs from the one of the source locale
+ * - a unit that is a plural label in only one of the two locales
+ *
+ * The number of plural forms is not compared, it depends on the language.
  */
 class XliffOutOfSyncInspection : XliffInspection() {
 
     override fun checkUnit(holder: ProblemsHolder, unit: XmlTag, location: XliffLocation) {
-        if (isPluralForm(unit)) return
+        // a plural label is checked as a whole at its first form, only the source texts are compared for each form
+        val group = TranslationWriter.pluralGroupOf(unit)
+        val firstForm = group == null || TranslationWriter.pluralForms(group).firstOrNull() == unit
         val id = XliffIndexing.translationIdOf(unit) ?: return
         val resolver = TranslationResolver.getInstance(holder.project)
         val units = resolver.findUnits(id)
 
         if (isSourceLocaleFile(unit, location)) {
+            if (!firstForm) return
             // a locale that falls back to a locale with the label is not missing it
             val available = units.map { it.locale }
             val missing = resolver.locales().filterNot { TranslationLocales.isCovered(it, available) }
@@ -225,12 +231,29 @@ class XliffOutOfSyncInspection : XliffInspection() {
         }
 
         val sourceLocale = sourceLocale(unit)
-        val sourceUnit = units.firstOrNull { sameLocale(it.locale, sourceLocale) }?.let(resolver::findTag)
-        if (sourceUnit == null) {
-            holder.registerProblem(
-                anchor(unit), XliffBundle.message("inspection.xliff.sync.obsolete", id.id, sourceLocale), RemoveUnitFix()
-            )
+        val sourceFirst = units.firstOrNull { sameLocale(it.locale, sourceLocale) }?.let(resolver::findTag)
+        if (sourceFirst == null) {
+            if (firstForm) {
+                holder.registerProblem(
+                    anchor(unit), XliffBundle.message("inspection.xliff.sync.obsolete", id.id, sourceLocale), RemoveUnitFix()
+                )
+            }
             return
+        }
+
+        val sourceGroup = TranslationWriter.pluralGroupOf(sourceFirst)
+        if ((group == null) != (sourceGroup == null)) {
+            if (firstForm) {
+                val key = if (sourceGroup != null) "inspection.xliff.sync.plural.expected" else "inspection.xliff.sync.plural.unexpected"
+                holder.registerProblem(anchor(unit), XliffBundle.message(key, id.id, sourceLocale))
+            }
+            return
+        }
+
+        // the form with the same id; languages with more forms than the source locale have forms without one
+        val sourceUnit = if (sourceGroup == null) sourceFirst else {
+            val formId = unit.getAttributeValue("id")
+            TranslationWriter.pluralForms(sourceGroup).firstOrNull { it.getAttributeValue("id") == formId } ?: return
         }
 
         val expected = TranslationWriter.sourceText(sourceUnit)
@@ -247,7 +270,9 @@ class XliffOutOfSyncInspection : XliffInspection() {
         override fun getFamilyName(): String = XliffBundle.message("inspection.xliff.sync.obsolete.fix")
 
         override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
-            XliffIndexing.unitTagOf(descriptor.psiElement)?.delete()
+            // a plural label is removed with all of its forms
+            val unit = XliffIndexing.unitTagOf(descriptor.psiElement) ?: return
+            (TranslationWriter.pluralGroupOf(unit) ?: unit).delete()
         }
     }
 
