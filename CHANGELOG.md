@@ -18,6 +18,10 @@
 - Quick documentation that shows a label in all locales, at its usage and on the id of a translation unit
 - Go to the translation unit from `i18n` values in node type definitions and from shorthand ids (`Package:Source:id`) in node type definitions and other configuration, with a gutter icon that shows the label
 - Completion of shorthand translation ids in YAML configuration
+- Find usages of a translation unit in Fusion, AFX and YAML, including the labels of node types that are set to `i18n`
+- Rename of a translation unit id in all locales and at its usages
+- Gutter icon on translation units that leads to the same unit in other locales
+- Translation units in "Go to Symbol", by their shorthand id
 - Folding of translation helper calls to the text of the label, with an option to collapse them by default
 - Unused method suppression for `inject*` methods and for controllers that extend a custom base controller
 
