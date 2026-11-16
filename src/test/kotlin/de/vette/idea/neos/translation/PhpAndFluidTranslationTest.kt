@@ -88,6 +88,29 @@ class PhpAndFluidTranslationTest : BasePlatformTestCase() {
         assertNull(referenceAtCaret())
     }
 
+    fun testOnlyFlowsTranslatorAndItsSubclassesHaveReferences() {
+        myFixture.addFileToProject(
+            "$SITE/Classes/Translators.php",
+            """
+            <?php
+            namespace Acme\Site;
+
+            class MailTranslator extends \Neos\Flow\I18n\Translator {}
+
+            class DeeplTranslator
+            {
+                public function translateById(string ${'$'}labelId) {}
+            }
+            """.trimIndent()
+        )
+
+        configurePhp("(new \\Acme\\Site\\DeeplTranslator())->translateById('head<caret>line');")
+        assertNull(referenceAtCaret())
+
+        configurePhp("(new \\Acme\\Site\\MailTranslator())->translateById('head<caret>line', [], null, null, 'Main', 'Acme.Site');")
+        assertInstanceOf(referenceAtCaret(), TranslationUnitReference::class.java)
+    }
+
     fun testCompletionInPhp() {
         configurePhp("${'$'}translator->translateById('<caret>', [], null, null, 'Main', 'Acme.Site');")
         myFixture.completeBasic()

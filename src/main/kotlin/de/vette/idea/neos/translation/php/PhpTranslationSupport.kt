@@ -60,7 +60,8 @@ object PhpTranslationUsage {
     private const val DEFAULT_PACKAGE = "Neos.Flow"
     private const val TRANSLATE_BY_ID = "translateById"
     private const val TRANSLATE_BY_ORIGINAL_LABEL = "translateByOriginalLabel"
-    private const val TRANSLATOR = "Translator"
+    private const val TRANSLATOR = "\\Neos\\Flow\\I18n\\Translator"
+    private const val MAX_CLASS_DEPTH = 10
 
     private const val LABEL_ID = "labelId"
     private const val SOURCE_NAME = "sourceName"
@@ -121,10 +122,15 @@ object PhpTranslationUsage {
         return literal.contents.takeIf { literal.firstPsiChild == null }
     }
 
-    /** Other classes may have methods with these names. If the method cannot be resolved, the name has to do. */
+    /**
+     * Other classes may have methods with these names, so the method has to be the one of Flow's translator or
+     * of a class that extends it. If the method cannot be resolved, the name has to do.
+     */
     private fun isTranslator(call: MethodReference): Boolean {
         val method = call.resolve() as? Method ?: return true
-        return method.containingClass?.name?.endsWith(TRANSLATOR) == true
+        return generateSequence(method.containingClass) { it.superClass }
+            .take(MAX_CLASS_DEPTH)
+            .any { it.fqn == TRANSLATOR }
     }
 }
 
