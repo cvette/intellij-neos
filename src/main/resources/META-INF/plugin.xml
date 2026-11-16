@@ -125,6 +125,9 @@
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.lang.yaml.completion.NodeTypeCompletionContributor"/>
     <lookup.charFilter implementation="de.vette.idea.neos.lang.yaml.completion.NodeTypeCompletionContributor$NodeTypeCharFilter"/>
     <psi.referenceContributor implementation="de.vette.idea.neos.lang.yaml.references.value.ValueReferenceContributor"/>
+    <psi.referenceContributor language="yaml" implementation="de.vette.idea.neos.translation.yaml.YamlTranslationReferenceContributor"/>
+    <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.translation.yaml.YamlTranslationCompletionContributor"/>
+    <codeInsight.lineMarkerProvider language="yaml" implementationClass="de.vette.idea.neos.translation.yaml.YamlTranslationLineMarkerProvider"/>
 
     <codeInsight.parameterNameHints language="NeosFusion" implementationClass="de.vette.idea.neos.lang.eel.codeInsight.hints.EelInlayParameterHintsProvider"/>
 

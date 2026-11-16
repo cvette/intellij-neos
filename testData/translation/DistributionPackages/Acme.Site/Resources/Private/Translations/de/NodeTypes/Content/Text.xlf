@@ -6,9 +6,21 @@
 				<source>Text</source>
 				<target>Text</target>
 			</trans-unit>
-			<trans-unit id="properties.text.ui.label" xml:space="preserve">
+			<trans-unit id="properties.text" xml:space="preserve">
 				<source>Content</source>
 				<target>Inhalt</target>
+			</trans-unit>
+			<trans-unit id="groups.layout" xml:space="preserve">
+				<source>Layout</source>
+				<target>Layout</target>
+			</trans-unit>
+			<trans-unit id="properties.alignment" xml:space="preserve">
+				<source>Alignment</source>
+				<target>Ausrichtung</target>
+			</trans-unit>
+			<trans-unit id="properties.alignment.selectBoxEditor.values.left" xml:space="preserve">
+				<source>Left</source>
+				<target>Links</target>
 			</trans-unit>
 		</body>
 	</file>

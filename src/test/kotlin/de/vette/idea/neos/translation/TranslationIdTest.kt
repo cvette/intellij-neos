@@ -6,16 +6,16 @@ import junit.framework.TestCase
 class TranslationIdTest : TestCase() {
 
     fun testParsesShorthand() {
-        val text = "Acme.Site:NodeTypes.Content.Text:properties.text.ui.label"
+        val text = "Acme.Site:NodeTypes.Content.Text:properties.text"
         val shorthand = TranslationId.parseShorthand(text)!!
 
         assertEquals(
-            TranslationId("Acme.Site", "NodeTypes/Content/Text", "properties.text.ui.label"),
+            TranslationId("Acme.Site", "NodeTypes/Content/Text", "properties.text"),
             shorthand.translationId
         )
         assertEquals("Acme.Site", shorthand.packageRange.substring(text))
         assertEquals("NodeTypes.Content.Text", shorthand.sourceRange.substring(text))
-        assertEquals("properties.text.ui.label", shorthand.idRange.substring(text))
+        assertEquals("properties.text", shorthand.idRange.substring(text))
         assertEquals(TextRange(33, text.length), shorthand.idRange)
     }
 

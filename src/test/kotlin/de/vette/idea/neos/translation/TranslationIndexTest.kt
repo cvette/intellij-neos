@@ -50,7 +50,7 @@ class TranslationIndexTest : BasePlatformTestCase() {
     }
 
     fun testNestedSource() {
-        val id = TranslationId.parseShorthand("Acme.Site:NodeTypes.Content.Text:properties.text.ui.label")!!.translationId
+        val id = TranslationId.parseShorthand("Acme.Site:NodeTypes.Content.Text:properties.text")!!.translationId
 
         assertEquals(listOf("Content", "Inhalt"), resolver.findUnits(id).map { it.data.text })
     }

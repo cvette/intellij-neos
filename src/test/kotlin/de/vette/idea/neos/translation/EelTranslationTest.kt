@@ -68,7 +68,7 @@ class EelTranslationTest : BasePlatformTestCase() {
     }
 
     fun testNestedSourceInShorthand() {
-        val reference = fusionReference("Translation.translate('Acme.Site:NodeTypes.Content.Text:properties.text.ui.la<caret>bel')")
+        val reference = fusionReference("Translation.translate('Acme.Site:NodeTypes.Content.Text:properties.te<caret>xt')")
 
         assertEquals(2, targets(reference).size)
     }
@@ -181,7 +181,7 @@ class EelTranslationTest : BasePlatformTestCase() {
         )
         assertSameElements(
             complete("I18n.translate('Acme.Site:NodeTypes.Content.Text:<caret>')"),
-            "properties.text.ui.label", "ui.label"
+            *NODE_TYPE_IDS
         )
     }
 
@@ -206,7 +206,7 @@ class EelTranslationTest : BasePlatformTestCase() {
     fun testCompletesPositionalArguments() {
         assertSameElements(
             complete("I18n.translate('<caret>', null, [], 'NodeTypes/Content/Text', 'Acme.Site')"),
-            "properties.text.ui.label", "ui.label"
+            *NODE_TYPE_IDS
         )
         assertSameElements(
             complete("I18n.translate('ui.label', null, [], '<caret>', 'Acme.Site')"),
@@ -250,12 +250,12 @@ class EelTranslationTest : BasePlatformTestCase() {
 
     fun testDocumentationOnTranslationUnit() {
         val tag = TranslationResolver.getInstance(project)
-            .findUnitTags(TranslationId("Acme.Site", "NodeTypes/Content/Text", "properties.text.ui.label"))
+            .findUnitTags(TranslationId("Acme.Site", "NodeTypes/Content/Text", "properties.text"))
             .first()
         val provider = TranslationDocumentationProvider()
 
         val doc = provider.generateDoc(tag.getAttribute("id")!!.valueElement, null)!!
-        assertTrue(doc, doc.contains("Acme.Site:NodeTypes.Content.Text:properties.text.ui.label"))
+        assertTrue(doc, doc.contains("Acme.Site:NodeTypes.Content.Text:properties.text"))
         assertTrue(doc, doc.contains("Content"))
         assertTrue(doc, doc.contains("Inhalt"))
         assertFalse(doc, doc.contains("missing"))
@@ -319,6 +319,11 @@ class EelTranslationTest : BasePlatformTestCase() {
         assertTrue(regions.any { it.placeholderText == "\"Welcome\"" })
         assertTrue("Expected the regions of the HTML tags", regions.size > 1)
     }
+
+    private val NODE_TYPE_IDS = arrayOf(
+        "groups.layout", "properties.alignment", "properties.alignment.selectBoxEditor.values.left",
+        "properties.text", "properties.text.ui.help.message", "ui.label"
+    )
 
     private fun configureFusion(expression: String) {
         myFixture.configureByText("test.fusion", "value = \${$expression}")
