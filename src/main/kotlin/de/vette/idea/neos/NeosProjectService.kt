@@ -64,7 +64,9 @@ class NeosProjectService(private val project: Project) {
 
             val indexedBefore = isEnabledForIndex(project)
             settings.pluginEnabled = enabled
-            if (indexedBefore != isEnabledForIndex(project)) {
+            // Enabling always builds them again: whether the project was indexed before cannot be told from
+            // isNeosProject(), as Composer may have found the composer.json only after the files were indexed.
+            if (enabled || indexedBefore != isEnabledForIndex(project)) {
                 val index = FileBasedIndex.getInstance()
                 listOf(
                     DefaultContextFileIndex.KEY, NodeTypesYamlFileIndex.KEY, TranslationUnitIndex.KEY, TranslationSourceIndex.KEY
