@@ -32,6 +32,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLanguageInjectionHost
+import com.intellij.psi.SmartPointerManager
 import com.intellij.psi.xml.XmlAttributeValue
 import com.intellij.psi.xml.XmlTag
 import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
@@ -232,8 +233,12 @@ class AddTranslationFix(
         val added = TranslationWriter.addUnit(project, id, locales, sourceText, anchor)
 
         // the text has to be entered by the user, lead them to the first unit that was added
-        if (!ApplicationManager.getApplication().isUnitTestMode) {
-            (added.values.firstOrNull() as? Navigatable)?.navigate(true)
-        }
+        // the editor is opened once the write action of the fix is over
+        val unit = added.values.firstOrNull() ?: return
+        if (ApplicationManager.getApplication().isUnitTestMode) return
+        val pointer = SmartPointerManager.getInstance(project).createSmartPsiElementPointer(unit)
+        ApplicationManager.getApplication().invokeLater({
+            (pointer.element as? Navigatable)?.navigate(true)
+        }, project.disposed)
     }
 }
