@@ -31,7 +31,7 @@ data class XliffLocation(val packageKey: String, val locale: String, val source:
 
     companion object {
         const val TRANSLATIONS_PATH = "/Resources/Private/Translations/"
-        private val EXTENSIONS = setOf("xlf", "xliff")
+        val EXTENSIONS = setOf("xlf", "xliff")
 
         @JvmStatic
         fun fromFile(file: VirtualFile): XliffLocation? = fromPath(file.path)

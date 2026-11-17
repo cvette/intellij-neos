@@ -166,8 +166,9 @@ public class SettingsForm implements PhpFrameworkConfigurable {
      * Adds the locales that have XLIFF files in the project and are not in the list yet
      */
     private void addDetectedLocales() {
-        // the index is not read on the UI thread
-        ReadAction.nonBlocking(() -> TranslationResolver.getInstance(project).discoveredLocales())
+        // the index is not read on the UI thread; the files are looked up by their name, as the index of
+        // translations is empty until the plugin is enabled and the settings are applied
+        ReadAction.nonBlocking(() -> TranslationResolver.getInstance(project).localesWithFiles())
                 .inSmartMode(project)
                 .finishOnUiThread(ModalityState.any(), detected -> {
                     for (String locale : detected) {

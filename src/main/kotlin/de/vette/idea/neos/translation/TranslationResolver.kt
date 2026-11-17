@@ -23,6 +23,7 @@ import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiManager
+import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlTag
@@ -72,6 +73,16 @@ class TranslationResolver(private val project: Project) {
      * All locales that have XLIFF files, the source locale first.
      */
     fun discoveredLocales(): List<String> = localeDirectories().sortedWith(localeOrder())
+
+    /**
+     * All locales that have XLIFF files, found by the names of the files instead of the index of translations.
+     * That index is empty as long as the plugin is not enabled for the project, which is the case when the
+     * locales are detected in the settings before they are applied.
+     */
+    fun localesWithFiles(): List<String> =
+        XliffLocation.EXTENSIONS.flatMap { FilenameIndex.getAllFilesByExt(project, it, scope) }
+            .mapNotNullTo(sortedSetOf()) { XliffLocation.fromFile(it)?.locale }
+            .sortedWith(localeOrder())
 
     /**
      * A configured locale the way its directory is written, so that "en-US" from the settings is the locale

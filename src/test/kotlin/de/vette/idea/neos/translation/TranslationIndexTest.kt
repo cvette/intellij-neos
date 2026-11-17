@@ -43,6 +43,21 @@ class TranslationIndexTest : BasePlatformTestCase() {
         assertTrue(resolver.hasUnit(id))
     }
 
+    fun testLocalesAreDetectedWhileThePluginIsDisabled() {
+        try {
+            de.vette.idea.neos.NeosProjectService.setEnabled(project, false)
+            CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+
+            assertEmpty(resolver.discoveredLocales())
+            assertEquals(listOf("en", "de"), resolver.localesWithFiles())
+        } finally {
+            de.vette.idea.neos.NeosProjectService.setEnabled(project, true)
+        }
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project)
+
+        assertEquals(resolver.discoveredLocales(), resolver.localesWithFiles())
+    }
+
     fun testLongTextsAreShortenedWithAnEllipsis() {
         val long = "word ".repeat(60).trim()
         myFixture.addFileToProject(
