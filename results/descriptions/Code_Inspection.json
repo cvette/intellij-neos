@@ -6697,17 +6697,17 @@
           "codeQualityCategory": "Code Style"
         },
         {
-          "shortName": "OverlyLongLambda",
-          "displayName": "Overly long lambda expression",
-          "enabled": false,
-          "description": "Reports lambda expressions whose number of statements exceeds the specified maximum.\n\nLambda expressions that are too long may be confusing, and it is often better to extract the statements into a separate method.\n\n\nThe following statements are not counted:\n\n* empty statements (semicolons)\n* block statements\n* `for` loop initialization statements, that is, `int i = ...` within a `for(int i = ...;...)` statement\n* `for` loop update statements, that is, `i += 2` within a `for(int i = ...;...; i += 2)` statement\n\nUse the **Non-comment source statements limit** field to specify the maximum allowed number of statements in a lambda expression.\n\n\nInspection ID: OverlyLongLambda",
-          "codeQualityCategory": "Code Style"
-        },
-        {
           "shortName": "ParametersPerMethod",
           "displayName": "Method with too many parameters",
           "enabled": false,
           "description": "Reports methods whose number of parameters exceeds the specified maximum. Methods with too many parameters can be a good sign that a refactoring is necessary.\n\nMethods that have super methods are not reported.\n\nUse the **Parameter limit** field to specify the maximum allowed number of parameters for a method.\n\n\nInspection ID: ParametersPerMethod",
+          "codeQualityCategory": "Code Style"
+        },
+        {
+          "shortName": "OverlyLongLambda",
+          "displayName": "Overly long lambda expression",
+          "enabled": false,
+          "description": "Reports lambda expressions whose number of statements exceeds the specified maximum.\n\nLambda expressions that are too long may be confusing, and it is often better to extract the statements into a separate method.\n\n\nThe following statements are not counted:\n\n* empty statements (semicolons)\n* block statements\n* `for` loop initialization statements, that is, `int i = ...` within a `for(int i = ...;...)` statement\n* `for` loop update statements, that is, `i += 2` within a `for(int i = ...;...; i += 2)` statement\n\nUse the **Non-comment source statements limit** field to specify the maximum allowed number of statements in a lambda expression.\n\n\nInspection ID: OverlyLongLambda",
           "codeQualityCategory": "Code Style"
         },
         {
@@ -8426,17 +8426,17 @@
           "codeQualityCategory": "Reliability"
         },
         {
-          "shortName": "ResultOfObjectAllocationIgnored",
-          "displayName": "Result of object allocation ignored",
-          "enabled": false,
-          "description": "Reports object instantiations where the allocated object is ignored and neither assigned to a variable nor used in another way.\n\n\nSuch expressions are legal in Java, but are often either unintended, or\nevidence of a very odd object initialization strategy.\n\n\nUse the options to specify the fully-qualified names of classes whose instantiations should be ignored by this inspection.\n\n\nInspection ID: ResultOfObjectAllocationIgnored",
-          "codeQualityCategory": "Reliability"
-        },
-        {
           "shortName": "ClassGetClass",
           "displayName": "Suspicious 'Class.getClass()' call",
           "enabled": true,
           "description": "Reports `getClass()` methods that are called on a `java.lang.Class` instance.\n\nThis is usually a mistake as the result is always equivalent to `Class.class`.\nIf it's a mistake, then it's better to remove the `getClass()` call and use the qualifier directly.\nIf the behavior is intended, then it's better to write `Class.class` explicitly to avoid confusion.\n\nExample:\n\n\n      void test(Class<?> clazz) {\n        String name = clazz.getClass().getName();\n      }\n\nAfter one of the possible quick-fixes is applied:\n\n\n      void test(Class<?> clazz) {\n        String name = clazz.getName();\n      }\n\nInspection ID: ClassGetClass\n\nNew in 2018.2",
+          "codeQualityCategory": "Reliability"
+        },
+        {
+          "shortName": "ResultOfObjectAllocationIgnored",
+          "displayName": "Result of object allocation ignored",
+          "enabled": false,
+          "description": "Reports object instantiations where the allocated object is ignored and neither assigned to a variable nor used in another way.\n\n\nSuch expressions are legal in Java, but are often either unintended, or\nevidence of a very odd object initialization strategy.\n\n\nUse the options to specify the fully-qualified names of classes whose instantiations should be ignored by this inspection.\n\n\nInspection ID: ResultOfObjectAllocationIgnored",
           "codeQualityCategory": "Reliability"
         },
         {
@@ -11111,17 +11111,17 @@
           "codeQualityCategory": "Unspecified"
         },
         {
-          "shortName": "ReplaceStringFormatWithLiteral",
-          "displayName": "'String.format' call can be replaced with string templates",
-          "enabled": false,
-          "description": "Reports `String.format` calls that can be replaced with string templates.\n\nUsing string templates makes your code simpler.\n\nThe quick-fix replaces the call with a string template.\n\n**Example:**\n\n\n      fun main() {\n          val id = \"abc\"\n          val date = \"123\"\n          val s = String.format(\"%s_%s_%s\", id, date, id)\n      }\n\nAfter the quick-fix is applied:\n\n\n      fun main() {\n          val id = \"abc\"\n          val date = \"123\"\n          val s = \"${id}_${date}_$id\"\n      }\n\nInspection ID: ReplaceStringFormatWithLiteral",
-          "codeQualityCategory": "Unspecified"
-        },
-        {
           "shortName": "ReplaceNotNullAssertionWithElvisReturn",
           "displayName": "Not-null assertion can be replaced with 'return'",
           "enabled": false,
           "description": "Reports not-null assertion (`!!`) calls that can be replaced with the elvis operator and return (`?: return`).\n\nA not-null assertion can lead to NPE (NullPointerException) that is not expected. Avoiding the use of `!!` is good practice.\n\nThe quick-fix replaces the not-null assertion with `return` or `return null`.\n\n**Example:**\n\n\n      fun test(number: Int?) {\n          val x = number!!\n      }\n\nAfter the quick-fix is applied:\n\n\n      fun test(number: Int?) {\n          val x = number ?: return\n      }\n\nInspection ID: ReplaceNotNullAssertionWithElvisReturn",
+          "codeQualityCategory": "Unspecified"
+        },
+        {
+          "shortName": "ReplaceStringFormatWithLiteral",
+          "displayName": "'String.format' call can be replaced with string templates",
+          "enabled": false,
+          "description": "Reports `String.format` calls that can be replaced with string templates.\n\nUsing string templates makes your code simpler.\n\nThe quick-fix replaces the call with a string template.\n\n**Example:**\n\n\n      fun main() {\n          val id = \"abc\"\n          val date = \"123\"\n          val s = String.format(\"%s_%s_%s\", id, date, id)\n      }\n\nAfter the quick-fix is applied:\n\n\n      fun main() {\n          val id = \"abc\"\n          val date = \"123\"\n          val s = \"${id}_${date}_$id\"\n      }\n\nInspection ID: ReplaceStringFormatWithLiteral",
           "codeQualityCategory": "Unspecified"
         },
         {
