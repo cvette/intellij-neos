@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "total": 165,
+  "total": 0,
   "tools inspection": {
-    "Code Inspection": 165
+    "Code Inspection": 0
   },
   "linter": "QDJVM",
   "attributes": {
     "deviceId": "200820300000000-beff-b97d-1142-74f9c0f3468c",
-    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/44907165317",
+    "jobUrl": "https://github.com/cvette/intellij-neos/actions/runs/45279078902",
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/cvette/intellij-neos.git",
-        "revisionId": "1ede8598cdc5553ad7e34283eafe9f1d8bb7fb18",
-        "branch": "main"
+        "revisionId": "0b001d8895c9432bcf6c5323ca37a721c0bc3bac",
+        "branch": "dependabot/github_actions/JetBrains/qodana-action-2026.3.1"
       }
     },
     "repoUrl": "https://github.com/cvette/intellij-neos.git"
